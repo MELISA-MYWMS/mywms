@@ -118,11 +118,11 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 
                         <tr>
                             <td>
-                            	<h:outputLabel id="input1Label" value="#{bundle.LabelEnterPlate}" styleClass="label" />
+                            	<h:outputLabel id="input1Label2" value="#{bundle.LabelEnterPlate}" styleClass="label" />
                             </td>
                         </tr><tr>
                             <td>
-                               	<h:inputText id="input1" 
+                               	<h:inputText id="input2" 
                              			 value="#{FuelBean.plateNumber}" 
                              			 styleClass="input" /> 
                             </td>

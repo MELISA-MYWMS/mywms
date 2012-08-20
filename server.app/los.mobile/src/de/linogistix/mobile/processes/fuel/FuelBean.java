@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 import org.apache.log4j.Logger;
 //import org.mywms.facade.FacadeException;
 //import org.mywms.globals.SerialNoRecordType;
+//import org.mywms.model.Role;
 //import org.mywms.model.Client;
 import org.mywms.model.ItemData;
 //import org.mywms.model.ItemUnitType;
@@ -186,6 +187,9 @@ public class FuelBean extends BasicDialogBean {
 	}
 
 	public String getNavigationKey() {
+		if(!isRolesAllowed())
+			return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
+
 		if( currentMode == MODE_OUT ) {
 			return FuelNavigationEnum.FUEL_CHOOSE_VEHICLE.name();
 		}
@@ -1413,12 +1417,12 @@ public class FuelBean extends BasicDialogBean {
 
 	@Override
 	public boolean isRolesAllowed() {
-		/*String[] allowed;
+		String[] allowed;
 		String[] roles;
 
 		allowed = getRolesAllowed();
 		if (allowed == null || allowed.length == 0) {
-			return true;
+			return false;
 		}
 
 		roles = getPrincipalRoles();
@@ -1426,7 +1430,7 @@ public class FuelBean extends BasicDialogBean {
 		if ((allowed == null || allowed.length == 0)
 				&& (roles == null || roles.length == 0)) {
 			return true;
-		}
+				}
 
 		for (String allow : allowed) {
 			for (String role : roles) {
@@ -1434,7 +1438,7 @@ public class FuelBean extends BasicDialogBean {
 					return true;
 				}
 			}
-		}*/
+		}
 
 		return false;
 
@@ -1443,7 +1447,7 @@ public class FuelBean extends BasicDialogBean {
 	@Override
 	public String[] getRolesAllowed () {
 	//return new String[] {Role.ADMIN_STR,Role.OPERATOR_STR,Role.FOREMAN_STR,Role.INVENTORY_STR,Role.CLEARING_STR};
-		return new String[] {"FuelAdmin"};
+		return new String[] {org.mywms.globals.Role.FUEL_STR};
 	}
 
 	

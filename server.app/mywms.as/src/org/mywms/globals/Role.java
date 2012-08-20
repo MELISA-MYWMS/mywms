@@ -38,6 +38,7 @@ public enum Role {
     LOGGING,
     /** Operates the clearing events. */
     CLEARING,
+    FUEL,
     /** The guest role. */
     GUEST;
 
@@ -63,6 +64,8 @@ public enum Role {
             return LOGGING_STR;
         case CLEARING:
             return CLEARING_STR;
+        case FUEL:
+            return FUEL_STR;
         default:
             return GUEST_STR;
         }
@@ -79,4 +82,5 @@ public enum Role {
     public static final String LOGGING_STR = "Logging";
     public static final String DOCUMENT_STR = "Document";
     public static final String GUEST_STR = "Guest";
+    public static final String FUEL_STR = "Fuel";
 }
