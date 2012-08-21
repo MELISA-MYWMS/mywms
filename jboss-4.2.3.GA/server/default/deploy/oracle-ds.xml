@@ -15,7 +15,7 @@
 <datasources>
   <local-tx-datasource>
     <jndi-name>losDS</jndi-name>
-    <connection-url>jdbc:oracle:thin:@localhost:1521:los</connection-url>
+    <connection-url>jdbc:oracle:thin:@localhost:1521:kefa</connection-url>
 	<!--
 
 		Here are a couple of the possible OCI configurations.
