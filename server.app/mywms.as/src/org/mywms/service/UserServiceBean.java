@@ -105,7 +105,7 @@ public class UserServiceBean extends BasicServiceBean<User> implements
 	}
 
 	public User create(Client client, String username, String firstName,
-			String lastName, String pwd) {
+			String lastName, String pwd, String personnelId) {
 		
 		if (client == null){
 			throw new NullPointerException("Client must not be null");
@@ -118,6 +118,7 @@ public class UserServiceBean extends BasicServiceBean<User> implements
 		user.setClient(client);
 		user.setFirstname(firstName);
 		user.setLastname(lastName);
+		user.setPersonnelId(personnelId);
 
 		MessageDigest md5;
 		try {

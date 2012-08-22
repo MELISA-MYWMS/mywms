@@ -54,11 +54,14 @@ public class UserCRUDBean extends BusinessObjectCRUDBean<User> implements UserCR
 
     @Override
     public User create(User entity) throws BusinessObjectExistsException, BusinessObjectCreationException, BusinessObjectSecurityException {
-        User u = userService.create(entity.getClient(), entity.getName(), entity.getFirstname(), entity.getLastname(), entity.getPassword());
+        User u = userService.create(entity.getClient(), entity.getName(), entity.getFirstname(), entity.getLastname(), entity.getPassword(),entity.getPersonnelId());
         
         u.setLocale(entity.getLocale());
         u.setPhone(entity.getPhone());
         u.setEmail(entity.getEmail());
+        u.setRank(entity.getRank());
+        u.setRankAbbr(entity.getRankAbbr());
+        u.setOrganizationUnit(entity.getOrganizationUnit());
         
         u.setAdditionalContent(entity.getAdditionalContent());
         
