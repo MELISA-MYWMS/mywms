@@ -19,7 +19,7 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
     </head>
     
     <body class="verticalscroll" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0" onload="load()">
-        <f:view locale="#{GRDirectBean.locale}">	
+        <f:view locale="#{FuelBean.locale}">	
             <f:loadBundle var="bundle" basename ="de.linogistix.mobile.processes.fuel.FuelBundle" /> 
 
             <h:form id="Form" styleClass="form" >

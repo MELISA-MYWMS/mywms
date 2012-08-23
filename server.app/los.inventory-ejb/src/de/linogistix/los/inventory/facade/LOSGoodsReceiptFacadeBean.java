@@ -259,6 +259,8 @@ public class LOSGoodsReceiptFacadeBean
         r = receiptComponent.createGoodsReceipt(c, licencePlate, driverName, forwarder, deliveryNoteNumber, receiptDate);
         r.setAdditionalContent(additionalContent);
         r.setGoodsInLocation(sl);
+	
+	manager.merge(r);
 
         return r;
     }

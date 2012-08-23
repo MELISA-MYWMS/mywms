@@ -3,8 +3,11 @@ package de.linogistix.los.inventory.service;
 //import java.math.BigDecimal;
 //import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
@@ -20,12 +23,22 @@ import org.mywms.service.EntityNotFoundException;
 //import de.linogistix.los.inventory.exception.InventoryExceptionKey;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
 
+import de.linogistix.los.util.businessservice.ContextService;
+
 @Stateless
 public class LOSOrderReceipientsServiceBean extends
-    BasicServiceBean<LOSOrderReceipients> implements LOSOrderReceipientsService {
+    BasicServiceBean<LOSOrderReceipients> implements LOSOrderReceipientsService,
+    LOSOrderReceipientsServiceRemote {
+
+    @EJB
+    private ContextService ctxService;
+
+    @PersistenceContext(unitName="myWMS")
+    private EntityManager manager;
 
     private static final Logger log  = Logger.getLogger(LOSOrderReceipientsServiceBean.class);
 
+    @SuppressWarnings("unchecked")
     public LOSOrderReceipients create() {
 
         LOSOrderReceipients rcp = new LOSOrderReceipients();
@@ -46,7 +59,7 @@ public class LOSOrderReceipientsServiceBean extends
             manager.createQuery("SELECT su FROM "
                                 + LOSOrderReceipients.class.getSimpleName()
                                 + " su "
-                                + " WHERE su.identity_card= :adId");
+                                + " WHERE su.identityCard=:adId");
         query = query.setParameter("adId", identityCard);
 
         try {

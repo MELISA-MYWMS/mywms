@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 //import java.text.DateFormat;
 //import java.util.ArrayList;
 //import java.util.Calendar;
-//import java.util.Date;
+import java.util.Date;
 //import java.util.HashMap;
 //import java.util.List;
 import java.util.Locale;
@@ -13,10 +13,9 @@ import java.util.ResourceBundle;
 //import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
-//import org.mywms.facade.FacadeException;
+import org.mywms.facade.FacadeException;
 //import org.mywms.globals.SerialNoRecordType;
-//import org.mywms.model.Role;
-//import org.mywms.model.Client;
+import org.mywms.model.Client;
 import org.mywms.model.ItemData;
 //import org.mywms.model.ItemUnitType;
 //import org.mywms.model.Lot;
@@ -26,14 +25,16 @@ import org.mywms.model.ItemData;
 
 //import de.linogistix.los.common.exception.UnAuthorizedException;
 //import de.linogistix.los.inventory.businessservice.LOSGoodsReceiptComponent;
-//import de.linogistix.los.inventory.facade.LOSGoodsReceiptFacade;
+import de.linogistix.los.inventory.facade.LOSGoodsReceiptFacade;
 //import de.linogistix.los.inventory.model.LOSAdvice;
-//import de.linogistix.los.inventory.model.LOSGoodsReceipt;
+import de.linogistix.los.inventory.model.LOSGoodsReceipt;
 //import de.linogistix.los.inventory.model.LOSGoodsReceiptState;
+import de.linogistix.los.inventory.model.LOSOrderReceipients;
 //import de.linogistix.los.inventory.model.LOSGoodsReceiptType;
 //import de.linogistix.los.inventory.service.QueryAdviceServiceRemote;
 //import de.linogistix.los.inventory.service.QueryGoodsReceiptServiceRemote;
 import de.linogistix.los.inventory.service.QueryItemDataServiceRemote;
+import de.linogistix.los.inventory.service.LOSOrderReceipientsServiceRemote;
 //import de.linogistix.los.inventory.service.QueryLotServiceRemote;
 //import de.linogistix.los.inventory.service.QueryStockServiceRemote;
 //import de.linogistix.los.inventory.service.dto.GoodsReceiptTO;
@@ -45,7 +46,7 @@ import de.linogistix.los.location.model.LOSStorageLocation;
 import de.linogistix.los.location.service.QueryStorageLocationServiceRemote;
 //import de.linogistix.los.location.service.QueryUnitLoadServiceRemote;
 //import de.linogistix.los.location.service.QueryUnitLoadTypeServiceRemote;
-//import de.linogistix.los.query.BODTO;
+import de.linogistix.los.query.BODTO;
 //import de.linogistix.los.report.businessservice.ReportService;
 //import de.linogistix.los.util.DateHelper;
 //import de.linogistix.los.util.entityservice.LOSSystemPropertyServiceRemote;
@@ -110,7 +111,7 @@ public class FuelBean extends BasicDialogBean {
 	private ItemData currentItemData;
 	//private UnitLoadType currentUnitLoadType;
 	//private int currentAmountOfProcessedUnitLoads = 0;
-	//private LOSGoodsReceipt currentGoodsReceipt;
+	private LOSGoodsReceipt currentGoodsReceipt;
 	//private String currentSerialNo;
 	//private String currentAddLocation;
 		
@@ -119,6 +120,7 @@ public class FuelBean extends BasicDialogBean {
 	private LOSStorageLocation loc;
 	private String driver;
 	private String plateNumber;
+	private LOSOrderReceipients receipient;
 
 	//private ArrayList<SelectItem> goodsReceiptList;
 	//private ArrayList<SelectItem> adviceList;
@@ -139,9 +141,11 @@ public class FuelBean extends BasicDialogBean {
 	
 	//private QueryGoodsReceiptServiceRemote queryGoodsReceiptService;
 		
-	//private LOSGoodsReceiptFacade goodsReceiptFacade;
+	private LOSGoodsReceiptFacade goodsReceiptFacade;
 	
 	private QueryStorageLocationServiceRemote locService;
+
+	private LOSOrderReceipientsServiceRemote receipientService;
 	
 	//private QueryFixedAssignmentServiceRemote fixService;
 	
@@ -163,9 +167,10 @@ public class FuelBean extends BasicDialogBean {
 		//queryUltService = super.getStateless(QueryUnitLoadTypeServiceRemote.class);
 		//queryUlService = super.getStateless(QueryUnitLoadServiceRemote.class);
 		//queryGoodsReceiptService = super.getStateless(QueryGoodsReceiptServiceRemote.class);
-		//goodsReceiptFacade = super.getStateless(LOSGoodsReceiptFacade.class);
+		goodsReceiptFacade = super.getStateless(LOSGoodsReceiptFacade.class);
 		//fixService = super.getStateless(QueryFixedAssignmentServiceRemote.class);
 		locService = super.getStateless(QueryStorageLocationServiceRemote.class);
+		receipientService = super.getStateless(LOSOrderReceipientsServiceRemote.class);
 		//queryStockService = super.getStateless(QueryStockServiceRemote.class);
 		//queryUnitLoadRemote = super.getStateless(UnitLoadQueryRemote.class);
 		queryItemData = super.getStateless(QueryItemDataServiceRemote.class);
@@ -194,8 +199,6 @@ public class FuelBean extends BasicDialogBean {
 			return FuelNavigationEnum.FUEL_CHOOSE_VEHICLE.name();
 		}
 		return FuelNavigationEnum.FUEL_CHOOSE_ITEM.name();
-		
-		
 	}
 
 
@@ -209,7 +212,6 @@ public class FuelBean extends BasicDialogBean {
 	@Override
 	public void init(String[] args) {
 		super.init(args);
-
 		
 		currentMode = MODE_OUT;
 		
@@ -1080,8 +1082,8 @@ public class FuelBean extends BasicDialogBean {
 
 		String drv = driver == null ? "" : driver.trim();
 		String plate = plateNumber == null ? "" : plateNumber.trim();
-		driver="";
-		plateNumber="";
+		//driver="";
+		//plateNumber="";
 
 		if( drv.length() == 0 ) {
 			JSFHelper.getInstance().message( resolve("MsgEnterDrv") );
@@ -1096,6 +1098,71 @@ public class FuelBean extends BasicDialogBean {
 	}
 
 	public String processEnterDelivererCancel() {
+		return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
+	}
+
+	public String processEnterReceipient() {
+		String code = inputCode == null ? "" : inputCode.trim();
+		inputCode = "";
+		
+		if( code.length() == 0 ) {
+			JSFHelper.getInstance().message( resolve("MsgEnterReceipient") );
+			return "";
+		}
+		
+		receipient = null;
+
+		try {
+			receipient = receipientService.getByIdentityCard(code);
+		}
+		catch( Exception e ) {
+			log.error("Cannot select receipient="+code+". ex="+e.getMessage(), e);
+		}
+		if( receipient == null ) {
+			log.error("Wrong receipient entered. receipient="+code);
+			JSFHelper.getInstance().message( resolve("MsgReceipientNotAccessable") );
+			return "";
+		}
+										
+		Client c = currentItemData.getClient();
+		BODTO<Client> cdto = new BODTO<Client>(c.getId(), c.getVersion(), c.getNumber());
+		BODTO<LOSStorageLocation> inLocation = new BODTO<LOSStorageLocation>(loc.getId(), 
+				loc.getVersion(), loc.getName());
+		Date receiptDate = new Date();
+
+		currentGoodsReceipt = goodsReceiptFacade.createGoodsReceipt(cdto,
+				plateNumber, driver, receipient.getIdentityCard(), "",
+				receiptDate, inLocation, "");
+
+		if(currentGoodsReceipt == null){
+			log.error("Cannot create GoodsReceipt");
+			JSFHelper.getInstance().message( resolve("MsgGoodsReceiptNull") );
+			return "";
+		}
+
+		try{
+			goodsReceiptFacade.finishGoodsReceipt(currentGoodsReceipt);
+		}catch (FacadeException ex) {
+			log.error(ex, ex);
+			JSFHelper.getInstance().message( resolve("MsgGoodsReceiptFacadeEx") );
+			return "";
+		}
+
+		
+		//initPos();
+		
+		//if( collectLotAlways || mat.isLotMandatory() ) {
+			//return GRDirectNavigationEnum.GRD_ENTER_LOT.name();
+		//}
+		//else if( mat.getSerialNoRecordType() == SerialNoRecordType.ALWAYS_RECORD ) {
+			//return GRDirectNavigationEnum.GRD_ENTER_SERIAL.name();
+		//}
+		
+		return FuelNavigationEnum.FUEL_IN_COMPLETE.name();
+	}
+	
+	public String processEnterReceipientCancel() {
+		//reset();
 		return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
 	}
 
