@@ -135,8 +135,7 @@ public class LOSGoodsReceiptComponentBean extends BasicFacadeBean implements
 				LOSAreaType.GOODS_IN);
 		/* added for MELISA 6/8/12 */
 		slList.addAll(slService.getListByAreaType(clientService.getSystemClient(), LOSAreaType.GOODS_IN_OUT));
-		slList.addAll(slService.getListByAreaType(clientService.getSystemClient(), LOSAreaType.STORE));
-
+		slList.addAll(slService.getListByAreaType(clientService.getSystemClient(), LOSAreaType.GENERIC));
 
 
 		if (slList.size() == 0) {
