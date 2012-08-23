@@ -270,7 +270,7 @@ public class LOSGoodsReceiptComponentBean extends BasicFacadeBean implements
 		}
 		
 		LOSArea a = (LOSArea) unitLoad.getStorageLocation().getArea();
-		if (!a.getAreaType().equals(LOSAreaType.GOODS_IN)) {
+		if (!a.getAreaType().equals(LOSAreaType.GOODS_IN) && !a.getAreaType().equals(LOSAreaType.GENERIC)) {
 			throw new InventoryException(
 					InventoryExceptionKey.NOT_A_GOODSIN_LOCATION,
 					new Object[] { unitLoad.getStorageLocation().getName() });
