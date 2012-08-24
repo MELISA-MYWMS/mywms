@@ -20,7 +20,7 @@ import org.mywms.model.ItemData;
 //import org.mywms.model.ItemUnitType;
 //import org.mywms.model.Lot;
 //import org.mywms.model.StockUnit;
-//import org.mywms.model.UnitLoadType;
+import org.mywms.model.UnitLoadType;
 //import org.mywms.service.EntityNotFoundException;
 
 //import de.linogistix.los.common.exception.UnAuthorizedException;
@@ -45,11 +45,11 @@ import de.linogistix.los.location.model.LOSStorageLocation;
 //import de.linogistix.los.location.service.QueryFixedAssignmentServiceRemote;
 import de.linogistix.los.location.service.QueryStorageLocationServiceRemote;
 //import de.linogistix.los.location.service.QueryUnitLoadServiceRemote;
-//import de.linogistix.los.location.service.QueryUnitLoadTypeServiceRemote;
+import de.linogistix.los.location.service.QueryUnitLoadTypeServiceRemote;
 import de.linogistix.los.query.BODTO;
 //import de.linogistix.los.report.businessservice.ReportService;
 //import de.linogistix.los.util.DateHelper;
-//import de.linogistix.los.util.entityservice.LOSSystemPropertyServiceRemote;
+import de.linogistix.los.util.entityservice.LOSSystemPropertyServiceRemote;
 import de.linogistix.mobile.common.gui.bean.BasicDialogBean;
 import de.linogistix.mobile.common.system.JSFHelper;
 
@@ -109,7 +109,7 @@ public class FuelBean extends BasicDialogBean {
 	//private LOSAdvice currentAdvice;
 	//private Lot currentLot;
 	private ItemData currentItemData;
-	//private UnitLoadType currentUnitLoadType;
+	private UnitLoadType currentUnitLoadType;
 	//private int currentAmountOfProcessedUnitLoads = 0;
 	private LOSGoodsReceipt currentGoodsReceipt;
 	//private String currentSerialNo;
@@ -133,7 +133,7 @@ public class FuelBean extends BasicDialogBean {
 
 	//private QueryLotServiceRemote queryLotService;
 	
-	//private QueryUnitLoadTypeServiceRemote queryUltService;
+	private QueryUnitLoadTypeServiceRemote queryUltService;
 	
 	//private QueryUnitLoadServiceRemote queryUlService;
 
@@ -149,7 +149,7 @@ public class FuelBean extends BasicDialogBean {
 	
 	//private QueryFixedAssignmentServiceRemote fixService;
 	
-	//private LOSSystemPropertyServiceRemote propertyService;
+	private LOSSystemPropertyServiceRemote propertyService;
 	
 	//private QueryStockServiceRemote queryStockService;
 
@@ -161,10 +161,10 @@ public class FuelBean extends BasicDialogBean {
 	public FuelBean(){
 		super();
 		
-		//propertyService = super.getStateless(LOSSystemPropertyServiceRemote.class);
+		propertyService = super.getStateless(LOSSystemPropertyServiceRemote.class);
 		//queryLotService = super.getStateless(QueryLotServiceRemote.class);
 		//queryAdviceService = super.getStateless(QueryAdviceServiceRemote.class);
-		//queryUltService = super.getStateless(QueryUnitLoadTypeServiceRemote.class);
+		queryUltService = super.getStateless(QueryUnitLoadTypeServiceRemote.class);
 		//queryUlService = super.getStateless(QueryUnitLoadServiceRemote.class);
 		//queryGoodsReceiptService = super.getStateless(QueryGoodsReceiptServiceRemote.class);
 		goodsReceiptFacade = super.getStateless(LOSGoodsReceiptFacade.class);
@@ -1148,6 +1148,7 @@ public class FuelBean extends BasicDialogBean {
 			return "";
 		}
 
+		return postUnitLoad( loc.getName(), null );
 		
 		//initPos();
 		
@@ -1158,7 +1159,6 @@ public class FuelBean extends BasicDialogBean {
 			//return GRDirectNavigationEnum.GRD_ENTER_SERIAL.name();
 		//}
 		
-		return FuelNavigationEnum.FUEL_IN_COMPLETE.name();
 	}
 	
 	public String processEnterReceipientCancel() {
@@ -1201,72 +1201,67 @@ public class FuelBean extends BasicDialogBean {
 		//return true;
 	//}
 	
-	//// ***********************************************************************
-	//// Posting
-	//// ***********************************************************************
-	//public String postUnitLoad( String targetLocName, String targetUlName ){
-		//String logStr = "postUnitLoad ";
-		
-		//if( currentAmount == null || BigDecimal.ZERO.compareTo(currentAmount) >= 0 ) {
-			//log.error(logStr+"Amount not valid. amount="+currentAmount);
-			//JSFHelper.getInstance().message( resolve("MsgAmountNotValid") );
-			//return GRDirectNavigationEnum.GRD_ENTER_AMOUNT.name();
-		//}
-		
+	public String postUnitLoad( String targetLocName, String targetUlName ){
+
+		if( currentAmount == null || BigDecimal.ZERO.compareTo(currentAmount) >= 0 ) {
+			log.error("Amount not valid. amount="+currentAmount);
+			JSFHelper.getInstance().message( resolve("MsgAmountNotValid") );
+			return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
+		}
+
 		//if( currentUnitLoadType == null ) {
-			//currentUnitLoadType = queryUltService.getDefaultUnitLoadType();
+		currentUnitLoadType = queryUltService.getDefaultUnitLoadType();
 		//}
 
 		//if( currentMode == MODE_MATERIAL ) {
-			//return postMaterial(targetLocName, targetUlName);
+		return postMaterial(targetLocName, targetUlName);
 		//}
 		//else {
 			//return postAdvice(targetLocName, targetUlName);
 		//}
-	//}
+	}
 	
-	//public String postMaterial( String targetLocName, String targetUlName ){
-		//String logStr = "postMaterial ";
-		
-		//int lock = (int)propertyService.getLongDefault(getWorkstationName(), "GOODS_IN_DEFAULT_LOCK", 0);
-		//if( currentItemData == null ) {
-			//JSFHelper.getInstance().message( resolve("MsgMatNotValid") );
-			//return "";
-		//}
-		//if( currentUnitLoadType == null ) {
-			//JSFHelper.getInstance().message( resolve("MsgUlTypeNotValid") );
-			//return "";
-		//}
-		//try {
+	public String postMaterial( String targetLocName, String targetUlName ){
 
-			//goodsReceiptFacade.createStock(
-										//currentItemData.getClient().getNumber(), 
-										//currentLot == null ? null : currentLot.getName(), 
-										//currentItemData.getNumber(),
-										//currentUlLabel,
-										//currentUnitLoadType.getName(),
-										//currentAmount,
-										//lock, null, currentSerialNo, targetLocName, targetUlName );
-			
-			
+		int lock = (int)propertyService.getLongDefault(getWorkstationName(), "GOODS_IN_DEFAULT_LOCK", 0);
+		if( currentItemData == null ) {
+			JSFHelper.getInstance().message( resolve("MsgMatNotValid") );
+			return "";
+		}
+		if( currentUnitLoadType == null ) {
+			JSFHelper.getInstance().message( resolve("MsgUlTypeNotValid") );
+			return "";
+		}
+		try {
+
+			goodsReceiptFacade.createStock(
+					currentItemData.getClient().getNumber(), 
+					null, 
+					currentItemData.getNumber(),
+					resolve("LabelGenerated"),
+					currentUnitLoadType.getName(),
+					currentAmount,
+					lock, null, null, targetLocName, targetUlName );
+
+
 			//currentAmountOfProcessedUnitLoads++;
-			
-			
-		//} catch ( FacadeException e) {
-			//log.error(logStr+"Error in posting ("+getLocale()+"): "+e.getMessage());
-			//String msg = ((FacadeException) e).getLocalizedMessage( getLocale() );
-			//JSFHelper.getInstance().message(msg);
-			//return "";
-			
-		//} catch ( Throwable e) {
-			//log.error(logStr+"General Error in posting: "+e.getMessage(), e);
-			//String msg = e.getLocalizedMessage();
-			//JSFHelper.getInstance().message(msg);
-			//return "";
-		//}
-		
-		//return GRDirectNavigationEnum.GRD_ENTER_MAT.name();
-	//}
+
+
+		} catch ( FacadeException e) {
+			log.error("Error in posting ("+getLocale()+"): "+e.getMessage());
+			String msg = ((FacadeException) e).getLocalizedMessage( getLocale() );
+			JSFHelper.getInstance().message(msg);
+			return "";
+
+		} catch ( Throwable e) {
+			log.error("General Error in posting: "+e.getMessage(), e);
+			String msg = e.getLocalizedMessage();
+			JSFHelper.getInstance().message(msg);
+			return "";
+		}
+
+		return FuelNavigationEnum.FUEL_IN_COMPLETE.name();
+	}
 	
 	//public String postAdvice( String targetLocName, String targetUlName ){
 		//String logStr = "postAdvice ";
