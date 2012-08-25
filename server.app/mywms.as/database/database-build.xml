@@ -1,9 +1,10 @@
 <project name="myWMS.database" default="createDBSchema">
 
 	<property name="classes.dir" location="../classes"/>
-	
-	<taskdef name="hibernatetool" 
-	         	 classname="org.hibernate.tool.ant.HibernateToolTask" />
+
+	<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" >
+		<classpath path="hibernate-tools.jar"/>
+	</taskdef>
 	
 	<target name="createDBSchema">
 		<hibernatetool destdir=".">
