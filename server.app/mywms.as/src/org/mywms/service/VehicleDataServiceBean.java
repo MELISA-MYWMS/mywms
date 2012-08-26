@@ -35,7 +35,7 @@ public class VehicleDataServiceBean
 
         return vehicleData;
     }
-
+    
 	public VehicleData getByPlateNumber(String plateNumber) throws EntityNotFoundException{
         Query query =
             manager.createQuery("SELECT su FROM "
@@ -49,9 +49,38 @@ public class VehicleDataServiceBean
         	return ret;
         } catch (NoResultException ex){
         	throw new EntityNotFoundException(ServiceExceptionKey.NO_ENTITY_WITH_NAME);
-        }
+        }      
+    }
+	
+	public VehicleData getByLabelId(String labelId) throws EntityNotFoundException{
+        Query query =
+            manager.createQuery("SELECT su FROM "
+                    + VehicleData.class.getSimpleName()
+                    + " su "
+                    + " WHERE su.labelId= :adId");
+            query = query.setParameter("adId", labelId);
 
-        
+        try{
+        	VehicleData ret = (VehicleData) query.getSingleResult();
+        	return ret;
+        } catch (NoResultException ex){
+        	throw new EntityNotFoundException(ServiceExceptionKey.NO_ENTITY_WITH_NAME);
+        }      
     }
 
+    public String getPlateNumberByLabelId(String labelId) throws EntityNotFoundException{
+        Query query =
+            manager.createQuery("SELECT su FROM "
+                + VehicleData.class.getSimpleName()
+                + " su "
+                + " WHERE su.labelId= :adId");
+        query = query.setParameter("adId", labelId);
+
+        try{
+        	VehicleData ret = (VehicleData) query.getSingleResult();            	            	
+        	return ret.getPlateNumber();
+        } catch (NoResultException ex){
+        	throw new EntityNotFoundException(ServiceExceptionKey.NO_ENTITY_WITH_NAME);
+        }
+    }
 }

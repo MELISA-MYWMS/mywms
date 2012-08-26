@@ -47,6 +47,7 @@ public class LOSFuelOrderLog extends BasicEntity {
         this.labelId = labelId;
     }
 
+    //LabelID not unique?
     @Override
     public String toUniqueString() {
         if (getLabelId() != null) {
