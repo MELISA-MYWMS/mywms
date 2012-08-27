@@ -230,10 +230,14 @@ public class OrderFacadeBean extends BasicFacadeBean implements OrderFacade {
 				.getSystemClient(), LOSAreaType.QUARANTINE));
 		slList.addAll(slService.getListByAreaType(clientService
 				.getSystemClient(), LOSAreaType.TOLL));
-		slList.addAll(slService.getListByAreaType(clientService
-				.getSystemClient(), LOSAreaType.TOLL));
+		//slList.addAll(slService.getListByAreaType(clientService
+		//		.getSystemClient(), LOSAreaType.TOLL));
 		slList.addAll(slService.getListByAreaType(clientService
 				.getSystemClient(), LOSAreaType.PRODUCTION));
+		slList.addAll(slService.getListByAreaType(clientService
+				.getSystemClient(), LOSAreaType.GOODS_IN_OUT));
+		slList.addAll(slService.getListByAreaType(clientService
+				.getSystemClient(), LOSAreaType.GENERIC));
 
 		if (slList.size() == 0) {
 			// LOSStorageLocation defLoc;
