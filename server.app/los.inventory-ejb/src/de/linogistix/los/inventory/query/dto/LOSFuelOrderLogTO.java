@@ -1,7 +1,6 @@
 package de.linogistix.los.inventory.query.dto;
 
 import java.math.BigDecimal;
-
 import de.linogistix.los.inventory.model.LOSFuelOrderLog;
 import de.linogistix.los.query.BODTO;
 
@@ -130,4 +129,18 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 	{
 	    this.tankRemaining = tankRemaining;
 	}
+	
+    public String getVehiclePlateNumber() {
+        return vehicle.getPlateNumber();
+    }
+    
+    public String getReceipientName() {
+    	String fullName;
+    	fullName = receipient.getRankAbbr();
+    	fullName += " ";
+    	fullName += receipient.getFirstName();
+    	fullName += " ";
+    	fullName += receipient.getLastName(); 
+        return fullName;
+    }
 }

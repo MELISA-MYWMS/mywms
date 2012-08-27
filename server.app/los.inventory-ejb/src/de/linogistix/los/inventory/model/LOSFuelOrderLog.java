@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import org.mywms.model.BusinessException;
+import org.mywms.model.VehicleData;
 import org.mywms.service.ConstraintViolatedException;
 
 import org.mywms.model.BasicEntity;
@@ -19,6 +20,7 @@ import de.linogistix.los.location.model.LOSStorageLocation;
 
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.OrderReceiptPosition;
+
 
 @Entity
 @Table(name = "los_fuel_order_log", uniqueConstraints = {
@@ -31,10 +33,11 @@ public class LOSFuelOrderLog extends BasicEntity {
     private static final long serialVersionUID = 1L;
 
     private String labelId;
+    private VehicleData vehicle;
     private LOSStorageLocation storLoc;
     private int stationPump;
-    private LOSOrderReceipients receipientId;
-    private OrderReceiptPosition rcptPosId;
+    private LOSOrderReceipients receipient;
+    private OrderReceiptPosition rcptPos;
     private String orderType;
     private BigDecimal tankRemaining;
 
@@ -70,7 +73,6 @@ public class LOSFuelOrderLog extends BasicEntity {
         } else {
             throw new RuntimeException("Id cannot be retrieved yet - hence labelId cannot be set");
         }
-
 
     }
 
@@ -118,17 +120,17 @@ public class LOSFuelOrderLog extends BasicEntity {
      * @return receipientId as LOSOrderReceipients.
      */
     @ManyToOne(optional=false)
-    public LOSOrderReceipients getReceipientId() {
-        return receipientId;
+    public LOSOrderReceipients getReceipient() {
+        return receipient;
     }
-
+    
     /**
      * Set receipientId.
      *
      * @param receipientId the value to set.
      */
-    public void setReceipientId(LOSOrderReceipients receipientId) {
-        this.receipientId = receipientId;
+    public void setReceipient(LOSOrderReceipients receipient) {
+        this.receipient = receipient;
     }
 
     /**
@@ -174,8 +176,8 @@ public class LOSFuelOrderLog extends BasicEntity {
      * @return rcptPosId as OrderReceiptPosition.
      */
     @OneToOne(optional=false)
-    public OrderReceiptPosition getRcptPosId() {
-        return rcptPosId;
+    public OrderReceiptPosition getRcptPos() {
+        return rcptPos;
     }
 
     /**
@@ -183,7 +185,27 @@ public class LOSFuelOrderLog extends BasicEntity {
      *
      * @param rcptPosId the value to set.
      */
-    public void setRcptPosId(OrderReceiptPosition rcptPosId) {
-        this.rcptPosId = rcptPosId;
+    public void setRcptPos(OrderReceiptPosition rcptPos) {
+        this.rcptPos = rcptPos;
+    }
+    
+    /**
+     * Get vehicleId.
+     *
+     * @return vehicleId as OrderReceiptPosition.
+     */
+    @ManyToOne(optional=false)
+    public VehicleData getVehicle() {
+        return vehicle;
+    }
+    
+     
+    /**
+     * Set vehicleId.
+     *
+     * @param vehicleId the value to set.
+     */
+    public void setVehicle(VehicleData vehicle) {
+        this.vehicle = vehicle;
     }
 }
