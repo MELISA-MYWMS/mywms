@@ -17,11 +17,13 @@ import org.mywms.facade.FacadeException;
 //import org.mywms.globals.SerialNoRecordType;
 import org.mywms.model.Client;
 import org.mywms.model.ItemData;
+import org.mywms.model.VehicleData;
 //import org.mywms.model.ItemUnitType;
 //import org.mywms.model.Lot;
 //import org.mywms.model.StockUnit;
 import org.mywms.model.UnitLoadType;
 //import org.mywms.service.EntityNotFoundException;
+import org.mywms.service.VehicleDataServiceRemote;
 
 //import de.linogistix.los.common.exception.UnAuthorizedException;
 //import de.linogistix.los.inventory.businessservice.LOSGoodsReceiptComponent;
@@ -109,6 +111,7 @@ public class FuelBean extends BasicDialogBean {
 	//private LOSAdvice currentAdvice;
 	//private Lot currentLot;
 	private ItemData currentItemData;
+	private VehicleData currentVehicleData;
 	private UnitLoadType currentUnitLoadType;
 	//private int currentAmountOfProcessedUnitLoads = 0;
 	private LOSGoodsReceipt currentGoodsReceipt;
@@ -157,6 +160,7 @@ public class FuelBean extends BasicDialogBean {
 	
 	private QueryItemDataServiceRemote queryItemData;
 	
+	private VehicleDataServiceRemote queryVehicleData;
 	
 	public FuelBean(){
 		super();
@@ -174,6 +178,7 @@ public class FuelBean extends BasicDialogBean {
 		//queryStockService = super.getStateless(QueryStockServiceRemote.class);
 		//queryUnitLoadRemote = super.getStateless(UnitLoadQueryRemote.class);
 		queryItemData = super.getStateless(QueryItemDataServiceRemote.class);
+		queryVehicleData = super.getStateless(VehicleDataServiceRemote.class);
 		
 		//collectUlType = propertyService.getBooleanDefault(getWorkstationName(), GRD_COLLECT_UNITLOAD_TYPE, collectUlType);
 		//log.info(GRD_COLLECT_UNITLOAD_TYPE+"="+collectUlType);
@@ -587,6 +592,43 @@ public class FuelBean extends BasicDialogBean {
 		return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
 	}
 	
+	public String processEnterVeh() {
+		currentMode = MODE_IN;
+
+		String code = inputCode == null ? "" : inputCode.trim();
+		inputCode = "";
+		
+		
+		if( code.length() == 0 ) {
+			JSFHelper.getInstance().message( resolve("MsgEnterVeh") );
+			return "";
+		}
+		
+		VehicleData veh = queryVehicleData.getByLabelId(code);
+
+		if( veh == null ) {
+			JSFHelper.getInstance().message( resolve("MsgMatNotFound") );
+			return "";
+		}
+
+		
+		currentVehicleData = veh;
+		//initPos();
+		
+		//if( collectLotAlways || mat.isLotMandatory() ) {
+			//return GRDirectNavigationEnum.GRD_ENTER_LOT.name();
+		//}
+		//else if( mat.getSerialNoRecordType() == SerialNoRecordType.ALWAYS_RECORD ) {
+			//return GRDirectNavigationEnum.GRD_ENTER_SERIAL.name();
+		//}
+		
+		return FuelNavigationEnum.FUEL_ENTER_AMOUNT.name();
+	}
+	
+	public String processEnterVehCancel() {
+		//reset();
+		return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
+	}
 	//// ***********************************************************************
 	//// EnterLot.jsp / EnterLotDate.jsp
 	//// ***********************************************************************
