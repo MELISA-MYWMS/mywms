@@ -1280,7 +1280,8 @@ public class FuelBean extends BasicDialogBean {
 					currentItemData.getClient().getNumber(), 
 					null, 
 					currentItemData.getNumber(),
-					resolve("LabelGenerated"),
+					null,
+					//resolve("LabelGenerated"),
 					currentUnitLoadType.getName(),
 					currentAmount,
 					lock, null, null, targetLocName, targetUlName );
