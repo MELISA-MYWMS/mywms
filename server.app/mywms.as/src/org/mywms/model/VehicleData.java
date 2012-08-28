@@ -29,8 +29,6 @@ uniqueConstraints = {
 @Inheritance(strategy = InheritanceType.JOINED)
 public class VehicleData
     extends BasicEntity {
-
-	private static final long serialVersionUID = 1L;
 	
     private String remarks = "";
     private String manufacturerName = "";

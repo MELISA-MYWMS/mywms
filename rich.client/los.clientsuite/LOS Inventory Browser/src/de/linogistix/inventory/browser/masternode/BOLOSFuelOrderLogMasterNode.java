@@ -29,10 +29,14 @@ public class BOLOSFuelOrderLogMasterNode extends BOMasterNode {
             
 	    //BOMasterNodeProperty<String> identityCard = new BOMasterNodeProperty<String>("identityCard", String.class, to.getIdentityCard(), CommonBundleResolver.class);
 	    //sheet.put(identityCard);
-//            BOMasterNodeProperty<String> plateNumber= new BOMasterNodeProperty<String>("plateNumber", String.class, to.getPlateNumber(), CommonBundleResolver.class);
-//            sheet.put(orderType);
-//            BOMasterNodeProperty<String> fullName= new BOMasterNodeProperty<String>("orderType", String.class, to.getFullName(), CommonBundleResolver.class);
-//            sheet.put(orderType);
+            BOMasterNodeProperty<String> plateNumber= new BOMasterNodeProperty<String>("plateNumber", String.class, to.getPlateNumber(), CommonBundleResolver.class);
+            sheet.put(plateNumber);
+            BOMasterNodeProperty<String> fullName= new BOMasterNodeProperty<String>("fullName", String.class, to.getFullName(), CommonBundleResolver.class);
+            sheet.put(fullName);
+            BOMasterNodeProperty<String> articleRef= new BOMasterNodeProperty<String>("articleRef", String.class, to.getArticleRef(), CommonBundleResolver.class);
+            sheet.put(articleRef);
+             BOMasterNodeProperty<String> articleDescr= new BOMasterNodeProperty<String>("articleDescr", String.class, to.getArticleDescr(), CommonBundleResolver.class);
+            sheet.put(articleDescr);
             BOMasterNodeProperty<String> orderType= new BOMasterNodeProperty<String>("orderType", String.class, to.getOrderType(), CommonBundleResolver.class);
             sheet.put(orderType);
             BOMasterNodeProperty<String> storageLocation= new BOMasterNodeProperty<String>("storageLocation", String.class, to.getStorageLocation(), CommonBundleResolver.class);
