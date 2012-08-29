@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 //import java.util.Calendar;
 import java.util.Date;
 //import java.util.HashMap;
-//import java.util.List;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -27,6 +27,7 @@ import org.mywms.service.VehicleDataServiceRemote;
 
 //import de.linogistix.los.common.exception.UnAuthorizedException;
 //import de.linogistix.los.inventory.businessservice.LOSGoodsReceiptComponent;
+import de.linogistix.los.inventory.facade.OrderFacade;
 import de.linogistix.los.inventory.facade.LOSGoodsReceiptFacade;
 //import de.linogistix.los.inventory.model.LOSAdvice;
 import de.linogistix.los.inventory.model.LOSGoodsReceipt;
@@ -40,6 +41,8 @@ import de.linogistix.los.inventory.service.LOSOrderReceipientsServiceRemote;
 //import de.linogistix.los.inventory.service.QueryLotServiceRemote;
 //import de.linogistix.los.inventory.service.QueryStockServiceRemote;
 //import de.linogistix.los.inventory.service.dto.GoodsReceiptTO;
+import de.linogistix.los.inventory.query.StockUnitQueryRemote;
+import de.linogistix.los.inventory.query.dto.StockUnitTO;
 //import de.linogistix.los.location.model.LOSFixedLocationAssignment;
 import de.linogistix.los.location.model.LOSStorageLocation;
 //import de.linogistix.los.location.model.LOSUnitLoad;
@@ -49,6 +52,7 @@ import de.linogistix.los.location.service.QueryStorageLocationServiceRemote;
 //import de.linogistix.los.location.service.QueryUnitLoadServiceRemote;
 import de.linogistix.los.location.service.QueryUnitLoadTypeServiceRemote;
 import de.linogistix.los.query.BODTO;
+import de.linogistix.los.query.QueryDetail;
 //import de.linogistix.los.report.businessservice.ReportService;
 //import de.linogistix.los.util.DateHelper;
 import de.linogistix.los.util.entityservice.LOSSystemPropertyServiceRemote;
@@ -98,10 +102,6 @@ public class FuelBean extends BasicDialogBean {
 	
 	private String currentMode;
 	
-
-
-	
-	
 	//private LOSStorageLocation currentFixTarget;
 	//private String inputLotName;
 	//private Date currentLotDate;
@@ -130,9 +130,6 @@ public class FuelBean extends BasicDialogBean {
 	//private HashMap<String, UnitLoadType> unitLoadTypeMap;
 	//private Long selectedGoodsReceiptId;
 	//private Long selectedAdviceId;
-	
-	
-
 
 	//private QueryLotServiceRemote queryLotService;
 	
@@ -145,6 +142,8 @@ public class FuelBean extends BasicDialogBean {
 	//private QueryGoodsReceiptServiceRemote queryGoodsReceiptService;
 		
 	private LOSGoodsReceiptFacade goodsReceiptFacade;
+
+	private OrderFacade orderFacade;
 	
 	private QueryStorageLocationServiceRemote locService;
 
@@ -155,6 +154,8 @@ public class FuelBean extends BasicDialogBean {
 	private LOSSystemPropertyServiceRemote propertyService;
 	
 	//private QueryStockServiceRemote queryStockService;
+	
+	private StockUnitQueryRemote stockUnitQuery;
 
 	//private UnitLoadQueryRemote queryUnitLoadRemote;
 	
@@ -172,10 +173,12 @@ public class FuelBean extends BasicDialogBean {
 		//queryUlService = super.getStateless(QueryUnitLoadServiceRemote.class);
 		//queryGoodsReceiptService = super.getStateless(QueryGoodsReceiptServiceRemote.class);
 		goodsReceiptFacade = super.getStateless(LOSGoodsReceiptFacade.class);
+		orderFacade = super.getStateless(OrderFacade.class);
 		//fixService = super.getStateless(QueryFixedAssignmentServiceRemote.class);
 		locService = super.getStateless(QueryStorageLocationServiceRemote.class);
 		receipientService = super.getStateless(LOSOrderReceipientsServiceRemote.class);
 		//queryStockService = super.getStateless(QueryStockServiceRemote.class);
+		stockUnitQuery = super.getStateless(StockUnitQueryRemote.class);
 		//queryUnitLoadRemote = super.getStateless(UnitLoadQueryRemote.class);
 		queryItemData = super.getStateless(QueryItemDataServiceRemote.class);
 		queryVehicleData = super.getStateless(VehicleDataServiceRemote.class);
@@ -551,7 +554,7 @@ public class FuelBean extends BasicDialogBean {
 	//// EnterMat.jsp
 	//// ***********************************************************************
 	public String processEnterItem() {
-		currentMode = MODE_IN;
+		//currentMode = MODE_IN;
 
 		String code = inputCode == null ? "" : inputCode.trim();
 		inputCode = "";
@@ -593,11 +596,10 @@ public class FuelBean extends BasicDialogBean {
 	}
 	
 	public String processEnterVeh() {
-		currentMode = MODE_IN;
+		currentMode = MODE_OUT;
 
 		String code = inputCode == null ? "" : inputCode.trim();
 		inputCode = "";
-		
 		
 		if( code.length() == 0 ) {
 			JSFHelper.getInstance().message( resolve("MsgEnterVeh") );
@@ -607,7 +609,7 @@ public class FuelBean extends BasicDialogBean {
 		VehicleData veh = queryVehicleData.getByLabelId(code);
 
 		if( veh == null ) {
-			JSFHelper.getInstance().message( resolve("MsgMatNotFound") );
+			JSFHelper.getInstance().message( resolve("MsgVehNotFound") );
 			return "";
 		}
 
@@ -622,7 +624,7 @@ public class FuelBean extends BasicDialogBean {
 			//return GRDirectNavigationEnum.GRD_ENTER_SERIAL.name();
 		//}
 		
-		return FuelNavigationEnum.FUEL_ENTER_AMOUNT.name();
+		return FuelNavigationEnum.FUEL_CHOOSE_ITEM.name();
 	}
 	
 	public String processEnterVehCancel() {
@@ -851,7 +853,10 @@ public class FuelBean extends BasicDialogBean {
 			return GRDirectNavigationEnum.GRD_ENTER_UL_NO.name();
 		}*/
 
-		return FuelNavigationEnum.ENTER_TARGET_IN_LOC.name();
+		if( currentMode == MODE_OUT )
+			return FuelNavigationEnum.ENTER_ORIGIN_LOC.name();
+		else
+			return FuelNavigationEnum.ENTER_TARGET_IN_LOC.name();
 	}
 	public String processEnterAmountCancel() {
 		//initPos();
@@ -1115,6 +1120,70 @@ public class FuelBean extends BasicDialogBean {
 	//}
 	
 	public String processEnterTargetCancel() {
+		//initPos();
+		//return getStartPage2();
+		return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
+	}
+
+	public String processEnterOriginLoc() {
+		String code = inputCode == null ? "" : inputCode.trim();
+		inputCode = "";
+
+		if( code.length() == 0 ) {
+			JSFHelper.getInstance().message( resolve("MsgEnterLoc") );
+			return "";
+		}
+		loc = null;
+		try {
+			loc = locService.getByName(code);
+		}
+		catch( Exception e ) {
+			log.error("Cannot select location="+code+". ex="+e.getMessage(), e);
+		}
+		if( loc == null ) {
+			log.error("Wrong location entered. location="+code);
+			JSFHelper.getInstance().message( resolve("MsgLocNotAccessable") );
+			return "";
+		}
+
+		//return postUnitLoad( loc.getName(), null );
+
+/*
+			     order(clientStr, .getText(), tos, .getText(), .getText(), .getSelectedItem()(), orderType, ().getDate(), processAutomaticly, ().getText());
+			bean.order(clientRef, orderRef, positions, documentUrl, labelUrl, destination, OrderType.TO_PRODUCTION, new Date(),true, "A Test Order");
+ 		try {
+                        bean.order(clientRef, orderRef, positions, documentUrl, labelUrl, destination);
+                        
+                } catch (FacadeException e) {
+                        // TODO Auto-generated catch block
+                        logger.error(e,e);
+                        fail(e.getMessage());
+                }
+*/
+		List<StockUnitTO> list = null;
+		BODTO<LOSStorageLocation> sl = new BODTO<LOSStorageLocation>(loc.getId(), 
+				loc.getVersion(), loc.getName());
+		BODTO<ItemData> it = new BODTO<ItemData>(currentItemData.getId(), 
+				currentItemData.getVersion(), currentItemData.getNumber());
+		//Client c = currentItemData.getClient();
+		//BODTO<Client> cdto = new BODTO<Client>(c.getId(), c.getVersion(), c.getNumber());
+		try{
+			//list = stockUnitQuery.queryByStorageLocation(sl, new QueryDetail(Integer.MAX_VALUE, 0));
+			//list = stockUnitQuery.queryByItemData(sl, new QueryDetail(Integer.MAX_VALUE, 0));
+		
+			//list = stockUnitQuery.queryByDefault(null, null, it, sl, new QueryDetail(Integer.MAX_VALUE, 0));
+			list = stockUnitQuery.queryByDefault(null, null, it, null, new QueryDetail(Integer.MAX_VALUE, 0));
+
+		} catch (Throwable ex) {
+		}
+
+		
+		JSFHelper.getInstance().message("list size is "+list.size());
+		return "";
+		//return FuelNavigationEnum.FUEL_ENTER_DELIVERER.name();
+	}
+
+	public String processEnterOriginCancel() {
 		//initPos();
 		//return getStartPage2();
 		return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
@@ -1556,4 +1625,13 @@ public class FuelBean extends BasicDialogBean {
 	}
 
 	
+	public String getCurrentMode()
+	{
+	    return currentMode;
+	}
+	
+	public void setCurrentMode(String currentMode)
+	{
+	    this.currentMode = currentMode;
+	}
 }

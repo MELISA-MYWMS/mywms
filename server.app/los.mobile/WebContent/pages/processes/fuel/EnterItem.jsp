@@ -25,7 +25,7 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
             <h:form id="Form" styleClass="form" >
 
                 <p id="pHeader" class="pageheader">
-                	<h:outputText id="pagetitle" value="#{bundle.TitleFuelIn}" styleClass="pagetitle" />
+                	<h:outputText id="pagetitle" value="#{bundle.TitleEnterItem}" styleClass="pagetitle" />
 	                <h:graphicImage id="logo" url="/pics/logo.gif" styleClass="logo"/>
                 </p>
                 

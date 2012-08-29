@@ -1551,6 +1551,18 @@
     </navigation-rule>
 
     <navigation-rule>
+        <from-view-id>/pages/processes/fuel/EnterVeh.jsp</from-view-id>
+	<navigation-case>
+	    <from-outcome>FUEL_BACK_TO_MENU</from-outcome>
+	    <to-view-id>/pages/processes/controller/MainMenu.jsp</to-view-id>
+	</navigation-case>
+        <navigation-case>
+            <from-outcome>FUEL_CHOOSE_ITEM</from-outcome>
+            <to-view-id>/pages/processes/fuel/EnterItem.jsp</to-view-id>
+        </navigation-case>   
+    </navigation-rule>
+
+    <navigation-rule>
         <from-view-id>/pages/processes/fuel/EnterItem.jsp</from-view-id>
 	<navigation-case>
 	    <from-outcome>FUEL_BACK_TO_MENU</from-outcome>
@@ -1571,6 +1583,10 @@
         <navigation-case>
             <from-outcome>ENTER_TARGET_IN_LOC</from-outcome>
             <to-view-id>/pages/processes/fuel/EnterTargetInLoc.jsp</to-view-id>
+        </navigation-case>   
+        <navigation-case>
+            <from-outcome>ENTER_ORIGIN_LOC</from-outcome>
+            <to-view-id>/pages/processes/fuel/EnterOriginLoc.jsp</to-view-id>
         </navigation-case>   
     </navigation-rule>
 
