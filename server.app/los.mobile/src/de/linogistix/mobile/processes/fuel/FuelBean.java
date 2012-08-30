@@ -29,6 +29,7 @@ import org.mywms.service.VehicleDataServiceRemote;
 //import de.linogistix.los.inventory.businessservice.LOSGoodsReceiptComponent;
 import de.linogistix.los.inventory.facade.OrderFacade;
 import de.linogistix.los.inventory.facade.LOSGoodsReceiptFacade;
+import de.linogistix.los.inventory.facade.ManageInventoryFacade;
 //import de.linogistix.los.inventory.model.LOSAdvice;
 import de.linogistix.los.inventory.model.LOSGoodsReceipt;
 //import de.linogistix.los.inventory.model.LOSGoodsReceiptState;
@@ -53,6 +54,7 @@ import de.linogistix.los.location.service.QueryStorageLocationServiceRemote;
 import de.linogistix.los.location.service.QueryUnitLoadTypeServiceRemote;
 import de.linogistix.los.query.BODTO;
 import de.linogistix.los.query.QueryDetail;
+import de.linogistix.los.query.LOSResultList;
 //import de.linogistix.los.report.businessservice.ReportService;
 //import de.linogistix.los.util.DateHelper;
 import de.linogistix.los.util.entityservice.LOSSystemPropertyServiceRemote;
@@ -142,6 +144,8 @@ public class FuelBean extends BasicDialogBean {
 	//private QueryGoodsReceiptServiceRemote queryGoodsReceiptService;
 		
 	private LOSGoodsReceiptFacade goodsReceiptFacade;
+	
+	private ManageInventoryFacade manageInventoryFacade;
 
 	private OrderFacade orderFacade;
 	
@@ -173,6 +177,7 @@ public class FuelBean extends BasicDialogBean {
 		//queryUlService = super.getStateless(QueryUnitLoadServiceRemote.class);
 		//queryGoodsReceiptService = super.getStateless(QueryGoodsReceiptServiceRemote.class);
 		goodsReceiptFacade = super.getStateless(LOSGoodsReceiptFacade.class);
+		manageInventoryFacade = super.getStateless(ManageInventoryFacade.class);
 		orderFacade = super.getStateless(OrderFacade.class);
 		//fixService = super.getStateless(QueryFixedAssignmentServiceRemote.class);
 		locService = super.getStateless(QueryStorageLocationServiceRemote.class);
@@ -1160,7 +1165,8 @@ public class FuelBean extends BasicDialogBean {
                         fail(e.getMessage());
                 }
 */
-		List<StockUnitTO> list = null;
+		//List<StockUnitTO> list = null;
+		LOSResultList<StockUnitTO> list = null;
 		BODTO<LOSStorageLocation> sl = new BODTO<LOSStorageLocation>(loc.getId(), 
 				loc.getVersion(), loc.getName());
 		BODTO<ItemData> it = new BODTO<ItemData>(currentItemData.getId(), 
@@ -1172,7 +1178,8 @@ public class FuelBean extends BasicDialogBean {
 			//list = stockUnitQuery.queryByItemData(sl, new QueryDetail(Integer.MAX_VALUE, 0));
 		
 			//list = stockUnitQuery.queryByDefault(null, null, it, sl, new QueryDetail(Integer.MAX_VALUE, 0));
-			list = stockUnitQuery.queryByDefault(null, null, it, null, new QueryDetail(Integer.MAX_VALUE, 0));
+			//list = stockUnitQuery.queryByDefault(null, null, it, null, new QueryDetail(0, Integer.MAX_VALUE));
+			list = stockUnitQuery.queryByDefault(null, null, it, sl, new QueryDetail(0, Integer.MAX_VALUE));
 
 		} catch (Throwable ex) {
 		}
@@ -1256,6 +1263,32 @@ public class FuelBean extends BasicDialogBean {
 		}catch (FacadeException ex) {
 			log.error(ex, ex);
 			JSFHelper.getInstance().message( resolve("MsgGoodsReceiptFacadeEx") );
+			return "";
+		}
+
+
+		LOSResultList<StockUnitTO> list = null;
+		BODTO<ItemData> it = new BODTO<ItemData>(currentItemData.getId(), 
+				currentItemData.getVersion(), currentItemData.getNumber());
+		StockUnitTO oldSU;
+		BigDecimal oldAmount;
+		try{
+			list = stockUnitQuery.queryByDefault(null, null, it, inLocation, new QueryDetail(0, Integer.MAX_VALUE));
+			if(list.size()>0){
+				oldSU = list.get(0);
+				oldAmount = oldSU.getAmount();
+				oldAmount = oldAmount.add(currentAmount);
+
+				manageInventoryFacade.changeAmount(oldSU, 
+						oldAmount, new BigDecimal(0), "");
+
+				/* getorcreateunitload */
+				return FuelNavigationEnum.FUEL_IN_COMPLETE.name();
+			}
+
+		} catch (Throwable ex) {
+			log.error(ex, ex);
+			JSFHelper.getInstance().message( resolve("MsgUnknownError") );
 			return "";
 		}
 
