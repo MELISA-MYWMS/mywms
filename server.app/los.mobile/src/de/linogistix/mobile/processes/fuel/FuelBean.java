@@ -28,9 +28,11 @@ import org.mywms.service.VehicleDataServiceRemote;
 //import de.linogistix.los.common.exception.UnAuthorizedException;
 //import de.linogistix.los.inventory.businessservice.LOSGoodsReceiptComponent;
 import de.linogistix.los.inventory.facade.OrderFacade;
+import de.linogistix.los.inventory.facade.OrderPositionTO;
 import de.linogistix.los.inventory.facade.LOSGoodsReceiptFacade;
 import de.linogistix.los.inventory.facade.ManageInventoryFacade;
 //import de.linogistix.los.inventory.model.LOSAdvice;
+import de.linogistix.los.inventory.model.OrderType;
 import de.linogistix.los.inventory.model.LOSGoodsReceipt;
 //import de.linogistix.los.inventory.model.LOSGoodsReceiptState;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
@@ -1171,8 +1173,10 @@ public class FuelBean extends BasicDialogBean {
 				loc.getVersion(), loc.getName());
 		BODTO<ItemData> it = new BODTO<ItemData>(currentItemData.getId(), 
 				currentItemData.getVersion(), currentItemData.getNumber());
-		//Client c = currentItemData.getClient();
+		Client c = currentItemData.getClient();
 		//BODTO<Client> cdto = new BODTO<Client>(c.getId(), c.getVersion(), c.getNumber());
+		StockUnitTO oldSU;
+		BigDecimal oldAmount = new BigDecimal(0);
 		try{
 			//list = stockUnitQuery.queryByStorageLocation(sl, new QueryDetail(Integer.MAX_VALUE, 0));
 			//list = stockUnitQuery.queryByItemData(sl, new QueryDetail(Integer.MAX_VALUE, 0));
@@ -1180,11 +1184,53 @@ public class FuelBean extends BasicDialogBean {
 			//list = stockUnitQuery.queryByDefault(null, null, it, sl, new QueryDetail(Integer.MAX_VALUE, 0));
 			//list = stockUnitQuery.queryByDefault(null, null, it, null, new QueryDetail(0, Integer.MAX_VALUE));
 			list = stockUnitQuery.queryByDefault(null, null, it, sl, new QueryDetail(0, Integer.MAX_VALUE));
+			if(list.size()>0){
+				oldSU = list.get(0);
+				oldAmount = oldSU.getAmount();
+			}
 
 		} catch (Throwable ex) {
+			log.error(ex, ex);
+			JSFHelper.getInstance().message( resolve("MsgUnknownError") );
+			return "";
 		}
-
 		
+		if(oldAmount.compareTo(currentAmount) == -1){
+			JSFHelper.getInstance().message( resolve("MsgAmountInsufficient") );
+			return "";
+		}
+			
+		OrderPositionTO[] tos = new OrderPositionTO[1];
+                OrderPositionTO to = new OrderPositionTO();
+                to.amount = currentAmount;
+                String val = currentItemData.getNumber();
+                if( val != null && val.startsWith("* ") )
+                    val = val.substring(2);
+                to.articleRef = val;
+		//val = item.getPrintnorm();
+		//if( val != null && val.startsWith("* ") )
+		//val = val.substring(2);
+                to.batchRef = null;
+                to.clientRef = c.getName();
+                tos[0] = to;
+
+		try{ orderFacade.order(c.getNumber(), 
+				null,
+                              	tos, 
+				null,
+                              	null, 
+                              	"FuelOut", 
+                              	OrderType.TO_CUSTOMER,
+                              	new Date(),
+                              	true,
+                              	null);
+		} catch (FacadeException e) {
+                        log.error(e,e);
+			JSFHelper.getInstance().message( resolve("MsgOrderStartFail") );
+			return "";
+                }
+
+
 		JSFHelper.getInstance().message("list size is "+list.size());
 		return "";
 		//return FuelNavigationEnum.FUEL_ENTER_DELIVERER.name();
