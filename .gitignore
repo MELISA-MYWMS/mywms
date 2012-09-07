@@ -21,7 +21,7 @@ jboss-4.2.3.GA/server/all/log/*.log
 jboss-4.2.3.GA/server/all/tmp/**/*
 jboss-4.2.3.GA/server/all/data/**/*
 jboss-4.2.3.GA/server/all/work/**/*
-jboss-4.2.3.GA/server/default/log/*.log
+jboss-4.2.3.GA/server/default/log/*
 jboss-4.2.3.GA/server/default/tmp/**/*
 jboss-4.2.3.GA/server/default/data/**/*
 jboss-4.2.3.GA/server/default/work/**/*
@@ -37,6 +37,7 @@ server.app/los.mobile/build/
 server.app/los.stocktaking-ejb/build/
 server.app/mywms.as/build/
 server.app/project-ejb/build/
+server.app/**/eclipse-out/
 
 rich.client/los.reference/Project EJB-Library/build/
 rich.client/los.reference/Project EJB-Library/release/
@@ -50,3 +51,4 @@ rich.client/los.clientsuite/nbplatform/
 rich.client/los.clientsuite/**/build/*
 rich.client/los.clientsuite/**/release/
 rich.client/los.clientsuite/dist/
+rich.client/los.clientsuite/nbproject/private/

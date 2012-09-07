@@ -188,6 +188,7 @@ public class OrderBusinessBean implements OrderBusiness {
 //				"CREATED OrderRequest: " + r.getRequestId(),
 //				InventoryLogKeys.CREATED_ORDERREQUEST.name(), new Object[] { r
 //						.getRequestId() });
+
 		return r;
 	}
 	
@@ -723,6 +724,67 @@ public class OrderBusinessBean implements OrderBusiness {
 					InventoryExceptionKey.PICKORDER_CANNOT_BE_CREATED, t.getLocalizedMessage());
 
 		}
+	}
+	
+	public LOSPickRequest processFuel(LOSOrderRequest r ) throws FacadeException, OrderCannotBeStarted {
+		LOSPickRequest pr;
+
+		r = manager.find(LOSOrderRequest.class, r.getId());
+		
+		if (!r.getOrderState().equals(LOSOrderRequestState.RAW)){
+			throw new InventoryException(InventoryExceptionKey.ORDER_ALREADY_STARTED, r.getNumber());
+		}
+		
+		ItemData idat;
+		Lot lot;
+		OrderCannotBeStarted orderCOrderCannotBeStarted = null;
+		try {
+
+			
+			for (LOSOrderRequestPosition to : r.getPositions()) {
+				if (to.getLot() == null ) {
+					lot = null;
+					idat = to.getItemData();
+					testItemData(idat);
+				} else {
+					
+					lot = to.getLot();
+					
+					idat = lot.getItemData();
+					try{
+						testLot(r,lot);
+					} catch (OrderCannotBeStarted ex){
+						log.error(ex.getMessage());
+						orderCOrderCannotBeStarted = ex;
+					}
+				}
+			}
+			
+
+			if (orderCOrderCannotBeStarted == null){
+				pr = pickService.processOrderRequest(r).get(0);
+			} else{
+				switch (r.getOrderType()) {
+				case INTERNAL:
+					pr = pickService.processOrderRequest(r).get(0);
+					break;
+				default:
+					throw orderCOrderCannotBeStarted;
+				}
+			}
+		} catch (FacadeException t) {
+			log.error(t.getMessage());
+			log.error("CREATE OrderRequest FAILED: " + r.getNumber());
+			throw t;
+
+		} catch (Throwable t) {
+			log.error(t.getMessage(), t);
+			throw new InventoryException(
+					InventoryExceptionKey.PICKORDER_CANNOT_BE_CREATED, t.getLocalizedMessage());
+
+		}
+
+		return pr;
 	}
 
 

@@ -98,6 +98,19 @@ public interface OrderFacade {
 	boolean processAutomaticly, @WebParam(name = "comment")
 	String comment) throws FacadeException;
 
+	@WebMethod
+	LOSPickRequest orderFuel(@WebParam(name = "clientRef")
+	String clientRef, @WebParam(name = "orderRef")
+	String orderRef, @WebParam(name = "positions")
+	OrderPositionTO[] positions, @WebParam(name = "documentUrl")
+	String documentUrl, @WebParam(name = "labelUrl")
+	String labelUrl, @WebParam(name = "destination")
+	String destination, @WebParam(name = "orderType")
+	OrderType type, @WebParam(name = "deliveryDate")
+	Date deliveryDate, @WebParam(name = "processAutomaticly")
+	boolean processAutomaticly, @WebParam(name = "comment")
+	String comment) throws FacadeException;
+
 	LOSOrderRequest order(BODTO<Client> c, String orderRef,
 			OrderPositionTO position, String documentUrl, String labelUrl,
 			BODTO<LOSStorageLocation> loc, OrderType type,

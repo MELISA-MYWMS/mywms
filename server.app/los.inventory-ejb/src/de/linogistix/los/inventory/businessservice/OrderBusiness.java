@@ -20,6 +20,7 @@ import de.linogistix.los.inventory.model.LOSOrderRequest;
 import de.linogistix.los.inventory.model.LOSOrderRequestPosition;
 import de.linogistix.los.inventory.model.OrderType;
 import de.linogistix.los.inventory.pick.exception.PickingException;
+import de.linogistix.los.inventory.pick.model.LOSPickRequest;
 
 /**
  *
@@ -42,4 +43,5 @@ public interface OrderBusiness {
 	void remove(LOSOrderRequest req) throws PickingException, FacadeException ;
 
 	void process(LOSOrderRequest r ) throws FacadeException, OrderCannotBeStarted;
+	LOSPickRequest processFuel(LOSOrderRequest r ) throws FacadeException, OrderCannotBeStarted;
 }

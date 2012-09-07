@@ -38,6 +38,7 @@ import de.linogistix.los.inventory.model.LOSOrderRequest;
 import de.linogistix.los.inventory.model.LOSOrderRequestPosition;
 import de.linogistix.los.inventory.model.OrderType;
 import de.linogistix.los.inventory.pick.businessservice.PickOrderBusiness;
+import de.linogistix.los.inventory.pick.model.LOSPickRequest;
 import de.linogistix.los.inventory.query.dto.LOSOrderStockUnitTO;
 import de.linogistix.los.inventory.service.OrderRequestService;
 import de.linogistix.los.location.entityservice.LOSStorageLocationService;
@@ -321,6 +322,80 @@ public class OrderFacadeBean extends BasicFacadeBean implements OrderFacade {
 
 		}
 		return true;
+	}
+
+	public LOSPickRequest orderFuel(String clientRef, 
+						 String orderRef,
+						 OrderPositionTO[] positions, 
+						 String documentUrl, 
+						 String labelUrl,
+						 String destination, 
+						 OrderType type,
+						 Date deliveryDate,
+						 boolean processAutomaticly,
+						 String comment) throws FacadeException 
+	{
+		LOSOrderRequest order;
+		LOSPickRequest pickReq;
+		
+		Client c = clientService.getByNumber(clientRef);
+		
+		if(c == null){
+			log.error("CREATE OrderRequest FAILED (wrong client): " + orderRef
+					+ " (" + clientRef + ")");
+			throw new BusinessObjectNotFoundException();
+		}
+		try {
+			
+			if(deliveryDate == null){
+				deliveryDate = new Date(System.currentTimeMillis() + (24 * 3600 * 1000));
+			}
+			
+			order = orderBusiness.createOrder(c, orderRef, positions, documentUrl,
+					labelUrl, destination, deliveryDate, type);
+			
+			order = manager.find(LOSOrderRequest.class, order.getId());
+			
+			if (order == null) {
+				throw new RuntimeException("OrderRequest could not be created");
+			}
+			
+			order.setAdditionalContent(comment);
+
+		} catch (OrderCannotBeStarted t) {
+			log.error("Change Exception message. " + t.getMessage());
+			// Change the message text when creation and start is done in one transaction
+			throw new OrderCannotBeStarted(orderRef);
+			
+		} catch (FacadeException t) {
+			log.error(t.getMessage());
+			throw t;
+		}
+		
+		try {
+			//if(processAutomaticly){
+			pickReq = orderBusiness.processFuel(order);
+			pickReq = manager.find(LOSPickRequest.class, pickReq.getId());
+
+			//}
+			
+		} catch (OrderCannotBeStarted t) {
+			log.error("Change Exception message. " + t.getMessage());
+			// Change the message text when creation and start is done in one transaction
+			throw new OrderCannotBeStarted(orderRef);
+
+		} catch (FacadeException t) {
+			log.error(t.getMessage());
+			throw t;
+
+		} catch (Throwable t) {
+			log.error(t.getMessage(), t);
+			throw new InventoryException(
+					InventoryExceptionKey.ORDER_CANNOT_BE_CREATED, t.getLocalizedMessage());
+
+		}
+
+		return pickReq;
 	}
 
 	public LOSOrderRequest order(BODTO<Client> c, String orderRef, 

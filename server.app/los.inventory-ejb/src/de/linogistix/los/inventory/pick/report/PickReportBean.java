@@ -95,6 +95,11 @@ public class PickReportBean implements PickReport {
 			receipt.setState(pick.getState().toString());
 			receipt.setType(type);
 			
+			/* Added for MELISA */
+			String source = "0";
+			byte[] byteArray = source.getBytes(); 
+			receipt.setDocument(byteArray);
+			
 			manager.persist(receipt);
 
 //		}
@@ -124,9 +129,10 @@ public class PickReportBean implements PickReport {
 			export.add(param);
 		}
 
-		manager.flush();
-
-		if (type.equals(DocumentTypes.APPLICATION_PDF.toString())) {
+		/* commented the following because there is an error while parsing
+		 * PickReceipt.jrxml
+		 */
+		/*if (type.equals(DocumentTypes.APPLICATION_PDF.toString())) {
 			try {
 				JasperDesign d = repService.getJrxmlResource(c,
 						BundleResolver.class, "PickReceipt.jrxml");
@@ -147,8 +153,9 @@ public class PickReportBean implements PickReport {
 			}
 		} else {
 			throw new IllegalArgumentException("only pdf supported");
-		}
+		}*/
 
+		manager.flush();
 		return receipt;
 
 	}

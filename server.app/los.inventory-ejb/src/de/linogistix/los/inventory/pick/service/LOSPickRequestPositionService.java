@@ -10,7 +10,8 @@ package de.linogistix.los.inventory.pick.service;
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.ejb.Local;
+//import javax.ejb.Local;
+import javax.ejb.Remote;
 
 import org.mywms.model.PickingWithdrawalType;
 import org.mywms.model.StockUnit;
@@ -21,7 +22,8 @@ import de.linogistix.los.inventory.model.LOSOrderRequestPosition;
 import de.linogistix.los.inventory.pick.model.LOSPickRequest;
 import de.linogistix.los.inventory.pick.model.LOSPickRequestPosition;
 
-@Local
+//@Local
+@Remote
 public interface LOSPickRequestPositionService extends BasicService<LOSPickRequestPosition>{
 	
 	List<LOSPickRequestPosition> getByPickRequest(LOSPickRequest r);
