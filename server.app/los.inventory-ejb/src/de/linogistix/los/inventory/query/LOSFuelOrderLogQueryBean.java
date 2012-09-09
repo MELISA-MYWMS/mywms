@@ -16,9 +16,8 @@ public class LOSFuelOrderLogQueryBean extends
 		LOSFuelOrderLogQueryRemote {
 
 	private static final String[] props = new String[]{
-		"id", "version", "labelId","vehicleId",
-		"storLoc.name", "stationPump", 
-		"orderReceipient.identityCard", "orderType", 
+		"id", "version", "labelId","vehicle.labelId","receipient.identityCard","rcptPos.id",
+		"storLoc.name", "stationPump", "orderType", 
 		"tankRemaining"
 	};
 	

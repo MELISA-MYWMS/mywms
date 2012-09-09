@@ -43,6 +43,7 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
     	this.articleDescr = idat.getRcptPos().getArticleDescr();    	
     }
 
+	//ask why?
 	public LOSFuelOrderLogTO(Long id, int version, String name){
 		super(id, version, name);
 	}

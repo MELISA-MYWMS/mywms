@@ -171,7 +171,7 @@ public class LOSFuelOrderLog extends BasicEntity {
     }
 
     /**
-     * Get rcptPosId.
+     * Get rcptPos_Id.
      *
      * @return rcptPosId as OrderReceiptPosition.
      */
@@ -181,18 +181,18 @@ public class LOSFuelOrderLog extends BasicEntity {
     }
 
     /**
-     * Set rcptPosId.
+     * Set rcptPos_Id.
      *
-     * @param rcptPosId the value to set.
+     * @param rcptPos_Id the value to set.
      */
     public void setRcptPos(OrderReceiptPosition rcptPos) {
         this.rcptPos = rcptPos;
     }
     
     /**
-     * Get vehicleId.
+     * Get vehicle_Id.
      *
-     * @return vehicleId as OrderReceiptPosition.
+     * @return vehicle_Id as OrderReceiptPosition.
      */
     @ManyToOne(optional=false)
     public VehicleData getVehicle() {
@@ -201,9 +201,9 @@ public class LOSFuelOrderLog extends BasicEntity {
     
      
     /**
-     * Set vehicleId.
+     * Set vehicle_Id.
      *
-     * @param vehicleId the value to set.
+     * @param vehicle_Id the value to set.
      */
     public void setVehicle(VehicleData vehicle) {
         this.vehicle = vehicle;
