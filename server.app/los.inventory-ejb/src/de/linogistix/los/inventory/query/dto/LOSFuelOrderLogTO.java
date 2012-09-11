@@ -12,10 +12,12 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 	private static final long serialVersionUID = 1L;
 	
 	//private OrderReceiptPosition rcptPosId;
+	private String labelId;
 	private String vehicleData;
 	private String storageLocation;	
 	private int stationPump;
 	private String orderReceipient;
+	private long orderRcptPos;
 	private String orderType;
 	private BigDecimal tankRemaining;
 	private String fullName;
@@ -24,14 +26,15 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 	private String articleDescr;
 		
 	public LOSFuelOrderLogTO(LOSFuelOrderLog idat) {
-        super(idat.getId(), idat.getVersion(), idat.getLabelId());
+        super(idat.getId(), idat.getVersion(), idat.getTransactionId());
+        this.labelId = idat.getLabelId();
 		this.storageLocation	= idat.getStorLoc().getName();
 		this.vehicleData = idat.getVehicle().getLabelId();
 		this.stationPump	= idat.getStationPump();
 		this.orderReceipient	= idat.getReceipient().getIdentityCard();
 		this.orderType	= idat.getOrderType();
 		this.tankRemaining	= idat.getTankRemaining();   
-				
+		this.orderRcptPos = idat.getRcptPos().getId();		
     	this.fullName = idat.getReceipient().getRankAbbr();
     	this.fullName += " ";
     	this.fullName += idat.getReceipient().getFirstName();
@@ -43,27 +46,43 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
     	this.articleDescr = idat.getRcptPos().getArticleDescr();    	
     }
 
-	//ask why?
-	public LOSFuelOrderLogTO(Long id, int version, String name){
-		super(id, version, name);
+	public LOSFuelOrderLogTO(Long id, int version, String transactionId){
+		super(id, version, transactionId);
 	}
 	
-	public LOSFuelOrderLogTO(Long id, int version, String name, String vehicleData, 
-		String storageLocation, int stationPump, String orderReceipient, String orderType, BigDecimal tankRemaining,
-		String fullName , String plateNumber , String articleRef, String articleDescr){
-		super(id, version, name);
+	public LOSFuelOrderLogTO(Long id, int version, String transactionId,String labelId, String vehicleData, 
+		String storageLocation, int stationPump, String orderReceipient,long orderRcptPos,String orderType, BigDecimal tankRemaining)
+		{
+		super(id, version, transactionId);
+		this.labelId = labelId; 
 		this.storageLocation	= storageLocation;
 		this.vehicleData = vehicleData;
 		this.stationPump	= stationPump;
 		this.orderReceipient	= orderReceipient;
+		this.orderRcptPos = orderRcptPos;
 		this.orderType	= orderType;
-		this.tankRemaining	= tankRemaining;
-		this.fullName = fullName;
-		this.plateNumber = plateNumber;
-    	this.articleRef = articleRef;
-    	this.articleDescr = articleDescr;    	
+		this.tankRemaining	= tankRemaining;   	
 	}
 
+	/**
+	 * Get labelId.
+	 *
+	 * @return labelId as String.
+	 */
+	public String getLabelId()
+	{
+	    return labelId;
+	}
+	
+	/**
+	 * Set labelId.
+	 *
+	 * @param labelId the value to set.
+	 */
+	public void setLabelId(String labelId)
+	{
+	    this.labelId = labelId;
+	}
 	
 	/**
 	 * Get storageLocation.

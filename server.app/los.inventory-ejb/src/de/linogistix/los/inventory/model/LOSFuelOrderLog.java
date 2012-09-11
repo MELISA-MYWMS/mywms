@@ -25,13 +25,14 @@ import de.linogistix.los.inventory.model.OrderReceiptPosition;
 @Entity
 @Table(name = "los_fuel_order_log", uniqueConstraints = {
     @UniqueConstraint(columnNames = {
-        "labelId"
+        "transactionid"
     })
 })
 public class LOSFuelOrderLog extends BasicEntity {
 
     private static final long serialVersionUID = 1L;
 
+    private String transactionId;
     private String labelId;
     private VehicleData vehicle;
     private LOSStorageLocation storLoc;
@@ -50,28 +51,37 @@ public class LOSFuelOrderLog extends BasicEntity {
         this.labelId = labelId;
     }
 
-    //LabelID not unique?
+    @Column(nullable = false)
+    public String getTransactionId() {
+        return this.transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+    
+    //TransactionID not unique?
     @Override
     public String toUniqueString() {
-        if (getLabelId() != null) {
-            return getLabelId();
+        if (getTransactionId() != null) {
+            return getTransactionId();
         } else {
             return getId().toString();
         }
     }
-
+    
     @PreUpdate
     @PrePersist
     public void sanityCheck() throws BusinessException, ConstraintViolatedException {
 
         if (getId() != null) {
-            if (( getLabelId() == null || getLabelId().length() == 0 )) {
-                setLabelId(getId().toString());
+            if (( getTransactionId() == null || getTransactionId().length() == 0 )) {
+                setTransactionId(getId().toString());
             } else {
                 //ok
             }
         } else {
-            throw new RuntimeException("Id cannot be retrieved yet - hence labelId cannot be set");
+            throw new RuntimeException("Id cannot be retrieved yet - hence TransactionId cannot be set");
         }
 
     }
