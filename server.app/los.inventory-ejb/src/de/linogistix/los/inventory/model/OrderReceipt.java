@@ -135,7 +135,7 @@ public class OrderReceipt extends Document{
 	 *
 	 * @return recipientId as LOSOrderReceipients.
 	 */
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public LOSOrderReceipients getRecipientId()
 	{
 	    return recipientId;

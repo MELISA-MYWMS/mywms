@@ -27,6 +27,7 @@ import org.mywms.service.VehicleDataServiceRemote;
 
 //import de.linogistix.los.common.exception.UnAuthorizedException;
 //import de.linogistix.los.inventory.businessservice.LOSGoodsReceiptComponent;
+import de.linogistix.los.inventory.businessservice.OrderBusiness;
 import de.linogistix.los.inventory.facade.OrderFacade;
 import de.linogistix.los.inventory.facade.OrderPositionTO;
 import de.linogistix.los.inventory.facade.LOSGoodsReceiptFacade;
@@ -39,6 +40,7 @@ import de.linogistix.los.inventory.model.LOSOrderReceipients;
 //import de.linogistix.los.inventory.model.LOSGoodsReceiptType;
 import de.linogistix.los.inventory.pick.facade.PickOrderFacade;
 import de.linogistix.los.inventory.pick.model.LOSPickRequest;
+import de.linogistix.los.inventory.model.LOSOrderRequest;
 import de.linogistix.los.inventory.pick.model.LOSPickRequestPosition;
 import de.linogistix.los.inventory.pick.service.LOSPickRequestPositionService;
 //import de.linogistix.los.inventory.service.QueryAdviceServiceRemote;
@@ -140,7 +142,9 @@ public class FuelBean extends BasicDialogBean {
     //private Long selectedAdviceId;
 
     //private QueryLotServiceRemote queryLotService;
-	private LOSPickRequestPositionService pickRequestPositionService;
+
+    private OrderBusiness orderBusiness;
+    private LOSPickRequestPositionService pickRequestPositionService;
     private QueryUnitLoadTypeServiceRemote queryUltService;
 
     //private QueryUnitLoadServiceRemote queryUlService;
@@ -196,7 +200,8 @@ public class FuelBean extends BasicDialogBean {
         //queryUnitLoadRemote = super.getStateless(UnitLoadQueryRemote.class);
         queryItemData = super.getStateless(QueryItemDataServiceRemote.class);
         queryVehicleData = super.getStateless(VehicleDataServiceRemote.class);
-        pickOrderFacade= super.getStateless(PickOrderFacade.class);
+        pickOrderFacade = super.getStateless(PickOrderFacade.class);
+	orderBusiness = super.getStateless(OrderBusiness.class);
 
         //collectUlType = propertyService.getBooleanDefault(getWorkstationName(), GRD_COLLECT_UNITLOAD_TYPE, collectUlType);
         //log.info(GRD_COLLECT_UNITLOAD_TYPE+"="+collectUlType);
@@ -1141,6 +1146,7 @@ public class FuelBean extends BasicDialogBean {
     public String processEnterOriginLoc() {
         String code = inputCode == null ? "" : inputCode.trim();
         inputCode = "";
+    	LOSStorageLocation outLoc = null;
 
         if( code.length() == 0 ) {
             JSFHelper.getInstance().message( resolve("MsgEnterLoc") );
@@ -1155,6 +1161,18 @@ public class FuelBean extends BasicDialogBean {
         if( loc == null ) {
             log.error("Wrong location entered. location="+code);
             JSFHelper.getInstance().message( resolve("MsgLocNotAccessable") );
+            return "";
+        }
+
+	String outLocation = code+"OUT";
+        try {
+            outLoc = locService.getByName(outLocation);
+        } catch( Exception e ) {
+            log.error("Output location "+outLocation+" does not exist. ex="+e.getMessage(), e);
+        }
+        if( outLoc == null ) {
+            log.error("Output location "+outLocation+" does not exist");
+            JSFHelper.getInstance().message( resolve("MsgOutLocNotAccessable") );
             return "";
         }
 
@@ -1201,13 +1219,14 @@ public class FuelBean extends BasicDialogBean {
         tos[0] = to;
 
         LOSPickRequest pr;
-        try {
+	LOSOrderRequest or;
+	try {
             pr = orderFacade.orderFuel(c.getNumber(),
                                        null,
                                        tos,
                                        null,
                                        null,
-                                       "FuelOut",
+                                       outLocation,
                                        OrderType.TO_CUSTOMER,
                                        new Date(),
                                        true,
@@ -1252,6 +1271,16 @@ public class FuelBean extends BasicDialogBean {
 
         try {
             pr = pickOrderFacade.finishPickingRequest(pr, pr.getDestination().getName());
+        } catch (Throwable ex) {
+            log.error(ex, ex);
+            JSFHelper.getInstance().message( resolve("MsgUnknownError") );
+            return "";
+        }
+
+	or = pr.getParentRequest();
+	or.setOrderType(OrderType.TO_EXTINGUISH);
+        try {
+	orderBusiness.finishOrder(or, false);
         } catch (Throwable ex) {
             log.error(ex, ex);
             JSFHelper.getInstance().message( resolve("MsgUnknownError") );

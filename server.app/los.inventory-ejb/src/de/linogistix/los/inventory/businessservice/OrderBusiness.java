@@ -10,7 +10,8 @@ package de.linogistix.los.inventory.businessservice;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.ejb.Local;
+//import javax.ejb.Local;
+import javax.ejb.Remote;
 
 import org.mywms.facade.FacadeException;
 import org.mywms.model.Client;
@@ -26,10 +27,12 @@ import de.linogistix.los.inventory.pick.model.LOSPickRequest;
  *
  * @author trautm
  */
-@Local
+//@Local
+@Remote
 public interface OrderBusiness {
 
     void finishOrder(LOSOrderRequest req, boolean force) throws FacadeException;
+    void finishFuelOrder(LOSOrderRequest req, boolean force) throws FacadeException;
 
     LOSOrderRequest createOrder(Client c, String orderRef,
 			OrderPositionTO[] positions, String documentUrl, String labelUrl,

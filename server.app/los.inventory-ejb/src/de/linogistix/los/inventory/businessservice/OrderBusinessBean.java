@@ -330,6 +330,84 @@ public class OrderBusinessBean implements OrderBusiness {
 
 	}
 
+	public void finishFuelOrder(LOSOrderRequest req, boolean force)
+			throws FacadeException {
+		
+		req = manager.find(LOSOrderRequest.class, req.getId());
+		log.debug("finishOrder. order="+req.getNumber());
+		
+		switch(req.getOrderState()){
+		case FINISHED: 
+		case FAILED:
+			log.warn("finishOrder. already has state FINISHED/FAILED: " + req.toString());
+			return;
+		}
+		
+		manageOrderService.processOrderFinishedStart(req);
+		
+
+		for (LOSOrderRequestPosition pos : req.getPositions()) {
+			switch (pos.getPositionState()) {
+			case FINISHED:
+			case PICKED: // TODO don't waterfall
+				req.setOrderState(LOSOrderRequestState.FINISHED);
+				break;
+			case PICKED_PARTIAL: {
+				if (force || pos.isPartitionAllowed()){
+					req.setOrderState(LOSOrderRequestState.FINISHED);
+					break;
+				} else{
+					throw new InventoryException(InventoryExceptionKey.ORDER_NOT_FINIHED, pos.getNumber());
+				}
+			}
+			case PENDING:
+			case RAW:
+			default:
+				if (force || pos.isPartitionAllowed()){
+					req.setOrderState(LOSOrderRequestState.FAILED);
+				}
+				else {
+					throw new InventoryException(InventoryExceptionKey.ORDER_NOT_FINIHED, pos.getNumber());
+				}
+			}
+		}
+		
+
+		switch(req.getOrderType()){
+		case INTERNAL:
+		case TO_PRODUCTION:
+			req.setOrderState(LOSOrderRequestState.FINISHED);
+			cleanup(req);
+			break;
+		case TO_CUSTOMER:
+		case TO_OTHER_SITE:
+			req.setOrderState(LOSOrderRequestState.FINISHED);
+			cleanup(req);
+			break;
+		case TO_EXTINGUISH:
+			req.setOrderState(LOSOrderRequestState.FINISHED);
+			cleanup(req);
+			//TODO: Create Vernichtungsreport
+			break;
+		case TO_REPLENISH:
+			req.setOrderState(LOSOrderRequestState.FINISHED);
+			break;
+		default:
+			log.warn("Unhandled state: " + req.getOrderType());
+			return;
+		}
+		
+		if( manageOrderService.createReceiptOnFinish(req) ) {
+			createReceipt(req, manageOrderService.printReceiptOnFinish(req));
+		}
+		
+		if( manageOrderService.printLabelOnFinish(req) ) {
+			createLabels(req, true);
+		}
+			
+		manageOrderService.processOrderFinishedEnd(req);
+
+	}
 	protected void cleanup(LOSOrderRequest req) throws FacadeException {
 		
 		switch (req.getOrderState()) {
