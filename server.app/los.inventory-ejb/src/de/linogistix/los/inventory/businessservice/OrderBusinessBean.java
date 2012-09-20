@@ -373,37 +373,16 @@ public class OrderBusinessBean implements OrderBusiness {
 		}
 		
 
-		switch(req.getOrderType()){
-		case INTERNAL:
-		case TO_PRODUCTION:
-			req.setOrderState(LOSOrderRequestState.FINISHED);
-			cleanup(req);
-			break;
-		case TO_CUSTOMER:
-		case TO_OTHER_SITE:
-			req.setOrderState(LOSOrderRequestState.FINISHED);
-			cleanup(req);
-			break;
-		case TO_EXTINGUISH:
-			req.setOrderState(LOSOrderRequestState.FINISHED);
-			cleanup(req);
-			//TODO: Create Vernichtungsreport
-			break;
-		case TO_REPLENISH:
-			req.setOrderState(LOSOrderRequestState.FINISHED);
-			break;
-		default:
-			log.warn("Unhandled state: " + req.getOrderType());
-			return;
-		}
+		req.setOrderState(LOSOrderRequestState.FINISHED);
+		cleanup(req);
 		
-		if( manageOrderService.createReceiptOnFinish(req) ) {
+		/*if( manageOrderService.createReceiptOnFinish(req) ) {
 			createReceipt(req, manageOrderService.printReceiptOnFinish(req));
 		}
 		
 		if( manageOrderService.printLabelOnFinish(req) ) {
 			createLabels(req, true);
-		}
+		}*/
 			
 		manageOrderService.processOrderFinishedEnd(req);
 

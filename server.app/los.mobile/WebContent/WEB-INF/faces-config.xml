@@ -1537,7 +1537,7 @@
         </navigation-case>   
     </navigation-rule>
 
-	<!--  Fuel -->
+    <!--  Fuel -->
     <navigation-rule>
         <from-view-id>/pages/processes/controller/MainMenu.jsp</from-view-id>
         <navigation-case>
@@ -1585,8 +1585,20 @@
             <to-view-id>/pages/processes/fuel/EnterTargetInLoc.jsp</to-view-id>
         </navigation-case>   
         <navigation-case>
-            <from-outcome>ENTER_ORIGIN_LOC</from-outcome>
-            <to-view-id>/pages/processes/fuel/EnterOriginLoc.jsp</to-view-id>
+            <from-outcome>FUEL_ENTER_RECEIPIENT</from-outcome>
+            <to-view-id>/pages/processes/fuel/EnterReceipient.jsp</to-view-id>
+        </navigation-case>   
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/pages/processes/fuel/EnterOriginLoc.jsp</from-view-id>
+	<navigation-case>
+	    <from-outcome>FUEL_BACK_TO_MENU</from-outcome>
+	    <to-view-id>/pages/processes/controller/MainMenu.jsp</to-view-id>
+	</navigation-case>
+        <navigation-case>
+            <from-outcome>FUEL_OUT_COMPLETE</from-outcome>
+	    <to-view-id>/pages/processes/controller/MainMenu.jsp</to-view-id>
         </navigation-case>   
     </navigation-rule>
 
@@ -1624,7 +1636,12 @@
             <from-outcome>FUEL_IN_COMPLETE</from-outcome>
 	    <to-view-id>/pages/processes/controller/MainMenu.jsp</to-view-id>
         </navigation-case>   
+        <navigation-case>
+            <from-outcome>ENTER_ORIGIN_LOC</from-outcome>
+            <to-view-id>/pages/processes/fuel/EnterOriginLoc.jsp</to-view-id>
+        </navigation-case>   
     </navigation-rule>
+
 
     <validator>
         <validator-id>astrologer.EmailValidator</validator-id>

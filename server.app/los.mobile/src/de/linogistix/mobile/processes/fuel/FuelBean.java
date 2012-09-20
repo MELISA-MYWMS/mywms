@@ -201,7 +201,7 @@ public class FuelBean extends BasicDialogBean {
         queryItemData = super.getStateless(QueryItemDataServiceRemote.class);
         queryVehicleData = super.getStateless(VehicleDataServiceRemote.class);
         pickOrderFacade = super.getStateless(PickOrderFacade.class);
-	orderBusiness = super.getStateless(OrderBusiness.class);
+        orderBusiness = super.getStateless(OrderBusiness.class);
 
         //collectUlType = propertyService.getBooleanDefault(getWorkstationName(), GRD_COLLECT_UNITLOAD_TYPE, collectUlType);
         //log.info(GRD_COLLECT_UNITLOAD_TYPE+"="+collectUlType);
@@ -873,7 +873,7 @@ public class FuelBean extends BasicDialogBean {
         }*/
 
         if( currentMode == MODE_OUT )
-            return FuelNavigationEnum.ENTER_ORIGIN_LOC.name();
+            return FuelNavigationEnum.FUEL_ENTER_RECEIPIENT.name();
         else
             return FuelNavigationEnum.ENTER_TARGET_IN_LOC.name();
     }
@@ -1146,7 +1146,7 @@ public class FuelBean extends BasicDialogBean {
     public String processEnterOriginLoc() {
         String code = inputCode == null ? "" : inputCode.trim();
         inputCode = "";
-    	LOSStorageLocation outLoc = null;
+        LOSStorageLocation outLoc = null;
 
         if( code.length() == 0 ) {
             JSFHelper.getInstance().message( resolve("MsgEnterLoc") );
@@ -1164,7 +1164,7 @@ public class FuelBean extends BasicDialogBean {
             return "";
         }
 
-	String outLocation = code+"OUT";
+        String outLocation = code+"OUT";
         try {
             outLoc = locService.getByName(outLocation);
         } catch( Exception e ) {
@@ -1219,8 +1219,8 @@ public class FuelBean extends BasicDialogBean {
         tos[0] = to;
 
         LOSPickRequest pr;
-	LOSOrderRequest or;
-	try {
+        LOSOrderRequest or;
+        try {
             pr = orderFacade.orderFuel(c.getNumber(),
                                        null,
                                        tos,
@@ -1236,14 +1236,14 @@ public class FuelBean extends BasicDialogBean {
             JSFHelper.getInstance().message( resolve("MsgOrderStartFail") );
             return "";
         }
-        
-		List<LOSPickRequestPosition> positionList = pickRequestPositionService.getByPickRequest(pr);
-        int totalPosition = 1;
-		totalPosition = positionList.size();
-		//int totalPosition = 1;
-		//totalPosition = pr.getPositions().size();
 
-		//List<LOSPickRequestPosition> positionList = pr.getPositions();
+        List<LOSPickRequestPosition> positionList = pickRequestPositionService.getByPickRequest(pr);
+        int totalPosition = 1;
+        totalPosition = positionList.size();
+        //int totalPosition = 1;
+        //totalPosition = pr.getPositions().size();
+
+        //List<LOSPickRequestPosition> positionList = pr.getPositions();
 
         boolean forward = false;
         for (int i = 0; i<totalPosition; i++) {
@@ -1277,19 +1277,19 @@ public class FuelBean extends BasicDialogBean {
             return "";
         }
 
-	or = pr.getParentRequest();
-	or.setOrderType(OrderType.TO_EXTINGUISH);
+        or = pr.getParentRequest();
+	//or.setOrderType(OrderType.TO_EXTINGUISH);
         try {
-	orderBusiness.finishOrder(or, false);
+            orderBusiness.finishFuelOrder(or, false);
         } catch (Throwable ex) {
             log.error(ex, ex);
             JSFHelper.getInstance().message( resolve("MsgUnknownError") );
             return "";
         }
 
-	JSFHelper.getInstance().message("list size is "+list.size());
-	return "";
-        //return FuelNavigationEnum.FUEL_ENTER_DELIVERER.name();
+        JSFHelper.getInstance().message("list size is "+list.size());
+        return "";
+        //return FuelNavigationEnum.FUEL_OUT_COMPLETE.name();
     }
 
     public String processEnterOriginCancel() {
@@ -1321,28 +1321,7 @@ public class FuelBean extends BasicDialogBean {
         return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
     }
 
-    public String processEnterReceipient() {
-        String code = inputCode == null ? "" : inputCode.trim();
-        inputCode = "";
-
-        if( code.length() == 0 ) {
-            JSFHelper.getInstance().message( resolve("MsgEnterReceipient") );
-            return "";
-        }
-
-        receipient = null;
-
-        try {
-            receipient = receipientService.getByIdentityCard(code);
-        } catch( Exception e ) {
-            log.error("Cannot select receipient="+code+". ex="+e.getMessage(), e);
-        }
-        if( receipient == null ) {
-            log.error("Wrong receipient entered. receipient="+code);
-            JSFHelper.getInstance().message( resolve("MsgReceipientNotAccessable") );
-            return "";
-        }
-
+    private String finalizeFuelIn() {
         Client c = currentItemData.getClient();
         BODTO<Client> cdto = new BODTO<Client>(c.getId(), c.getVersion(), c.getNumber());
         BODTO<LOSStorageLocation> inLocation = new BODTO<LOSStorageLocation>(loc.getId(),
@@ -1394,16 +1373,34 @@ public class FuelBean extends BasicDialogBean {
         }
 
         return postUnitLoad( loc.getName(), null );
+    }
 
-        //initPos();
+    public String processEnterReceipient() {
+        String code = inputCode == null ? "" : inputCode.trim();
+        inputCode = "";
 
-        //if( collectLotAlways || mat.isLotMandatory() ) {
-        //return GRDirectNavigationEnum.GRD_ENTER_LOT.name();
-        //}
-        //else if( mat.getSerialNoRecordType() == SerialNoRecordType.ALWAYS_RECORD ) {
-        //return GRDirectNavigationEnum.GRD_ENTER_SERIAL.name();
-        //}
+        if( code.length() == 0 ) {
+            JSFHelper.getInstance().message( resolve("MsgEnterReceipient") );
+            return "";
+        }
 
+        receipient = null;
+
+        try {
+            receipient = receipientService.getByIdentityCard(code);
+        } catch( Exception e ) {
+            log.error("Cannot select receipient="+code+". ex="+e.getMessage(), e);
+        }
+        if( receipient == null ) {
+            log.error("Wrong receipient entered. receipient="+code);
+            JSFHelper.getInstance().message( resolve("MsgReceipientNotAccessable") );
+            return "";
+        }
+
+        if( currentMode == MODE_OUT )
+            return FuelNavigationEnum.ENTER_ORIGIN_LOC.name();
+        else
+            return finalizeFuelIn();
     }
 
     public String processEnterReceipientCancel() {
@@ -1754,12 +1751,19 @@ public class FuelBean extends BasicDialogBean {
         return new String[] {org.mywms.globals.Role.FUEL_STR};
     }
 
-
     public String getCurrentMode() {
         return currentMode;
     }
 
     public void setCurrentMode(String currentMode) {
         this.currentMode = currentMode;
+    }
+
+    public LOSOrderReceipients getReceipient() {
+        return receipient;
+    }
+
+    public void setReceipient(LOSOrderReceipients receipient) {
+        this.receipient = receipient;
     }
 }
