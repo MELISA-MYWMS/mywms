@@ -12,5 +12,6 @@ public interface VehicleDataService
 	public VehicleData create();
 
 	public VehicleData getByPlateNumber(String plateNumber) throws EntityNotFoundException;
-
+	public VehicleData getByLabelId(String labelId) throws EntityNotFoundException;
+	public String getPlateNumberByLabelId(String labelId) throws EntityNotFoundException;
 }

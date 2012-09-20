@@ -145,6 +145,9 @@
             <file name="de-linogistix-inventory-browser-bo-BOLOSStockUnitRecord.instance">
                 <attr name="position" intvalue="900"/>
             </file>
+            <file name="de-linogistix-inventory-browser-bo-BOLOSFuelOrderLog.instance">
+                 <attr name="position" intvalue="950"/>
+            </file>
         </folder>
         
         <folder name="GoodsIn">

@@ -135,8 +135,7 @@ public class LOSGoodsReceiptComponentBean extends BasicFacadeBean implements
 				LOSAreaType.GOODS_IN);
 		/* added for MELISA 6/8/12 */
 		slList.addAll(slService.getListByAreaType(clientService.getSystemClient(), LOSAreaType.GOODS_IN_OUT));
-		slList.addAll(slService.getListByAreaType(clientService.getSystemClient(), LOSAreaType.STORE));
-
+		slList.addAll(slService.getListByAreaType(clientService.getSystemClient(), LOSAreaType.GENERIC));
 
 
 		if (slList.size() == 0) {
@@ -270,7 +269,7 @@ public class LOSGoodsReceiptComponentBean extends BasicFacadeBean implements
 		}
 		
 		LOSArea a = (LOSArea) unitLoad.getStorageLocation().getArea();
-		if (!a.getAreaType().equals(LOSAreaType.GOODS_IN)) {
+		if (!a.getAreaType().equals(LOSAreaType.GOODS_IN) && !a.getAreaType().equals(LOSAreaType.GENERIC)) {
 			throw new InventoryException(
 					InventoryExceptionKey.NOT_A_GOODSIN_LOCATION,
 					new Object[] { unitLoad.getStorageLocation().getName() });

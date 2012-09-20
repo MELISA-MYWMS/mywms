@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import org.mywms.model.BusinessException;
+import org.mywms.model.VehicleData;
 import org.mywms.service.ConstraintViolatedException;
 
 import org.mywms.model.BasicEntity;
@@ -20,21 +21,24 @@ import de.linogistix.los.location.model.LOSStorageLocation;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.OrderReceiptPosition;
 
+
 @Entity
 @Table(name = "los_fuel_order_log", uniqueConstraints = {
     @UniqueConstraint(columnNames = {
-        "labelId"
+        "transactionid"
     })
 })
 public class LOSFuelOrderLog extends BasicEntity {
 
     private static final long serialVersionUID = 1L;
 
+    private String transactionId;
     private String labelId;
+    private VehicleData vehicle;
     private LOSStorageLocation storLoc;
     private int stationPump;
-    private LOSOrderReceipients receipientId;
-    private OrderReceiptPosition rcptPosId;
+    private LOSOrderReceipients receipient;
+    private OrderReceiptPosition rcptPos;
     private String orderType;
     private BigDecimal tankRemaining;
 
@@ -47,29 +51,38 @@ public class LOSFuelOrderLog extends BasicEntity {
         this.labelId = labelId;
     }
 
+    @Column(nullable = false)
+    public String getTransactionId() {
+        return this.transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+    
+    //TransactionID not unique?
     @Override
     public String toUniqueString() {
-        if (getLabelId() != null) {
-            return getLabelId();
+        if (getTransactionId() != null) {
+            return getTransactionId();
         } else {
             return getId().toString();
         }
     }
-
+    
     @PreUpdate
     @PrePersist
     public void sanityCheck() throws BusinessException, ConstraintViolatedException {
 
         if (getId() != null) {
-            if (( getLabelId() == null || getLabelId().length() == 0 )) {
-                setLabelId(getId().toString());
+            if (( getTransactionId() == null || getTransactionId().length() == 0 )) {
+                setTransactionId(getId().toString());
             } else {
                 //ok
             }
         } else {
-            throw new RuntimeException("Id cannot be retrieved yet - hence labelId cannot be set");
+            throw new RuntimeException("Id cannot be retrieved yet - hence TransactionId cannot be set");
         }
-
 
     }
 
@@ -117,17 +130,17 @@ public class LOSFuelOrderLog extends BasicEntity {
      * @return receipientId as LOSOrderReceipients.
      */
     @ManyToOne(optional=false)
-    public LOSOrderReceipients getReceipientId() {
-        return receipientId;
+    public LOSOrderReceipients getReceipient() {
+        return receipient;
     }
-
+    
     /**
      * Set receipientId.
      *
      * @param receipientId the value to set.
      */
-    public void setReceipientId(LOSOrderReceipients receipientId) {
-        this.receipientId = receipientId;
+    public void setReceipient(LOSOrderReceipients receipient) {
+        this.receipient = receipient;
     }
 
     /**
@@ -168,21 +181,41 @@ public class LOSFuelOrderLog extends BasicEntity {
     }
 
     /**
-     * Get rcptPosId.
+     * Get rcptPos_Id.
      *
      * @return rcptPosId as OrderReceiptPosition.
      */
     @OneToOne(optional=false)
-    public OrderReceiptPosition getRcptPosId() {
-        return rcptPosId;
+    public OrderReceiptPosition getRcptPos() {
+        return rcptPos;
     }
 
     /**
-     * Set rcptPosId.
+     * Set rcptPos_Id.
      *
-     * @param rcptPosId the value to set.
+     * @param rcptPos_Id the value to set.
      */
-    public void setRcptPosId(OrderReceiptPosition rcptPosId) {
-        this.rcptPosId = rcptPosId;
+    public void setRcptPos(OrderReceiptPosition rcptPos) {
+        this.rcptPos = rcptPos;
+    }
+    
+    /**
+     * Get vehicle_Id.
+     *
+     * @return vehicle_Id as OrderReceiptPosition.
+     */
+    @ManyToOne(optional=false)
+    public VehicleData getVehicle() {
+        return vehicle;
+    }
+    
+     
+    /**
+     * Set vehicle_Id.
+     *
+     * @param vehicle_Id the value to set.
+     */
+    public void setVehicle(VehicleData vehicle) {
+        this.vehicle = vehicle;
     }
 }

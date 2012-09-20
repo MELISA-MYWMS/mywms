@@ -68,7 +68,7 @@ public interface UserService
     User create(Client client, String username)
         throws UniqueConstraintViolatedException;
     
-    User create(Client client, String username, String firstName, String lastName, String pwd);
+    User create(Client client, String username, String firstName, String lastName, String pwd, String personnelId);
 
     /**
      * Changes the password of the user

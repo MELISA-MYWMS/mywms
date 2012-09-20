@@ -29,7 +29,7 @@ uniqueConstraints = {
 @Inheritance(strategy = InheritanceType.JOINED)
 public class VehicleData
     extends BasicEntity {
-
+	
     private String remarks = "";
     private String manufacturerName = "";
     private String modelName = "";

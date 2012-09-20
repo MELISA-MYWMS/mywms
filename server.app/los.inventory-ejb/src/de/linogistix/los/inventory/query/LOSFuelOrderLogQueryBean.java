@@ -1,5 +1,6 @@
 package de.linogistix.los.inventory.query;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,15 +17,15 @@ public class LOSFuelOrderLogQueryBean extends
 		LOSFuelOrderLogQueryRemote {
 
 	private static final String[] props = new String[]{
-		"id", "version", "labelId",
-		"storLoc.name", "stationPump", 
-		"orderReceipient.identityCard", "orderType", 
-		"tankRemaining"
+		"id", "version", "transactionId","labelId","vehicle.labelId","storLoc.name", "stationPump",
+		"receipient.identityCard", "rcptPos.id", "orderType", "tankRemaining" 			
 	};
 	
+			
+			
 	@Override
 	public String getUniqueNameProp() {
-		return "labelId";
+		return "transactionId";
 	}
 
 	@Override
@@ -41,6 +42,13 @@ public class LOSFuelOrderLogQueryBean extends
 	protected List<TemplateQueryWhereToken> getAutoCompletionTokens(String value) {
  List<TemplateQueryWhereToken> ret = new ArrayList<TemplateQueryWhereToken>();
 
+ 	TemplateQueryWhereToken transactionId = new TemplateQueryWhereToken(
+         TemplateQueryWhereToken.OPERATOR_LIKE, "transactionId",
+         value);
+     transactionId.setLogicalOperator(TemplateQueryWhereToken.OPERATOR_OR);
+     ret.add(transactionId);
+
+     
         TemplateQueryWhereToken labelId = new TemplateQueryWhereToken(
             TemplateQueryWhereToken.OPERATOR_LIKE, "labelId",
             value);

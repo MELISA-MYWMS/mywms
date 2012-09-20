@@ -20,6 +20,8 @@ import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import org.openide.util.actions.SystemAction;
 
+import java.math.BigDecimal;
+
 /**
  * BOMasterNodes are suitable for being shown in a master view. A BOMasterNode is  
  * used as a handle for BasicEntities. 

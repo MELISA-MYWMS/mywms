@@ -174,10 +174,10 @@ public class RefTopologyFacadeBean implements RefTopologyFacade {
 		
 		log.info("Create User...");
 
-		createUser(sys, "deutsch", "Deutsch", "de", org.mywms.globals.Role.ADMIN_STR);
-		createUser(sys, "english", "English", "en", org.mywms.globals.Role.ADMIN_STR);
-		createUser(sys, "français", "Français", "fr", org.mywms.globals.Role.ADMIN_STR);
-		createUser(sys, "francais", "Français", "fr", org.mywms.globals.Role.ADMIN_STR);
+		createUser(sys, "deutsch", "Deutsch", "de", org.mywms.globals.Role.ADMIN_STR,"0","system","system","system");
+		createUser(sys, "english", "English", "en", org.mywms.globals.Role.ADMIN_STR,"1","system","system","system");
+		createUser(sys, "français", "Français", "fr", org.mywms.globals.Role.ADMIN_STR,"2","system","system","system");
+		createUser(sys, "francais", "Français", "fr", org.mywms.globals.Role.ADMIN_STR,"3","system","system","system");
 
 		log.info("Create Zones...");
 		
@@ -425,7 +425,7 @@ public class RefTopologyFacadeBean implements RefTopologyFacade {
 		return itemUnit;
 	}
 
-	private User createUser(Client client, String name, String lastName, String locale, String roleName) {
+	private User createUser(Client client, String name, String lastName, String locale, String roleName,String personnelId,String rank, String rankAbbr,String organizationUnit) {
 		List<Role> roles = new ArrayList<Role>();
 		try{
 			roles.add(roleService.getByName(roleName));
@@ -445,13 +445,18 @@ public class RefTopologyFacadeBean implements RefTopologyFacade {
 			user.setClient(client);
 			user.setName(name);
 			user.setPassword(name);
+			user.setPersonnelId(personnelId);
 			manager.persist(user);
 		}
 		user.setClient(client);
 		user.setPassword(name);
+		user.setPersonnelId(personnelId);
 		user.setLastname(lastName);
 		user.setRoles(roles);
 		user.setLocale(locale);
+		user.setRank(rank);
+		user.setRankAbbr(rankAbbr);
+		user.setOrganizationUnit(organizationUnit);
 		
 		try {
 			userService.changePasswd(user, name, false);
