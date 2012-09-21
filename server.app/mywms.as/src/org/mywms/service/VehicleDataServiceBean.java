@@ -24,7 +24,7 @@ public class VehicleDataServiceBean
 {
 	private static final Logger log  = Logger.getLogger(VehicleDataServiceBean.class);
 
-	public VehicleData getByLabelId(String labelId){
+	/*public VehicleData getByLabelId(String labelId){
 		StringBuffer sb = new StringBuffer();
 		sb.append("SELECT vd FROM ");
 		sb.append(VehicleData.class.getSimpleName()+ " vd ");
@@ -47,7 +47,7 @@ public class VehicleDataServiceBean
 		}
 		
 		return null;
-	}
+	}*/
     
     public VehicleData create()
     {

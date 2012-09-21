@@ -7,8 +7,8 @@
         <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
                
-        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:kefa</property>
-        <property name="hibernate.default_schema">jboss</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:los</property>
+        <property name="hibernate.default_schema">JBOSS</property>
         <property name="hibernate.connection.username">jboss</property>
         <property name="hibernate.connection.password">jboss</property>
 

@@ -34,6 +34,7 @@ import de.linogistix.los.inventory.exception.InventoryExceptionKey;
 import de.linogistix.los.inventory.facade.OrderPositionTO;
 import de.linogistix.los.inventory.model.LOSGoodsOutRequest;
 import de.linogistix.los.inventory.model.LOSOrderRequest;
+import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.LOSOrderRequestPosition;
 import de.linogistix.los.inventory.model.LOSOrderRequestPositionState;
 import de.linogistix.los.inventory.model.LOSOrderRequestState;
@@ -330,7 +331,7 @@ public class OrderBusinessBean implements OrderBusiness {
 
 	}
 
-	public void finishFuelOrder(LOSOrderRequest req, boolean force)
+	public void finishFuelOrder(LOSOrderRequest req, boolean force, LOSOrderReceipients receipient)
 			throws FacadeException {
 		
 		req = manager.find(LOSOrderRequest.class, req.getId());
@@ -376,17 +377,24 @@ public class OrderBusinessBean implements OrderBusiness {
 		req.setOrderState(LOSOrderRequestState.FINISHED);
 		cleanup(req);
 		
-		/*if( manageOrderService.createReceiptOnFinish(req) ) {
-			createReceipt(req, manageOrderService.printReceiptOnFinish(req));
+		if( manageOrderService.createReceiptOnFinish(req) ) {
+			OrderReceipt receipt = null;
+			try {
+				receipt = orderReport.generateFuelOrderReceipt(req.getClient(),
+						 req, receipient);
+			} catch (ReportException rex) {
+				log.error(rex.getMessage(), rex);
+			}
 		}
 		
-		if( manageOrderService.printLabelOnFinish(req) ) {
+		/*if( manageOrderService.printLabelOnFinish(req) ) {
 			createLabels(req, true);
 		}*/
 			
 		manageOrderService.processOrderFinishedEnd(req);
 
 	}
+
 	protected void cleanup(LOSOrderRequest req) throws FacadeException {
 		
 		switch (req.getOrderState()) {

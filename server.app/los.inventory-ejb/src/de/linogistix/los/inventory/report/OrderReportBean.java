@@ -30,7 +30,9 @@ import org.mywms.model.Lot;
 import de.linogistix.los.inventory.model.LOSOrderRequest;
 import de.linogistix.los.inventory.model.LOSOrderRequestPosition;
 import de.linogistix.los.inventory.model.OrderReceipt;
+import de.linogistix.los.inventory.model.OrderType;
 import de.linogistix.los.inventory.model.OrderReceiptPosition;
+import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.pick.model.LOSPickRequestPosition;
 import de.linogistix.los.inventory.pick.service.LOSPickRequestPositionService;
 import de.linogistix.los.inventory.res.InventoryBundleResolver;
@@ -147,6 +149,83 @@ public class OrderReportBean implements OrderReport {
 		} else {
 			throw new IllegalArgumentException("only pdf supported");
 		}
+
+		return receipt;
+
+	}
+
+	public OrderReceipt generateFuelOrderReceipt(Client c, LOSOrderRequest order, LOSOrderReceipients receipient) throws ReportException {
+
+		OrderReceipt receipt;
+		OrderReceiptPosition outPos;
+		List<OrderReceiptPosition> export = new ArrayList<OrderReceiptPosition>();
+
+		if (order.getPositions() == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		OrderReceiptSheet sheet = new OrderReceiptSheet(order);
+		
+		receipt = new OrderReceipt();
+		receipt.setClient(c);
+		receipt.setUser(contextService.getCallersUser().getName());
+		receipt.setDate(new Date());
+		receipt.setName(order.getNumber());
+		//receipt.setOrderNumber(order.getParentRequestNumber()==null?"":order.getParentRequestNumber());
+		receipt.setOrderNumber(order.getNumber());
+		receipt.setOrderReference(order.getRequestId());
+		receipt.setOrderType(order.getOrderType());
+		receipt.setState(order.getOrderState());
+		//receipt.setType(OrderType.TO_CUSTOMER);
+		receipt.setDestination(order.getDestination().getName());
+		receipt.setRecipientId(receipient);
+
+		String source = "0";
+		byte[] byteArray = source.getBytes();
+		receipt.setDocument(byteArray);
+
+		
+		manager.persist(receipt);
+
+		for (OrderReceiptSheetPosition p : sheet.getPositions()){
+			if( p == null ) {
+				log.error("This is not expected. One position of the order has not been picked");
+				continue;
+			}
+			
+			if (p.getWithoutLot().compareTo(new BigDecimal(0)) > 0){
+				outPos = new OrderReceiptPosition();
+				outPos.setClient(receipt.getClient());
+				outPos.setAmount(p.getAmountPicked(null));
+				outPos.setAmountordered(p.getAmountOrdered());
+				outPos.setArticleRef(p.getOrderRequestPosition().getItemData().getNumber());
+				outPos.setArticleDescr(p.getOrderRequestPosition().getItemData().getAdditionalContent());
+				outPos.setArticleScale(p.getOrderRequestPosition().getItemData().getScale());
+				outPos.setLotRef("");
+				outPos.setPos(p.getOrderRequestPosition().getPositionIndex());
+				outPos.setReceipt(receipt);
+				manager.persist(outPos);
+
+				export.add(outPos);
+			}
+			for (Lot lot : p.getLotPositions().keySet()){
+				outPos = new OrderReceiptPosition();
+				outPos.setClient(receipt.getClient());
+				outPos.setAmount(p.getAmountPicked(lot));
+				outPos.setAmountordered(p.getAmountOrdered());
+				outPos.setArticleRef(p.getOrderRequestPosition().getItemData().getNumber());
+				outPos.setArticleDescr(p.getOrderRequestPosition().getItemData().getAdditionalContent());
+				outPos.setArticleScale(p.getOrderRequestPosition().getItemData().getScale());
+				outPos.setLotRef(lot.getName());
+				outPos.setPos(p.getOrderRequestPosition().getPositionIndex());
+				outPos.setReceipt(receipt);
+				manager.persist(outPos);
+
+				export.add(outPos);
+			}
+		}
+
+		manager.flush();
 
 		return receipt;
 

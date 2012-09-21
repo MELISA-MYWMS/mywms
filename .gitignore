@@ -30,6 +30,7 @@ jboss-4.2.3.GA/server/minimal/tmp/**/*
 jboss-4.2.3.GA/server/minimal/data/**/*
 jboss-4.2.3.GA/server/minimal/work/**/*
 
+server.app/bin/
 server.app/los.common-ejb/build/
 server.app/los.inventory-ejb/build/
 server.app/los.location-ejb/build/

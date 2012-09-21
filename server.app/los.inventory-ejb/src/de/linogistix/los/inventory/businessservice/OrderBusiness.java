@@ -18,6 +18,7 @@ import org.mywms.model.Client;
 
 import de.linogistix.los.inventory.facade.OrderPositionTO;
 import de.linogistix.los.inventory.model.LOSOrderRequest;
+import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.LOSOrderRequestPosition;
 import de.linogistix.los.inventory.model.OrderType;
 import de.linogistix.los.inventory.pick.exception.PickingException;
@@ -32,7 +33,7 @@ import de.linogistix.los.inventory.pick.model.LOSPickRequest;
 public interface OrderBusiness {
 
     void finishOrder(LOSOrderRequest req, boolean force) throws FacadeException;
-    void finishFuelOrder(LOSOrderRequest req, boolean force) throws FacadeException;
+    void finishFuelOrder(LOSOrderRequest req, boolean force, LOSOrderReceipients receipient) throws FacadeException;
 
     LOSOrderRequest createOrder(Client c, String orderRef,
 			OrderPositionTO[] positions, String documentUrl, String labelUrl,

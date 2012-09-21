@@ -13,10 +13,12 @@ import org.mywms.model.Client;
 
 import de.linogistix.los.inventory.model.LOSOrderRequest;
 import de.linogistix.los.inventory.model.OrderReceipt;
+import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.report.businessservice.ReportException;
 
 @Remote
 public interface OrderReport {
 	
 	public OrderReceipt generateOrderReceipt(Client c, String type, LOSOrderRequest r) throws ReportException;
+	public OrderReceipt generateFuelOrderReceipt(Client c, LOSOrderRequest r, LOSOrderReceipients receipient) throws ReportException;
 }
