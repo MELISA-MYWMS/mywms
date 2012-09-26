@@ -79,7 +79,7 @@ public class BOLOSFuelOrderLog extends BO {
     }
 
     protected String[] initIdentifiableProperties() {
-        return new String[] {"orderReceipient"};
+        return new String[] {"transactionId"};
     }
 
     @Override

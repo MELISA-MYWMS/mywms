@@ -1597,6 +1597,18 @@
 	    <to-view-id>/pages/processes/controller/MainMenu.jsp</to-view-id>
 	</navigation-case>
         <navigation-case>
+            <from-outcome>FUEL_ENTER_PUMP</from-outcome>
+            <to-view-id>/pages/processes/fuel/EnterPump.jsp</to-view-id>
+        </navigation-case>   
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/pages/processes/fuel/EnterPump.jsp</from-view-id>
+	<navigation-case>
+	    <from-outcome>FUEL_BACK_TO_MENU</from-outcome>
+	    <to-view-id>/pages/processes/controller/MainMenu.jsp</to-view-id>
+	</navigation-case>
+        <navigation-case>
             <from-outcome>FUEL_OUT_COMPLETE</from-outcome>
 	    <to-view-id>/pages/processes/controller/MainMenu.jsp</to-view-id>
         </navigation-case>   
@@ -1627,6 +1639,18 @@
     </navigation-rule>
     
     <navigation-rule>
+        <from-view-id>/pages/processes/fuel/FuelOrderType.jsp</from-view-id>
+	<navigation-case>
+	    <from-outcome>FUEL_BACK_TO_MENU</from-outcome>
+	    <to-view-id>/pages/processes/controller/MainMenu.jsp</to-view-id>
+	</navigation-case>
+        <navigation-case>
+            <from-outcome>ENTER_ORIGIN_LOC</from-outcome>
+            <to-view-id>/pages/processes/fuel/EnterOriginLoc.jsp</to-view-id>
+        </navigation-case>   
+    </navigation-rule>
+    
+    <navigation-rule>
         <from-view-id>/pages/processes/fuel/EnterReceipient.jsp</from-view-id>
 	<navigation-case>
 	    <from-outcome>FUEL_BACK_TO_MENU</from-outcome>
@@ -1637,11 +1661,15 @@
 	    <to-view-id>/pages/processes/controller/MainMenu.jsp</to-view-id>
         </navigation-case>   
         <navigation-case>
-            <from-outcome>ENTER_ORIGIN_LOC</from-outcome>
-            <to-view-id>/pages/processes/fuel/EnterOriginLoc.jsp</to-view-id>
+            <from-outcome>FUEL_ENTER_ORDERTYPE</from-outcome>
+            <to-view-id>/pages/processes/fuel/FuelOrderType.jsp</to-view-id>
         </navigation-case>   
     </navigation-rule>
 
+<converter>
+  <converter-for-class>java.lang.Enum</converter-for-class>
+  <converter-class>javax.faces.convert.EnumConverter</converter-class>
+</converter>
 
     <validator>
         <validator-id>astrologer.EmailValidator</validator-id>

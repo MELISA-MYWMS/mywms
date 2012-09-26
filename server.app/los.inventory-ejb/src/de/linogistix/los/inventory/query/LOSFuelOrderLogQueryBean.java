@@ -17,8 +17,9 @@ public class LOSFuelOrderLogQueryBean extends
 		LOSFuelOrderLogQueryRemote {
 
 	private static final String[] props = new String[]{
-		"id", "version", "transactionId","labelId","vehicle.labelId","storLoc.name", "stationPump",
-		"receipient.identityCard", "rcptPos.id", "orderType", "tankRemaining" 			
+		"id", "version", "transactionId", "vehicle.labelId","storLoc.name", "stationPump",
+		"receipient.identityCard", "rcptPos.id", "orderType", "tankRemaining", "vehicle.plateNumber",
+		"receipient.firstName", "receipient.rank", "receipient.lastName", "rcptPos.articleRef", "rcptPos.articleDescr"
 	};
 	
 			
@@ -48,38 +49,8 @@ public class LOSFuelOrderLogQueryBean extends
      transactionId.setLogicalOperator(TemplateQueryWhereToken.OPERATOR_OR);
      ret.add(transactionId);
 
-     
-        TemplateQueryWhereToken labelId = new TemplateQueryWhereToken(
-            TemplateQueryWhereToken.OPERATOR_LIKE, "labelId",
-            value);
-        labelId.setLogicalOperator(TemplateQueryWhereToken.OPERATOR_OR);
-        ret.add(labelId);
-
         return ret;
 
-		/*List<TemplateQueryWhereToken> ret =  new ArrayList<TemplateQueryWhereToken>();
-		
-		TemplateQueryWhereToken name = new TemplateQueryWhereToken(
-				TemplateQueryWhereToken.OPERATOR_LIKE, "name",
-				value);
-		name.setLogicalOperator(TemplateQueryWhereToken.OPERATOR_OR);
-		
-		TemplateQueryWhereToken orderRef = new TemplateQueryWhereToken(
-				TemplateQueryWhereToken.OPERATOR_LIKE, "orderReference",
-				value);
-		orderRef.setLogicalOperator(TemplateQueryWhereToken.OPERATOR_OR);
-		
-		TemplateQueryWhereToken orderNumber = new TemplateQueryWhereToken(
-				TemplateQueryWhereToken.OPERATOR_LIKE, "orderNumber",
-				value);
-		orderNumber.setLogicalOperator(TemplateQueryWhereToken.OPERATOR_OR);
-		
-		
-		ret.add(name);
-		ret.add(orderNumber);
-		ret.add(orderRef);
-		
-		return ret;*/
 	}
 
 }

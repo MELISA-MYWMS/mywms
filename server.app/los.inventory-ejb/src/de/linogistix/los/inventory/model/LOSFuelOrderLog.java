@@ -33,7 +33,6 @@ public class LOSFuelOrderLog extends BasicEntity {
     private static final long serialVersionUID = 1L;
 
     private String transactionId;
-    private String labelId;
     private VehicleData vehicle;
     private LOSStorageLocation storLoc;
     private int stationPump;
@@ -41,15 +40,6 @@ public class LOSFuelOrderLog extends BasicEntity {
     private OrderReceiptPosition rcptPos;
     private String orderType;
     private BigDecimal tankRemaining;
-
-    @Column(nullable = false)
-    public String getLabelId() {
-        return this.labelId;
-    }
-
-    public void setLabelId(String labelId) {
-        this.labelId = labelId;
-    }
 
     @Column(nullable = false)
     public String getTransactionId() {

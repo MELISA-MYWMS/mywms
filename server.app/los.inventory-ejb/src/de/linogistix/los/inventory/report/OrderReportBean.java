@@ -185,7 +185,7 @@ public class OrderReportBean implements OrderReport {
 		receipt.setDocument(byteArray);
 
 		
-		manager.persist(receipt);
+		//manager.persist(receipt);
 
 		for (OrderReceiptSheetPosition p : sheet.getPositions()){
 			if( p == null ) {
@@ -225,6 +225,8 @@ public class OrderReportBean implements OrderReport {
 			}
 		}
 
+		receipt.setPositions(export);
+		manager.persist(receipt);
 		manager.flush();
 
 		return receipt;

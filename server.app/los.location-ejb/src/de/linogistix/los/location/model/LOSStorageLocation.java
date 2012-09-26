@@ -59,7 +59,7 @@ public class LOSStorageLocation extends BasicClientAssignedEntity{
     private BigDecimal yCoordinates;
     private Date checkDate;
     private Date nextCheckDate;
-    private int pickingSources;
+    private int pickingSources = 1;
     private boolean workingCondition = false;
     
     @Column(nullable=false, unique=true)

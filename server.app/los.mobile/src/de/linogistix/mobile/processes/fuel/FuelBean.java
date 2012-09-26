@@ -3,9 +3,11 @@ package de.linogistix.mobile.processes.fuel;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
 import org.mywms.facade.FacadeException;
@@ -14,6 +16,7 @@ import org.mywms.model.ItemData;
 import org.mywms.model.VehicleData;
 import org.mywms.model.UnitLoadType;
 import org.mywms.service.VehicleDataServiceRemote;
+import org.mywms.globals.FuelOrderType;
 
 import de.linogistix.los.inventory.businessservice.OrderBusiness;
 import de.linogistix.los.inventory.facade.OrderFacade;
@@ -21,6 +24,7 @@ import de.linogistix.los.inventory.facade.OrderPositionTO;
 import de.linogistix.los.inventory.facade.LOSGoodsReceiptFacade;
 import de.linogistix.los.inventory.facade.ManageInventoryFacade;
 import de.linogistix.los.inventory.model.OrderType;
+import de.linogistix.los.inventory.model.OrderReceiptPosition;
 import de.linogistix.los.inventory.model.LOSGoodsReceipt;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.pick.facade.PickOrderFacade;
@@ -30,6 +34,7 @@ import de.linogistix.los.inventory.pick.model.LOSPickRequestPosition;
 import de.linogistix.los.inventory.pick.service.LOSPickRequestPositionService;
 import de.linogistix.los.inventory.service.QueryItemDataServiceRemote;
 import de.linogistix.los.inventory.service.LOSOrderReceipientsServiceRemote;
+import de.linogistix.los.inventory.service.LOSFuelOrderLogService;
 import de.linogistix.los.inventory.query.StockUnitQueryRemote;
 import de.linogistix.los.inventory.query.dto.StockUnitTO;
 import de.linogistix.los.location.model.LOSStorageLocation;
@@ -59,14 +64,21 @@ public class FuelBean extends BasicDialogBean {
     private String inputCode;
     private String inputAmount;
     private LOSStorageLocation loc;
+
+private String inLocation;
+    private String outLocation;
     private String driver;
     private String plateNumber;
     private LOSOrderReceipients receipient;
 
+    private String selectedOrderType;
+    private ArrayList<SelectItem> orderTypeList;
+    private int selectedPump;
+    private ArrayList<SelectItem> pumpList;
+
     private OrderBusiness orderBusiness;
     private LOSPickRequestPositionService pickRequestPositionService;
     private QueryUnitLoadTypeServiceRemote queryUltService;
-
 
     private LOSGoodsReceiptFacade goodsReceiptFacade;
 
@@ -77,6 +89,8 @@ public class FuelBean extends BasicDialogBean {
     private QueryStorageLocationServiceRemote locService;
 
     private LOSOrderReceipientsServiceRemote receipientService;
+
+    private LOSFuelOrderLogService lOSFuelOrderLogService;
 
     private LOSSystemPropertyServiceRemote propertyService;
 
@@ -104,6 +118,7 @@ public class FuelBean extends BasicDialogBean {
         queryVehicleData = super.getStateless(VehicleDataServiceRemote.class);
         pickOrderFacade = super.getStateless(PickOrderFacade.class);
         orderBusiness = super.getStateless(OrderBusiness.class);
+        lOSFuelOrderLogService = super.getStateless(LOSFuelOrderLogService.class);
     }
 
     public String getNavigationKey() {
@@ -311,7 +326,7 @@ public class FuelBean extends BasicDialogBean {
             return "";
         }
 
-        String outLocation = code+"OUT";
+        outLocation = code+"OUT";
         try {
             outLoc = locService.getByName(outLocation);
         } catch( Exception e ) {
@@ -322,119 +337,9 @@ public class FuelBean extends BasicDialogBean {
             JSFHelper.getInstance().message( resolve("MsgOutLocNotAccessable") );
             return "";
         }
+		inLocation = code;
 
-        //List<StockUnitTO> list = null;
-        LOSResultList<StockUnitTO> list = null;
-        BODTO<LOSStorageLocation> sl = new BODTO<LOSStorageLocation>(loc.getId(),
-                loc.getVersion(), loc.getName());
-        BODTO<ItemData> it = new BODTO<ItemData>(currentItemData.getId(),
-                currentItemData.getVersion(), currentItemData.getNumber());
-        Client c = currentItemData.getClient();
-        //BODTO<Client> cdto = new BODTO<Client>(c.getId(), c.getVersion(), c.getNumber());
-        StockUnitTO oldSU;
-        BigDecimal oldAmount = new BigDecimal(0);
-        try {
-            list = stockUnitQuery.queryByDefault(null, null, it, sl, new QueryDetail(0, Integer.MAX_VALUE));
-            if(list.size()>0) {
-                oldSU = list.get(0);
-                oldAmount = oldSU.getAmount();
-            }
-
-        } catch (Throwable ex) {
-            log.error(ex, ex);
-            JSFHelper.getInstance().message( resolve("MsgUnknownError") );
-            return "";
-        }
-
-        if(oldAmount.compareTo(currentAmount) == -1) {
-            JSFHelper.getInstance().message( resolve("MsgAmountInsufficient") );
-            return "";
-        }
-
-        OrderPositionTO[] tos = new OrderPositionTO[1];
-        OrderPositionTO to = new OrderPositionTO();
-        to.amount = currentAmount;
-        String val = currentItemData.getNumber();
-        if( val != null && val.startsWith("* ") )
-            val = val.substring(2);
-        to.articleRef = val;
-        //val = item.getPrintnorm();
-        //if( val != null && val.startsWith("* ") )
-        //val = val.substring(2);
-        to.batchRef = null;
-        to.clientRef = c.getName();
-        tos[0] = to;
-
-        LOSPickRequest pr;
-        LOSOrderRequest or;
-        try {
-            pr = orderFacade.orderFuel(c.getNumber(),
-                                       null,
-                                       tos,
-                                       null,
-                                       null,
-                                       outLocation,
-                                       OrderType.TO_CUSTOMER,
-                                       new Date(),
-                                       true,
-                                       null);
-        } catch (FacadeException e) {
-            log.error(e,e);
-            JSFHelper.getInstance().message( resolve("MsgOrderStartFail") );
-            return "";
-        }
-
-        List<LOSPickRequestPosition> positionList = pickRequestPositionService.getByPickRequest(pr);
-        int totalPosition = 1;
-        totalPosition = positionList.size();
-        //int totalPosition = 1;
-        //totalPosition = pr.getPositions().size();
-
-        //List<LOSPickRequestPosition> positionList = pr.getPositions();
-
-        boolean forward = false;
-        for (int i = 0; i<totalPosition; i++) {
-            if (positionList.get(i).isPicked() || positionList.get(i).isCanceled())
-                continue;
-
-            try {
-                forward = pickOrderFacade.testCanProcess(positionList.get(i), false, code, currentAmount);
-            } catch (Throwable ex) {
-                log.error(ex, ex);
-                JSFHelper.getInstance().message( resolve("MsgUnknownError") );
-                return "";
-            }
-
-            if(forward) {
-                try {
-                    pickOrderFacade.processPickRequestPosition(positionList.get(i), false, code, currentAmount, false, false);
-                } catch (Throwable ex) {
-                    log.error(ex, ex);
-                    JSFHelper.getInstance().message( resolve("MsgUnknownError") );
-                    return "";
-                }
-            }
-        }
-
-        try {
-            pr = pickOrderFacade.finishPickingRequest(pr, pr.getDestination().getName());
-        } catch (Throwable ex) {
-            log.error(ex, ex);
-            JSFHelper.getInstance().message( resolve("MsgUnknownError") );
-            return "";
-        }
-
-        or = pr.getParentRequest();
-        //or.setOrderType(OrderType.TO_EXTINGUISH);
-        try {
-            orderBusiness.finishFuelOrder(or, false, receipient);
-        } catch (Throwable ex) {
-            log.error(ex, ex);
-            JSFHelper.getInstance().message( resolve("MsgUnknownError") );
-            return "";
-        }
-
-	return FuelNavigationEnum.FUEL_OUT_COMPLETE.name();
+        return FuelNavigationEnum.FUEL_ENTER_PUMP.name();
     }
 
     public String processEnterOriginCancel() {
@@ -543,13 +448,153 @@ public class FuelBean extends BasicDialogBean {
         }
 
         if( currentMode == MODE_OUT )
-            return FuelNavigationEnum.ENTER_ORIGIN_LOC.name();
+            return FuelNavigationEnum.FUEL_ENTER_ORDERTYPE.name();
         else
             return finalizeFuelIn();
     }
 
     public String processEnterReceipientCancel() {
         //reset();
+        return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
+    }
+
+    public String processEnterOrderType() {
+        orderTypeList = null;
+
+        if(selectedOrderType==null ||selectedOrderType.length() == 0) {
+            JSFHelper.getInstance().message( resolve("MsgOrderTypeError") );
+            return "";
+        }
+
+        return FuelNavigationEnum.ENTER_ORIGIN_LOC.name();
+    }
+
+    public String processEnterOrderTypeCancel() {
+        return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
+    }
+
+    public String processEnterPump() {
+        pumpList = null;
+
+		if(selectedPump < 1) {
+			selectedPump = 1;
+		}
+
+
+        LOSResultList<StockUnitTO> list = null;
+        BODTO<LOSStorageLocation> sl = new BODTO<LOSStorageLocation>(loc.getId(),
+                loc.getVersion(), loc.getName());
+        BODTO<ItemData> it = new BODTO<ItemData>(currentItemData.getId(),
+                currentItemData.getVersion(), currentItemData.getNumber());
+        Client c = currentItemData.getClient();
+        StockUnitTO oldSU;
+        BigDecimal oldAmount = new BigDecimal(0);
+        try {
+            list = stockUnitQuery.queryByDefault(null, null, it, sl, new QueryDetail(0, Integer.MAX_VALUE));
+            if(list.size()>0) {
+                oldSU = list.get(0);
+                oldAmount = oldSU.getAmount();
+            }
+
+        } catch (Throwable ex) {
+            log.error(ex, ex);
+            JSFHelper.getInstance().message( resolve("MsgUnknownError") );
+            return "";
+        }
+
+        if(oldAmount.compareTo(currentAmount) == -1) {
+            JSFHelper.getInstance().message( resolve("MsgAmountInsufficient") );
+            return "";
+        }
+    	
+	BigDecimal amountRemaining = oldAmount.subtract(currentAmount);
+
+        OrderPositionTO[] tos = new OrderPositionTO[1];
+        OrderPositionTO to = new OrderPositionTO();
+        to.amount = currentAmount;
+        String val = currentItemData.getNumber();
+        if( val != null && val.startsWith("* ") )
+            val = val.substring(2);
+        to.articleRef = val;
+        to.batchRef = null;
+        to.clientRef = c.getName();
+        tos[0] = to;
+
+        LOSPickRequest pr;
+        LOSOrderRequest or;
+        try {
+            pr = orderFacade.orderFuel(c.getNumber(),
+                                       null,
+                                       tos,
+                                       null,
+                                       null,
+                                       outLocation,
+                                       OrderType.TO_CUSTOMER,
+                                       new Date(),
+                                       true,
+                                       null);
+        } catch (FacadeException e) {
+            log.error(e,e);
+            JSFHelper.getInstance().message( resolve("MsgOrderStartFail") );
+            return "";
+        }
+
+        List<LOSPickRequestPosition> positionList = pickRequestPositionService.getByPickRequest(pr);
+        int totalPosition = 1;
+        totalPosition = positionList.size();
+        //int totalPosition = 1;
+        //totalPosition = pr.getPositions().size();
+
+        //List<LOSPickRequestPosition> positionList = pr.getPositions();
+
+        boolean forward = false;
+        for (int i = 0; i<totalPosition; i++) {
+            if (positionList.get(i).isPicked() || positionList.get(i).isCanceled())
+                continue;
+
+            try {
+                forward = pickOrderFacade.testCanProcess(positionList.get(i), false, inLocation, currentAmount);
+            } catch (Throwable ex) {
+                log.error(ex, ex);
+                JSFHelper.getInstance().message( resolve("MsgUnknownError") );
+                return "";
+            }
+
+            if(forward) {
+                try {
+                    pickOrderFacade.processPickRequestPosition(positionList.get(i), false, inLocation, currentAmount, false, false);
+                } catch (Throwable ex) {
+                    log.error(ex, ex);
+                    JSFHelper.getInstance().message( resolve("MsgUnknownError") );
+                    return "";
+                }
+            }
+        }
+
+        try {
+            pr = pickOrderFacade.finishPickingRequest(pr, pr.getDestination().getName());
+        } catch (Throwable ex) {
+            log.error(ex, ex);
+            JSFHelper.getInstance().message( resolve("MsgUnknownError") );
+            return "";
+        }
+
+	OrderReceiptPosition orp;
+        or = pr.getParentRequest();
+        try {
+            orp = orderBusiness.finishFuelOrder(or, false, receipient);
+        } catch (Throwable ex) {
+            log.error(ex, ex);
+            JSFHelper.getInstance().message( resolve("MsgUnknownError") );
+            return "";
+        }
+
+	lOSFuelOrderLogService.create(currentVehicleData, loc, selectedPump, receipient, orp, selectedOrderType, amountRemaining);
+
+	return FuelNavigationEnum.FUEL_OUT_COMPLETE.name();
+    }
+
+    public String processEnterPumpCancel() {
         return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
     }
 
@@ -670,9 +715,9 @@ public class FuelBean extends BasicDialogBean {
     @Override
     protected ResourceBundle getResourceBundle() {
         ResourceBundle bundle;
-        Locale loc;
-        loc = getUIViewRoot().getLocale();
-        bundle = ResourceBundle.getBundle("de.linogistix.mobile.processes.fuel.FuelBundle", loc);
+        Locale lo;
+        lo = getUIViewRoot().getLocale();
+        bundle = ResourceBundle.getBundle("de.linogistix.mobile.processes.fuel.FuelBundle", lo);
         return bundle;
     }
 
@@ -725,5 +770,98 @@ public class FuelBean extends BasicDialogBean {
 
     public void setReceipient(LOSOrderReceipients receipient) {
         this.receipient = receipient;
+    }
+
+    public String getSelectedOrderType() {
+        return selectedOrderType;
+    }
+
+    public void setSelectedOrderType(String selectedOrderType) {
+        this.selectedOrderType = selectedOrderType;
+    }
+
+    public List<SelectItem> getOrderTypeList() {
+
+        if( orderTypeList == null ) {
+            orderTypeList = new ArrayList<SelectItem>();
+
+            for (FuelOrderType ot : FuelOrderType.values()) {
+                orderTypeList.add(new SelectItem(ot, resolve(ot.getLabel())));
+            }
+        }
+
+        return orderTypeList;
+    }
+
+    public int getSelectedPump() {
+        return selectedPump;
+    }
+
+    public void setSelectedPump(int selectedPump) {
+        this.selectedPump = selectedPump;
+    }
+
+    public List<SelectItem> getPumpList() {
+
+        if( pumpList == null ) {
+		int pumps=1;
+		if( loc != null ){
+			pumps = loc.getPickingSources();
+		}
+		if(pumps < 1)
+			pumps=1;
+
+            pumpList = new ArrayList<SelectItem>();
+
+            for (int i =1; i<=pumps; i++) {
+                pumpList.add(new SelectItem(i));
+            }
+        }
+
+        return pumpList;
+    }
+
+    public String getOutLocation() {
+        return outLocation;
+    }
+
+    public void setOutLocation(String outLocation) {
+        this.outLocation = outLocation;
+    }
+
+    public String getInLocation() {
+        return inLocation;
+    }
+
+    public void setInLocation(String inLocation) {
+        this.inLocation = inLocation;
+    }
+    
+    public VehicleData getCurrentVehicleData()
+    {
+        return currentVehicleData;
+    }
+    
+    public void setCurrentVehicleData(VehicleData currentVehicleData)
+    {
+        this.currentVehicleData = currentVehicleData;
+    }
+    
+    public LOSStorageLocation getLoc() {
+		return loc;
+	}
+
+	public void setLoc(LOSStorageLocation loc) {
+		this.loc = loc;
+	}
+    
+    public BigDecimal getCurrentAmount()
+    {
+        return currentAmount;
+    }
+    
+    public void setCurrentAmount(BigDecimal currentAmount)
+    {
+        this.currentAmount = currentAmount;
     }
 }

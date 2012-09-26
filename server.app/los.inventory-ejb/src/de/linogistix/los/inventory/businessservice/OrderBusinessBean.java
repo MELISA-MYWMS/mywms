@@ -40,6 +40,7 @@ import de.linogistix.los.inventory.model.LOSOrderRequestPositionState;
 import de.linogistix.los.inventory.model.LOSOrderRequestState;
 import de.linogistix.los.inventory.model.OrderReceipt;
 import de.linogistix.los.inventory.model.OrderType;
+import de.linogistix.los.inventory.model.OrderReceiptPosition;
 import de.linogistix.los.inventory.pick.businessservice.PickOrderBusiness;
 import de.linogistix.los.inventory.pick.exception.PickingException;
 import de.linogistix.los.inventory.pick.model.LOSPickRequest;
@@ -331,8 +332,9 @@ public class OrderBusinessBean implements OrderBusiness {
 
 	}
 
-	public void finishFuelOrder(LOSOrderRequest req, boolean force, LOSOrderReceipients receipient)
+	public OrderReceiptPosition finishFuelOrder(LOSOrderRequest req, boolean force, LOSOrderReceipients receipient)
 			throws FacadeException {
+		OrderReceiptPosition orp = null;
 		
 		req = manager.find(LOSOrderRequest.class, req.getId());
 		log.debug("finishOrder. order="+req.getNumber());
@@ -341,7 +343,7 @@ public class OrderBusinessBean implements OrderBusiness {
 		case FINISHED: 
 		case FAILED:
 			log.warn("finishOrder. already has state FINISHED/FAILED: " + req.toString());
-			return;
+			return null;
 		}
 		
 		manageOrderService.processOrderFinishedStart(req);
@@ -377,8 +379,8 @@ public class OrderBusinessBean implements OrderBusiness {
 		req.setOrderState(LOSOrderRequestState.FINISHED);
 		cleanup(req);
 		
+		OrderReceipt receipt = null;
 		if( manageOrderService.createReceiptOnFinish(req) ) {
-			OrderReceipt receipt = null;
 			try {
 				receipt = orderReport.generateFuelOrderReceipt(req.getClient(),
 						 req, receipient);
@@ -392,7 +394,21 @@ public class OrderBusinessBean implements OrderBusiness {
 		}*/
 			
 		manageOrderService.processOrderFinishedEnd(req);
+		//manager.flush();
+		//receipt = manager.find(OrderReceipt.class, receipt.getId());
+		
+		//log.error("MELISA receipt " + receipt.getOrderNumber());
+		//if(receipt == null )
+		//log.error("MELISA receipt null");
+		//if(receipt.getPositions() == null )
+		//log.error("MELISA positions null");
 
+		if(receipt != null && receipt.getPositions() != null ){
+			orp = receipt.getPositions().get(0);
+		}
+		//if(orp == null )
+		//log.error("MELISA orp null");
+		return orp;
 	}
 
 	protected void cleanup(LOSOrderRequest req) throws FacadeException {
