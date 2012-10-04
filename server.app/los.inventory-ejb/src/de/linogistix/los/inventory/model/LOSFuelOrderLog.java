@@ -175,7 +175,7 @@ public class LOSFuelOrderLog extends BasicEntity {
      *
      * @return rcptPosId as OrderReceiptPosition.
      */
-    @OneToOne(optional=false)
+    @OneToOne(optional=true)
     public OrderReceiptPosition getRcptPos() {
         return rcptPos;
     }
@@ -194,7 +194,7 @@ public class LOSFuelOrderLog extends BasicEntity {
      *
      * @return vehicle_Id as OrderReceiptPosition.
      */
-    @ManyToOne(optional=false)
+    @ManyToOne(optional=true)
     public VehicleData getVehicle() {
         return vehicle;
     }

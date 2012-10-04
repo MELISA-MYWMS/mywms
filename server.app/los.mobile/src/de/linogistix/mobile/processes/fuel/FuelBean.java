@@ -65,7 +65,7 @@ public class FuelBean extends BasicDialogBean {
     private String inputAmount;
     private LOSStorageLocation loc;
 
-private String inLocation;
+    private String inLocation;
     private String outLocation;
     private String driver;
     private String plateNumber;
@@ -122,8 +122,10 @@ private String inLocation;
     }
 
     public String getNavigationKey() {
-        if(!isRolesAllowed())
+        if(!isRolesAllowed()){
+        	currentMode = "";
             return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
+		}
 
         if( currentMode == MODE_OUT ) {
             return FuelNavigationEnum.FUEL_CHOOSE_VEHICLE.name();
@@ -155,7 +157,9 @@ private String inLocation;
     }
 
     public String processEnterItem() {
-        //currentMode = MODE_IN;
+		if(currentMode != MODE_OUT){
+			currentMode = MODE_IN;
+		}
 
         String code = inputCode == null ? "" : inputCode.trim();
         inputCode = "";
@@ -188,11 +192,14 @@ private String inLocation;
         //return GRDirectNavigationEnum.GRD_ENTER_SERIAL.name();
         //}
 
-        return FuelNavigationEnum.FUEL_ENTER_AMOUNT.name();
+		//JSFHelper.getInstance().message(currentMode );
+		//return "";
+		return FuelNavigationEnum.FUEL_ENTER_AMOUNT.name();
     }
 
     public String processEnterItemCancel() {
         //reset();
+        currentMode = "";
         return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
     }
 
@@ -237,6 +244,7 @@ private String inLocation;
 
     public String processEnterVehCancel() {
         //reset();
+        currentMode = "";
         return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
     }
 
@@ -270,6 +278,7 @@ private String inLocation;
     public String processEnterAmountCancel() {
         //initPos();
         //return getStartPage2();
+        currentMode = "";
         return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
     }
 
@@ -302,6 +311,7 @@ private String inLocation;
     public String processEnterTargetCancel() {
         //initPos();
         //return getStartPage2();
+        currentMode = "";
         return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
     }
 
@@ -339,12 +349,14 @@ private String inLocation;
         }
 		inLocation = code;
 
+        currentMode = "";
         return FuelNavigationEnum.FUEL_ENTER_PUMP.name();
     }
 
     public String processEnterOriginCancel() {
         //initPos();
         //return getStartPage2();
+        currentMode = "";
         return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
     }
 
@@ -368,6 +380,7 @@ private String inLocation;
     }
 
     public String processEnterDelivererCancel() {
+        currentMode = "";
         return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
     }
 
@@ -413,6 +426,8 @@ private String inLocation;
                                                    oldAmount, new BigDecimal(0), "");
 
                 /* getorcreateunitload */
+		lOSFuelOrderLogService.create(null, loc, 0, receipient, null, "FUEL ORDER IN", oldAmount);
+        		currentMode = "";
                 return FuelNavigationEnum.FUEL_IN_COMPLETE.name();
             }
 
@@ -455,6 +470,7 @@ private String inLocation;
 
     public String processEnterReceipientCancel() {
         //reset();
+        currentMode = "";
         return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
     }
 
@@ -470,10 +486,12 @@ private String inLocation;
     }
 
     public String processEnterOrderTypeCancel() {
+        currentMode = "";
         return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
     }
 
     public String processEnterPump() {
+        currentMode = "";
         pumpList = null;
 
 		if(selectedPump < 1) {
@@ -542,10 +560,6 @@ private String inLocation;
         List<LOSPickRequestPosition> positionList = pickRequestPositionService.getByPickRequest(pr);
         int totalPosition = 1;
         totalPosition = positionList.size();
-        //int totalPosition = 1;
-        //totalPosition = pr.getPositions().size();
-
-        //List<LOSPickRequestPosition> positionList = pr.getPositions();
 
         boolean forward = false;
         for (int i = 0; i<totalPosition; i++) {
@@ -595,6 +609,7 @@ private String inLocation;
     }
 
     public String processEnterPumpCancel() {
+        currentMode = "";
         return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
     }
 
@@ -604,6 +619,7 @@ private String inLocation;
         if( currentAmount == null || BigDecimal.ZERO.compareTo(currentAmount) >= 0 ) {
             log.error("Amount not valid. amount="+currentAmount);
             JSFHelper.getInstance().message( resolve("MsgAmountNotValid") );
+        	currentMode = "";
             return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
         }
 
@@ -659,6 +675,9 @@ private String inLocation;
             return "";
         }
 
+	lOSFuelOrderLogService.create(null, loc, 0, receipient, null, "FUEL ORDER IN", currentAmount);
+
+        currentMode = "";
         return FuelNavigationEnum.FUEL_IN_COMPLETE.name();
     }
 
@@ -864,4 +883,5 @@ private String inLocation;
     {
         this.currentAmount = currentAmount;
     }
+    
 }

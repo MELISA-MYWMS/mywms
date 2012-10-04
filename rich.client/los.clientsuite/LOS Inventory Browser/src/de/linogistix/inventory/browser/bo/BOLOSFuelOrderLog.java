@@ -4,7 +4,8 @@ import org.mywms.model.BasicEntity;
 import org.mywms.globals.Role;
 
 import de.linogistix.common.bobrowser.bo.BO;
-import de.linogistix.common.res.CommonBundleResolver;
+//import de.linogistix.common.res.CommonBundleResolver;
+import de.linogistix.inventory.res.InventoryBundleResolver;
 import de.linogistix.common.services.J2EEServiceLocator;
 import de.linogistix.common.util.ExceptionAnnotator;
 import de.linogistix.los.crud.BusinessObjectCRUDRemote;
@@ -84,7 +85,7 @@ public class BOLOSFuelOrderLog extends BO {
 
     @Override
     public Class initBundleResolver() {
-        return CommonBundleResolver.class;
+        return InventoryBundleResolver.class;
     }
 
     @Override

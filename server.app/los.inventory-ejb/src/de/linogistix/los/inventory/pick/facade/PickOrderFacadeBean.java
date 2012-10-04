@@ -122,8 +122,9 @@ public class PickOrderFacadeBean implements PickOrderFacade {
 		sl = manager.find(LOSStorageLocation.class, sl.getId());
 		pickOrderService.processPickRequestPosition(r, position, unexpectedNullAmount, sl, amount, takeWholeUnitLoad, stockEmptyConfirmed);
 			
-		return (LOSPickRequestPosition) BusinessObjectHelper
-				.eagerRead(position);
+		//return (LOSPickRequestPosition) BusinessObjectHelper
+		//.eagerRead(position);
+		return position;
 	}
 	
 
@@ -154,7 +155,7 @@ public class PickOrderFacadeBean implements PickOrderFacade {
 	public boolean testCanProcess(
 			LOSPickRequestPosition position, boolean unexpectedNullAmount,
 			String label, BigDecimal amount) throws FacadeException {
-		position = manager.find(LOSPickRequestPosition.class, position.getId());
+		//position = manager.find(LOSPickRequestPosition.class, position.getId());
 		LOSPickRequest r = position.getPickRequest();
 		LOSStorageLocation sl = resolveSource(r, label);
 		sl = manager.find(LOSStorageLocation.class, sl.getId());

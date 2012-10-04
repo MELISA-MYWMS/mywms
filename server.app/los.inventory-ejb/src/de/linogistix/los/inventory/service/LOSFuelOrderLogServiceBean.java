@@ -21,7 +21,7 @@ public class LOSFuelOrderLogServiceBean extends BasicServiceBean<LOSFuelOrderLog
 	public LOSFuelOrderLog create(VehicleData vehicle, LOSStorageLocation storLoc, int stationPump, LOSOrderReceipients receipient, 
 				OrderReceiptPosition rcptPos, String orderType, BigDecimal tankRemaining){
 
-		//log.error("MELISA fuel log "+vehicle.getLabelId());
+		//log.error("MELISA fuel log "+ orderType);
 		LOSFuelOrderLog fuelLog = new LOSFuelOrderLog(); 
 
 		fuelLog.setVehicle(vehicle);
