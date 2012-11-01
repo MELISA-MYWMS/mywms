@@ -90,7 +90,7 @@ public class ReportServiceBean implements ReportService {
 
 			if (parameters == null) {
 				parameters = new HashMap<String, Object>();
-				parameters.put("REPORT_LOCALE", Locale.GERMANY);
+				parameters.put("REPORT_LOCALE", Locale.ENGLISH);
 			}
 
 			// Fill the requested report with the specified data

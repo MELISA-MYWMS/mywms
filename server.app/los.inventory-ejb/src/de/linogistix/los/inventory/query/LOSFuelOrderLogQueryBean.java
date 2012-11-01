@@ -3,15 +3,31 @@ package de.linogistix.los.inventory.query;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import javax.ejb.Stateless;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import org.mywms.model.VehicleData;
+
 import de.linogistix.los.query.BODTO;
 import de.linogistix.los.query.BODTOConstructorProperty;
+import de.linogistix.los.query.LOSResultList;
+import de.linogistix.los.query.QueryDetail;
+import de.linogistix.los.query.TemplateQuery;
 import de.linogistix.los.inventory.model.LOSFuelOrderLog;
+import de.linogistix.los.inventory.pick.model.LOSPickRequest;
+import de.linogistix.los.inventory.pick.model.LOSPickRequestPosition;
 import de.linogistix.los.inventory.query.dto.LOSFuelOrderLogTO;
 import de.linogistix.los.query.BusinessObjectQueryBean;
 import de.linogistix.los.query.TemplateQueryWhereToken;
+import de.linogistix.los.query.exception.BusinessObjectNotFoundException;
+import de.linogistix.los.query.exception.BusinessObjectQueryException;
+import de.linogistix.los.runtime.BusinessObjectSecurityException;
+import de.linogistix.los.util.BusinessObjectHelper;
 
 @Stateless
 public class LOSFuelOrderLogQueryBean extends
@@ -80,7 +96,25 @@ public class LOSFuelOrderLogQueryBean extends
         ret.add(transactionId);
 
         return ret;
-
     }
 
+    @SuppressWarnings("unchecked")
+
+    public List<LOSFuelOrderLog> queryByDate(Date createDateFrom,Date createDateTo) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("SELECT ");
+		buffer.append(" r ");
+		buffer.append(" FROM ");
+		buffer.append(LOSFuelOrderLog.class.getName());
+		buffer.append(" r ");
+		buffer.append(" WHERE ");
+		buffer.append(" r.created.date>=:dateFrom and r.created.date<=:dateTo");
+		Query q = manager.createQuery(new String(buffer));
+		q = q.setParameter("dateFrom", createDateFrom);
+		q = q.setParameter("dateTo", createDateTo);
+		
+		return q.getResultList();
+	}
+	
+    
 }

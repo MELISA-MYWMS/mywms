@@ -70,7 +70,7 @@ public class OrderQueryBean extends
 		
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.add(GregorianCalendar.HOUR, -6);
-		
+		//Melisa why?
 		Date ago = cal.getTime();
 		
 		List<BODTO<LOSOrder>> orders;

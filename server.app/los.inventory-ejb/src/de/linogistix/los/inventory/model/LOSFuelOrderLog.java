@@ -1,6 +1,7 @@
 package de.linogistix.los.inventory.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +34,8 @@ public class LOSFuelOrderLog extends BasicEntity {
     private static final long serialVersionUID = 1L;
 
     private String transactionId;
+ //MELISA
+ //   private Date transactionDate; //used created for now
     private VehicleData vehicle;
     private LOSStorageLocation storLoc;
     private int stationPump;

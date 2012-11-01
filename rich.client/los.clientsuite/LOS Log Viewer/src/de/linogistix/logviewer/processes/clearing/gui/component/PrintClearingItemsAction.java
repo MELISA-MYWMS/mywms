@@ -125,14 +125,14 @@ public class PrintClearingItemsAction extends NodeAction {
             
             List<PropertyDescriptor> props = new ArrayList<PropertyDescriptor>();
             PropertyDescriptor pd = new PropertyDescriptor("created", ClearingItem.class, "getCreated", null);
-            pd.setDisplayName("Datum");
+            pd.setDisplayName("Date");
             props.add(pd);
 
             pd = new PropertyDescriptor("message", ClearingItem.class);
-            pd.setDisplayName("Klärfall");
+            pd.setDisplayName("Clearing Items");
             props.add(pd);
 
-            byte[] bytes = export("Klärfallliste", clearingList, props);
+            byte[] bytes = export("Clearing List", clearingList, props);
             log.info("received " + bytes.length + " bytes");
 
             log.info("going to print");

@@ -125,7 +125,7 @@ public class StorageLocationLabelReportBean implements StorageLocationLabelRepor
                 repService = new ReportServiceBean();
             }
             HashMap<String, Object> parameters = new HashMap<String, Object>();
-            parameters.put("REPORT_LOCALE", Locale.GERMANY);
+            parameters.put("REPORT_LOCALE", Locale.ENGLISH);
             
             String dir = BundleResolver.class.getPackage().toString();
             dir = dir.replaceAll("package", "/");
