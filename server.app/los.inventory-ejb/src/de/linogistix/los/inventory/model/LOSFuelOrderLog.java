@@ -36,11 +36,20 @@ public class LOSFuelOrderLog extends BasicEntity {
     private String transactionId;
  //MELISA
  //   private Date transactionDate; //used created for now
-    private VehicleData vehicle;
-    private LOSStorageLocation storLoc;
+    private long vehicleID;
+    private String vehicleLabelID;
+    private String vehiclePlateNumber;
+    private long storLocID;
+    private String storLocName;
     private int stationPump;
-    private LOSOrderReceipients receipient;
-    private OrderReceiptPosition rcptPos;
+    private long receipientID;
+    private String receipientName;
+    private String receipientTokenID;
+    private String receipientIDCard;
+    private long rcptPosID;
+    private String rcptArticleDescr;
+    private String rcptArticleRef; 
+    private BigDecimal rcptPosQuantity;
     private String orderType;
     private BigDecimal tankRemaining;
 
@@ -81,24 +90,41 @@ public class LOSFuelOrderLog extends BasicEntity {
 
 
     /**
-     * Get storLoc.
+     * Get StorLocID.
      *
-     * @return storLoc as LOSStorageLocation.
+     * @return storLoc as ID from LOSStorageLocation.
      */
-    @ManyToOne(optional=false)
-    public LOSStorageLocation getStorLoc() {
-        return storLoc;
+    public long getStorLocID() {
+        return storLocID;
     }
 
     /**
-     * Set storLoc.
+     * Set StorLocID.
      *
      * @param storLoc the value to set.
      */
-    public void setStorLoc(LOSStorageLocation storLoc) {
-        this.storLoc = storLoc;
+    public void setStorLocID(long storLocID) {
+        this.storLocID = storLocID;
     }
 
+    /**
+     * Get StorLocName
+     *
+     * @return StorLocName as Name from LOSStorageLocation.
+     */
+    public String getStorLocName() {
+        return storLocName;
+    }
+
+    /**
+     * Set StorLocName.
+     *
+     * @param StorLocName the value to set.
+     */
+    public void setStorLocName(String storLocName) {
+        this.storLocName = storLocName;
+    }
+    
     /**
      * Get stationPump.
      *
@@ -120,11 +146,10 @@ public class LOSFuelOrderLog extends BasicEntity {
     /**
      * Get receipientId.
      *
-     * @return receipientId as LOSOrderReceipients.
+     * @return receipientId as Id from LOSOrderReceipients.
      */
-    @ManyToOne(optional=false)
-    public LOSOrderReceipients getReceipient() {
-        return receipient;
+    public long getReceipientID() {
+        return receipientID;
     }
     
     /**
@@ -132,10 +157,64 @@ public class LOSFuelOrderLog extends BasicEntity {
      *
      * @param receipientId the value to set.
      */
-    public void setReceipient(LOSOrderReceipients receipient) {
-        this.receipient = receipient;
+    public void setReceipientID(long receipientID) {
+        this.receipientID = receipientID;
     }
 
+    /**
+     * Get receipientTokenID.
+     *
+     * @return receipientId as TokenID from LOSOrderReceipients.
+     */
+    public String getReceipientTokenID() {
+        return receipientTokenID;
+    }
+    
+    /**
+     * Set receipientLabelID.
+     *
+     * @param receipientLabelID the value to set.
+     */
+    public void setReceipientTokenID(String receipientTokenID) {
+        this.receipientTokenID = receipientTokenID;
+    }
+    
+    /**
+     * Get receipientName.
+     *
+     * @return receipientId as Name from LOSOrderReceipients.
+     */
+    public String getReceipientName() {
+        return receipientName;
+    }
+    
+    /**
+     * Set receipientName.
+     *
+     * @param receipientName the value to set.
+     */
+    public void setReceipientName(String receipientName) {
+        this.receipientName = receipientName;
+    }
+    
+    /**
+     * Get receipientIDCard.
+     *
+     * @return receipientIDCard as Identity Card from LOSOrderReceipients.
+     */
+    public String getReceipientIDCard() {
+        return receipientIDCard;
+    }
+    
+    /**
+     * Set receipientIDCard.
+     *
+     * @param receipientIDcard the value to set.
+     */
+    public void setReceipientIDCard(String receipientIDCard) {
+        this.receipientIDCard = receipientIDCard;
+    }
+    
     /**
      * Get orderType.
      *
@@ -174,41 +253,129 @@ public class LOSFuelOrderLog extends BasicEntity {
     }
 
     /**
-     * Get rcptPos_Id.
+     * Get rcptPosId.
      *
-     * @return rcptPosId as OrderReceiptPosition.
+     * @return rcptPosId as ID from OrderReceiptPosition.
      */
-    @OneToOne(optional=true)
-    public OrderReceiptPosition getRcptPos() {
-        return rcptPos;
+    public long getRcptPosID() {
+        return rcptPosID;
     }
 
     /**
-     * Set rcptPos_Id.
+     * Set rcptPosId.
      *
-     * @param rcptPos_Id the value to set.
+     * @param rcptPosId the value to set.
      */
-    public void setRcptPos(OrderReceiptPosition rcptPos) {
-        this.rcptPos = rcptPos;
+    public void setRcptPosID(long rcptPosID) {
+        this.rcptPosID = rcptPosID;
     }
     
     /**
-     * Get vehicle_Id.
+     * Get rcptArticleDescr.
      *
-     * @return vehicle_Id as OrderReceiptPosition.
+     * @return rcptPosItemDescr as rcptArticleDescr from OrderReceiptPosition.
      */
-    @ManyToOne(optional=true)
-    public VehicleData getVehicle() {
-        return vehicle;
+    public String getRcptArticleDescr() {
+        return rcptArticleDescr;
+    }
+
+    /**
+     * Set rcptPosItemRef.
+     *
+     * @param rcptPosItemRef the value to set.
+     */
+    public void setRcptArticleRef(String rcptArticleRef) {
+        this.rcptArticleRef = rcptArticleRef;
+    }
+    
+    /**
+     * Get rcptArticleRef.
+     *
+     * @return rcptPosItemRef as rcptArticleRef from OrderReceiptPosition.
+     */
+    public String getRcptArticleRef() {
+        return rcptArticleRef;
+    }
+
+    /**
+     * Set rcptPosItemDescr.
+     *
+     * @param rcptPosItemDescr the value to set.
+     */
+    public void setRcptArticleDescr(String rcptArticleDescr) {
+        this.rcptArticleDescr = rcptArticleDescr;
+    }
+    /**
+     * Get rcptPosQuantity.
+     *
+     * @return rcptPosQuantity as Quantity from OrderReceiptPosition.
+     */
+    @Column(precision=18, scale=6)
+    public BigDecimal getRcptPosQuantity() {
+        return rcptPosQuantity;
+    }
+
+    /**
+     * Set rcptPosQuantity.
+     *
+     * @param rcptPosQuantity the value to set.
+     */
+    public void setRcptPosQuantity(BigDecimal rcptPosQuantity) {
+        this.rcptPosQuantity = rcptPosQuantity;
+    } 
+    /**
+     * Get vehicleId.
+     *
+     * @return vehicle_Id as ID from VehicleData.
+     */
+    public long getVehicleID() {
+        return vehicleID;
+    }
+         
+    /**
+     * Set vehicleId.
+     *
+     * @param vehicleId the value to set.
+     */
+    public void setVehicleID(long vehicleID) {
+        this.vehicleID = vehicleID;
+    }
+    
+    /**
+     * Get vehiclePlateNumber.
+     *
+     * @return vehiclePlateNumber as PlateNumber from VehicleData.
+     */
+    public String getVehiclePlateNumber() {
+        return vehiclePlateNumber;
     }
     
      
     /**
-     * Set vehicle_Id.
+     * Set vehiclePlateNumber.
      *
-     * @param vehicle_Id the value to set.
+     * @param vehiclePlateNumber the value to set.
      */
-    public void setVehicle(VehicleData vehicle) {
-        this.vehicle = vehicle;
+    public void setVehiclePlateNumber(String vehiclePlateNumber) {
+        this.vehiclePlateNumber = vehiclePlateNumber;
+    }
+    
+    /**
+     * Get vehicleLabelID.
+     *
+     * @return vehicleLabelID as vehicleLabelID from VehicleData.
+     */
+    public String getVehicleLabelID() {
+        return vehicleLabelID;
+    }
+    
+     
+    /**
+     * Set vehicleLabelID.
+     *
+     * @param vehicleLabelID the value to set.
+     */
+    public void setVehicleLabelID(String vehicleLabelID) {
+        this.vehicleLabelID = vehicleLabelID;
     }
 }
