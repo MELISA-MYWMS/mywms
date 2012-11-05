@@ -133,7 +133,7 @@ public class VehicleData
         this.hoursMeter = hoursMeter;
     }
 
-    @Column(precision=19, scale=2)
+    @Column(precision=18, scale=2)
     public BigDecimal getCategoryId() {
         return categoryId;
     }
@@ -142,7 +142,7 @@ public class VehicleData
         this.categoryId = categoryId;
     }
 
-    @Column(precision=19, scale=2)
+    @Column(precision=18, scale=2)
     public BigDecimal getTypeId() {
         return typeId;
     }

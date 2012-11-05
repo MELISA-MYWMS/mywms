@@ -102,11 +102,15 @@ public class LOSFuelOrderLogReportBean implements LOSFuelOrderLogReport {
 					parameters.put("LOS_DATE_FROM", LogDateFrom);
 					parameters.put("LOS_DATE_TO",LogDateTo);
 					
-					
-	                d = repService.getJrxmlResource(InventoryBundleResolver.class, "LOSFuelOrderLogReport.jrxml");
-	                
-	                byte[] bytes = repService.typeExportPdf(l.getName(), l.getType(), d, export, parameters);
-	                l.setDocument(bytes);	            
+					try {
+		                d = repService.getJrxmlResource(InventoryBundleResolver.class, "LOSFuelOrderLogReport.jrxml");
+		                
+		                byte[] bytes = repService.typeExportPdf(l.getName(), l.getType(), d, export, parameters);
+		                l.setDocument(bytes);
+					} catch (Throwable t) {
+						log.error(t.getMessage(), t);
+						throw new ReportException();
+					}
 	        } 	        
 	        else {
 	            throw new IllegalArgumentException("only pdf supported");

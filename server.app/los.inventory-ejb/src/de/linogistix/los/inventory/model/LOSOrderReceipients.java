@@ -177,7 +177,7 @@ public class LOSOrderReceipients extends BasicEntity {
 	 *
 	 * @return phone as BigDecimal.
 	 */
-	@Column(nullable=false, precision=19)
+	@Column(nullable=false, precision=18)
 	public BigDecimal getPhone()
 	{
 	    return phone;
@@ -198,7 +198,7 @@ public class LOSOrderReceipients extends BasicEntity {
 	 *
 	 * @return vpnPhone as BigDecimal.
 	 */
-	@Column(precision=19)
+	@Column(precision=18)
 	public BigDecimal getVpnPhone()
 	{
 	    return vpnPhone;
