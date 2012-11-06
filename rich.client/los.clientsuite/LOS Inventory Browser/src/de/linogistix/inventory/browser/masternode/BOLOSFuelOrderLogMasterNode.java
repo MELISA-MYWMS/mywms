@@ -30,23 +30,20 @@ public class BOLOSFuelOrderLogMasterNode extends BOMasterNode {
             
 	    //BOMasterNodeProperty<String> identityCard = new BOMasterNodeProperty<String>("identityCard", String.class, to.getIdentityCard(), InventoryBundleResolver.class);
 	    //sheet.put(identityCard);
-
-		//BOMasterNodeProperty<String> plateNumber= new BOMasterNodeProperty<String>("plateNumber", String.class, to.getPlateNumber(), InventoryBundleResolver.class);
-		//sheet.put(plateNumber);
-			BOMasterNodeProperty<String> fullName= new BOMasterNodeProperty<String>("fullName", String.class, to.getFullName(), InventoryBundleResolver.class);
-			sheet.put(fullName);
-		//BOMasterNodeProperty<String> articleRef= new BOMasterNodeProperty<String>("articleRef", String.class, to.getArticleRef(), InventoryBundleResolver.class);
-		//sheet.put(articleRef);
-		//BOMasterNodeProperty<String> articleDescr= new BOMasterNodeProperty<String>("articleDescr", String.class, to.getArticleDescr(), InventoryBundleResolver.class);
-		//sheet.put(articleDescr);
-            BOMasterNodeProperty<String> orderType= new BOMasterNodeProperty<String>("orderType", String.class, to.getOrderType(), InventoryBundleResolver.class);
-            sheet.put(orderType);
-			BOMasterNodeProperty<String> storageLocation= new BOMasterNodeProperty<String>("storageLocation", String.class, to.getStorageLocation(), InventoryBundleResolver.class);
-			sheet.put(storageLocation);
-			//BOMasterNodeProperty<String> orderReceipient= new BOMasterNodeProperty<String>("orderReceipient", String.class, to.getOrderReceipient(), InventoryBundleResolver.class);
-			//sheet.put(orderReceipient);
-			BOMasterNodeProperty<BigDecimal> tankRemaining= new BOMasterNodeProperty<BigDecimal>("tankRemaining", BigDecimal.class, to.getTankRemaining(), InventoryBundleResolver.class);
-			sheet.put(tankRemaining);
+                BOMasterNodeProperty<String> orderType= new BOMasterNodeProperty<String>("orderType", String.class, to.getOrderType(), InventoryBundleResolver.class);
+                sheet.put(orderType);
+		BOMasterNodeProperty<String> storageLocation= new BOMasterNodeProperty<String>("storageLocation", String.class, to.getStorLocName(), InventoryBundleResolver.class);
+		sheet.put(storageLocation);
+                BOMasterNodeProperty<String> articleDescr= new BOMasterNodeProperty<String>("articleDescr", String.class, to.getRcptArticleDescr(), InventoryBundleResolver.class);
+		sheet.put(articleDescr);
+		BOMasterNodeProperty<String> plateNumber= new BOMasterNodeProperty<String>("plateNumber", String.class, to.getVehiclePlateNumber(), InventoryBundleResolver.class);
+		sheet.put(plateNumber);
+		BOMasterNodeProperty<String> receipientName= new BOMasterNodeProperty<String>("receipientName", String.class, to.getReceipientName(), InventoryBundleResolver.class);
+		sheet.put(receipientName);
+                BOMasterNodeProperty<BigDecimal> rcptQuantity= new BOMasterNodeProperty<BigDecimal>("rcptQuantity", BigDecimal.class, to.getRcptPosQuantity(), InventoryBundleResolver.class);
+		sheet.put(articleDescr);
+		BOMasterNodeProperty<BigDecimal> tankRemaining= new BOMasterNodeProperty<BigDecimal>("tankRemaining", BigDecimal.class, to.getTankRemaining(), InventoryBundleResolver.class);
+		sheet.put(tankRemaining);
         }
         return new PropertySet[] {sheet};
     }
@@ -54,24 +51,18 @@ public class BOLOSFuelOrderLogMasterNode extends BOMasterNode {
     //-------------------------------------------------------------------------
     public static Property[] boMasterNodeProperties() {
 	    //BOMasterNodeProperty<String> identityCard = new BOMasterNodeProperty<String>("identityCard", String.class, "", InventoryBundleResolver.class);
-
-		//BOMasterNodeProperty<String>  plateNumber = new BOMasterNodeProperty<String>("plateNumber", String.class, "", InventoryBundleResolver.class);
-		BOMasterNodeProperty<String> fullName = new BOMasterNodeProperty<String>("fullName", String.class, "", InventoryBundleResolver.class);
-		//BOMasterNodeProperty<String> articleRef = new BOMasterNodeProperty<String>("articleRef", String.class, "", InventoryBundleResolver.class);
-		//BOMasterNodeProperty<String> articleDescr = new BOMasterNodeProperty<String>("articleDescr", String.class, "", InventoryBundleResolver.class);
-        BOMasterNodeProperty<String> orderType = new BOMasterNodeProperty<String>("orderType", String.class, "", InventoryBundleResolver.class);
-		BOMasterNodeProperty<String> storageLocation = new BOMasterNodeProperty<String>("storageLocation", String.class, "", InventoryBundleResolver.class);
-		//BOMasterNodeProperty<String> orderReceipient = new BOMasterNodeProperty<String>("orderReceipient", String.class, "", InventoryBundleResolver.class);
+                BOMasterNodeProperty<String> orderType = new BOMasterNodeProperty<String>("orderType", String.class, "", InventoryBundleResolver.class);
+                BOMasterNodeProperty<String> storageLocation = new BOMasterNodeProperty<String>("storageLocation", String.class, "", InventoryBundleResolver.class);
+                BOMasterNodeProperty<String> articleDescr = new BOMasterNodeProperty<String>("articleDescr", String.class, "", InventoryBundleResolver.class);
+		BOMasterNodeProperty<String>  plateNumber = new BOMasterNodeProperty<String>("plateNumber", String.class, "", InventoryBundleResolver.class);
+		BOMasterNodeProperty<String> receipientName = new BOMasterNodeProperty<String>("receipientName", String.class, "", InventoryBundleResolver.class);
+                BOMasterNodeProperty<BigDecimal> rcptQuantity = new BOMasterNodeProperty<BigDecimal>("rcptQuantity", BigDecimal.class, BigDecimal.ZERO, InventoryBundleResolver.class);
 		BOMasterNodeProperty<BigDecimal> tankRemaining = new BOMasterNodeProperty<BigDecimal>("tankRemaining", BigDecimal.class, BigDecimal.ZERO, InventoryBundleResolver.class);
         BOMasterNodeProperty[] props = new BOMasterNodeProperty[] {
-		//identityCard, 
-		//plateNumber, 
-		fullName, 
-			//articleRef, articleDescr, 
-		orderType, storageLocation,
-			//, orderReceipient, 
-		tankRemaining
-        };
+		//identityCard,
+                orderType, storageLocation, articleDescr,
+		plateNumber, receipientName, rcptQuantity,
+		tankRemaining};
         return props;
     }
 }
