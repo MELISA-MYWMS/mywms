@@ -15,5 +15,6 @@ public enum FuelNavigationEnum {
 	FUEL_OUT_COMPLETE,
 	/*for fuel log*/
 	FUEL_CHOOSE_DATES,
-	FUEL_LOG_CHOOSE_LOC
+	FUEL_LOG_CHOOSE_LOC,
+	FUEL_GET_PDF
 }

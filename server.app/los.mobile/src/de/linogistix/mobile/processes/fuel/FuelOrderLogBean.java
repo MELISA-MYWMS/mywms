@@ -1,5 +1,11 @@
 package de.linogistix.mobile.processes.fuel;
 
+import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import org.apache.log4j.Logger;
+
 import de.linogistix.los.util.entityservice.LOSSystemPropertyServiceRemote;
 import de.linogistix.mobile.common.gui.bean.BasicDialogBean;
 import de.linogistix.mobile.common.system.JSFHelper;
@@ -7,46 +13,55 @@ import de.linogistix.mobile.common.system.JSFHelper;
 public class FuelOrderLogBean extends BasicDialogBean {
     Logger log = Logger.getLogger(FuelBean.class);
 
+    private Date startDateInput;
+    private Date endDateInput;
+
     private LOSSystemPropertyServiceRemote propertyService;
 
-    public FuelBean() {
+    public FuelOrderLogBean() {
         super();
         propertyService = super.getStateless(LOSSystemPropertyServiceRemote.class);
     }
 
     public String getNavigationKey() {
         if(!isRolesAllowed()){
-        	currentMode = "";
             return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
 		}
 
-        if( currentMode == MODE_OUT ) {
-            return FuelNavigationEnum.FUEL_CHOOSE_VEHICLE.name();
-        }
-        return FuelNavigationEnum.FUEL_CHOOSE_ITEM.name();
+        return FuelNavigationEnum.FUEL_CHOOSE_DATES.name();
     }
 
 
     public String getTitle() {
-        if( currentMode == MODE_OUT ) {
-            return resolve("TitleFuelOut");
-        }
-        return resolve("TitleFuelIn");
+        return resolve("TitleFuelLog");
     }
 
     @Override
     public void init(String[] args) {
         super.init(args);
+    }
 
-        currentMode = MODE_OUT;
+    public String processEnterDates() {
 
-        if( args != null && args.length>0 ) {
-            String s = args[0];
-            if(s.startsWith(MODE_IN) ) {
-                currentMode = MODE_IN;
-            }
-        }
+        /*if( mat.isAdviceMandatory() ) {
+            JSFHelper.getInstance().message( resolve("MsgMatAdviceMandatory") );
+            return "";
+        }*/
 
+		return FuelNavigationEnum.FUEL_LOG_CHOOSE_LOC.name();
+    }
+
+    public String processEnterDatesCancel() {
+        return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
+    }
+
+    @Override
+    protected ResourceBundle getResourceBundle() {
+        ResourceBundle bundle;
+        Locale lo;
+        lo = getUIViewRoot().getLocale();
+        bundle = ResourceBundle.getBundle("de.linogistix.mobile.processes.fuel.FuelBundle", lo);
+        return bundle;
     }
 
     @Override
@@ -82,4 +97,21 @@ public class FuelOrderLogBean extends BasicDialogBean {
     public String[] getRolesAllowed () {
         return new String[] {org.mywms.globals.Role.FUEL_STR};
     }
+
+	public Date getStartDateInput() {
+		return startDateInput;
+	}
+
+	public void setStartDateInput(Date startDateInput) {
+		this.startDateInput = startDateInput;
+	}
+
+	public Date getEndDateInput() {
+		return endDateInput;
+	}
+
+	public void setEndDateInput(Date endDateInput) {
+		this.endDateInput = endDateInput;
+	}
+
 }
