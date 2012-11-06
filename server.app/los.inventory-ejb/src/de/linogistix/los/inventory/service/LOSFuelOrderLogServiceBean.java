@@ -24,14 +24,23 @@ public class LOSFuelOrderLogServiceBean extends BasicServiceBean<LOSFuelOrderLog
 		//log.error("MELISA fuel log "+ orderType);
 		LOSFuelOrderLog fuelLog = new LOSFuelOrderLog(); 
 
-		fuelLog.setVehicle(vehicle);
-		fuelLog.setStorLoc(storLoc);
+		fuelLog.setVehicleID(vehicle.getId());
+		fuelLog.setVehicleLabelID(vehicle.getLabelId());
+		fuelLog.setVehiclePlateNumber(vehicle.getPlateNumber());
+		fuelLog.setStorLocID(storLoc.getId());
+		fuelLog.setStorLocName(storLoc.getName());
 		fuelLog.setStationPump(stationPump);
-		fuelLog.setReceipient(receipient);
+		fuelLog.setReceipientID(receipient.getId());
+		String receipientName = receipient.getRankAbbr() + " " + receipient.getFirstName() + " " + receipient.getLastName(); 
+		fuelLog.setReceipientName(receipientName);
+		fuelLog.setReceipientTokenID(receipient.getTokenId());
+		fuelLog.setReceipientIDCard(receipient.getIdentityCard());
 		fuelLog.setOrderType(orderType);
 		fuelLog.setTankRemaining(tankRemaining);
-		fuelLog.setRcptPos(rcptPos);
-
+		fuelLog.setRcptPosID(rcptPos.getId());
+		fuelLog.setRcptArticleDescr(rcptPos.getArticleDescr());
+		fuelLog.setRcptArticleRef(rcptPos.getArticleRef());
+		
 		manager.persist(fuelLog);
 		manager.flush();
 		return fuelLog;
