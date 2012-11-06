@@ -40,25 +40,43 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 		
 	public LOSFuelOrderLogTO(LOSFuelOrderLog idat) {
         	super(idat.getId(), idat.getVersion(), idat.getTransactionId());
-		this.storageLocation	= idat.getStorLoc().getName();
-		this.vehicleData 	= idat.getVehicle().getLabelId();
+		this.storageLocation	= idat.getStorLocName();
+		this.vehicleData 	= idat.getVehicleLabelID();
 		this.stationPump	= idat.getStationPump();
-		this.orderReceipient	= idat.getReceipient().getIdentityCard();
+		this.orderReceipient	= idat.getReceipientIDCard();
 		this.orderType		= idat.getOrderType();
 		this.tankRemaining	= idat.getTankRemaining();   
-		this.orderRcptPos 	= idat.getRcptPos().getId();		
-    		this.fullName 		= idat.getReceipient().getRankAbbr();
-    		this.fullName 		+= " ";
-    		this.fullName 		+= idat.getReceipient().getFirstName();
-    		this.fullName 		+= " ";
-    		this.fullName 		+= idat.getReceipient().getLastName();         
-		this.firstName		= idat.getReceipient().getFirstName();
-		this.rankName		= idat.getReceipient().getRankAbbr();
-		this.lastName		= idat.getReceipient().getLastName();
-    		this.plateNumber 	= idat.getVehicle().getPlateNumber();
-    		this.articleRef 	= idat.getRcptPos().getArticleRef();
-    		this.articleDescr 	= idat.getRcptPos().getArticleDescr();    	
+		this.orderRcptPos 	= idat.getRcptPosID();		
+    		this.fullName 		= idat.getReceipientName();
+		//this.fullName 		= idat.getReceipient().getRankAbbr();
+		//this.fullName 		+= " ";
+		//this.fullName 		+= idat.getReceipient().getFirstName();
+		//this.fullName 		+= " ";
+		//this.fullName 		+= idat.getReceipient().getLastName();         
+		this.firstName		= idat.getReceipientName();
+		this.rankName		= idat.getReceipientName();
+		this.lastName		= idat.getReceipientName();
+    		this.plateNumber 	= idat.getVehiclePlateNumber();
+    		this.articleRef 	= idat.getRcptArticleRef();
+    		this.articleDescr 	= idat.getRcptArticleDescr();    	
     }
+
+    /*public long getStorLocID() {
+    public String getStorLocName() {
+    public int getStationPump() {
+    public long getReceipientID() {
+    public String getReceipientTokenID() {
+    public String getReceipientName() {
+    public String getReceipientIDCard() {
+    public String getOrderType() {
+    public BigDecimal getTankRemaining() {
+    public long getRcptPosID() {
+    public String getRcptArticleDescr() {
+    public String getRcptArticleRef() {
+    public BigDecimal getRcptPosQuantity() {
+    public long getVehicleID() {
+    public String getVehiclePlateNumber() {
+    public String getVehicleLabelID() {*/
 
 	public LOSFuelOrderLogTO(Long id, int version, String transactionId){
 		super(id, version, transactionId);

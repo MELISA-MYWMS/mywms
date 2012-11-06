@@ -17,6 +17,7 @@ public class ManageMobileBean implements ManageMobile {
 		List<MobileFunction> functionList = new ArrayList<MobileFunction>();
 		functionList.add(new MobileFunction("de.linogistix.mobile.processes.fuel.FuelBean", "MODE_OUT") );
 		functionList.add(new MobileFunction("de.linogistix.mobile.processes.fuel.FuelBean", "MODE_IN") );
+		functionList.add(new MobileFunction("de.linogistix.mobile.processes.fuel.FuelOrderLogBean"));
 		functionList.add(new MobileFunction("de.linogistix.mobile.processes.info.InfoBean"));
 		functionList.add(new MobileFunction("de.linogistix.mobile.processes.goodsreceipt.GoodsReceiptBean"));
 		functionList.add(new MobileFunction("de.linogistix.mobile.processes.storage.StorageBackingBean"));
