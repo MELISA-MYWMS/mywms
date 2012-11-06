@@ -35,15 +35,17 @@ public class LOSFuelOrderLogQueryBean extends
     LOSFuelOrderLogQueryRemote {
 
 		private static final String[] props = new String[] {
-			"id", "version", "transactionId",
-				//, "vehicle.labelId"
-				"storLoc.name", "stationPump",
-				"receipient.identityCard", 
-				//"rcptPos.id", 
-				"orderType", "tankRemaining", 
-				//"vehicle.plateNumber",
-				"receipient.firstName", "receipient.rank", "receipient.lastName"
-				//"rcptPos.articleRef", "rcptPos.articleDescr"
+			"id", "version", "transactionId",								
+				"storLocName", 
+				"stationPump",				 				
+				"orderType",  
+				"vehiclePlateNumber",
+				"receipientName",
+				"receipientIDCard",
+				"rcptArticleRef",
+				"rcptArticleDescr",
+				"rcptPosQuantity",
+				"tankRemaining"				
 		};
 
     @Override
@@ -68,20 +70,17 @@ public class LOSFuelOrderLogQueryBean extends
 		propList.add(new BODTOConstructorProperty("id", false));
 		propList.add(new BODTOConstructorProperty("version", false));
 		propList.add(new BODTOConstructorProperty("transactionId", false));
-		propList.add(new BODTOConstructorProperty("vehicle.labelId", true));
-		propList.add(new BODTOConstructorProperty("storLoc.name", true));
+		propList.add(new BODTOConstructorProperty("storLocName", true));
 		propList.add(new BODTOConstructorProperty("stationPump", true));
-		propList.add(new BODTOConstructorProperty("receipient.identityCard", true));
-		propList.add(new BODTOConstructorProperty("rcptPos.id", true));
 		propList.add(new BODTOConstructorProperty("orderType", true));
+		propList.add(new BODTOConstructorProperty("vehiclePlateNumber", true));
+		propList.add(new BODTOConstructorProperty("receipientName", true));
+		propList.add(new BODTOConstructorProperty("receipientIDCard", true));
+		propList.add(new BODTOConstructorProperty("rcptArticleRef", true));
+		propList.add(new BODTOConstructorProperty("articleDescr", true));	
 		
 		propList.add(new BODTOConstructorProperty("tankRemaining", true));
-		propList.add(new BODTOConstructorProperty("vehicle.plateNumber", true));
-		propList.add(new BODTOConstructorProperty("receipient.firstName", true));
-		propList.add(new BODTOConstructorProperty("receipient.rank", true));
-		propList.add(new BODTOConstructorProperty("receipient.lastName", true));
-		propList.add(new BODTOConstructorProperty("rcptPos.articleRef", true));
-		propList.add(new BODTOConstructorProperty("rcptPos.articleDescr", true));
+			
 		return propList;
 	}*/
 

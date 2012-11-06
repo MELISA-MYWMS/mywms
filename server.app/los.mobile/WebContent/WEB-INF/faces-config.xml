@@ -145,6 +145,11 @@
       <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     
+    <managed-bean>
+      <managed-bean-name>FuelOrderlogBean</managed-bean-name>
+      <managed-bean-class>de.linogistix.mobile.processes.fuel.FuelOrderlogBean</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 <!--############################# Rich Faces Demo ###############################################################-->
       <managed-bean>
         <managed-bean-name>DemoBean</managed-bean-name>
@@ -1536,6 +1541,30 @@
             <to-view-id>/faces/pages/processes/gr_direct/ChooseOrder.jsp</to-view-id>
         </navigation-case>   
     </navigation-rule>
+
+    <!--  FuelLog -->
+    <navigation-rule>
+        <from-view-id>/pages/processes/controller/MainMenu.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>FUEL_CHOOSE_DATES</from-outcome>
+            <to-view-id>/pages/processes/fuel/EnterDates.jsp</to-view-id>
+        </navigation-case>   
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/pages/processes/fuel/EnterDates.jsp</from-view-id>
+	<navigation-case>
+	    <from-outcome>FUEL_BACK_TO_MENU</from-outcome>
+	    <to-view-id>/pages/processes/controller/MainMenu.jsp</to-view-id>
+	</navigation-case>
+        <navigation-case>
+            <from-outcome>FUEL_LOG_CHOOSE_LOC</from-outcome>
+            <to-view-id>/pages/processes/fuel/EnterLogLoc.jsp</to-view-id>
+        </navigation-case>   
+    </navigation-rule>
+
+    <!--  End FuelLog -->
+
 
     <!--  Fuel -->
     <navigation-rule>
