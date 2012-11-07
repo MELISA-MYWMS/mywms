@@ -89,7 +89,7 @@ public class LOSFuelOrderLogReportBean implements LOSFuelOrderLogReport {
 	        //persist
 	        if (type.equals(DocumentTypes.APPLICATION_PDF.toString())) {
 	        	JasperDesign d;
-	        		        		               
+/* Disable for compile	        		        		               
 	            	List<LOSFuelOrderLog> export;
 	    			export = LOSFuelOrderLogQuery.queryByDate(LogDateFrom, LogDateTo);
 	    			
@@ -114,6 +114,7 @@ public class LOSFuelOrderLogReportBean implements LOSFuelOrderLogReport {
 	        } 	        
 	        else {
 	            throw new IllegalArgumentException("only pdf supported");
+	            */
 	        }
 
 	        return l;

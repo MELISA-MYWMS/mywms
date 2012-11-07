@@ -10,17 +10,25 @@ import de.linogistix.los.util.entityservice.LOSSystemPropertyServiceRemote;
 import de.linogistix.mobile.common.gui.bean.BasicDialogBean;
 import de.linogistix.mobile.common.system.JSFHelper;
 
+import de.linogistix.los.location.model.LOSStorageLocation;
+
+import de.linogistix.los.location.service.QueryStorageLocationServiceRemote;
+
 public class FuelOrderLogBean extends BasicDialogBean {
     Logger log = Logger.getLogger(FuelBean.class);
 
     private Date startDateInput;
     private Date endDateInput;
+    private String inputCode;
+
+    private QueryStorageLocationServiceRemote locService;
 
     private LOSSystemPropertyServiceRemote propertyService;
 
     public FuelOrderLogBean() {
         super();
         propertyService = super.getStateless(LOSSystemPropertyServiceRemote.class);
+        locService = super.getStateless(QueryStorageLocationServiceRemote.class);
     }
 
     public String getNavigationKey() {
@@ -52,6 +60,34 @@ public class FuelOrderLogBean extends BasicDialogBean {
     }
 
     public String processEnterDatesCancel() {
+        return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
+    }
+
+    public String processEnterLoc() {
+        String code = inputCode == null ? "" : inputCode.trim();
+        inputCode = "";
+        LOSStorageLocation loc = null;
+
+        if( code.length() == 0 ) {
+            JSFHelper.getInstance().message( resolve("MsgEnterLoc") );
+            return "";
+        }
+        loc = null;
+        try {
+            loc = locService.getByName(code);
+        } catch( Exception e ) {
+            log.error("Cannot select location="+code+". ex="+e.getMessage(), e);
+        }
+        if( loc == null ) {
+            log.error("Wrong location entered. location="+code);
+            JSFHelper.getInstance().message( resolve("MsgLocNotAccessable") );
+            return "";
+        }
+
+        return FuelNavigationEnum.FUEL_GET_PDF.name();
+    }
+
+    public String processEnterLocCancel() {
         return FuelNavigationEnum.FUEL_BACK_TO_MENU.name();
     }
 
@@ -114,4 +150,10 @@ public class FuelOrderLogBean extends BasicDialogBean {
 		this.endDateInput = endDateInput;
 	}
 
+    public String getInputCode() {
+        return inputCode;
+    }
+    public void setInputCode(String inputCode) {
+        this.inputCode = inputCode;
+    }
 }

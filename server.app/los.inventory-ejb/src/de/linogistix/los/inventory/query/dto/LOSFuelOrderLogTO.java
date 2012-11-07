@@ -14,14 +14,7 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(LOSFuelOrderLogTO.class);
 
-    /*private String vehicle; //plateNumber
-    private String storLoc; //name
-    private int stationPump;
-    private String receipient; //identityCard
-    private long rcptPos; //id
-    private String orderType;
-    private BigDecimal tankRemaining;*/
-	
+/*	
 	private String vehicleData;
 	private String storageLocation;	
 	private int stationPump;
@@ -37,120 +30,128 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 	private String lastName;
 	private String articleRef;
 	private String articleDescr;
-		
+*/
+	
+	private long vehicleID;
+    private String vehicleLabelID;
+    private String vehiclePlateNumber;
+    private long storLocID;
+    private String storLocName;
+    private int stationPump;
+    private long receipientID;
+    private String receipientName;
+    private String receipientTokenID;
+    private String receipientIDCard;
+    private long rcptPosID;
+    private String rcptArticleDescr;
+    private String rcptArticleRef; 
+    private BigDecimal rcptPosQuantity;
+    private String orderType;
+    private BigDecimal tankRemaining;
+	
 	public LOSFuelOrderLogTO(LOSFuelOrderLog idat) {
         	super(idat.getId(), idat.getVersion(), idat.getTransactionId());
-		this.storageLocation	= idat.getStorLocName();
-		this.vehicleData 	= idat.getVehicleLabelID();
+        this.vehicleID = idat.getVehicleID();
+        this.vehicleLabelID = idat.getVehicleLabelID();
+        this.vehiclePlateNumber = idat.getVehiclePlateNumber();
+		this.storLocID = idat.getStorLocID();
+        this.storLocName = idat.getStorLocName();		
 		this.stationPump	= idat.getStationPump();
-		this.orderReceipient	= idat.getReceipientIDCard();
+		this.receipientID	= idat.getReceipientID();
+		this.receipientName = idat.getReceipientName();
+		this.receipientTokenID = idat.getReceipientTokenID();
+		this.receipientIDCard = idat.getReceipientIDCard();
+		this.rcptPosID 	= idat.getRcptPosID();
+		this.rcptArticleRef 	= idat.getRcptArticleRef();
+		this.rcptArticleDescr 	= idat.getRcptArticleDescr();
+		this.rcptPosQuantity = idat.getRcptPosQuantity();
 		this.orderType		= idat.getOrderType();
-		this.tankRemaining	= idat.getTankRemaining();   
-		this.orderRcptPos 	= idat.getRcptPosID();		
-    		this.fullName 		= idat.getReceipientName();
-		//this.fullName 		= idat.getReceipient().getRankAbbr();
-		//this.fullName 		+= " ";
-		//this.fullName 		+= idat.getReceipient().getFirstName();
-		//this.fullName 		+= " ";
-		//this.fullName 		+= idat.getReceipient().getLastName();         
-		this.firstName		= idat.getReceipientName();
-		this.rankName		= idat.getReceipientName();
-		this.lastName		= idat.getReceipientName();
-    		this.plateNumber 	= idat.getVehiclePlateNumber();
-    		this.articleRef 	= idat.getRcptArticleRef();
-    		this.articleDescr 	= idat.getRcptArticleDescr();    	
+		this.tankRemaining	= idat.getTankRemaining();   				   		
     }
-
-    /*public long getStorLocID() {
-    public String getStorLocName() {
-    public int getStationPump() {
-    public long getReceipientID() {
-    public String getReceipientTokenID() {
-    public String getReceipientName() {
-    public String getReceipientIDCard() {
-    public String getOrderType() {
-    public BigDecimal getTankRemaining() {
-    public long getRcptPosID() {
-    public String getRcptArticleDescr() {
-    public String getRcptArticleRef() {
-    public BigDecimal getRcptPosQuantity() {
-    public long getVehicleID() {
-    public String getVehiclePlateNumber() {
-    public String getVehicleLabelID() {*/
 
 	public LOSFuelOrderLogTO(Long id, int version, String transactionId){
 		super(id, version, transactionId);
 	}
 	
 	public LOSFuelOrderLogTO(Long id, int version, String transactionId, 
-			//String vehicleData, 
-		String storageLocation, int stationPump, 
-		String orderReceipient,
-		//long orderRcptPos,
-		String orderType, BigDecimal tankRemaining, 
-		//String plateNumber,
-		String firstName, String rankName, String lastName
-		//, String articleRef, 	String articleDescr
+			String vehicleLabelID, String vehiclePlateNumber,String storLocName, int stationPump, 
+			String receipientName, String receipientTokenID, String receipientIDCard, String rcptArticleDescr,
+			String rcptArticleRef, BigDecimal rcptPosQuantity, String orderType, BigDecimal tankRemaining
 		)
 	{
 		super(id, version, transactionId);
-		this.storageLocation	= storageLocation;
-		//this.vehicleData 	= vehicleData;
+		this.vehicleLabelID = vehicleLabelID;
+		this.vehiclePlateNumber = vehiclePlateNumber;
+		this.storLocName = storLocName;
 		this.stationPump	= stationPump;
-		this.orderReceipient	= orderReceipient;
-		//this.orderRcptPos 	= orderRcptPos;
+		this.receipientName	= receipientName;
+		this.receipientTokenID = receipientTokenID;
+		this.receipientIDCard = receipientIDCard;
+		this.rcptArticleDescr = rcptArticleDescr;
+		this.rcptArticleRef = rcptArticleRef;
+		this.rcptPosQuantity = rcptPosQuantity;
 		this.orderType		= orderType;
-		this.tankRemaining	= tankRemaining;   	
-		//this.plateNumber	= plateNumber;
-		//this.fullName		= fullName;
-		this.firstName		= firstName;
-		this.rankName		= rankName;
-		this.lastName		= lastName;
-		//this.articleRef		= articleRef;
-		//this.articleDescr	= articleDescr;
-    		this.fullName 		= rankName + " " + firstName + " " + lastName;
+		this.tankRemaining	= tankRemaining;   			
 	}
 
-
 	
 	/**
-	 * Get vehicleData.
+	 * Get vehicleLabelID.
 	 *
-	 * @return vehicleData as String.
+	 * @return vehicleLabelID as String.
 	 */
-	public String getVehicleData()
+	public String getVehicleLabelID()
 	{
-	    return vehicleData;
+	    return vehicleLabelID;
 	}
 	
 	/**
-	 * Set vehicleData.
+	 * Set vehicleLabelID.
 	 *
-	 * @param vehicleData the value to set.
+	 * @param vehicleLabelID the value to set.
 	 */
-	public void setVehicleData(String vehicleData)
+	public void setVehicleLabelID (String vehicleLabelID)
 	{
-	    this.vehicleData = vehicleData;
+	    this.vehicleLabelID = vehicleLabelID;
 	}
 	
 	/**
-	 * Get storageLocation.
+	 * Get vehiclePlateNumber.
 	 *
-	 * @return storageLocation as String.
+	 * @return vehiclePlateNumber as String.
 	 */
-	public String getStorageLocation()
+	public String getVehiclePlateNumber()
 	{
-	    return storageLocation;
+	    return vehiclePlateNumber;
 	}
 	
 	/**
-	 * Set storageLocation.
+	 * Set vehiclePlateNumber.
+	 *
+	 * @param vehiclePlateNumber the value to set.
+	 */
+	public void setVehiclePlateNumber(String vehiclePlateNumber)
+	{
+	    this.vehiclePlateNumber = vehiclePlateNumber;
+	}
+	/**
+	 * Get storageLocation Name.
+	 *
+	 * @return storageLocation Name as String.
+	 */
+	public String getStorLocName()
+	{
+	    return storLocName;
+	}
+	
+	/**
+	 * Set storageLocation Name.
 	 *
 	 * @param storageLocation the value to set.
 	 */
-	public void setStorageLocation(String storageLocation)
+	public void setStorLocName(String storLocName)
 	{
-	    this.storageLocation = storageLocation;
+	    this.storLocName = storLocName;
 	}
 	
 	/**
@@ -174,45 +175,64 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 	}
 	
 	/**
-	 * Get orderReceipient.
+	 * Get receipientName.
 	 *
-	 * @return orderReceipient as String.
+	 * @return receipientName as String.
 	 */
-	public String getOrderReceipient()
+	public String getReceipientName()
 	{
-	    return orderReceipient;
+	    return receipientName;
 	}
 	
 	/**
-	 * Set orderReceipient.
+	 * Set receipientName.
 	 *
-	 * @param orderReceipient the value to set.
+	 * @param receipientName the value to set.
 	 */
-	public void setOrderReceipient(String orderReceipient)
+	public void setReceipientName(String receipientName)
 	{
-	    this.orderReceipient = orderReceipient;
+	    this.receipientName = receipientName;
 	}
 	
 	/**
-	 * Get orderRcptPos.
+	 * Get receipientTokenID.
 	 *
-	 * @return orderRcptPos as long.
+	 * @return receipientTokenID.
 	 */
-	public long getOrderRcptPos()
+	public String getReceipientTokenID()
 	{
-	    return orderRcptPos;
+	    return receipientTokenID;
 	}
 	
 	/**
-	 * Set orderRcptPos.
+	 * Set receipientTokenID.
 	 *
-	 * @param orderRcptPos the value to set.
+	 * @param receipientTokenID the value to set.
 	 */
-	public void setOrderRcptPos(long orderRcptPos)
+	public void setReceipientTokenID(String receipientTokenID)
 	{
-	    this.orderRcptPos = orderRcptPos;
+	    this.receipientTokenID = receipientTokenID;
 	}
 	
+	/**
+	 * Get receipientIDCard.
+	 *
+	 * @return receipientIDCard.
+	 */
+	public String getReceipientIDCard()
+	{
+	    return receipientIDCard;
+	}
+	
+	/**
+	 * Set receipientIDCard.
+	 *
+	 * @param IDCard the value to set.
+	 */
+	public void setReceipientIDCard(String receipientIDCard)
+	{
+	    this.receipientIDCard = receipientIDCard;
+	}
 	/**
 	 * Get orderType.
 	 *
@@ -253,115 +273,15 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 	    this.tankRemaining = tankRemaining;
 	}
 	
-	/**
-	 * Get plateNumber.
-	 *
-	 * @return plateNumber as String.
-	 */
-	public String getPlateNumber()
-	{
-	    return plateNumber;
-	}
-	
-	/**
-	 * Set plateNumber.
-	 *
-	 * @param plateNumber the value to set.
-	 */
-	public void setPlateNumber(String plateNumber)
-	{
-	    this.plateNumber = plateNumber;
-	}
-	
-	/**
-	 * Get fullName.
-	 *
-	 * @return fullName as String.
-	 */
-	public String getFullName()
-	{
-		fullName = rankName + " " + firstName + " " + lastName;
-	    return fullName;
-	}
-	
-	/**
-	 * Set fullName.
-	 *
-	 * @param fullName the value to set.
-	 */
-	public void setFullName(String fullName)
-	{
-	    this.fullName = fullName;
-	}
-	
-	/**
-	 * Get firstName.
-	 *
-	 * @return firstName as String.
-	 */
-	public String getFirstName()
-	{
-	    return firstName;
-	}
-	
-	/**
-	 * Set firstName.
-	 *
-	 * @param firstName the value to set.
-	 */
-	public void setFirstName(String firstName)
-	{
-	    this.firstName = firstName;
-	}
-	
-	/**
-	 * Get rankName.
-	 *
-	 * @return rankName as String.
-	 */
-	public String getRankName()
-	{
-	    return rankName;
-	}
-	
-	/**
-	 * Set rankName.
-	 *
-	 * @param rankName the value to set.
-	 */
-	public void setRankName(String rankName)
-	{
-	    this.rankName = rankName;
-	}
-	
-	/**
-	 * Get lastName.
-	 *
-	 * @return lastName as String.
-	 */
-	public String getLastName()
-	{
-	    return lastName;
-	}
-	
-	/**
-	 * Set lastName.
-	 *
-	 * @param lastName the value to set.
-	 */
-	public void setLastName(String lastName)
-	{
-	    this.lastName = lastName;
-	}
-	
+		
 	/**
 	 * Get articleRef.
 	 *
 	 * @return articleRef as String.
 	 */
-	public String getArticleRef()
+	public String getRcptArticleRef()
 	{
-	    return articleRef;
+	    return rcptArticleRef;
 	}
 	
 	/**
@@ -369,9 +289,9 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 	 *
 	 * @param articleRef the value to set.
 	 */
-	public void setArticleRef(String articleRef)
+	public void setRcptArticleRef(String rcptArticleRef)
 	{
-	    this.articleRef = articleRef;
+	    this.rcptArticleRef = rcptArticleRef;
 	}
 	
 	/**
@@ -379,9 +299,9 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 	 *
 	 * @return articleDescr as String.
 	 */
-	public String getArticleDescr()
+	public String getRcptArticleDescr()
 	{
-	    return articleDescr;
+	    return rcptArticleDescr;
 	}
 	
 	/**
@@ -389,10 +309,32 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 	 *
 	 * @param articleDescr the value to set.
 	 */
-	public void setArticleDescr(String articleDescr)
+	public void setRcptArticleDescr(String rcptArticleDescr)
 	{
-	    this.articleDescr = articleDescr;
+	    this.rcptArticleDescr = rcptArticleDescr;
 	}
+	
+	/**
+	 * Get rcptPosQuantity.
+	 *
+	 * @return rcptPosQuantity as String.
+	 */
+	public BigDecimal getRcptPosQuantity()
+	{
+	    return rcptPosQuantity;
+	}
+	
+	/**
+	 * Set rcptPosQuantity.
+	 *
+	 * @param rcptPosQuantity the value to set.
+	 */
+	public void setRcptPosQuantity(BigDecimal rcptPosQuantity)
+	{
+	    this.rcptPosQuantity = rcptPosQuantity;
+	}
+		
+
 	//@Override
 	//protected ResourceBundle getResourceBundle() {
 	//ResourceBundle bundle;
