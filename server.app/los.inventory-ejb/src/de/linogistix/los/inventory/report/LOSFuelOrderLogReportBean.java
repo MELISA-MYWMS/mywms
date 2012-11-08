@@ -48,8 +48,9 @@ import de.linogistix.los.util.businessservice.ContextService;
 @Stateless
 public class LOSFuelOrderLogReportBean implements LOSFuelOrderLogReport {
 
-	private static final Logger log = Logger.getLogger(LOSFuelOrderLogReport.class);
-	
+	private static final Logger log = Logger
+			.getLogger(LOSFuelOrderLogReport.class);
+
 	@EJB
 	LOSFuelOrderLogService LOSFuelOrderLogService;
 	@EJB
@@ -58,67 +59,65 @@ public class LOSFuelOrderLogReportBean implements LOSFuelOrderLogReport {
 	ContextService contextService;
 	@EJB
 	LOSFuelOrderLogQueryRemote LOSFuelOrderLogQuery;
-	
+
 	@PersistenceContext(unitName = "myWMS")
 	protected EntityManager manager;
 
+	public LOSFuelOrderLogDocument printFuelOrderLogReport(
+			LOSStorageLocation storageLocation, Date LogDateFrom,
+			Date LogDateTo, String printer) throws ReportException {
 
-	public LOSFuelOrderLogDocument printFuelOrderLogReport(LOSStorageLocation storageLocation, Date LogDateFrom, Date LogDateTo, String printer) throws ReportException{
-		 	
-			String type = DocumentTypes.APPLICATION_PDF.toString();
-			
-			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-			Date date = new Date();
-			String documentName = storageLocation.getName();
-			documentName += dateFormat.format(date);
-			
-			DateFormat dateFormatID = new SimpleDateFormat("yyyyMMddHHmmss");
-			String documentID = storageLocation.toUniqueString();
-			documentID += "_";
-			documentID += dateFormatID.format(date);
-				
-			LOSFuelOrderLogDocument l = new LOSFuelOrderLogDocument();
-	        l.setName(documentName);	        
-	        l.setBookDocumentID(documentID);
-	        l.setType(type);
-	        
-	        l.setDateFrom(LogDateFrom);
-	        l.setDateTo(LogDateTo);
-	        
-	        
-	        //persist
-	        if (type.equals(DocumentTypes.APPLICATION_PDF.toString())) {
-	        	JasperDesign d;
-/* Disable for compile	        		        		               
-	            	List<LOSFuelOrderLog> export;
-	    			export = LOSFuelOrderLogQuery.queryByDate(LogDateFrom, LogDateTo);
-	    			
-	                if (repService == null) {
-	                    repService = new ReportServiceBean();
-	                }
-	                
-	                Map<String, Object> parameters = new HashMap<String, Object>();
-					
-					parameters.put("LOS_DATE_FROM", LogDateFrom);
-					parameters.put("LOS_DATE_TO",LogDateTo);
-					
+		String type = DocumentTypes.APPLICATION_PDF.toString();
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		String documentName = storageLocation.getName();
+		documentName += dateFormat.format(date);
+
+		DateFormat dateFormatID = new SimpleDateFormat("yyyyMMddHHmmss");
+		String documentID = storageLocation.toUniqueString();
+		documentID += "_";
+		documentID += dateFormatID.format(date);
+
+		LOSFuelOrderLogDocument l = new LOSFuelOrderLogDocument();
+		l.setName(documentName);
+		l.setBookDocumentID(documentID);
+		l.setType(type);
+
+		l.setDateFrom(LogDateFrom);
+		l.setDateTo(LogDateTo);
+
+		if (type.equals(DocumentTypes.APPLICATION_PDF.toString())) {
+			JasperDesign d;
+			List<LOSFuelOrderLog> export;
+			export = LOSFuelOrderLogQuery.queryByDate(LogDateFrom, LogDateTo);
+
+			if (repService == null) {
+				repService = new ReportServiceBean();
+			}
+
+			Map<String, Object> parameters = new HashMap<String, Object>();
+
+			parameters.put("LOS_DATE_FROM", LogDateFrom);
+			parameters.put("LOS_DATE_TO", LogDateTo);
+
 			try {
-		                d = repService.getJrxmlResource(InventoryBundleResolver.class, "LOSFuelOrderLogReport.jrxml");
-		                
-		                byte[] bytes = repService.typeExportPdf(l.getName(), l.getType(), d, export, parameters);
-		                l.setDocument(bytes);
+				d = repService.getJrxmlResource(InventoryBundleResolver.class,
+						"LOSFuelOrderLogReport.jrxml");
+
+				byte[] bytes = repService.typeExportPdf(l.getName(),
+						l.getType(), d, export, parameters);
+				l.setDocument(bytes);
 			} catch (Throwable t) {
 				log.error(t.getMessage(), t);
 				throw new ReportException();
 			}
-	        } 	        
-	        else {
-	            throw new IllegalArgumentException("only pdf supported");
-	            */
-	        }
+		} else {
+			throw new IllegalArgumentException("only pdf supported");
 
-	        return l;
-	    }
+		}
 
+		return l;
+	}
 
 }

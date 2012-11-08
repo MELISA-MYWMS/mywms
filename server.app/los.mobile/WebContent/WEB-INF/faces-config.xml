@@ -1575,6 +1575,14 @@
 	</navigation-case>   
     </navigation-rule>
 
+    <navigation-rule>
+        <from-view-id>/pages/processes/fuel/GetPdf.jsp</from-view-id>
+	<navigation-case>
+	    <from-outcome>FUEL_BACK_TO_MENU</from-outcome>
+	    <to-view-id>/pages/processes/controller/MainMenu.jsp</to-view-id>
+	</navigation-case>
+    </navigation-rule>
+
     <!--  End FuelLog -->
 
 

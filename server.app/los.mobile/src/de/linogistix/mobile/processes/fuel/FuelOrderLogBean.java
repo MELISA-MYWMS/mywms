@@ -1,5 +1,7 @@
 package de.linogistix.mobile.processes.fuel;
 
+import javax.servlet.http.*; 
+
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -11,6 +13,8 @@ import de.linogistix.mobile.common.gui.bean.BasicDialogBean;
 import de.linogistix.mobile.common.system.JSFHelper;
 
 import de.linogistix.los.location.model.LOSStorageLocation;
+import de.linogistix.los.inventory.model.LOSFuelOrderLogDocument;
+import de.linogistix.los.inventory.report.LOSFuelOrderLogReport;
 
 import de.linogistix.los.location.service.QueryStorageLocationServiceRemote;
 
@@ -20,8 +24,10 @@ public class FuelOrderLogBean extends BasicDialogBean {
     private Date startDateInput;
     private Date endDateInput;
     private String inputCode;
+	private LOSFuelOrderLogDocument fuelOrderLogDocument;
 
     private QueryStorageLocationServiceRemote locService;
+	private LOSFuelOrderLogReport fuelOrderLogReportService;
 
     private LOSSystemPropertyServiceRemote propertyService;
 
@@ -29,6 +35,7 @@ public class FuelOrderLogBean extends BasicDialogBean {
         super();
         propertyService = super.getStateless(LOSSystemPropertyServiceRemote.class);
         locService = super.getStateless(QueryStorageLocationServiceRemote.class);
+		fuelOrderLogReportService = super.getStateless(LOSFuelOrderLogReport .class);
     }
 
     public String getNavigationKey() {
@@ -83,6 +90,14 @@ public class FuelOrderLogBean extends BasicDialogBean {
             JSFHelper.getInstance().message( resolve("MsgLocNotAccessable") );
             return "";
         }
+
+		try {
+			fuelOrderLogDocument = fuelOrderLogReportService.printFuelOrderLogReport(loc, startDateInput, endDateInput, "");
+		 } catch (Throwable ex) {
+            log.error(ex, ex);
+            JSFHelper.getInstance().message( resolve("MsgPdfError") );
+            return "";
+         }
 
         return FuelNavigationEnum.FUEL_GET_PDF.name();
     }
@@ -156,4 +171,38 @@ public class FuelOrderLogBean extends BasicDialogBean {
     public void setInputCode(String inputCode) {
         this.inputCode = inputCode;
     }
+
+	public LOSFuelOrderLogDocument getFuelOrderLogDocument() {
+		return fuelOrderLogDocument;
+	}
+
+	public void setFuelOrderLogDocument(LOSFuelOrderLogDocument fuelOrderLogDocument) {
+		this.fuelOrderLogDocument = fuelOrderLogDocument;
+	}
 }
+
+/*
+public void writeToResponse(String headerType, ByteArrayOutputStream bos) {
+
+FacesContext faces = FacesContext.getCurrentInstance();
+
+HttpServletResponse resp = (HttpServletResponse) faces.getExternalContext().getResponse();
+
+try {
+
+resp.setContentType(headerType);
+
+resp.setHeader("Content-Disposition", "inline;filename=" + reportName + "." + reportType );
+
+bos.writeTo(sos);
+
+sos.flush();
+
+faces.responseComplete();// without this response write error will come
+
+} catch (IOException e) {
+
+e.printStackTrace();
+
+}
+*/
