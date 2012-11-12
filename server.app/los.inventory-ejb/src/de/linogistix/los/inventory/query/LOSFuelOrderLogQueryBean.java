@@ -18,6 +18,7 @@ import de.linogistix.los.query.BODTOConstructorProperty;
 import de.linogistix.los.query.LOSResultList;
 import de.linogistix.los.query.QueryDetail;
 import de.linogistix.los.query.TemplateQuery;
+import de.linogistix.los.location.model.LOSStorageLocation;
 import de.linogistix.los.inventory.model.LOSFuelOrderLog;
 import de.linogistix.los.inventory.pick.model.LOSPickRequest;
 import de.linogistix.los.inventory.pick.model.LOSPickRequestPosition;
@@ -98,7 +99,6 @@ public class LOSFuelOrderLogQueryBean extends
     }
 
     @SuppressWarnings("unchecked")
-
     public List<LOSFuelOrderLog> queryByDate(Date createDateFrom,Date createDateTo) {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("SELECT ");
@@ -107,7 +107,8 @@ public class LOSFuelOrderLogQueryBean extends
 		buffer.append(LOSFuelOrderLog.class.getName());
 		buffer.append(" r ");
 		buffer.append(" WHERE ");
-		buffer.append(" r.created.date>=:dateFrom and r.created.date<=:dateTo");
+		//buffer.append(" r.created.date>=:dateFrom and r.created.date<=:dateTo");
+		buffer.append(" r.created>=:dateFrom and r.created<=:dateTo");
 		Query q = manager.createQuery(new String(buffer));
 		q = q.setParameter("dateFrom", createDateFrom);
 		q = q.setParameter("dateTo", createDateTo);
@@ -116,4 +117,21 @@ public class LOSFuelOrderLogQueryBean extends
 	}
 	
     
+    @SuppressWarnings("unchecked")
+	public List<LOSFuelOrderLog> queryByDateAndLoc(Date createDateFrom,Date createDateTo, LOSStorageLocation storageLocation){
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("SELECT ");
+		buffer.append(" r ");
+		buffer.append(" FROM ");
+		buffer.append(LOSFuelOrderLog.class.getName());
+		buffer.append(" r ");
+		buffer.append(" WHERE ");
+		buffer.append(" r.created>=:dateFrom and r.created<=:dateTo and r.storLocID=:locid");
+		Query q = manager.createQuery(new String(buffer));
+		q = q.setParameter("dateFrom", createDateFrom);
+		q = q.setParameter("dateTo", createDateTo);
+		q = q.setParameter("locid", storageLocation.getId());
+		
+		return q.getResultList();
+	}
 }

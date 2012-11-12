@@ -94,6 +94,27 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 		this.tankRemaining	= tankRemaining;   			
 	}
 
+	public LOSFuelOrderLogTO(Long id, int version, String transactionId, 
+			String storLocName, int stationPump, String orderType, 
+			String vehiclePlateNumber, String receipientName, String receipientIDCard,
+			String rcptArticleRef, String rcptArticleDescr,	BigDecimal rcptPosQuantity, 
+			BigDecimal tankRemaining
+		)
+	{
+		super(id, version, transactionId);
+		//this.vehicleLabelID = vehicleLabelID;
+		this.vehiclePlateNumber = vehiclePlateNumber;
+		this.storLocName = storLocName;
+		this.stationPump	= stationPump;
+		this.receipientName	= receipientName;
+		//this.receipientTokenID = receipientTokenID;
+		this.receipientIDCard = receipientIDCard;
+		this.rcptArticleDescr = rcptArticleDescr;
+		this.rcptArticleRef = rcptArticleRef;
+		this.rcptPosQuantity = rcptPosQuantity;
+		this.orderType		= orderType;
+		this.tankRemaining	= tankRemaining;   			
+	}
 	
 	/**
 	 * Get vehicleLabelID.

@@ -1,6 +1,9 @@
 package de.linogistix.mobile.processes.fuel;
 
 import javax.servlet.http.*; 
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletOutputStream;
+import java.io.ByteArrayOutputStream;
 
 import java.util.Date;
 import java.util.Locale;
@@ -58,10 +61,14 @@ public class FuelOrderLogBean extends BasicDialogBean {
 
     public String processEnterDates() {
 
-        /*if( mat.isAdviceMandatory() ) {
-            JSFHelper.getInstance().message( resolve("MsgMatAdviceMandatory") );
+    	if(startDateInput == null || endDateInput == null){
+            JSFHelper.getInstance().message( resolve("MsgDatesNull") );
             return "";
-        }*/
+		}
+		if(startDateInput.compareTo(endDateInput)>0){
+            JSFHelper.getInstance().message( resolve("MsgDatesWrong") );
+            return "";
+		}
 
 		return FuelNavigationEnum.FUEL_LOG_CHOOSE_LOC.name();
     }
@@ -99,7 +106,10 @@ public class FuelOrderLogBean extends BasicDialogBean {
             return "";
          }
 
-        return FuelNavigationEnum.FUEL_GET_PDF.name();
+		writeToResponse(fuelOrderLogDocument.getDocument());
+
+		//return FuelNavigationEnum.FUEL_GET_PDF.name();
+		return "";
     }
 
     public String processEnterLocCancel() {
@@ -179,30 +189,36 @@ public class FuelOrderLogBean extends BasicDialogBean {
 	public void setFuelOrderLogDocument(LOSFuelOrderLogDocument fuelOrderLogDocument) {
 		this.fuelOrderLogDocument = fuelOrderLogDocument;
 	}
+
+	public void writeToResponse(byte[] data) {
+
+		FacesContext faces = FacesContext.getCurrentInstance();
+		HttpServletResponse resp = (HttpServletResponse) faces.getExternalContext().getResponse();
+
+		try {
+			resp.setContentType("application/pdf");
+			resp.setHeader("Content-Disposition", "inline;filename=report.pdf");
+
+			ServletOutputStream sos = resp.getOutputStream(); // get response output stream  
+			//ByteArrayOutputStream bos = getFileByteArrayOutputStream(); // Get your txt file  
+			//bos.writeTo(sos);
+			sos.write(data);
+
+			sos.flush();
+
+			faces.responseComplete();// without this response write error will come
+		//
+		//} catch (IOException e) {
+		//
+		//e.printStackTrace();
+		} catch (Throwable ex) {
+           log.error(ex, ex);
+		   //JSFHelper.getInstance().message( resolve("MsgPdfError") );
+		   //return "";
+        }
+
+	}
+
 }
 
-/*
-public void writeToResponse(String headerType, ByteArrayOutputStream bos) {
 
-FacesContext faces = FacesContext.getCurrentInstance();
-
-HttpServletResponse resp = (HttpServletResponse) faces.getExternalContext().getResponse();
-
-try {
-
-resp.setContentType(headerType);
-
-resp.setHeader("Content-Disposition", "inline;filename=" + reportName + "." + reportType );
-
-bos.writeTo(sos);
-
-sos.flush();
-
-faces.responseComplete();// without this response write error will come
-
-} catch (IOException e) {
-
-e.printStackTrace();
-
-}
-*/

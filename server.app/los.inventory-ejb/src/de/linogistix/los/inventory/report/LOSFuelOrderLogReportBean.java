@@ -90,7 +90,8 @@ public class LOSFuelOrderLogReportBean implements LOSFuelOrderLogReport {
 		if (type.equals(DocumentTypes.APPLICATION_PDF.toString())) {
 			JasperDesign d;
 			List<LOSFuelOrderLog> export;
-			export = LOSFuelOrderLogQuery.queryByDate(LogDateFrom, LogDateTo);
+			//export = LOSFuelOrderLogQuery.queryByDate(LogDateFrom, LogDateTo);
+			export = LOSFuelOrderLogQuery.queryByDateAndLoc(LogDateFrom, LogDateTo, storageLocation);
 
 			if (repService == null) {
 				repService = new ReportServiceBean();

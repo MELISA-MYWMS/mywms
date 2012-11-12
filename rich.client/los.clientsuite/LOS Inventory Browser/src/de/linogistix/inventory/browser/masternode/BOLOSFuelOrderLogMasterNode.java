@@ -50,27 +50,6 @@ public class BOLOSFuelOrderLogMasterNode extends BOMasterNode {
 
     //-------------------------------------------------------------------------
     public static Property[] boMasterNodeProperties() {
-<<<<<<< HEAD
-        //BOMasterNodeProperty<String> identityCard = new BOMasterNodeProperty<String>("identityCard", String.class, "", InventoryBundleResolver.class);
-
-        //BOMasterNodeProperty<String>  plateNumber = new BOMasterNodeProperty<String>("plateNumber", String.class, "", InventoryBundleResolver.class);
-        BOMasterNodeProperty<String> fullName = new BOMasterNodeProperty<String>("fullName", String.class, "", InventoryBundleResolver.class);
-        //BOMasterNodeProperty<String> articleRef = new BOMasterNodeProperty<String>("articleRef", String.class, "", InventoryBundleResolver.class);
-        //BOMasterNodeProperty<String> articleDescr = new BOMasterNodeProperty<String>("articleDescr", String.class, "", InventoryBundleResolver.class);
-        BOMasterNodeProperty<String> orderType = new BOMasterNodeProperty<String>("orderType", String.class, "", InventoryBundleResolver.class);
-        BOMasterNodeProperty<String> storageLocation = new BOMasterNodeProperty<String>("storageLocation", String.class, "", InventoryBundleResolver.class);
-        //BOMasterNodeProperty<String> orderReceipient = new BOMasterNodeProperty<String>("orderReceipient", String.class, "", InventoryBundleResolver.class);
-        BOMasterNodeProperty<BigDecimal> tankRemaining = new BOMasterNodeProperty<BigDecimal>("tankRemaining", BigDecimal.class, BigDecimal.ZERO, InventoryBundleResolver.class);
-        BOMasterNodeProperty[] props = new BOMasterNodeProperty[] {
-            //identityCard,
-            //plateNumber,
-            fullName,
-            //articleRef, articleDescr,
-            orderType, storageLocation,
-            //, orderReceipient,
-            tankRemaining
-        };
-=======
 	    //BOMasterNodeProperty<String> identityCard = new BOMasterNodeProperty<String>("identityCard", String.class, "", InventoryBundleResolver.class);
                 BOMasterNodeProperty<String> orderType = new BOMasterNodeProperty<String>("orderType", String.class, "", InventoryBundleResolver.class);
                 BOMasterNodeProperty<String> storageLocation = new BOMasterNodeProperty<String>("storageLocation", String.class, "", InventoryBundleResolver.class);
@@ -84,7 +63,6 @@ public class BOLOSFuelOrderLogMasterNode extends BOMasterNode {
                 orderType, storageLocation, articleDescr,
 		plateNumber, receipientName, rcptQuantity,
 		tankRemaining};
->>>>>>> 4849f3cdf72b3a91dee87e2a461d6f98c86c70a0
         return props;
     }
 }
