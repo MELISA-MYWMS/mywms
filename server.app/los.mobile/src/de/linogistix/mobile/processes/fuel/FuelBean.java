@@ -336,7 +336,8 @@ public class FuelBean extends BasicDialogBean {
             return "";
         }
 
-        outLocation = code+"OUT";
+		//outLocation = code+"OUT";
+        outLocation = "Nirwana";
         try {
             outLoc = locService.getByName(outLocation);
         } catch( Exception e ) {
