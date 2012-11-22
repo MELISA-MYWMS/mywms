@@ -99,6 +99,7 @@ public class LOSFuelOrderLogReportBean implements LOSFuelOrderLogReport {
 
 			Map<String, Object> parameters = new HashMap<String, Object>();
 
+			//parameters.put("LOS_LOCATION", storageLocation.getName());
 			parameters.put("LOS_DATE_FROM", LogDateFrom);
 			parameters.put("LOS_DATE_TO", LogDateTo);
 

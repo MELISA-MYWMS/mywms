@@ -8,6 +8,7 @@
 package de.linogistix.los.report.businessservice;
 
 import java.awt.Image;
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -69,6 +70,5 @@ public interface ReportService {
      * @throws IOException
      * @throws FacadeException 
      */
-    public byte[] typeExportExcelGeneric(String name, List<? extends Object> exportList, Map<String, String> properties) throws IOException, FacadeException ;
-    
+    public byte[] typeExportExcelGeneric(String name, List<? extends Object> exportList, Map<String, String> properties) throws IOException, FacadeException ;       
 }

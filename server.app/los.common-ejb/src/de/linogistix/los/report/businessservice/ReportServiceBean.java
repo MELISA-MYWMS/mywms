@@ -52,6 +52,7 @@ import org.mywms.facade.FacadeException;
 import org.mywms.globals.DocumentTypes;
 import org.mywms.model.Client;
 
+package de.linogistix.los.report.businessservice;
 
 import de.linogistix.los.report.util.GenericExcelExporter;
 import de.linogistix.los.res.BundleResolver;
@@ -73,8 +74,10 @@ public class ReportServiceBean implements ReportService {
 						 		Map<String, Object> parameters) throws IOException
 	{
 		JasperDesign jasperDesign;
+		
+		
 		try {
-			jasperDesign = JRXmlLoader.load(is);
+			jasperDesign = JRXmlLoader.load(LegacyJasperInputStream((is));
 		} catch (JRException e) {
 			throw new IOException(e.getMessage());
 		}

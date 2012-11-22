@@ -26,6 +26,7 @@ import de.linogistix.los.inventory.facade.ManageInventoryFacade;
 import de.linogistix.los.inventory.model.OrderType;
 import de.linogistix.los.inventory.model.OrderReceiptPosition;
 import de.linogistix.los.inventory.model.LOSGoodsReceipt;
+import de.linogistix.los.inventory.model.LOSGoodsReceiptPosition;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.pick.facade.PickOrderFacade;
 import de.linogistix.los.inventory.pick.model.LOSPickRequest;
@@ -60,6 +61,7 @@ public class FuelBean extends BasicDialogBean {
     private VehicleData currentVehicleData;
     private UnitLoadType currentUnitLoadType;
     private LOSGoodsReceipt currentGoodsReceipt;
+    private LOSGoodsReceiptPosition currentGoodsReceiptPosition;
 
     private String inputCode;
     private String inputAmount;
@@ -336,8 +338,8 @@ public class FuelBean extends BasicDialogBean {
             return "";
         }
 
-		//outLocation = code+"OUT";
-        outLocation = "Nirwana";
+		outLocation = code+"OUT";
+        //outLocation = "Nirwana";
         try {
             outLoc = locService.getByName(outLocation);
         } catch( Exception e ) {
@@ -390,11 +392,14 @@ public class FuelBean extends BasicDialogBean {
         BODTO<Client> cdto = new BODTO<Client>(c.getId(), c.getVersion(), c.getNumber());
         BODTO<LOSStorageLocation> inLocation = new BODTO<LOSStorageLocation>(loc.getId(),
                 loc.getVersion(), loc.getName());
+        BODTO<ItemData> it = new BODTO<ItemData>(currentItemData.getId(),
+                currentItemData.getVersion(), currentItemData.getNumber());
         Date receiptDate = new Date();
 
         currentGoodsReceipt = goodsReceiptFacade.createGoodsReceipt(cdto,
                               plateNumber, driver, receipient.getIdentityCard(), "",
                               receiptDate, inLocation, "");
+        
 
         if(currentGoodsReceipt == null) {
             log.error("Cannot create GoodsReceipt");
@@ -402,6 +407,16 @@ public class FuelBean extends BasicDialogBean {
             return "";
         }
 
+      /*  
+        try {
+        	currentGoodsReceiptPosition = goodsReceiptFacade.createGoodsReceiptPosition(cdto, currentGoodsReceipt, null, it, currentGoodsReceipt.getDeliveryNoteNumber(),null,currentAmount,null);
+         } catch (FacadeException ex) {
+        	 log.error("Cannot create GoodsReceipt Position");
+            JSFHelper.getInstance().message( resolve("MsgGoodsReceiptNull") );
+            return "";
+        }
+        */
+        
         try {
             goodsReceiptFacade.finishGoodsReceipt(currentGoodsReceipt);
         } catch (FacadeException ex) {
@@ -409,13 +424,13 @@ public class FuelBean extends BasicDialogBean {
             JSFHelper.getInstance().message( resolve("MsgGoodsReceiptFacadeEx") );
             return "";
         }
-
-
+                      
+        
         LOSResultList<StockUnitTO> list = null;
-        BODTO<ItemData> it = new BODTO<ItemData>(currentItemData.getId(),
-                currentItemData.getVersion(), currentItemData.getNumber());
+
         StockUnitTO oldSU;
         BigDecimal oldAmount;
+                
         try {
             list = stockUnitQuery.queryByDefault(null, null, it, inLocation, new QueryDetail(0, Integer.MAX_VALUE));
             if(list.size()>0) {
@@ -427,7 +442,7 @@ public class FuelBean extends BasicDialogBean {
                                                    oldAmount, new BigDecimal(0), "");
 
                 /* getorcreateunitload */
-		lOSFuelOrderLogService.create(null, loc, 0, receipient, null, "FUEL ORDER IN", oldAmount);
+		lOSFuelOrderLogService.create(loc, receipient, currentItemData, currentAmount, "FUEL ORDER IN", oldAmount);
         		currentMode = "";
                 return FuelNavigationEnum.FUEL_IN_COMPLETE.name();
             }
