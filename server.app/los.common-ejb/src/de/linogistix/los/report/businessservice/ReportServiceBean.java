@@ -52,8 +52,6 @@ import org.mywms.facade.FacadeException;
 import org.mywms.globals.DocumentTypes;
 import org.mywms.model.Client;
 
-package de.linogistix.los.report.businessservice;
-
 import de.linogistix.los.report.util.GenericExcelExporter;
 import de.linogistix.los.res.BundleResolver;
 
@@ -75,9 +73,10 @@ public class ReportServiceBean implements ReportService {
 	{
 		JasperDesign jasperDesign;
 		
+		LegacyJasperInputStream is_leg = new LegacyJasperInputStream(is);
 		
 		try {
-			jasperDesign = JRXmlLoader.load(LegacyJasperInputStream((is));
+			jasperDesign = JRXmlLoader.load(is_leg);
 		} catch (JRException e) {
 			throw new IOException(e.getMessage());
 		}
@@ -359,10 +358,19 @@ public class ReportServiceBean implements ReportService {
 				throw new NullPointerException();
 			}
 		}
-		JasperDesign jasperDesign = JRXmlLoader.load(is);
+		
+		LegacyJasperInputStream is_leg = new LegacyJasperInputStream(is);
+		
+		JasperDesign jasperDesign = JRXmlLoader.load(is_leg);
 		
 		try{
 			is.close();
+		} catch (IOException ex){
+			log.error("Exception reading resource: "+ex.getMessage(), ex);
+		}
+		
+		try{
+			is_leg.close();
 		} catch (IOException ex){
 			log.error("Exception reading resource: "+ex.getMessage(), ex);
 		}

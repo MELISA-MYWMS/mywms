@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StorageLocationLabels" printOrder="Horizontal" pageWidth="595" pageHeight="842" columnWidth="567" leftMargin="14" rightMargin="14" topMargin="61" bottomMargin="61" uuid="73be3d3d-bed3-4b90-8c0a-447d5d8c33a9">
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD JasperReport//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="StorageLocationLabels" printOrder="Horizontal" pageWidth="595" pageHeight="842" columnWidth="567" leftMargin="14" rightMargin="14" topMargin="61" bottomMargin="61">
 	<property name="ireport.scriptlethandling" value="0"/>
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.0"/>
@@ -11,155 +13,154 @@
 	<import value="net.sf.jasperreports.engine.data.*"/>
 	<parameter name="LOS_DATE_FROM" class="java.util.Date"/>
 	<parameter name="LOS_DATE_TO" class="java.util.Date"/>
-	<field name="RcptArticleRef" class="java.lang.String"/>
-	<field name="RcptArticleDescr" class="java.lang.String"/>
-	<field name="ReceipientName" class="java.lang.String"/>
+	<field name="rcptArticleRef" class="java.lang.String"/>
+	<field name="rcptArticleDescr" class="java.lang.String"/>
+	<field name="vehiclePlateNumber" class="java.lang.String"/>
 	<field name="tankRemaining" class="java.math.BigDecimal"/>
-	<field name="RcptPosQuantity" class="java.math.BigDecimal"/>
-	<field name="OrderType" class="java.lang.Integer"/>
-	<field name="VehiclePlateNumber" class="java.lang.String"/>
+	<field name="receipientName" class="java.lang.String"/>
+	<field name="rcptPosQuantity" class="java.math.BigDecimal"/>
 	<background>
-		<band splitType="Stretch"/>
+		<band/>
 	</background>
 	<title>
-		<band splitType="Stretch"/>
+		<band/>
 	</title>
 	<pageHeader>
-		<band height="87" splitType="Stretch">
-			<textField isBlankWhenNull="true">
-				<reportElement uuid="1101b7be-ca23-4a2a-ac62-a3f23bdcd2e2" x="75" y="34" width="125" height="20"/>
+		<band height="95">
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="55" y="34" width="83" height="20"/>
 				<textElement textAlignment="Right">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{LOS_DATE_FROM}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{LOS_DATE_FROM}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="2df3fcbb-0ca3-40ff-8911-768535e0f116" x="0" y="34" width="75" height="20"/>
-				<textElement textAlignment="Right"/>
+				<reportElement x="0" y="34" width="55" height="20"/>
+				<textElement textAlignment="Right">
+					<font pdfEncoding="Cp1253"/>
+				</textElement>
 				<text><![CDATA[Από:]]></text>
 			</staticText>
-			<textField>
-				<reportElement uuid="83727eca-7552-450a-ae22-ae9f98897e10" x="485" y="34" width="82" height="20"/>
+			<textField hyperlinkType="None">
+				<reportElement x="383" y="34" width="125" height="20"/>
 				<textElement textAlignment="Right">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{PAGE_NUMBER} + " / " + $V{PAGE_COUNT}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{PAGE_NUMBER} + " / " + $V{PAGE_COUNT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="e2232137-f6ce-4867-8427-a7de8d91320f" x="124" y="0" width="311" height="34"/>
-				<textElement>
-					<font size="22" isBold="true"/>
+				<reportElement x="138" y="0" width="311" height="34"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="true" pdfEncoding="Cp1253"/>
 				</textElement>
-				<text><![CDATA[Ημερολόγιο Καυσίμων]]></text>
+				<text><![CDATA[Βιβλίο Καυσίμων ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="5ffa44e2-d9fc-4c9e-96ee-da2c0de1d2a2" x="33" y="66" width="120" height="20"/>
+				<reportElement x="33" y="54" width="67" height="20"/>
 				<textElement>
-					<font isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Είδος]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="5acec733-5114-458b-87fd-ec9f6185bcd1" x="288" y="65" width="147" height="20"/>
-				<textElement>
-					<font isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Παραλαμβάνων]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="ebfde26a-6a75-415b-8da2-7547ab50582e" x="435" y="65" width="70" height="20"/>
-				<textElement>
-					<font isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Ποσότητα]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="d1267c64-868a-4511-b723-3484a3b81365" x="505" y="66" width="55" height="20"/>
-				<textElement>
-					<font isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Υπόλοιπο]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="4b874a3d-e3be-4546-ab88-8c8dc6b06f63" x="153" y="65" width="135" height="22"/>
-				<textElement>
-					<font isItalic="true"/>
+					<font isItalic="true" pdfEncoding="Cp1253"/>
 				</textElement>
 				<text><![CDATA[Όχημα]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="260" y="54" width="100" height="40"/>
+				<textElement>
+					<font isItalic="true" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Χορηγηθείσα Ποσότητα σε λίτρα]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="54" width="100" height="20"/>
+				<textElement>
+					<font isItalic="true" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Υπόλοιπο Δεξαμενής σε λίτρα]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="54" width="100" height="20"/>
+				<textElement>
+					<font isItalic="true" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Υπογραφή]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="54" width="160" height="40"/>
+				<textElement>
+					<font isItalic="true" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Ονοματεπώνυμο Οδηγού ή Εκπροσώπου Συνεργείου]]></text>
+			</staticText>
 			<line>
-				<reportElement uuid="7937840c-b71d-4515-b904-a6356abd3ebb" x="0" y="85" width="560" height="1"/>
+				<reportElement x="0" y="94" width="560" height="1"/>
 			</line>
 			<staticText>
-				<reportElement uuid="cc221e6a-e32a-49c3-83b4-5aae8cba28aa" x="413" y="34" width="72" height="20"/>
+				<reportElement x="341" y="34" width="42" height="20"/>
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Σελίδα:]]></text>
+				<text><![CDATA[Σελίδα]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="7720cab2-7602-4308-90eb-54bc1a408375" x="0" y="66" width="33" height="20"/>
+				<reportElement x="0" y="54" width="33" height="20"/>
 				<textElement/>
-				<text><![CDATA[Κωδ]]></text>
+				<text><![CDATA[Pos]]></text>
 			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement uuid="1101b7be-ca23-4a2a-ac62-a3f23bdcd2e2" x="288" y="34" width="125" height="20"/>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="180" y="34" width="91" height="20"/>
 				<textElement textAlignment="Right">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{LOS_DATE_TO}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{LOS_DATE_TO}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="2df3fcbb-0ca3-40ff-8911-768535e0f116" x="213" y="34" width="75" height="20"/>
-				<textElement textAlignment="Right"/>
-				<text><![CDATA[Έως]]></text>
+				<reportElement x="138" y="34" width="42" height="20"/>
+				<textElement textAlignment="Right">
+					<font pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Έως:]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band splitType="Stretch"/>
+		<band/>
 	</columnHeader>
 	<detail>
-		<band height="28" splitType="Stretch">
-			<textField>
-				<reportElement uuid="ea92494a-7758-4b89-a3d0-05fdec78356d" x="33" y="6" width="120" height="20"/>
+		<band height="28">
+			<textField hyperlinkType="None">
+				<reportElement x="33" y="6" width="67" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{articleRef}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vehiclePlateNumber}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement uuid="e1028d10-b9b3-4415-8a68-54576f91c7a2" x="153" y="6" width="135" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{VehiclePlateNumber}]]></textFieldExpression>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="100" y="6" width="160" height="20"/>
+				<textElement>
+					<font pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{receipientName}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="f57a4b7a-0ea1-4a0d-9b1f-034c0445cdeb" x="288" y="8" width="147" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{ReceipientName}]]></textFieldExpression>
+			<textField hyperlinkType="None">
+				<reportElement x="360" y="6" width="100" height="20"/>
+				<textElement>
+					<font pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tankRemaining}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="886b83d3-1cad-4565-bb16-801570639631" x="435" y="6" width="70" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{RcptPosQuantity}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="27c179bf-1000-450e-a044-1b8d623fca55" x="505" y="6" width="55" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{tankRemaining}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="44612dcd-8b9d-447e-abc9-ba3d5c5b7e8d" x="0" y="6" width="33" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{OrderType}]]></textFieldExpression>
+			<textField hyperlinkType="None">
+				<reportElement x="260" y="6" width="100" height="20"/>
+				<textElement>
+					<font pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{rcptPosQuantity}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band splitType="Stretch"/>
+		<band/>
 	</columnFooter>
 	<pageFooter>
-		<band splitType="Stretch"/>
+		<band/>
 	</pageFooter>
 	<summary>
-		<band splitType="Stretch"/>
+		<band/>
 	</summary>
 </jasperReport>

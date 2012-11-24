@@ -24,7 +24,6 @@
 	<classpathentry kind="lib" path="los.common-ejb/lib/commons-validator-1.1.4.jar"/>
 	<classpathentry kind="lib" path="los.common-ejb/lib/iReport.jar"/>
 	<classpathentry kind="lib" path="los.common-ejb/lib/itext-1.02b.jar"/>
-	<classpathentry kind="lib" path="los.common-ejb/lib/jasperreports-3.0.0.jar"/>
 	<classpathentry kind="lib" path="los.common-ejb/lib/jsch-0.1.39.jar"/>
 	<classpathentry kind="lib" path="los.common-ejb/lib/junit-3.8.2.jar"/>
 	<classpathentry kind="lib" path="los.common-ejb/lib/poi-2.5.1-final-20040804.jar"/>
@@ -48,5 +47,6 @@
 	<classpathentry kind="lib" path="mywms.as/lib/postgresql-9.1-901.jdbc3.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.generic.runtimeTarget/JBoss v4.2"/>
+	<classpathentry kind="lib" path="/los.common-ejb/lib/jasperreports-3.0.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
