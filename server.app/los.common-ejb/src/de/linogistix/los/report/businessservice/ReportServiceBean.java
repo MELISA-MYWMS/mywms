@@ -72,11 +72,10 @@ public class ReportServiceBean implements ReportService {
 						 		Map<String, Object> parameters) throws IOException
 	{
 		JasperDesign jasperDesign;
-		
-		LegacyJasperInputStream is_leg = new LegacyJasperInputStream(is);
+	
 		
 		try {
-			jasperDesign = JRXmlLoader.load(is_leg);
+			jasperDesign = JRXmlLoader.load(is);
 		} catch (JRException e) {
 			throw new IOException(e.getMessage());
 		}
@@ -359,9 +358,8 @@ public class ReportServiceBean implements ReportService {
 			}
 		}
 		
-		LegacyJasperInputStream is_leg = new LegacyJasperInputStream(is);
 		
-		JasperDesign jasperDesign = JRXmlLoader.load(is_leg);
+		JasperDesign jasperDesign = JRXmlLoader.load(is);
 		
 		try{
 			is.close();
@@ -369,12 +367,7 @@ public class ReportServiceBean implements ReportService {
 			log.error("Exception reading resource: "+ex.getMessage(), ex);
 		}
 		
-		try{
-			is_leg.close();
-		} catch (IOException ex){
-			log.error("Exception reading resource: "+ex.getMessage(), ex);
-		}
-		
+				
 		return jasperDesign;
 
 	}
