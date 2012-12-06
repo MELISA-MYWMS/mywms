@@ -35,7 +35,7 @@ public class LOSFuelOrderLog extends BasicEntity {
 
     private String transactionId;
  //MELISA
- //   private Date transactionDate; //used created for now
+    private Date transactionDate; 
     private long vehicleID;
     private String vehicleLabelID;
     private String vehiclePlateNumber;
@@ -88,7 +88,24 @@ public class LOSFuelOrderLog extends BasicEntity {
 
     }
 
+    /**
+     * Get StorLocID.
+     *
+     * @return transactionDate as Date
+     */
+    public Date getTransactionDate() {
+        return transactionDate;
+    }
 
+    /**
+     * Set transactionDate.
+     *
+     * @param transactionDate the value to set.
+     */
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+    
     /**
      * Get StorLocID.
      *

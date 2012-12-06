@@ -61,7 +61,7 @@ public class FuelBean extends BasicDialogBean {
     private VehicleData currentVehicleData;
     private UnitLoadType currentUnitLoadType;
     private LOSGoodsReceipt currentGoodsReceipt;
-    private LOSGoodsReceiptPosition currentGoodsReceiptPosition;
+    private LOSGoodsReceiptPosition currentGoodsReceiptPosition;   
 
     private String inputCode;
     private String inputAmount;
@@ -541,7 +541,16 @@ public class FuelBean extends BasicDialogBean {
             return "";
         }
     	
-	BigDecimal amountRemaining = oldAmount.subtract(currentAmount);
+        BigDecimal amountRemaining = oldAmount.subtract(currentAmount);
+        
+        if (amountRemaining.compareTo(loc.getType().getLowVolume()) == -1) {
+            JSFHelper.getInstance().message( resolve("MsgLowVolume") );            
+        	}
+        
+        if (amountRemaining.compareTo(loc.getType().getMinimumVolume()) == -1) {
+            JSFHelper.getInstance().message( resolve("MsgMinimumVolume") );
+            return "";
+        }
 
         OrderPositionTO[] tos = new OrderPositionTO[1];
         OrderPositionTO to = new OrderPositionTO();

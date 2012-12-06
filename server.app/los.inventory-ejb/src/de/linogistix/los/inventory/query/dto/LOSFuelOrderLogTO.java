@@ -1,6 +1,7 @@
 package de.linogistix.los.inventory.query.dto;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import org.mywms.model.VehicleData;
 
@@ -31,8 +32,8 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 	private String articleRef;
 	private String articleDescr;
 */
-	
-	private long vehicleID;
+	private Date transactionDate;
+	private long vehicleID;	
     private String vehicleLabelID;
     private String vehiclePlateNumber;
     private long storLocID;
@@ -51,6 +52,7 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 	
 	public LOSFuelOrderLogTO(LOSFuelOrderLog idat) {
         	super(idat.getId(), idat.getVersion(), idat.getTransactionId());
+        this.transactionDate = idat.getCreated();
         this.vehicleID = idat.getVehicleID();
         this.vehicleLabelID = idat.getVehicleLabelID();
         this.vehiclePlateNumber = idat.getVehiclePlateNumber();
@@ -73,13 +75,14 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 		super(id, version, transactionId);
 	}
 	
-	public LOSFuelOrderLogTO(Long id, int version, String transactionId, 
+	public LOSFuelOrderLogTO(Long id, int version, String transactionId, Date transactionDate, 
 			String vehicleLabelID, String vehiclePlateNumber,String storLocName, int stationPump, 
 			String receipientName, String receipientTokenID, String receipientIDCard, String rcptArticleDescr,
 			String rcptArticleRef, BigDecimal rcptPosQuantity, String orderType, BigDecimal tankRemaining
 		)
 	{
 		super(id, version, transactionId);
+		this.transactionDate = transactionDate;
 		this.vehicleLabelID = vehicleLabelID;
 		this.vehiclePlateNumber = vehiclePlateNumber;
 		this.storLocName = storLocName;
@@ -94,7 +97,7 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 		this.tankRemaining	= tankRemaining;   			
 	}
 
-	public LOSFuelOrderLogTO(Long id, int version, String transactionId, 
+	public LOSFuelOrderLogTO(Long id, int version, String transactionId, Date transactionDate, 
 			String storLocName, int stationPump, String orderType, 
 			String vehiclePlateNumber, String receipientName, String receipientIDCard,
 			String rcptArticleRef, String rcptArticleDescr,	BigDecimal rcptPosQuantity, 
@@ -103,6 +106,7 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 	{
 		super(id, version, transactionId);
 		//this.vehicleLabelID = vehicleLabelID;
+		this.transactionDate = transactionDate;
 		this.vehiclePlateNumber = vehiclePlateNumber;
 		this.storLocName = storLocName;
 		this.stationPump	= stationPump;
@@ -115,6 +119,27 @@ public class LOSFuelOrderLogTO extends BODTO<LOSFuelOrderLog> {
 		this.orderType		= orderType;
 		this.tankRemaining	= tankRemaining;   			
 	}
+	
+	/**
+	 * Get transactionDate;
+	 *
+	 * @return transactionDate as Date.
+	 */
+	public Date getTransactionDate()
+	{
+	    return transactionDate;
+	}
+	
+	/**
+	 * Set transactionDate.
+	 *
+	 * @param transactionDate the value to set.
+	 */
+	public void setTransactionDate (Date transactionDate)
+	{
+	    this.transactionDate = transactionDate;
+	}
+	
 	
 	/**
 	 * Get vehicleLabelID.

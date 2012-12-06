@@ -36,7 +36,8 @@ public class LOSFuelOrderLogQueryBean extends
     LOSFuelOrderLogQueryRemote {
 
 		private static final String[] props = new String[] {
-			"id", "version", "transactionId",								
+			"id", "version", "transactionId",
+				"transactionDate",
 				"storLocName", 
 				"stationPump",				 				
 				"orderType",  
@@ -71,6 +72,7 @@ public class LOSFuelOrderLogQueryBean extends
 		propList.add(new BODTOConstructorProperty("id", false));
 		propList.add(new BODTOConstructorProperty("version", false));
 		propList.add(new BODTOConstructorProperty("transactionId", false));
+		propList.add(new BODTOConstructorProperty("transactionDate", true));
 		propList.add(new BODTOConstructorProperty("storLocName", true));
 		propList.add(new BODTOConstructorProperty("stationPump", true));
 		propList.add(new BODTOConstructorProperty("orderType", true));
