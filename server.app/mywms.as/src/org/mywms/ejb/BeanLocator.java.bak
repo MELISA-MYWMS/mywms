@@ -195,7 +195,7 @@ public class BeanLocator
     	p = initialContextProperties.getProperty("java.naming.provider.url");
     	if( p == null ) {
             p = System.getProperty("java.naming.provider.url");
-    		initialContextProperties.put("java.naming.provider.url", p == null ? "192.168.1.4:1099" : p);
+    		initialContextProperties.put("java.naming.provider.url", p == null ? "192.168.1.2:1099" : p);
     	}
     }
 

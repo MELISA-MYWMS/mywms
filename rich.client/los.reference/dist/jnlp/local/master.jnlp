@@ -12,7 +12,7 @@
     <!-- The following property is needed when running with unsigned jars: -->
     <property name="netbeans.jnlp.fixPolicy" value="false"/>
     <extension name='branding' href='branding.jnlp' />
-	<property name="java.naming.provider.url" value="localhost:1099"/>
+	<property name="java.naming.provider.url" value="192.168.1.4:1099"/>
 	<property name="org.mywms.env.applicationName" value="los.reference"/>
 <!-- The following line will be replaced with an automatically generated list of resources: -->
 

@@ -1,1 +1,1 @@
-start run.bat -c default -Djboss.bind.address=0.0.0.0
+start run.bat -c default -Djboss.bind.address=192.168.1.4
