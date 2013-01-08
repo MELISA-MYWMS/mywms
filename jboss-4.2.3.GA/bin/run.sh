@@ -176,7 +176,7 @@ if [ -d "$JBOSS_NATIVE_DIR" ]; then
 fi
 
 # Setup JBoss specific properties
-JAVA_OPTS="-Dprogram.name=$PROGNAME $JAVA_OPTS"
+JAVA_OPTS="-XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -Dprogram.name=$PROGNAME $JAVA_OPTS"
 
 # Setup the java endorsed dirs
 JBOSS_ENDORSED_DIRS="$JBOSS_HOME/lib/endorsed"
