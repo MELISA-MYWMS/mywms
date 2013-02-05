@@ -13,21 +13,22 @@
 #
 # Either modify this script for your requirements or just ensure that
 # the following variables are set correctly before calling the script.
-
+JBOSS_HOST="127.0.0.1";
 #define where jboss is - this is the directory containing directories log, bin, conf etc
-JBOSS_HOME=${JBOSS_HOME:-"/usr/local/jboss"}
+JBOSS_HOME=${JBOSS_HOME:-"/home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA"}
 
 #define the user under which jboss will run, or use 'RUNASIS' to run as the current user
-JBOSS_USER=${JBOSS_USER:-"jboss"}
+JBOSS_USER=${JBOSS_USER:-"Parhs"}
 
 #make sure java is in your path
-JAVAPTH=${JAVAPTH:-"/usr/local/jdk/bin"}
+JAVAPTH=${JAVAPTH:-"/usr/java"}
 
 #configuration to use, usually one of 'minimal', 'default', 'all'
 JBOSS_CONF=${JBOSS_CONF:-"default"}
 
 #if JBOSS_HOST specified, use -b to bind jboss services to that address
-JBOSS_BIND_ADDR=${JBOSS_HOST:+"-b $JBOSS_HOST"}
+#JBOSS_BIND_ADDR=${JBOSS_HOST:+"-b $JBOSS_HOST"}
+JBOSS_BIND_ADDR=${JBOSS_HOST:+"-b 0.0.0.0"}
 
 #define the script to use to start jboss
 JBOSSSH=${JBOSSSH:-"$JBOSS_HOME/bin/run.sh -c $JBOSS_CONF $JBOSS_BIND_ADDR"}

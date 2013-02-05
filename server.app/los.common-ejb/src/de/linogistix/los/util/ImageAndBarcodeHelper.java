@@ -18,6 +18,17 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.oned.Code128Writer;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.google.zxing.qrcode.decoder.Mode;
+import com.google.zxing.qrcode.decoder.Version;
+import com.google.zxing.qrcode.encoder.ByteMatrix;
+
 /**
  *
  * @author trautm
@@ -46,6 +57,20 @@ public class ImageAndBarcodeHelper {
 //        }
         return ret;
         
+    }
+    
+    public static BufferedImage createQR(int width, int heigth, String inputTxt){
+    	 QRCodeWriter writer = new QRCodeWriter();
+	        BitMatrix matrix = null;
+	        try {
+	            matrix = writer.encode(inputTxt, BarcodeFormat.QR_CODE, width, heigth);
+	        } catch (WriterException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }    
+	        BufferedImage ret = null;
+	        if (matrix != null) ret = MatrixToImageWriter.toBufferedImage(matrix);
+	        return ret;  	   	
     }
     
     /**
