@@ -2,7 +2,7 @@ package de.linogistix.los.inventory.service;
 
 import java.util.Date;
 
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
 import org.mywms.model.ItemData;
 import de.linogistix.los.inventory.model.MovementOrderLog;
@@ -13,18 +13,13 @@ import org.mywms.service.BasicService;
  * 
  */
 
-@Local
+@Remote
 public interface MovementOrderLogService extends BasicService<MovementOrderLog> {
 
-	MovementOrderLog createNewMovementOrder(String organization, String formation,
-			String militaryUnit, String plateNo, String vehicleType,
-			String movementDate, String judgmentNo, String movementPurpose,
-			String movementRoute, String movementLoad, String driverName,
-			String passenger1Name, String passenger2Name,
+	public MovementOrderLog create(String organization,
+			String formation, String militaryUnit, long sequenceNumber,Date currDate, String plateNo,
+			String vehicleType, Date movementDate, String orderNo,
+			String movementPurpose, String movementRoute, String movementLoad,
+			String driverName, String passenger1Name, String passenger2Name,
 			String passenger3Name, String passenger4Name);
-
-	boolean deleteMovementOrder(long sequenceNumber);
-
-	boolean editMovementOrder(long sequenceNumber, String[] fields,
-			String[] values);
 }

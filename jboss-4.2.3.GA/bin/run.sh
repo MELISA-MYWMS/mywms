@@ -177,6 +177,7 @@ fi
 
 # Setup JBoss specific properties
 JAVA_OPTS="-Dprogram.name=$PROGNAME $JAVA_OPTS"
+JAVA_OPTS="$JAVA_OPTS -Xmx1744m -XX:MaxPermSize=256m"
 
 # Setup the java endorsed dirs
 JBOSS_ENDORSED_DIRS="$JBOSS_HOME/lib/endorsed"

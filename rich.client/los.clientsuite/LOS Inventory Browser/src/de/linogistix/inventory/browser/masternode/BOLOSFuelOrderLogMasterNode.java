@@ -30,6 +30,7 @@ public class BOLOSFuelOrderLogMasterNode extends BOMasterNode {
             
 	    //BOMasterNodeProperty<String> identityCard = new BOMasterNodeProperty<String>("identityCard", String.class, to.getIdentityCard(), InventoryBundleResolver.class);
 	    //sheet.put(identityCard);
+                
                 BOMasterNodeProperty<String> orderType= new BOMasterNodeProperty<String>("orderType", String.class, to.getOrderType(), InventoryBundleResolver.class);
                 sheet.put(orderType);
 		BOMasterNodeProperty<String> storageLocation= new BOMasterNodeProperty<String>("storageLocation", String.class, to.getStorLocName(), InventoryBundleResolver.class);

@@ -67,12 +67,14 @@ public class OrderFacadeBean extends BasicFacadeBean implements OrderFacade {
 	private LOSStorageLocationService slService;
 
 	Logger log = Logger.getLogger(OrderFacadeBean.class);
-	
+
 	@EJB
 	ClientService clientService;
 	@EJB
 	OrderRequestService orderService;
-	
+
+	@EJB
+	OrderRequestService movementOrderLogService;
 	@EJB
 	ItemDataService idatService;
 	@EJB
@@ -90,32 +92,27 @@ public class OrderFacadeBean extends BasicFacadeBean implements OrderFacade {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see de.linogistix.los.inventory.connector.OrderRemote#order(java.lang.String,
-	 *      java.lang.String, java.lang.String[], byte[], byte[])
+	 * @see
+	 * de.linogistix.los.inventory.connector.OrderRemote#order(java.lang.String,
+	 * java.lang.String, java.lang.String[], byte[], byte[])
 	 */
 	@WebMethod
 	public boolean order(
 
-	@WebParam(name = "clientRef")
-	String clientRef,
+	@WebParam(name = "clientRef") String clientRef,
 
-	@WebParam(name = "orderRef")
-	String orderRef,
+	@WebParam(name = "orderRef") String orderRef,
 
-	@WebParam(name = "positions")
-	OrderPositionTO[] positions,
+	@WebParam(name = "positions") OrderPositionTO[] positions,
 
-	@WebParam(name = "documentUrl")
-	String documentUrl,
+	@WebParam(name = "documentUrl") String documentUrl,
 
-	@WebParam(name = "labelUrl")
-	String labelUrl,
+	@WebParam(name = "labelUrl") String labelUrl,
 
-	@WebParam(name = "destination")
-	String destination) throws FacadeException {
+	@WebParam(name = "destination") String destination) throws FacadeException {
 		OrderType t = resolveOrderType(destination);
 		return order(clientRef, orderRef, positions, documentUrl, labelUrl,
-					 destination, t, new Date(), true, "");
+				destination, t, new Date(), true, "");
 	}
 
 	private OrderType resolveOrderType(String destination) {
@@ -143,11 +140,10 @@ public class OrderFacadeBean extends BasicFacadeBean implements OrderFacade {
 	@WebMethod
 	public void startOrder(
 
-	@WebParam(name = "clientRef")
-	String clientRef,
+	@WebParam(name = "clientRef") String clientRef,
 
-	@WebParam(name = "orderRef")
-	String orderRef) throws FacadeException, OrderCannotBeStarted {
+	@WebParam(name = "orderRef") String orderRef) throws FacadeException,
+			OrderCannotBeStarted {
 
 		LOSOrderRequest r;
 
@@ -160,9 +156,9 @@ public class OrderFacadeBean extends BasicFacadeBean implements OrderFacade {
 		orderBusiness.process(r);
 
 	}
-	
-	public void startOrder(
-	BODTO<LOSOrderRequest> orderTo) throws FacadeException, OrderCannotBeStarted {
+
+	public void startOrder(BODTO<LOSOrderRequest> orderTo)
+			throws FacadeException, OrderCannotBeStarted {
 
 		LOSOrderRequest r;
 
@@ -170,12 +166,12 @@ public class OrderFacadeBean extends BasicFacadeBean implements OrderFacade {
 			r = orderService.get(orderTo.getId());
 		} catch (EntityNotFoundException e) {
 			throw new InventoryException(
-					InventoryExceptionKey.ORDER_CANNOT_BE_STARTED, orderTo.getName());
+					InventoryExceptionKey.ORDER_CANNOT_BE_STARTED,
+					orderTo.getName());
 		}
 		orderBusiness.process(r);
 
 	}
-
 
 	public void finishOrders(List<BODTO<LOSOrderRequest>> orders)
 			throws FacadeException {
@@ -190,7 +186,7 @@ public class OrderFacadeBean extends BasicFacadeBean implements OrderFacade {
 			if (r == null) {
 				continue;
 			}
-			
+
 			orderBusiness.processOrderPicked(r, true);
 			orderBusiness.finishOrder(r, true);
 		}
@@ -225,20 +221,20 @@ public class OrderFacadeBean extends BasicFacadeBean implements OrderFacade {
 		List<LOSStorageLocation> slList;
 		slList = slService.getListByAreaType(clientService.getSystemClient(),
 				LOSAreaType.GOODS_OUT);
-		slList.addAll(slService.getListByAreaType(clientService
-				.getSystemClient(), LOSAreaType.QUALITY_ASSURANCE));
-		slList.addAll(slService.getListByAreaType(clientService
-				.getSystemClient(), LOSAreaType.QUARANTINE));
-		slList.addAll(slService.getListByAreaType(clientService
-				.getSystemClient(), LOSAreaType.TOLL));
-		//slList.addAll(slService.getListByAreaType(clientService
-		//		.getSystemClient(), LOSAreaType.TOLL));
-		slList.addAll(slService.getListByAreaType(clientService
-				.getSystemClient(), LOSAreaType.PRODUCTION));
-		slList.addAll(slService.getListByAreaType(clientService
-				.getSystemClient(), LOSAreaType.GOODS_IN_OUT));
-		slList.addAll(slService.getListByAreaType(clientService
-				.getSystemClient(), LOSAreaType.GENERIC));
+		slList.addAll(slService.getListByAreaType(
+				clientService.getSystemClient(), LOSAreaType.QUALITY_ASSURANCE));
+		slList.addAll(slService.getListByAreaType(
+				clientService.getSystemClient(), LOSAreaType.QUARANTINE));
+		slList.addAll(slService.getListByAreaType(
+				clientService.getSystemClient(), LOSAreaType.TOLL));
+		// slList.addAll(slService.getListByAreaType(clientService
+		// .getSystemClient(), LOSAreaType.TOLL));
+		slList.addAll(slService.getListByAreaType(
+				clientService.getSystemClient(), LOSAreaType.PRODUCTION));
+		slList.addAll(slService.getListByAreaType(
+				clientService.getSystemClient(), LOSAreaType.GOODS_IN_OUT));
+		slList.addAll(slService.getListByAreaType(
+				clientService.getSystemClient(), LOSAreaType.GENERIC));
 
 		if (slList.size() == 0) {
 			// LOSStorageLocation defLoc;
@@ -254,61 +250,57 @@ public class OrderFacadeBean extends BasicFacadeBean implements OrderFacade {
 		return slList;
 	}
 
-	public boolean order(String clientRef, 
-						 String orderRef,
-						 OrderPositionTO[] positions, 
-						 String documentUrl, 
-						 String labelUrl,
-						 String destination, 
-						 OrderType type,
-						 Date deliveryDate,
-						 boolean processAutomaticly,
-						 String comment) throws FacadeException 
-	{
+	public boolean order(String clientRef, String orderRef,
+			OrderPositionTO[] positions, String documentUrl, String labelUrl,
+			String destination, OrderType type, Date deliveryDate,
+			boolean processAutomaticly, String comment) throws FacadeException {
 		LOSOrderRequest order;
-		
+
 		Client c = clientService.getByNumber(clientRef);
-		
-		if(c == null){
+
+		if (c == null) {
 			log.error("CREATE OrderRequest FAILED (wrong client): " + orderRef
 					+ " (" + clientRef + ")");
 			throw new BusinessObjectNotFoundException();
 		}
 		try {
-			
-			if(deliveryDate == null){
-				deliveryDate = new Date(System.currentTimeMillis() + (24 * 3600 * 1000));
+
+			if (deliveryDate == null) {
+				deliveryDate = new Date(System.currentTimeMillis()
+						+ (24 * 3600 * 1000));
 			}
-			
-			order = orderBusiness.createOrder(c, orderRef, positions, documentUrl,
-					labelUrl, destination, deliveryDate, type);
-			
+
+			order = orderBusiness.createOrder(c, orderRef, positions,
+					documentUrl, labelUrl, destination, deliveryDate, type);
+
 			order = manager.find(LOSOrderRequest.class, order.getId());
-			
+
 			if (order == null) {
 				throw new RuntimeException("OrderRequest could not be created");
 			}
-			
+
 			order.setAdditionalContent(comment);
 
 		} catch (OrderCannotBeStarted t) {
 			log.error("Change Exception message. " + t.getMessage());
-			// Change the message text when creation and start is done in one transaction
+			// Change the message text when creation and start is done in one
+			// transaction
 			throw new OrderCannotBeStarted(orderRef);
-			
+
 		} catch (FacadeException t) {
 			log.error(t.getMessage());
 			throw t;
 		}
-		
+
 		try {
-			if(processAutomaticly){
+			if (processAutomaticly) {
 				orderBusiness.process(order);
 			}
-			
+
 		} catch (OrderCannotBeStarted t) {
 			log.error("Change Exception message. " + t.getMessage());
-			// Change the message text when creation and start is done in one transaction
+			// Change the message text when creation and start is done in one
+			// transaction
 			throw new OrderCannotBeStarted(orderRef);
 
 		} catch (FacadeException t) {
@@ -318,70 +310,67 @@ public class OrderFacadeBean extends BasicFacadeBean implements OrderFacade {
 		} catch (Throwable t) {
 			log.error(t.getMessage(), t);
 			throw new InventoryException(
-					InventoryExceptionKey.ORDER_CANNOT_BE_CREATED, t.getLocalizedMessage());
+					InventoryExceptionKey.ORDER_CANNOT_BE_CREATED,
+					t.getLocalizedMessage());
 
 		}
 		return true;
 	}
 
-	public LOSPickRequest orderFuel(String clientRef, 
-						 String orderRef,
-						 OrderPositionTO[] positions, 
-						 String documentUrl, 
-						 String labelUrl,
-						 String destination, 
-						 OrderType type,
-						 Date deliveryDate,
-						 boolean processAutomaticly,
-						 String comment) throws FacadeException 
-	{
+	public LOSPickRequest orderFuel(String clientRef, String orderRef,
+			OrderPositionTO[] positions, String documentUrl, String labelUrl,
+			String destination, OrderType type, Date deliveryDate,
+			boolean processAutomaticly, String comment) throws FacadeException {
 		LOSOrderRequest order;
 		LOSPickRequest pickReq;
-		
+
 		Client c = clientService.getByNumber(clientRef);
-		
-		if(c == null){
+
+		if (c == null) {
 			log.error("CREATE OrderRequest FAILED (wrong client): " + orderRef
 					+ " (" + clientRef + ")");
 			throw new BusinessObjectNotFoundException();
 		}
 		try {
-			
-			if(deliveryDate == null){
-				deliveryDate = new Date(System.currentTimeMillis() + (24 * 3600 * 1000));
+
+			if (deliveryDate == null) {
+				deliveryDate = new Date(System.currentTimeMillis()
+						+ (24 * 3600 * 1000));
 			}
-			
-			order = orderBusiness.createOrder(c, orderRef, positions, documentUrl,
-					labelUrl, destination, deliveryDate, type);
-			
+
+			order = orderBusiness.createOrder(c, orderRef, positions,
+					documentUrl, labelUrl, destination, deliveryDate, type);
+
 			order = manager.find(LOSOrderRequest.class, order.getId());
-			
+
 			if (order == null) {
 				throw new RuntimeException("OrderRequest could not be created");
 			}
-			
+
 			order.setAdditionalContent(comment);
 
 		} catch (OrderCannotBeStarted t) {
 			log.error("Change Exception message. " + t.getMessage());
-			// Change the message text when creation and start is done in one transaction
+			// Change the message text when creation and start is done in one
+			// transaction
 			throw new OrderCannotBeStarted(orderRef);
-			
+
 		} catch (FacadeException t) {
 			log.error(t.getMessage());
 			throw t;
 		}
-		
+
 		try {
-			//if(processAutomaticly){
+			// if(processAutomaticly){
 			pickReq = orderBusiness.processFuel(order);
 			pickReq = manager.find(LOSPickRequest.class, pickReq.getId());
 
-			//}
-			
+			// }
+
 		} catch (OrderCannotBeStarted t) {
 			log.error("Change Exception message. " + t.getMessage());
-			// Change the message text when creation and start is done in one transaction
+			// Change the message text when creation and start is done in one
+			// transaction
 			throw new OrderCannotBeStarted(orderRef);
 
 		} catch (FacadeException t) {
@@ -391,37 +380,108 @@ public class OrderFacadeBean extends BasicFacadeBean implements OrderFacade {
 		} catch (Throwable t) {
 			log.error(t.getMessage(), t);
 			throw new InventoryException(
-					InventoryExceptionKey.ORDER_CANNOT_BE_CREATED, t.getLocalizedMessage());
+					InventoryExceptionKey.ORDER_CANNOT_BE_CREATED,
+					t.getLocalizedMessage());
 
 		}
 
 		return pickReq;
 	}
 
-	public LOSOrderRequest order(BODTO<Client> c, String orderRef, 
+	public LOSPickRequest movementOrder(String clientRef, String orderRef,
+			OrderPositionTO[] positions, String documentUrl, String labelUrl,
+			String destination, OrderType type, Date deliveryDate,
+			boolean processAutomaticly, String comment) throws FacadeException {
+		LOSOrderRequest order;
+		LOSPickRequest pickReq;
+
+		Client c = clientService.getByNumber(clientRef);
+
+		if (c == null) {
+			log.error("CREATE OrderRequest FAILED (wrong client): " + orderRef
+					+ " (" + clientRef + ")");
+			throw new BusinessObjectNotFoundException();
+		}
+		try {
+
+			if (deliveryDate == null) {
+				deliveryDate = new Date(System.currentTimeMillis()
+						+ (24 * 3600 * 1000));
+			}
+
+			order = orderBusiness.createOrder(c, orderRef, positions,
+					documentUrl, labelUrl, destination, deliveryDate, type);
+
+			order = manager.find(LOSOrderRequest.class, order.getId());
+
+			if (order == null) {
+				throw new RuntimeException("OrderRequest could not be created");
+			}
+
+			order.setAdditionalContent(comment);
+
+		} catch (OrderCannotBeStarted t) {
+			log.error("Change Exception message. " + t.getMessage());
+			// Change the message text when creation and start is done in one
+			// transaction
+			throw new OrderCannotBeStarted(orderRef);
+
+		} catch (FacadeException t) {
+			log.error(t.getMessage());
+			throw t;
+		}
+
+		try {
+			// if(processAutomaticly){
+			pickReq = orderBusiness.processFuel(order);
+			pickReq = manager.find(LOSPickRequest.class, pickReq.getId());
+
+			// }
+
+		} catch (OrderCannotBeStarted t) {
+			log.error("Change Exception message. " + t.getMessage());
+			// Change the message text when creation and start is done in one
+			// transaction
+			throw new OrderCannotBeStarted(orderRef);
+
+		} catch (FacadeException t) {
+			log.error(t.getMessage());
+			throw t;
+
+		} catch (Throwable t) {
+			log.error(t.getMessage(), t);
+			throw new InventoryException(
+					InventoryExceptionKey.ORDER_CANNOT_BE_CREATED,
+					t.getLocalizedMessage());
+
+		}
+
+		return pickReq;
+	}
+
+	public LOSOrderRequest order(BODTO<Client> c, String orderRef,
 			OrderPositionTO position, String documentUrl, String labelUrl,
 			BODTO<LOSStorageLocation> loc, OrderType type,
 			List<BODTO<StockUnit>> sus) throws FacadeException {
 
 		LOSOrderRequest r;
 		Client client = manager.find(Client.class, c.getId());
-		
+
 		try {
 			Date delivery = new Date(System.currentTimeMillis()
 					+ (24 * 3600 * 1000));
-			r = orderBusiness.createOrder(client, orderRef, new OrderPositionTO[]{position},
-					documentUrl,
-					labelUrl, 
+			r = orderBusiness.createOrder(client, orderRef,
+					new OrderPositionTO[] { position }, documentUrl, labelUrl,
 					loc.getName(), delivery, type);
 			r = manager.find(LOSOrderRequest.class, r.getId());
-			
+
 			List<StockUnit> stockUList = new ArrayList<StockUnit>();
-			for (BODTO<StockUnit> suTo : sus){
+			for (BODTO<StockUnit> suTo : sus) {
 				stockUList.add(manager.find(StockUnit.class, suTo.getId()));
 			}
-			
+
 			pickOrderService.processOrderRequest(r, stockUList, null);
-			
+
 			if (r == null) {
 				throw new RuntimeException("OrderRequest could not be created");
 			}
@@ -432,81 +492,83 @@ public class OrderFacadeBean extends BasicFacadeBean implements OrderFacade {
 		} catch (Throwable t) {
 			log.error(t.getMessage(), t);
 			throw new InventoryException(
-					InventoryExceptionKey.ORDER_CANNOT_BE_CREATED, t.getLocalizedMessage());
+					InventoryExceptionKey.ORDER_CANNOT_BE_CREATED,
+					t.getLocalizedMessage());
 
 		}
 		return r;
-		
+
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public LOSResultList<LOSOrderStockUnitTO> querySuitableStocksByOrderPosition(BODTO<LOSOrderRequestPosition> orderPosTO,
-			  																	 BODTO<Lot> lotTO,
-			  																	 BODTO<LOSStorageLocation> locationTO) 
-		throws InventoryException
-	{
-		
-		if(orderPosTO == null){
+	public LOSResultList<LOSOrderStockUnitTO> querySuitableStocksByOrderPosition(
+			BODTO<LOSOrderRequestPosition> orderPosTO, BODTO<Lot> lotTO,
+			BODTO<LOSStorageLocation> locationTO) throws InventoryException {
+
+		if (orderPosTO == null) {
 			return new LOSResultList<LOSOrderStockUnitTO>();
 		}
-		
-		LOSOrderRequestPosition orderPos = manager.find(LOSOrderRequestPosition.class, orderPosTO.getId());
-		
-		if(orderPos == null){
-			throw new InventoryException(InventoryExceptionKey.NO_SUCH_ORDERPOSITION, new Object[0]);
+
+		LOSOrderRequestPosition orderPos = manager.find(
+				LOSOrderRequestPosition.class, orderPosTO.getId());
+
+		if (orderPos == null) {
+			throw new InventoryException(
+					InventoryExceptionKey.NO_SUCH_ORDERPOSITION, new Object[0]);
 		}
-		
+
 		StringBuffer sb = new StringBuffer("SELECT new ");
 		sb.append(LOSOrderStockUnitTO.class.getName());
 		sb.append("(su.id, su.version, su.lot, ul.labelId, ");
 		sb.append("ul.storageLocation.name, su.amount, su.reservedAmount) ");
-		sb.append(" FROM "+StockUnit.class.getSimpleName()+" su ");
-		
+		sb.append(" FROM " + StockUnit.class.getSimpleName() + " su ");
+
 		sb.append(" LEFT OUTER JOIN su.lot AS l, ");
-				
-		sb.append(LOSUnitLoad.class.getSimpleName()+" ul ");
+
+		sb.append(LOSUnitLoad.class.getSimpleName() + " ul ");
 		sb.append("WHERE su.unitLoad=ul ");
 		sb.append("AND su.lock = 0 ");
 		sb.append("AND (su.amount - su.reservedAmount) > 0 ");
 		sb.append("AND ul.lock = 0 ");
 		sb.append("AND ul.storageLocation.lock = 0 ");
 		sb.append("AND su.itemData=:it ");
-				
+
 		Lot lot = null;
-		
-		if(lotTO != null){
+
+		if (lotTO != null) {
 			lot = manager.find(Lot.class, lotTO.getId());
 		}
-		
-		if(lot != null){
+
+		if (lot != null) {
 			sb.append("AND su.lot=:l ");
 			sb.append("AND su.lot.lock = 0 ");
 		}
-		
+
 		LOSStorageLocation sl = null;
-		if(locationTO != null){
+		if (locationTO != null) {
 			sl = manager.find(LOSStorageLocation.class, locationTO.getId());
 		}
-		
-		if(sl != null){
+
+		if (sl != null) {
 			sb.append("AND ul.storageLocation=:sl");
 		}
-		
+
 		Query query = manager.createQuery(sb.toString());
-		
-		log.debug("--- Query stocks for orderposition > "+sb.toString());
-		log.debug("--- Params > IT "+orderPos.getItemData().getNumber()+" | LOT "+lot+" | SL "+sl);
-		
+
+		log.debug("--- Query stocks for orderposition > " + sb.toString());
+		log.debug("--- Params > IT " + orderPos.getItemData().getNumber()
+				+ " | LOT " + lot + " | SL " + sl);
+
 		query.setParameter("it", orderPos.getItemData());
-		
-		if(lot != null){
+
+		if (lot != null) {
 			query.setParameter("l", lot);
 		}
-		
-		if(sl != null){
+
+		if (sl != null) {
 			query.setParameter("sl", sl);
 		}
-		
+
 		return new LOSResultList<LOSOrderStockUnitTO>(query.getResultList());
 	}
 

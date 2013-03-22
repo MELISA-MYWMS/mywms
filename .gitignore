@@ -29,6 +29,7 @@ jboss-4.2.3.GA/server/minimal/log/*.log
 jboss-4.2.3.GA/server/minimal/tmp/**/*
 jboss-4.2.3.GA/server/minimal/data/**/*
 jboss-4.2.3.GA/server/minimal/work/**/*
+jboss-4.2.3.GA/bin/run.sh
 
 server.app/bin/
 server.app/los.common-ejb/build/
@@ -53,3 +54,6 @@ rich.client/los.clientsuite/**/build/*
 rich.client/los.clientsuite/**/release/
 rich.client/los.clientsuite/dist/
 rich.client/los.clientsuite/nbproject/private/
+
+config/server.app/jndi.properties
+config/rich.client/Settings/jndi.properties

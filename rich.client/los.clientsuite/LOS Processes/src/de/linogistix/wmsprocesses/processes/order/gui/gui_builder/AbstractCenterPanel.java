@@ -135,6 +135,7 @@ public abstract class AbstractCenterPanel extends javax.swing.JPanel implements 
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         orderDetailPanel.add(orderNumberLabel, gridBagConstraints);
+        orderNumberLabel.getAccessibleContext().setAccessibleName(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.orderNumberLabel.AccessibleContext.accessibleName")); // NOI18N
 
         orderNumberTextField.setText("");
         orderNumberTextField.setMinimumSize(new java.awt.Dimension(300, 22));

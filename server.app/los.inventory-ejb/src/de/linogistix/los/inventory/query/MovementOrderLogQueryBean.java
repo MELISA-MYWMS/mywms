@@ -18,7 +18,6 @@ import de.linogistix.los.query.BODTOConstructorProperty;
 import de.linogistix.los.query.LOSResultList;
 import de.linogistix.los.query.QueryDetail;
 import de.linogistix.los.query.TemplateQuery;
-import de.linogistix.los.location.model.LOSStorageLocation;
 import de.linogistix.los.inventory.model.MovementOrderLog;
 import de.linogistix.los.inventory.pick.model.LOSPickRequest;
 import de.linogistix.los.inventory.pick.model.LOSPickRequestPosition;
@@ -37,17 +36,23 @@ public class MovementOrderLogQueryBean extends
 
 		private static final String[] props = new String[] {
 			"id", "version", "transactionId",
-				"transactionDate",
-				"storLocName", 
-				"stationPump",				 				
-				"orderType",  
-				"vehiclePlateNumber",
-				"receipientName",
-				"receipientIDCard",
-				"rcptArticleRef",
-				"rcptArticleDescr",
-				"rcptPosQuantity",
-				"tankRemaining"				
+				"organization",
+				"formation", 
+				"militaryUnit",
+				"sequenceNumber",
+				"currDate",
+				"plateNo",  
+				"vehicleType",
+				"movementDate",
+				"orderNo",
+				"movementPurpose",
+				"movementRoute",
+				"movementLoad",
+				"driverName",
+				"passenger1Name",
+				"passenger2Name",
+				"passenger3Name",
+				"passenger4Name"
 		};
 
     @Override
@@ -93,25 +98,6 @@ public class MovementOrderLogQueryBean extends
 		Query q = manager.createQuery(new String(buffer));
 		q = q.setParameter("dateFrom", createDateFrom);
 		q = q.setParameter("dateTo", createDateTo);
-		
-		return q.getResultList();
-	}
-	
-    
-    @SuppressWarnings("unchecked")
-	public List<MovementOrderLog> queryByDateAndLoc(Date createDateFrom,Date createDateTo, LOSStorageLocation storageLocation){
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("SELECT ");
-		buffer.append(" r ");
-		buffer.append(" FROM ");
-		buffer.append(MovementOrderLog.class.getName());
-		buffer.append(" r ");
-		buffer.append(" WHERE ");
-		buffer.append(" r.created>=:dateFrom and r.created<=:dateTo and r.storLocID=:locid");
-		Query q = manager.createQuery(new String(buffer));
-		q = q.setParameter("dateFrom", createDateFrom);
-		q = q.setParameter("dateTo", createDateTo);
-		q = q.setParameter("locid", storageLocation.getId());
 		
 		return q.getResultList();
 	}

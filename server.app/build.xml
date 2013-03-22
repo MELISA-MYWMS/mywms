@@ -28,15 +28,9 @@
 
 	<property name="los.stocktaking-ejb.home" location="./los.stocktaking-ejb" />
 	<property name="los.stocktaking-ejb.comp.dir" location="${los.stocktaking-ejb.home}/build/component" />
-	
+
 	<property name="los-mobile.home" location="./los.mobile" />
-	
-	<taskdef resource="cargo.tasks">
-  		<classpath>
-  	 	 <pathelement location="${/etc/eclipse/plugins/org.apache.ant_1.8.3.v20120321-1730/lib/cargo-core-uberjar-1.3.2.jar}"/>
- 	  	 <pathelement location="${/etc/eclipse/plugins/org.apache.ant_1.8.3.v20120321-1730/lib/cargo-ant-1.3.2.jar}"/> 
- 	 	</classpath>
-	</taskdef>
+
 
 	<target name="project.package">
 
@@ -96,36 +90,59 @@
 		</copy>
 
 	</target>
+	<target name="project.refresh" description="Clean, build, package, deploy">
+		<!-- Clean -->
+		<ant antfile="${mywms.home}/build.xml" target="mywms.clean" />
+		<ant antfile="${los.common-ejb.home}/build.xml" target="common.clean" />
+		<ant antfile="${los.location-ejb.home}/build.xml" target="location.clean" />
+		<ant antfile="${los.inventory-ejb.home}/build.xml" target="inventory.clean" />
+		<ant antfile="${los.stocktaking-ejb.home}/build.xml" target="stocktaking.clean" />
+		<ant antfile="${los-mobile.home}/build.xml" target="los-mobile.clean" />
+		<ant antfile="project-ejb/build.xml" target="project-ejb.clean" />
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${project.build.dir}" />
+		</delete>
+		<!-- Build -->
+		<ant antfile="${mywms.home}/build.xml" target="mywms.package.component" />
+		<ant antfile="${los.common-ejb.home}/build.xml" target="common.package.component" />
+		<ant antfile="${los.location-ejb.home}/build.xml" target="location.package.component" />
+		<ant antfile="${los.inventory-ejb.home}/build.xml" target="inventory.package.component" />
+		<ant antfile="${los.stocktaking-ejb.home}/build.xml" target="stocktaking.package.component" />
+		<ant antfile="${los-mobile.home}/build.xml" target="los-mobile.compile" />
+		<ant antfile="project-ejb/build.xml" target="project-ejb.package.component" />
 
 
-	<target name="ear.package" depends="project.package" description="Package the web application and the ejb application into ear">
-
-		<!-- The web apps of the .war -->
+		<!-- Package -->
 		<mkdir dir="${project.war.dir}" />
-		
 		<copy todir="${project.war.dir}">
 			<fileset dir="${los-mobile.home}/build/war">
 				<include name="**/*.*" />
 			</fileset>
 		</copy>
-
 		<copy todir="${project.war.dir}/META-INF" overwrite="true">
 			<fileset dir="${project.config.dir}/server.app" includes="appserver.properties" />
 		</copy>
-
 		<!-- Ensure appserver.properties are always modified -->
 		<touch file="${project.war.dir}/META-INF/appserver.properties" />
-
-
-
 	</target>
-
-	<target name="ear.deploy.local" depends="ear.package" description="Deploy .ear to local JBoss">
-
-		<delete includeemptydirs="true" failonerror="false">
+	<target name="ear.package" depends="project.package" description="Package the web application and the ejb application into ear">
+		<!-- The web apps of the .war -->
+		<mkdir dir="${project.war.dir}" />
+		<copy todir="${project.war.dir}">
+			<fileset dir="${los-mobile.home}/build/war">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<copy todir="${project.war.dir}/META-INF" overwrite="true">
+			<fileset dir="${project.config.dir}/server.app" includes="appserver.properties" />
+		</copy>
+		<!-- Ensure appserver.properties are always modified -->
+		<touch file="${project.war.dir}/META-INF/appserver.properties" />
+		<!-- deploy -->
+<delete includeemptydirs="true" failonerror="false">
 			<fileset dir="${project.ear.dir}/los-mobile.war" />
 		</delete>
-		
+
 		<jar jarfile="${project.ear.dir}/los-mobile.war" update="true" duplicate="add">
 			<fileset dir="${project.war.dir}">
 				<include name="**/*.*" />
@@ -133,7 +150,33 @@
 		</jar>
 
 		<mkdir dir="${project.deploy.dir}" />
+
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${project.deploy.dir}/los-mobile.war" />
+		</delete>
+
+		<copy todir="${project.deploy.dir}">
+			<fileset dir="${project.ear.dir}" includes="**/**" />
+		</copy>
+
+		<touch file="${project.deploy.dir}/META-INF/application.xml" />
 		
+	</target>
+
+	<target name="ear.deploy.local" depends="ear.package" description="Deploy .ear to local JBoss">
+
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${project.ear.dir}/los-mobile.war" />
+		</delete>
+
+		<jar jarfile="${project.ear.dir}/los-mobile.war" update="true" duplicate="add">
+			<fileset dir="${project.war.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</jar>
+
+		<mkdir dir="${project.deploy.dir}" />
+
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset dir="${project.deploy.dir}/los-mobile.war" />
 		</delete>
@@ -145,30 +188,30 @@
 		<touch file="${project.deploy.dir}/META-INF/application.xml" />
 
 	</target>
-	
+
 	<target name="web.deploy.exploded" depends="ear.package" description="Deploy only extracted webapp">
-		
+
 		<mkdir dir="${project.deploy.dir}" />
-		
+
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset dir="${project.ear.dir}" includes="los-mobile.war" />
 		</delete>
-		
+
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset dir="${project.deploy.dir}" includes="los-mobile.war" />
 		</delete>
-		
+
 		<mkdir dir="${project.deploy.dir}/los-mobile.war" />
 
 		<copy todir="${project.deploy.dir}/los-mobile.war" overwrite="true">
 			<fileset dir="${project.war.dir}" includes="**/**" />
 		</copy>
-<!--
+		<!--
 		<touch file="${project.deploy.dir}/los-mobile.war/WEB-INF/web.xml" />
 		<touch file="${project.deploy.dir}/META-INF/application.xml" />
 -->
 	</target>
-	
+
 	<target name="ear.undeploy.local" description="Undeploy Enterprise Application from local JBoss">
 
 		<delete includeemptydirs="true" failonerror="false">
@@ -213,10 +256,5 @@
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset dir="${project.build.dir}" />
 		</delete>
-
 	</target>
-	
-	<target name="ear.deploy.remote" description="Deploy .ear package to remote JBoss">
-    		<cargo id="mycontainerid" containerId="jboss42x" home="/home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA" action="start" wait="false" />
-		</target>
 </project>

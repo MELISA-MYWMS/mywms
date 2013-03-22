@@ -7,6 +7,7 @@
  */
 package de.linogistix.inventory.gui.component.controls;
 
+
 import de.linogistix.common.gui.component.controls.BOAutoFilteringComboBoxModel;
 import de.linogistix.common.services.J2EEServiceLocator;
 import de.linogistix.los.inventory.model.LOSAdvice;

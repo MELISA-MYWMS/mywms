@@ -15,37 +15,37 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(MovementOrderLogTO.class);
 
-	private String organization = "";
-	private String formation = "";
-	private String militaryUnit = "";
-	private long sequenceNumber = 0;
-	private Date currDate = null;
-	private String plateNo = "";
-	private String vehicleType = "";
-	private Date movementDate = null;
-	private String judgmentNo = "";
-	private String movementPurpose = "";
-	private String movementRoute = "";
-	private String movementLoad = "";
-	private String driverName = "";
-	private String passenger1Name = "";
-	private String passenger2Name = "";
-	private String passenger3Name = "";
-	private String passenger4Name = "";
+	private String organization;
+	private String formation;
+	private String militaryUnit;
+	private long sequenceNumber;
+	private Date currDate;
+	private String plateNo;
+	private String vehicleType;
+	private Date movementDate;
+	private String orderNo;
+	private String movementPurpose;
+	private String movementRoute;
+	private String movementLoad;
+	private String driverName;
+	private String passenger1Name;
+	private String passenger2Name;
+	private String passenger3Name;
+	private String passenger4Name;
 
 	public MovementOrderLogTO(MovementOrderLog idat) {
-		super(idat.getId(), idat.getVersion(), idat.getSequenceNumber());
+		super(idat.getId(), idat.getVersion(), idat.getTransactionId());
 		this.organization = idat.getOrganization();
 		this.formation = idat.getFormation();
 		this.militaryUnit = idat.getMilitaryUnit();
 		this.sequenceNumber = idat.getSequenceNumber();
 		this.currDate = idat.getCreated();
 		this.plateNo = idat.getPlateNo();
-		this.vehicleType = idat.getPlateNo();
+		this.vehicleType = idat.getVehicleType();
 		this.movementDate = idat.getMovementDate();
-		this.judgmentNo = idat.getJudgmentNo();
+		this.orderNo = idat.getOrderNo();
 		this.movementPurpose = idat.getMovementPurpose();
-		this.movementRoute = idat.getMovementPurpose();
+		this.movementRoute = idat.getMovementRoute();
 		this.movementLoad = idat.getMovementLoad();
 		this.driverName = idat.getDriverName();
 		this.passenger1Name = idat.getPassenger1Name();
@@ -59,8 +59,9 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 	}
 
 	public MovementOrderLogTO(Long id, int version, String transactionId, String organization, String formation,
-			String militaryUnit, String plateNo, String vehicleType,
-			String movementDateStr, String judgmentNo, String movementPurpose,
+			String militaryUnit,Long sequenceNumber,Date currDate, String plateNo, String vehicleType,
+			Date movementDate,
+			String orderNo, String movementPurpose,
 			String movementRoute, String movementLoad, String driverName,
 			String passenger1Name, String passenger2Name,
 			String passenger3Name, String passenger4Name) {
@@ -73,7 +74,7 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		this.plateNo = plateNo;
 		this.vehicleType = vehicleType;
 		this.movementDate = movementDate;
-		this.judgmentNo = judgmentNo;
+		this.orderNo = orderNo;
 		this.movementPurpose = movementPurpose;
 		this.movementRoute = movementRoute;
 		this.movementLoad = movementLoad;
@@ -141,12 +142,12 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		this.vehicleType = vehicleType;
 	}
 
-	public String getJudgmentNo() {
-		return this.judgmentNo;
+	public String getOrderNo() {
+		return this.orderNo;
 	}
 
-	public void setJudgmentNo(String judgmentNo) {
-		this.judgmentNo = judgmentNo;
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
 	}
 
 	public Date getMovementDate() {

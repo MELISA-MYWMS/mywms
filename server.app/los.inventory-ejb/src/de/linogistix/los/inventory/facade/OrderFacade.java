@@ -110,6 +110,8 @@ public interface OrderFacade {
 	Date deliveryDate, @WebParam(name = "processAutomaticly")
 	boolean processAutomaticly, @WebParam(name = "comment")
 	String comment) throws FacadeException;
+	
+	
 
 	LOSOrderRequest order(BODTO<Client> c, String orderRef,
 			OrderPositionTO position, String documentUrl, String labelUrl,
@@ -131,6 +133,9 @@ public interface OrderFacade {
 	// @WebParam( name="positions") OrderPositionTO[] positions,
 	// @WebParam( name="destination") String destination);
 
+	public List<BODTO<LOSStorageLocation>> getGoodsOutLocations()
+			throws LOSLocationException;
+	
 	/**
 	 * Service for finishing {@link LOSOrderRequest}.
 	 * Typical operations are printing some labels and setting the {@link LOSOrderRequestState.FINISHED}.
@@ -178,8 +183,8 @@ public interface OrderFacade {
 	 * @return
 	 * @throws LOSLocationException
 	 */
-	List<BODTO<LOSStorageLocation>> getGoodsOutLocations()
-			throws LOSLocationException;
+	
+
 
 	/**
 	 * Returns List of {@link LOSOrderStockUnitTO} that are suitable to solve
@@ -195,5 +200,15 @@ public interface OrderFacade {
 			BODTO<LOSOrderRequestPosition> orderPosTO, BODTO<Lot> lotTO,
 			BODTO<LOSStorageLocation> locationTO) throws InventoryException;
        
+	public LOSPickRequest movementOrder(String clientRef, 
+			 String orderRef,
+			 OrderPositionTO[] positions, 
+			 String documentUrl, 
+			 String labelUrl,
+			 String destination, 
+			 OrderType type,
+			 Date deliveryDate,
+			 boolean processAutomaticly,
+			 String comment) throws FacadeException;
         
 }

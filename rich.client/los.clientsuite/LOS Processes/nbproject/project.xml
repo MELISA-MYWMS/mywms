@@ -182,6 +182,9 @@
                 <package>de.linogistix.wmsprocesses.processes.goodsreceipt</package>
                 <package>de.linogistix.wmsprocesses.processes.goodsreceipt.gui.component</package>
                 <package>de.linogistix.wmsprocesses.processes.goodsreceipt.gui.gui_builder</package>
+                <package>de.linogistix.wmsprocesses.processes.movement</package>
+                <package>de.linogistix.wmsprocesses.processes.movement.gui.component</package>
+                <package>de.linogistix.wmsprocesses.processes.movement.gui.gui_builder</package>
                 <package>de.linogistix.wmsprocesses.processes.order</package>
                 <package>de.linogistix.wmsprocesses.processes.order.gui.component</package>
                 <package>de.linogistix.wmsprocesses.processes.order.gui.gui_builder</package>

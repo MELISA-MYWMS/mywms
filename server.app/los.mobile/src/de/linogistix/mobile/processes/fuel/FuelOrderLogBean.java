@@ -108,7 +108,7 @@ public class FuelOrderLogBean extends BasicDialogBean {
 
 		writeToResponse(fuelOrderLogDocument.getDocument());
 
-		//return FuelNavigationEnum.FUEL_GET_PDF.name();
+		//return MovementOrderNavigationEnum.FUEL_GET_PDF.name();
 		return "";
     }
 

@@ -13,36 +13,81 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.mywms.model.BasicEntity;
+import org.mywms.model.BusinessException;
+import org.mywms.service.ConstraintViolatedException;
 
 @Entity
-@Table(name = "movement_order")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "los_movement_order_log", uniqueConstraints = {
+	    @UniqueConstraint(columnNames = {
+	        "transactionid"
+	    })
+	})
 public class MovementOrderLog extends BasicEntity {
 	private static final long serialVersionUID = 1L;
 
-	private String organization = "";
-	private String formation = "";
-	private String militaryUnit = "";
-	private long sequenceNumber = 0;
-	private Date currDate = null;
-	private String plateNo = "";
-	private String vehicleType = "";
-	private Date movementDate = null;
-	private String judgmentNo = "";
-	private String movementPurpose = "";
-	private String movementRoute = "";
-	private String movementLoad = "";
-	private String driverName = "";
-	private String passenger1Name = "";
-	private String passenger2Name = "";
-	private String passenger3Name = "";
-	private String passenger4Name = "";
+	private String transactionId;
+
+	private String organization;
+	private String formation;
+	private String militaryUnit;
+	private long sequenceNumber;
+	private Date currDate;
+	private String plateNo;
+	private String vehicleType;
+	private Date movementDate;
+	private String orderNo;
+	private String movementPurpose;
+	private String movementRoute;
+	private String movementLoad;
+	private String driverName;
+	private String passenger1Name;
+	private String passenger2Name;
+	private String passenger3Name;
+	private String passenger4Name;
 
 	
 	
+	@Column(nullable = false)
+    public String getTransactionId() {
+        return this.transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+    
+    //TransactionID not unique?
+    @Override
+    public String toUniqueString() {
+        if (getTransactionId() != null) {
+            return getTransactionId();
+        } else {
+            return getId().toString();
+        }
+    }
+    
+    @PreUpdate
+    @PrePersist
+    public void sanityCheck() throws BusinessException, ConstraintViolatedException {
+
+        if (getId() != null) {
+            if (( getTransactionId() == null || getTransactionId().length() == 0 )) {
+                setTransactionId(getId().toString());
+            } else {
+                //ok
+            }
+        } else {
+            throw new RuntimeException("Id cannot be retrieved yet - hence TransactionId cannot be set");
+        }
+
+    }
+    
 	
 	@Column(nullable = false)
 	public String getOrganization() {
@@ -107,12 +152,12 @@ public class MovementOrderLog extends BasicEntity {
 	}
 	
 	@Column(nullable = false)
-	public String getJudgmentNo() {
-		return this.judgmentNo;
+	public String getOrderNo() {
+		return this.orderNo;
 	}
 
-	public void setJudgmentNo(String judgmentNo) {
-		this.judgmentNo = judgmentNo;
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
 	}
 	
 	@Column(nullable = false)

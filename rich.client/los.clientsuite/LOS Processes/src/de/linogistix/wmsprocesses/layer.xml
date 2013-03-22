@@ -7,6 +7,7 @@
         <folder name="Window">
             <file name="de-linogistix-wmsprocesses-processes-create_avis-CreateAvisAction.instance"/>
             <file name="de-linogistix-wmsprocesses-processes-goodsreceipt-GoodsReceiptAction.instance"/>
+            <file name="de-linogistix-wmsprocesses-processes-movement-CreateMovementAction.instance"/>
             <file name="de-linogistix-wmsprocesses-stockunittransfer-StockUnitTransferAction.instance"/>
             <file name="de-linogistix-wmsprocesses-changeamount-StockUnitChangeAmountAction.instance"/>
             <file name="de-linogistix-wmsprocesses-unitloadtransfer-UnitLoadTransferAction.instance"/>
@@ -50,9 +51,13 @@
                 <attr name="position" intvalue="400"/>
                 <attr name="originalFile" stringvalue="Actions/Window/de-linogistix-wmsprocesses-processes-treat_order-TreatOrderAction.instance"/>
             </file>
-            <file name="Sep-499[javax-swing-JSeparator].instance">
+         <!--   <file name="Sep-499[javax-swing-JSeparator].instance">
                 <attr name="position" intvalue="499"/>
-            </file>
+            </file> -->
+             <file name="CreateMovementAction.shadow">
+                <attr name="position" intvalue="500"/>
+                <attr name="originalFile" stringvalue="Actions/Window/de-linogistix-wmsprocesses-processes-movement-CreateMovementAction.instance"/>
+            </file> 
         </folder>
         <folder name="LOSActions">
             <file name="UnitLoadTransferAction.shadow">

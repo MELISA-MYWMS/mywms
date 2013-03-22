@@ -1,5 +1,8 @@
 package de.linogistix.los.inventory.service;
 
+import javax.ejb.Stateless;
+
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -12,16 +15,17 @@ import org.mywms.service.BasicServiceBean;
 
 import de.linogistix.los.inventory.model.MovementOrderLog;
 
-
+@Stateless
 public class MovementOrderLogServiceBean extends BasicServiceBean<MovementOrderLog>
 		implements MovementOrderLogService {
 	private static final Logger log = Logger
-			.getLogger(MovementOrderLogServiceBean.class.getName());
+			.getLogger(MovementOrderLogServiceBean.class);
 
-	@Override
-	public MovementOrderLog createNewMovementOrder(String organization,
-			String formation, String militaryUnit, String plateNo,
-			String vehicleType, String movementDateStr, String judgmentNo,
+	
+	public MovementOrderLog create(String organization,
+			String formation, String militaryUnit, long sequenceNumber,Date currDate
+			, String plateNo,
+			String vehicleType, Date movementDate, String orderNo,
 			String movementPurpose, String movementRoute, String movementLoad,
 			String driverName, String passenger1Name, String passenger2Name,
 			String passenger3Name, String passenger4Name) {
@@ -30,25 +34,12 @@ public class MovementOrderLogServiceBean extends BasicServiceBean<MovementOrderL
 		
 		
 		if (organization == null || formation == null || militaryUnit == null
-				|| plateNo == null || movementDateStr == null
-				|| judgmentNo == null || movementRoute == null
+				|| plateNo == null || movementDate == null
+				|| orderNo == null || movementRoute == null
 				|| movementPurpose == null || driverName == null) {
 			throw new NullPointerException(
 					"Creating new movement order failed due to missing parameter(s)");
 		} else {
-			// Convert movementDate string to a Date Object
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
-			Date movementDate = null;
-			try {
-				movementDate = dateFormat.parse(movementDateStr);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			// Get current date to String and Date object
-			dateFormat = new SimpleDateFormat("dd/mm/yyyy");
-			Calendar cal = Calendar.getInstance();
-			Date currDate = cal.getTime();
-			String currDateStr = dateFormat.format(currDate);
 
 			myNewMovementOrder = new MovementOrderLog();
 			myNewMovementOrder.setCurrDate(currDate);
@@ -59,36 +50,21 @@ public class MovementOrderLogServiceBean extends BasicServiceBean<MovementOrderL
 			if (vehicleType != null)
 				myNewMovementOrder.setVehicleType(vehicleType);
 			myNewMovementOrder.setMovementDate(movementDate);
-			myNewMovementOrder.setJudgmentNo(judgmentNo);
+			myNewMovementOrder.setOrderNo(orderNo);
 			myNewMovementOrder.setMovementPurpose(movementPurpose);
 			myNewMovementOrder.setMovementRoute(movementRoute);
 			if (movementLoad != null)
 				myNewMovementOrder.setMovementLoad(movementLoad);
 			myNewMovementOrder.setDriverName(driverName);
-			myNewMovementOrder.setDriverName(driverName);
-			myNewMovementOrder.setDriverName(driverName);
-			myNewMovementOrder.setDriverName(driverName);
-			myNewMovementOrder.setDriverName(driverName);
-
-			
+			myNewMovementOrder.setPassenger1Name(passenger1Name);
+			myNewMovementOrder.setPassenger2Name(passenger2Name);
+			myNewMovementOrder.setPassenger3Name(passenger3Name);
+			myNewMovementOrder.setPassenger4Name(passenger4Name);	
 		}
 		
 			manager.persist(myNewMovementOrder);
 			manager.flush();
 			return myNewMovementOrder;
 	}
-
-	@Override
-	public boolean deleteMovementOrder(long sequenceNumber) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean editMovementOrder(long sequenceNumber, String[] fields,
-			String[] values) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 }
