@@ -57,3 +57,5 @@ rich.client/los.clientsuite/nbproject/private/
 
 config/server.app/jndi.properties
 config/rich.client/Settings/jndi.properties
+server.app/mywms.as/src/org/mywms/ejb/BeanLocator.java
+server.app/mywms.as/src/org/mywms/res/jndi.properties
