@@ -36,13 +36,16 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.DateFormatter;
+import org.mywms.facade.ZoneFacade;
 import org.mywms.facade.FacadeException;
 import org.mywms.model.Client;
 import org.mywms.model.ItemData;
 import org.mywms.model.Lot;
+import org.mywms.model.Zone;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
@@ -136,7 +139,36 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         Passenger3Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class,"MovementOrderCenterPanel.PassNameLabel")+":");
         Passenger4Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class,"MovementOrderCenterPanel.PassNameLabel")+":");
 
+        OrganizationComboBox.removeAllItems();
+        OrganizationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class,"MovementOrderCenterPanel.HAFComboItem"));
+        OrganizationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class,"MovementOrderCenterPanel.HAComboItem"));
+        OrganizationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class,"MovementOrderCenterPanel.HNComboItem"));
+
+        FormationComboBox.removeAllItems();
+        FormationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class,"MovementOrderCenterPanel.ATAComboItem"));
+        FormationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class,"MovementOrderCenterPanel.GEAComboItem"));
+        FormationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class,"MovementOrderCenterPanel.DAEComboItem"));
+        FormationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class,"MovementOrderCenterPanel.DAYComboItem"));
+        FormationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class,"MovementOrderCenterPanel.DAKComboItem"));
+
+        MillitaryUnitComboBox.removeAllItems();
+        List<Zone> MillitaryUnits = this.getMillitaryUnits();
+        for (int i=0; i< MillitaryUnits.size(); i++){
+            MillitaryUnitComboBox.addItem(MillitaryUnits.get(i).getName());
+        }
       }
+
+      private List<Zone> getMillitaryUnits(){
+         ZoneFacade ZoneF = null;
+         List<Zone> zones = null;
+           try {
+               ZoneF = (ZoneFacade) loc.getStateless(ZoneFacade.class);
+           } catch (J2EEServiceLocatorException ex) {
+              Exceptions.printStackTrace(ex);
+           }
+         zones = ZoneF.getAllZones();
+         return zones;
+     }
 
           public void componentClosed() {
     }

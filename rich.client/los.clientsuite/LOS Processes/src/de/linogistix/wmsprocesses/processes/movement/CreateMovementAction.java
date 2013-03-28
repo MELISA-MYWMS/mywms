@@ -29,7 +29,7 @@ public class CreateMovementAction extends AbstractAction {
     }
 
     public CreateMovementAction() {
-        super(NbBundle.getMessage(WMSProcessesBundleResolver.class, "CTL_CreateMovementAction"));
+        super(NbBundle.getMessage(WMSProcessesBundleResolver.class, "CTL_MovementAction"));
 //        putValue(SMALL_ICON, new ImageIcon(Utilities.loadImage(CreateMovementTopComponent.ICON_PATH, true)));
 
         LoginService login = (LoginService) Lookup.getDefault().lookup(LoginService.class);

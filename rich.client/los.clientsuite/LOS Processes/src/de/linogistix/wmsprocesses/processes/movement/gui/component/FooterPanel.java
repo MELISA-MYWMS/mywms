@@ -66,7 +66,7 @@ public class FooterPanel extends AbstractFooterPanel {
 
     @Override
     protected void clearButtonActionPerformedListener(ActionEvent evt) {
-        
+        topComponentPanel.centerPanel.clear();
     }
 
       @Override
