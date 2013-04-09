@@ -86,9 +86,9 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
     public void process(boolean processAutomaticly) {
         String formation = FormationComboBox.getSelectedItem().toString();
         String organization = OrganizationComboBox.getSelectedItem().toString();
-        String militaryUnit = MillitaryUnitComboBox.getSelectedItem().toString();
+        Zone militaryUnit = (Zone) MillitaryUnitComboBox.getSelectedItem();
         Date currDate = currentDateTextField.getDate();
-        String vehicleType = VehicleTypeComboBox.getSelectedItem().toString();
+        String vehicleType = vehicleDataComboBox.getSelectedAsEntity().getModelName();
         String plateNo = vehicleDataComboBox.getSelectedAsEntity().getPlateNumber();
         Date movementDate = MovementDateTextField.getDate();
         String orderNo = OrderNoFormattedTextField.getText();
@@ -96,7 +96,7 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         String movementPurpose = MovementPurposeTextField.getText();
         String movementLoad = MovementLoadTextField.getText();
         String movementRoute = MovementRouteTextField.getText();
-        String driverName = driverComboBox.getSelectedAsEntity().getFirstName() + driverComboBox.getSelectedAsEntity().getLastName();
+        LOSOrderReceipients driver = driverComboBox.getSelectedAsEntity();
         String passenger1Name = Passenger1TextField.getText();
         String passenger2Name = Passenger2TextField.getText();
         String passenger3Name = Passenger3TextField.getText();
@@ -117,7 +117,7 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
             return;
         }
         try {
-            Logger.getLogger(CenterPanel.class.getName()).info("---*--- Movement created: " + mi.createMovementOrder(organization, formation, militaryUnit, sequenceNumber, currDate, plateNo, vehicleType, movementDate, orderNo, movementPurpose, movementRoute, movementLoad, driverName, passenger1Name, passenger2Name, passenger3Name, passenger4Name));
+            Logger.getLogger(CenterPanel.class.getName()).info("---*--- Movement created: " + mi.createMovementOrder(organization, formation, militaryUnit, sequenceNumber, currDate, plateNo, vehicleType, movementDate, orderNo, movementPurpose, movementRoute, movementLoad, driver, passenger1Name, passenger2Name, passenger3Name, passenger4Name));
         } catch (FacadeException ex) {
             Exceptions.printStackTrace(ex);
         }
@@ -162,12 +162,6 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         for (int i = 0; i < MillitaryUnits.size(); i++) {
             MillitaryUnitComboBox.addItem(MillitaryUnits.get(i).getName());
         }
-
-        VehicleTypeComboBox.removeAllItems();
-        List<VehicleData> vehicles = this.getVehicles();
-        for (int i = 0; i < vehicles.size(); i++) {
-            VehicleTypeComboBox.addItem(vehicles.get(i).getModelName());
-        }
         initAutofiltering();
     }
 
@@ -177,6 +171,7 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         getVehicleDataComboBox().setAlignmentX(CENTER_ALIGNMENT);
         //getVehicleDataComboBox().setEditorLabelTitle("Vehicle Data");
 
+
         getVehicleDataComboBox().addItemChangeListener(new PropertyChangeListener() {
 
             public void propertyChange(PropertyChangeEvent evt) {
@@ -184,7 +179,8 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
                 VehicleData selVehicleData = getVehicleDataComboBox().getSelectedAsEntity();
 
                 if (selVehicleData != null) {
-                    VehicleTypeComboBox.setSelectedItem(selVehicleData.getModelName());
+                    vehicleTypeTextField.setText(selVehicleData.getModelName());
+
                 } else {
 //                    getAmountTextField().setEnabled(false);
                 }
@@ -246,7 +242,7 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         return zones;
     }
 
-    private List<VehicleData> getVehicles() {
+  /*  private List<VehicleData> getVehicles() {
         VehicleDataFacade VehicleF = null;
         List<VehicleData> vehicles = null;
         try {
@@ -256,7 +252,7 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         }
         vehicles = VehicleF.getAllVehicles();
         return vehicles;
-    }
+    }*/
 
     public void componentClosed() {
     }

@@ -48,7 +48,7 @@ public class MovementOrderLogQueryBean extends
 				"movementPurpose",
 				"movementRoute",
 				"movementLoad",
-				"driverName",
+				"driver",
 				"passenger1Name",
 				"passenger2Name",
 				"passenger3Name",

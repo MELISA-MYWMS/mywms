@@ -18,6 +18,7 @@ import javax.persistence.PersistenceContext;
 import org.apache.log4j.Logger;
 import org.mywms.facade.BasicFacadeBean;
 import org.mywms.facade.FacadeException;
+import org.mywms.model.Zone;
 
 import de.linogistix.los.inventory.service.MovementOrderLogService;
 import de.linogistix.los.inventory.businessservice.LOSGoodsReceiptComponent;
@@ -27,6 +28,7 @@ import de.linogistix.los.inventory.model.LOSAdvice;
 import de.linogistix.los.inventory.model.LOSAdviceState;
 import de.linogistix.los.inventory.model.LOSGoodsReceipt;
 import de.linogistix.los.inventory.model.LOSGoodsReceiptState;
+import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.MovementOrderLog;
 import de.linogistix.los.inventory.service.LOSGoodsReceiptService;
 import de.linogistix.los.query.BODTO;
@@ -49,13 +51,13 @@ public class MovementOrderFacadeBean extends BasicFacadeBean implements
 
 
 	public boolean createMovementOrder(String organization, String formation,
-			String militaryUnit,Long sequenceNumber,Date currDate, String plateNo, String vehicleType,
+			Zone militaryUnit,Long sequenceNumber,Date currDate, String plateNo, String vehicleType,
 			Date movementDate,
 			String orderNo, String movementPurpose,
-			String movementRoute, String movementLoad, String driverName,
+			String movementRoute, String movementLoad, LOSOrderReceipients driver,
 			String passenger1Name, String passenger2Name,
 			String passenger3Name, String passenger4Name) throws FacadeException {
-		movementOrderService.create(organization, formation, militaryUnit, sequenceNumber, currDate, plateNo, vehicleType, movementDate, orderNo, movementPurpose, movementRoute, movementLoad, driverName, passenger1Name, passenger2Name, passenger3Name, passenger4Name);
+		movementOrderService.create(organization, formation, militaryUnit, sequenceNumber, currDate, plateNo, vehicleType, movementDate, orderNo, movementPurpose, movementRoute, movementLoad, driver, passenger1Name, passenger2Name, passenger3Name, passenger4Name);
 			
 		return true;
 	}

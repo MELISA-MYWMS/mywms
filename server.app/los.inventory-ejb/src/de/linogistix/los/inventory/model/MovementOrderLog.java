@@ -12,7 +12,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -20,6 +22,7 @@ import javax.persistence.UniqueConstraint;
 
 import org.mywms.model.BasicEntity;
 import org.mywms.model.BusinessException;
+import org.mywms.model.Zone;
 import org.mywms.service.ConstraintViolatedException;
 
 @Entity
@@ -35,7 +38,7 @@ public class MovementOrderLog extends BasicEntity {
 
 	private String organization;
 	private String formation;
-	private String militaryUnit;
+	private Zone militaryUnit;
 	private long sequenceNumber;
 	private Date currDate;
 	private String plateNo;
@@ -45,7 +48,7 @@ public class MovementOrderLog extends BasicEntity {
 	private String movementPurpose;
 	private String movementRoute;
 	private String movementLoad;
-	private String driverName;
+	private LOSOrderReceipients driver;
 	private String passenger1Name;
 	private String passenger2Name;
 	private String passenger3Name;
@@ -108,11 +111,11 @@ public class MovementOrderLog extends BasicEntity {
 	}
 
 	@Column(nullable = false)
-	public String getMilitaryUnit() {
+	public Zone getMilitaryUnit() {
 		return this.militaryUnit;
 	}
 
-	public void setMilitaryUnit(String militaryUnit) {
+	public void setMilitaryUnit(Zone militaryUnit) {
 		this.militaryUnit = militaryUnit;
 	}
 
@@ -195,13 +198,15 @@ public class MovementOrderLog extends BasicEntity {
 		this.movementLoad = movementLoad;
 	}
 	
-	@Column(nullable = false)
-	public String getDriverName() {
-		return this.driverName;
+	//@Column(nullable = false)
+	@ManyToOne(optional=false)
+	@JoinColumn(name="identityCard")
+	public LOSOrderReceipients getDriver() {
+		return this.driver;
 	}
 
-	public void setDriverName(String driverName) {
-		this.driverName = driverName;
+	public void setDriver(LOSOrderReceipients driver) {
+		this.driver = driver;
 	}
 	
 	public String getPassenger1Name() {

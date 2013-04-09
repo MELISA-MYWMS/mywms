@@ -5,10 +5,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 
+import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.MovementOrderLog;
 import de.linogistix.los.query.BODTO;
 
 import org.apache.log4j.Logger;
+import org.mywms.model.Zone;
 
 public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 
@@ -17,7 +19,7 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 
 	private String organization;
 	private String formation;
-	private String militaryUnit;
+	private Zone militaryUnit;
 	private long sequenceNumber;
 	private Date currDate;
 	private String plateNo;
@@ -27,7 +29,7 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 	private String movementPurpose;
 	private String movementRoute;
 	private String movementLoad;
-	private String driverName;
+	private LOSOrderReceipients driver;
 	private String passenger1Name;
 	private String passenger2Name;
 	private String passenger3Name;
@@ -47,7 +49,7 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		this.movementPurpose = idat.getMovementPurpose();
 		this.movementRoute = idat.getMovementRoute();
 		this.movementLoad = idat.getMovementLoad();
-		this.driverName = idat.getDriverName();
+		this.driver = idat.getDriver();
 		this.passenger1Name = idat.getPassenger1Name();
 		this.passenger2Name = idat.getPassenger2Name();
 		this.passenger3Name = idat.getPassenger3Name();
@@ -59,10 +61,10 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 	}
 
 	public MovementOrderLogTO(Long id, int version, String transactionId, String organization, String formation,
-			String militaryUnit,Long sequenceNumber,Date currDate, String plateNo, String vehicleType,
+			Zone militaryUnit,Long sequenceNumber,Date currDate, String plateNo, String vehicleType,
 			Date movementDate,
 			String orderNo, String movementPurpose,
-			String movementRoute, String movementLoad, String driverName,
+			String movementRoute, String movementLoad, LOSOrderReceipients driver,
 			String passenger1Name, String passenger2Name,
 			String passenger3Name, String passenger4Name) {
 		super(id, version, transactionId);
@@ -78,7 +80,7 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		this.movementPurpose = movementPurpose;
 		this.movementRoute = movementRoute;
 		this.movementLoad = movementLoad;
-		this.driverName = driverName;
+		this.driver = driver;
 		this.passenger1Name = passenger1Name;
 		this.passenger2Name = passenger2Name;
 		this.passenger3Name = passenger3Name;
@@ -102,11 +104,11 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		this.formation = formation;
 	}
 
-	public String getMilitaryUnit() {
+	public Zone getMilitaryUnit() {
 		return this.militaryUnit;
 	}
 
-	public void setMilitaryUnit(String militaryUnit) {
+	public void setMilitaryUnit(Zone militaryUnit) {
 		this.militaryUnit = militaryUnit;
 	}
 
@@ -182,12 +184,12 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		this.movementLoad = movementLoad;
 	}
 
-	public String getDriverName() {
-		return this.driverName;
+	public LOSOrderReceipients getDriver() {
+		return this.driver;
 	}
 
-	public void setDriverName(String driverName) {
-		this.driverName = driverName;
+	public void setDriver(LOSOrderReceipients driver) {
+		this.driver= driver;
 	}
 
 	public String getPassenger1Name() {

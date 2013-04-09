@@ -36,7 +36,7 @@ public class BOMovementOrderLogMasterNode extends BOMasterNode {
                 sheet.put(organization);
                 BOMasterNodeProperty<String>formation= new BOMasterNodeProperty<String>("formation", String.class, to.getFormation(), InventoryBundleResolver.class);
 		sheet.put(formation);
-                BOMasterNodeProperty<String>militaryUnit= new BOMasterNodeProperty<String>("militaryUnit", String.class, to.getMilitaryUnit(), InventoryBundleResolver.class);
+                BOMasterNodeProperty<String>militaryUnit= new BOMasterNodeProperty<String>("militaryUnit", String.class, to.getMilitaryUnit().getName(), InventoryBundleResolver.class);
 		sheet.put(militaryUnit);
                 BOMasterNodeProperty<Long>sequenceNumber= new BOMasterNodeProperty<Long>("sequenceNumber", Long.class, to.getSequenceNumber(), InventoryBundleResolver.class);
 		sheet.put(sequenceNumber);
@@ -54,7 +54,7 @@ public class BOMovementOrderLogMasterNode extends BOMasterNode {
 		sheet.put(movementRoute);
 		BOMasterNodeProperty<String> movementLoad= new BOMasterNodeProperty<String>("movementLoad", String.class, to.getMovementLoad(), InventoryBundleResolver.class);
 		sheet.put(movementLoad);
-                BOMasterNodeProperty<String> driverName= new BOMasterNodeProperty<String>("driverName", String.class, to.getDriverName(), InventoryBundleResolver.class);
+                BOMasterNodeProperty<String> driverName= new BOMasterNodeProperty<String>("driverName", String.class, to.getDriver().toShortString(), InventoryBundleResolver.class);
                 sheet.put(driverName);
                 BOMasterNodeProperty<String> passenger1Name= new BOMasterNodeProperty<String>("passenger1Name", String.class, to.getPassenger1Name(), InventoryBundleResolver.class);
                 sheet.put(passenger1Name);

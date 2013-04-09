@@ -108,4 +108,5 @@ public class VehicleDataServiceBean
         	throw new EntityNotFoundException(ServiceExceptionKey.NO_ENTITY_WITH_NAME);
         }
     }
+   
 }

@@ -1,9 +1,12 @@
 package de.linogistix.los.inventory.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -24,9 +27,12 @@ public class LOSOrderReceipients extends BasicEntity {
 	private String rankAbbr;
 	private String rank;
 	private String organizationUnit;
+	private LOSOrderReceipientsType type; //e.g Driver
 	private BigDecimal phone;
 	private BigDecimal vpnPhone;
 	private String tokenId;
+	
+	private List<MovementOrderLog> movementOrders = new ArrayList<MovementOrderLog>();
 	
 	/**
 	 * Get personnelId.
@@ -172,6 +178,14 @@ public class LOSOrderReceipients extends BasicEntity {
 	    this.organizationUnit = organizationUnit;
 	}
 	
+	public LOSOrderReceipientsType getType() {
+		return type;
+	}
+
+	public void setType(LOSOrderReceipientsType type) {
+		this.type = type;
+	}
+
 	/**
 	 * Get phone.
 	 *
@@ -223,6 +237,14 @@ public class LOSOrderReceipients extends BasicEntity {
 	public String getTokenId()
 	{
 	    return tokenId;
+	}
+	@OneToMany(mappedBy="driver")
+	public List<MovementOrderLog> getMovementOrders(){
+		return movementOrders;
+	}
+	
+	public void setMovementOrders(List<MovementOrderLog> movementOrders){
+		this.movementOrders = movementOrders;
 	}
 	
 	/**

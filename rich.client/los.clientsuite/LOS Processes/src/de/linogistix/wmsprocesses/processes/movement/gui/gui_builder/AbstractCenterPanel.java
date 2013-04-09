@@ -7,11 +7,15 @@
  */
 package de.linogistix.wmsprocesses.processes.movement.gui.gui_builder;
 
+import de.linogistix.common.gui.component.controls.BOAutoFilteringComboBox;
 import de.linogistix.common.gui.component.controls.LOSDateFormattedTextField;
 import java.awt.Color;
+import java.text.ParseException;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import org.mywms.model.VehicleData;
+import org.openide.util.Exceptions;
 
 /**
  *
@@ -31,259 +35,294 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel6 = new javax.swing.JPanel();
-        jSplitPane3 = new javax.swing.JSplitPane();
-        jPanel7 = new javax.swing.JPanel();
-        VehicleTypeComboBox1 = new javax.swing.JComboBox();
-        VehiclePlateNoFormattedTextField1 = new javax.swing.JFormattedTextField();
-        OrderNoFormattedTextField1 = new javax.swing.JFormattedTextField();
-        MovementDateTextField1 = new de.linogistix.common.gui.component.controls.LOSDateFormattedTextField();
-        jPanel8 = new javax.swing.JPanel();
-        VehicleTypeLabel1 = new javax.swing.JLabel();
-        VehiclePlateNoLabel1 = new javax.swing.JLabel();
-        MovementDateLabel1 = new javax.swing.JLabel();
-        OrderNoLabel1 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        MovementLoadLabel = new javax.swing.JLabel();
-        MovementRouteLabel = new javax.swing.JLabel();
-        MovementPurposeLabel = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        MovementPurposeTextField = new javax.swing.JTextField();
-        MovementLoadTextField = new javax.swing.JTextField();
-        MovementRouteTextField = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        VehicleTypeComboBox = new javax.swing.JComboBox();
-        VehiclePlateNoFormattedTextField = new javax.swing.JFormattedTextField();
-        OrderNoFormattedTextField = new javax.swing.JFormattedTextField();
-        MovementDateTextField = new de.linogistix.common.gui.component.controls.LOSDateFormattedTextField();
-        jPanel4 = new javax.swing.JPanel();
-        VehicleTypeLabel = new javax.swing.JLabel();
-        VehiclePlateNoLabel = new javax.swing.JLabel();
-        MovementDateLabel = new javax.swing.JLabel();
-        OrderNoLabel = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
-        Passenger1Label = new javax.swing.JLabel();
-        Passenger2Label = new javax.swing.JLabel();
-        DriverNameLabel = new javax.swing.JLabel();
-        Passenger3Label = new javax.swing.JLabel();
-        Passenger4Label = new javax.swing.JLabel();
-        Passenger3TextField = new javax.swing.JTextField();
-        Passenger4TextField = new javax.swing.JTextField();
-        Passenger2TextField = new javax.swing.JTextField();
-        Passenger1TextField = new javax.swing.JTextField();
-        DriverNameTextField = new javax.swing.JTextField();
-        jPanel15 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        FormationComboBox = new javax.swing.JComboBox();
-        MillitaryUnitComboBox = new javax.swing.JComboBox();
-        OrganizationComboBox = new javax.swing.JComboBox();
-        currentDateTextField = new de.linogistix.common.gui.component.controls.LOSDateFormattedTextField();
-        sequenceNumberTextField = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
+        DocumentPropsPanel = new javax.swing.JPanel();
         OrganizationLabel = new javax.swing.JLabel();
+        OrganizationComboBox = new javax.swing.JComboBox();
         FormationLabel = new javax.swing.JLabel();
+        FormationComboBox = new javax.swing.JComboBox();
         MillitaryUnitLabel = new javax.swing.JLabel();
+        MillitaryUnitComboBox = new javax.swing.JComboBox();
         DateLabel = new javax.swing.JLabel();
+        currentDateTextField = new de.linogistix.common.gui.component.controls.LOSDateFormattedTextField();
         SequenceNoLabel = new javax.swing.JLabel();
+        sequenceNumberTextField = new javax.swing.JTextField();
+        MovementPanel = new javax.swing.JPanel();
+        MovementPurposeLabel = new javax.swing.JLabel();
+        MovementPurposeTextField = new javax.swing.JTextField();
+        MovementLoadLabel = new javax.swing.JLabel();
+        MovementLoadTextField = new javax.swing.JTextField();
+        MovementRouteLabel = new javax.swing.JLabel();
+        MovementRouteTextField = new javax.swing.JTextField();
+        VehiclePanel = new javax.swing.JPanel();
+        VehiclePlateNoLabel = new javax.swing.JLabel();
+        VehicleTypeLabel = new javax.swing.JLabel();
+        vehicleTypeTextField = new javax.swing.JTextField();
+        MovementDateLabel = new javax.swing.JLabel();
+        MovementDateTextField = new de.linogistix.common.gui.component.controls.LOSDateFormattedTextField();
+        OrderNoLabel = new javax.swing.JLabel();
+        OrderNoFormattedTextField = new javax.swing.JFormattedTextField();
+        PersonsPanel = new javax.swing.JPanel();
+        DriverNameLabel = new javax.swing.JLabel();
+        Passenger1Label = new javax.swing.JLabel();
+        Passenger1TextField = new javax.swing.JTextField();
+        Passenger2Label = new javax.swing.JLabel();
+        Passenger2TextField = new javax.swing.JTextField();
+        Passenger3Label = new javax.swing.JLabel();
+        Passenger3TextField = new javax.swing.JTextField();
+        Passenger4Label = new javax.swing.JLabel();
+        Passenger4TextField = new javax.swing.JTextField();
 
-        jSplitPane3.setDividerLocation(200);
-        jSplitPane3.setPreferredSize(new java.awt.Dimension(200, 224));
-
-        VehicleTypeComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        VehiclePlateNoFormattedTextField1.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.VehiclePlateNoFormattedTextField1.text")); // NOI18N
-
-        try {
-            OrderNoFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###/####-###")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        OrderNoFormattedTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        OrderNoFormattedTextField1.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.OrderNoFormattedTextField1.text")); // NOI18N
-
-        org.jdesktop.layout.GroupLayout jPanel7Layout = new org.jdesktop.layout.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel7Layout.createSequentialGroup()
-                .add(jPanel7Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(VehiclePlateNoFormattedTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(VehicleTypeComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 183, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(OrderNoFormattedTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 119, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(MovementDateTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(135, Short.MAX_VALUE))
+        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(VehicleTypeComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(VehiclePlateNoFormattedTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(MovementDateTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(11, 11, 11)
-                .add(OrderNoFormattedTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
-        );
-
-        jSplitPane3.setRightComponent(jPanel7);
-
-        jPanel8.setMinimumSize(new java.awt.Dimension(100, 200));
-        jPanel8.setPreferredSize(new java.awt.Dimension(120, 224));
-        jPanel8.setRequestFocusEnabled(false);
-
-        VehicleTypeLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        VehicleTypeLabel1.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.VehicleTypeLabel1.text")); // NOI18N
-
-        VehiclePlateNoLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        VehiclePlateNoLabel1.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.VehiclePlateNoLabel1.text")); // NOI18N
-
-        MovementDateLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        MovementDateLabel1.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementDateLabel1.text")); // NOI18N
-
-        OrderNoLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        OrderNoLabel1.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.OrderNoLabel1.text")); // NOI18N
-
-        org.jdesktop.layout.GroupLayout jPanel8Layout = new org.jdesktop.layout.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel8Layout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, OrderNoLabel1)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, VehicleTypeLabel1)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, VehiclePlateNoLabel1)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, MovementDateLabel1))
-                .addContainerGap())
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel8Layout.createSequentialGroup()
-                .add(18, 18, 18)
-                .add(VehicleTypeLabel1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(VehiclePlateNoLabel1)
-                .add(18, 18, 18)
-                .add(MovementDateLabel1)
-                .add(18, 18, 18)
-                .add(OrderNoLabel1)
-                .addContainerGap(84, Short.MAX_VALUE))
-        );
-
-        jSplitPane3.setLeftComponent(jPanel8);
-
-        org.jdesktop.layout.GroupLayout jPanel6Layout = new org.jdesktop.layout.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jSplitPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 424, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jSplitPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 218, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(400, 500));
+        setMinimumSize(new java.awt.Dimension(153, 388));
+        setLayout(new java.awt.GridBagLayout());
 
-        jPanel11.setMinimumSize(new java.awt.Dimension(100, 200));
-        jPanel11.setPreferredSize(new java.awt.Dimension(120, 224));
-        jPanel11.setRequestFocusEnabled(false);
+        DocumentPropsPanel.setMinimumSize(new java.awt.Dimension(300, 175));
+        DocumentPropsPanel.setLayout(new java.awt.GridBagLayout());
 
-        MovementLoadLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        MovementLoadLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementLoadLabel.text")); // NOI18N
+        OrganizationLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        OrganizationLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.OrganizationLabel.text_1")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
+        DocumentPropsPanel.add(OrganizationLabel, gridBagConstraints);
+        OrganizationLabel.getAccessibleContext().setAccessibleName(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.jLabel1.AccessibleContext.accessibleName_1")); // NOI18N
 
-        MovementRouteLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        MovementRouteLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementRouteLabel.text")); // NOI18N
+        OrganizationComboBox.setMaximumSize(new java.awt.Dimension(180, 27));
+        OrganizationComboBox.setMinimumSize(new java.awt.Dimension(180, 27));
+        OrganizationComboBox.setPreferredSize(new java.awt.Dimension(180, 27));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        DocumentPropsPanel.add(OrganizationComboBox, gridBagConstraints);
+
+        FormationLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FormationLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.FormationLabel.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
+        DocumentPropsPanel.add(FormationLabel, gridBagConstraints);
+
+        FormationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        FormationComboBox.setMaximumSize(new java.awt.Dimension(180, 27));
+        FormationComboBox.setMinimumSize(new java.awt.Dimension(180, 27));
+        FormationComboBox.setPreferredSize(new java.awt.Dimension(180, 27));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        DocumentPropsPanel.add(FormationComboBox, gridBagConstraints);
+
+        MillitaryUnitLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        MillitaryUnitLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MillitaryUnitLabel.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
+        DocumentPropsPanel.add(MillitaryUnitLabel, gridBagConstraints);
+
+        MillitaryUnitComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        MillitaryUnitComboBox.setMaximumSize(new java.awt.Dimension(180, 27));
+        MillitaryUnitComboBox.setMinimumSize(new java.awt.Dimension(180, 27));
+        MillitaryUnitComboBox.setPreferredSize(new java.awt.Dimension(180, 27));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        DocumentPropsPanel.add(MillitaryUnitComboBox, gridBagConstraints);
+
+        DateLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        DateLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.DateLabel.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
+        DocumentPropsPanel.add(DateLabel, gridBagConstraints);
+
+        currentDateTextField.setToolTipText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.currentDateTextField.toolTipText")); // NOI18N
+        currentDateTextField.setMaximumSize(new java.awt.Dimension(180, 27));
+        currentDateTextField.setMinimumSize(new java.awt.Dimension(180, 27));
+        currentDateTextField.setPreferredSize(new java.awt.Dimension(180, 27));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        DocumentPropsPanel.add(currentDateTextField, gridBagConstraints);
+
+        SequenceNoLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        SequenceNoLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.SequenceNoLabel.text_1")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
+        DocumentPropsPanel.add(SequenceNoLabel, gridBagConstraints);
+
+        sequenceNumberTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.sequenceNumberTextField.text")); // NOI18N
+        sequenceNumberTextField.setMaximumSize(new java.awt.Dimension(180, 27));
+        sequenceNumberTextField.setMinimumSize(new java.awt.Dimension(180, 27));
+        sequenceNumberTextField.setPreferredSize(new java.awt.Dimension(180, 27));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        DocumentPropsPanel.add(sequenceNumberTextField, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        add(DocumentPropsPanel, gridBagConstraints);
+
+        MovementPanel.setLayout(new java.awt.GridBagLayout());
 
         MovementPurposeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         MovementPurposeLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementPurposeLabel.text")); // NOI18N
-
-        org.jdesktop.layout.GroupLayout jPanel11Layout = new org.jdesktop.layout.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel11Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .add(jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, MovementPurposeLabel)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, MovementLoadLabel)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, MovementRouteLabel))
-                .addContainerGap())
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(MovementPurposeLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(MovementLoadLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(MovementRouteLabel)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 4);
+        MovementPanel.add(MovementPurposeLabel, gridBagConstraints);
 
         MovementPurposeTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementPurposeTextField.text")); // NOI18N
+        MovementPurposeTextField.setMinimumSize(new java.awt.Dimension(100, 27));
+        MovementPurposeTextField.setPreferredSize(new java.awt.Dimension(180, 27));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        MovementPanel.add(MovementPurposeTextField, gridBagConstraints);
 
-        MovementLoadTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementLoadTextField.text")); // NOI18N
+        MovementLoadLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        MovementLoadLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementLoadLabel.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 4);
+        MovementPanel.add(MovementLoadLabel, gridBagConstraints);
 
-        MovementRouteTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementRouteTextField.text")); // NOI18N
+        MovementLoadTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementPurposeTextField.text")); // NOI18N
+        MovementLoadTextField.setMinimumSize(new java.awt.Dimension(100, 27));
+        MovementLoadTextField.setPreferredSize(new java.awt.Dimension(180, 27));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        MovementPanel.add(MovementLoadTextField, gridBagConstraints);
 
-        org.jdesktop.layout.GroupLayout jPanel10Layout = new org.jdesktop.layout.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(MovementPurposeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 192, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(MovementRouteTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 192, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(MovementLoadTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 192, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(MovementPurposeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(MovementLoadTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(MovementRouteTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
+        MovementRouteLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        MovementRouteLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementRouteLabel.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 4);
+        MovementPanel.add(MovementRouteLabel, gridBagConstraints);
 
-        org.jdesktop.layout.GroupLayout jPanel9Layout = new org.jdesktop.layout.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel9Layout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(jPanel11, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 138, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .add(jPanel11, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 86, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        );
+        MovementRouteTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementPurposeTextField.text")); // NOI18N
+        MovementRouteTextField.setMinimumSize(new java.awt.Dimension(100, 27));
+        MovementRouteTextField.setPreferredSize(new java.awt.Dimension(180, 27));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        MovementPanel.add(MovementRouteTextField, gridBagConstraints);
 
-        VehicleTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        add(MovementPanel, gridBagConstraints);
 
-        VehiclePlateNoFormattedTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.VehiclePlateNoFormattedTextField.text")); // NOI18N
+        VehiclePanel.setMinimumSize(new java.awt.Dimension(300, 133));
+        VehiclePanel.setPreferredSize(new java.awt.Dimension(325, 241));
+        VehiclePanel.setLayout(new java.awt.GridBagLayout());
+
+        VehiclePlateNoLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        VehiclePlateNoLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.VehiclePlateNoLabel.text")); // NOI18N
+        VehiclePlateNoLabel.setAlignmentX(0.5F);
+        VehiclePlateNoLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 4);
+        VehiclePanel.add(VehiclePlateNoLabel, gridBagConstraints);
+
+        VehicleTypeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        VehicleTypeLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.VehicleTypeLabel.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
+        VehiclePanel.add(VehicleTypeLabel, gridBagConstraints);
+
+        vehicleTypeTextField.setEditable(false);
+        vehicleTypeTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.vehicleTypeTextField.text")); // NOI18N
+        vehicleTypeTextField.setMinimumSize(new java.awt.Dimension(99, 27));
+        vehicleTypeTextField.setPreferredSize(new java.awt.Dimension(180, 27));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        VehiclePanel.add(vehicleTypeTextField, gridBagConstraints);
+
+        MovementDateLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        MovementDateLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementDateLabel.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
+        VehiclePanel.add(MovementDateLabel, gridBagConstraints);
+
+        MovementDateTextField.setMaximumSize(new java.awt.Dimension(180, 27));
+        MovementDateTextField.setMinimumSize(new java.awt.Dimension(180, 27));
+        MovementDateTextField.setPreferredSize(new java.awt.Dimension(180, 27));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        VehiclePanel.add(MovementDateTextField, gridBagConstraints);
+
+        OrderNoLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        OrderNoLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.OrderNoLabel.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
+        VehiclePanel.add(OrderNoLabel, gridBagConstraints);
 
         try {
             OrderNoFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###/####-###")));
@@ -292,352 +331,133 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         }
         OrderNoFormattedTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         OrderNoFormattedTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.OrderNoFormattedTextField.text")); // NOI18N
+        OrderNoFormattedTextField.setMaximumSize(new java.awt.Dimension(120, 27));
+        OrderNoFormattedTextField.setMinimumSize(new java.awt.Dimension(100, 27));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        VehiclePanel.add(OrderNoFormattedTextField, gridBagConstraints);
 
-        org.jdesktop.layout.GroupLayout jPanel5Layout = new org.jdesktop.layout.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel5Layout.createSequentialGroup()
-                .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(VehiclePlateNoFormattedTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(VehicleTypeComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 183, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(OrderNoFormattedTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 119, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(MovementDateTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(VehicleTypeComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(VehiclePlateNoFormattedTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(MovementDateTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(11, 11, 11)
-                .add(OrderNoFormattedTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        add(VehiclePanel, gridBagConstraints);
 
-        jPanel4.setMinimumSize(new java.awt.Dimension(100, 200));
-        jPanel4.setPreferredSize(new java.awt.Dimension(120, 224));
-        jPanel4.setRequestFocusEnabled(false);
-
-        VehicleTypeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        VehicleTypeLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.VehicleTypeLabel.text")); // NOI18N
-
-        VehiclePlateNoLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        VehiclePlateNoLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.VehiclePlateNoLabel.text")); // NOI18N
-
-        MovementDateLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        MovementDateLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementDateLabel.text")); // NOI18N
-
-        OrderNoLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        OrderNoLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.OrderNoLabel.text")); // NOI18N
-
-        org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, VehicleTypeLabel)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, VehiclePlateNoLabel)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, OrderNoLabel)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, MovementDateLabel))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4Layout.createSequentialGroup()
-                .add(18, 18, 18)
-                .add(VehicleTypeLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(VehiclePlateNoLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(MovementDateLabel)
-                .add(13, 13, 13)
-                .add(OrderNoLabel)
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-
-        org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 138, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 132, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel14.setMinimumSize(new java.awt.Dimension(100, 200));
-        jPanel14.setPreferredSize(new java.awt.Dimension(120, 224));
-        jPanel14.setRequestFocusEnabled(false);
-
-        Passenger1Label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Passenger1Label.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger1Label.text")); // NOI18N
-
-        Passenger2Label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Passenger2Label.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger2Label.text")); // NOI18N
+        PersonsPanel.setLayout(new java.awt.GridBagLayout());
 
         DriverNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         DriverNameLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.DriverNameLabel.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
+        PersonsPanel.add(DriverNameLabel, gridBagConstraints);
 
-        Passenger3Label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Passenger3Label.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger3Label.text")); // NOI18N
-
-        Passenger4Label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Passenger4Label.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger4Label.text")); // NOI18N
-
-        org.jdesktop.layout.GroupLayout jPanel14Layout = new org.jdesktop.layout.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel14Layout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
-                .add(jPanel14Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, DriverNameLabel)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, Passenger1Label)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, Passenger2Label)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, Passenger3Label)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, Passenger4Label)))
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(DriverNameLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(Passenger1Label)
-                .add(11, 11, 11)
-                .add(Passenger2Label)
-                .add(11, 11, 11)
-                .add(Passenger3Label)
-                .add(18, 18, 18)
-                .add(Passenger4Label)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        Passenger3TextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger3TextField.text")); // NOI18N
-        Passenger3TextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                Passenger3TextKeyFieldTyped(evt);
-            }
-        });
-
-        Passenger4TextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger3TextField.text")); // NOI18N
-        Passenger4TextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                Passenger4TextFieldKeyTyped(evt);
-            }
-        });
-
-        Passenger2TextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger3TextField.text")); // NOI18N
-        Passenger2TextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                Passenger2TextKeyFieldTyped(evt);
-            }
-        });
+        Passenger1Label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Passenger1Label.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger1Label.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
+        PersonsPanel.add(Passenger1Label, gridBagConstraints);
 
         Passenger1TextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger3TextField.text")); // NOI18N
+        Passenger1TextField.setMinimumSize(new java.awt.Dimension(100, 27));
         Passenger1TextField.setNextFocusableComponent(Passenger2TextField);
+        Passenger1TextField.setPreferredSize(new java.awt.Dimension(180, 27));
         Passenger1TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 Passenger3TextKeyFieldTyped(evt);
                 Passenger1TextFieldKeyTyped(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        PersonsPanel.add(Passenger1TextField, gridBagConstraints);
 
-        DriverNameTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger3TextField.text")); // NOI18N
-        DriverNameTextField.setNextFocusableComponent(Passenger1TextField);
-        DriverNameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+        Passenger2Label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Passenger2Label.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger2Label.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
+        PersonsPanel.add(Passenger2Label, gridBagConstraints);
+
+        Passenger2TextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger3TextField.text")); // NOI18N
+        Passenger2TextField.setMinimumSize(new java.awt.Dimension(100, 27));
+        Passenger2TextField.setPreferredSize(new java.awt.Dimension(180, 27));
+        Passenger2TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                DriverNameTextFieldKeyTyped(evt);
+                Passenger2TextKeyFieldTyped(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        PersonsPanel.add(Passenger2TextField, gridBagConstraints);
 
-        org.jdesktop.layout.GroupLayout jPanel12Layout = new org.jdesktop.layout.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 143, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(10, 10, 10)
-                .add(jPanel12Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(DriverNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 192, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(Passenger2TextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 192, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(Passenger1TextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 192, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(Passenger4TextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 192, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(Passenger3TextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 192, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel12Layout.createSequentialGroup()
-                .add(jPanel12Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel12Layout.createSequentialGroup()
-                        .add(11, 11, 11)
-                        .add(DriverNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(Passenger1TextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(Passenger2TextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(Passenger3TextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(Passenger4TextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jPanel14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 143, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        Passenger3Label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Passenger3Label.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger3Label.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
+        PersonsPanel.add(Passenger3Label, gridBagConstraints);
 
-        jPanel2.setPreferredSize(new java.awt.Dimension(80, 159));
+        Passenger3TextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger3TextField.text")); // NOI18N
+        Passenger3TextField.setMinimumSize(new java.awt.Dimension(100, 27));
+        Passenger3TextField.setPreferredSize(new java.awt.Dimension(180, 27));
+        Passenger3TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Passenger3TextKeyFieldTyped(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        PersonsPanel.add(Passenger3TextField, gridBagConstraints);
 
-        FormationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Passenger4Label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Passenger4Label.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger4Label.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
+        PersonsPanel.add(Passenger4Label, gridBagConstraints);
 
-        MillitaryUnitComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Passenger4TextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger3TextField.text")); // NOI18N
+        Passenger4TextField.setMinimumSize(new java.awt.Dimension(100, 27));
+        Passenger4TextField.setPreferredSize(new java.awt.Dimension(180, 27));
+        Passenger4TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Passenger4TextFieldKeyTyped(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
+        PersonsPanel.add(Passenger4TextField, gridBagConstraints);
 
-        currentDateTextField.setToolTipText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.currentDateTextField.toolTipText")); // NOI18N
-
-        sequenceNumberTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.sequenceNumberTextField.text")); // NOI18N
-
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel2Layout.createSequentialGroup()
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(OrganizationComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 172, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(FormationComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 172, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(MillitaryUnitComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 172, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(currentDateTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(sequenceNumberTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 151, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(OrganizationComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(FormationComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(MillitaryUnitComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(currentDateTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(sequenceNumberTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel1.setPreferredSize(new java.awt.Dimension(500, 500));
-
-        OrganizationLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.OrganizationLabel.text_1")); // NOI18N
-
-        FormationLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.FormationLabel.text")); // NOI18N
-
-        MillitaryUnitLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MillitaryUnitLabel.text")); // NOI18N
-
-        DateLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.DateLabel.text")); // NOI18N
-
-        SequenceNoLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.SequenceNoLabel.text_1")); // NOI18N
-
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, OrganizationLabel)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, FormationLabel)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, MillitaryUnitLabel)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, DateLabel)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, SequenceNoLabel))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(OrganizationLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(FormationLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(MillitaryUnitLabel)
-                .add(18, 18, 18)
-                .add(DateLabel)
-                .add(18, 18, 18)
-                .add(SequenceNoLabel)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-
-        OrganizationLabel.getAccessibleContext().setAccessibleName(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.jLabel1.AccessibleContext.accessibleName_1")); // NOI18N
-
-        org.jdesktop.layout.GroupLayout jPanel15Layout = new org.jdesktop.layout.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 134, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 188, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel15Layout.createSequentialGroup()
-                .add(19, 19, 19)
-                .add(jPanel15Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 157, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 157, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel1.getAccessibleContext().setAccessibleParent(jPanel1);
-
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jPanel15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(18, 18, 18)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel12, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jPanel9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(92, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(29, 29, 29)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jPanel15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jPanel12, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jPanel9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(420, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        add(PersonsPanel, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Passenger3TextKeyFieldTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Passenger3TextKeyFieldTyped
@@ -677,37 +497,25 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_Passenger4TextFieldKeyTyped
 
-    private void DriverNameTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DriverNameTextFieldKeyTyped
-        JTextField thisTextField = (JTextField) evt.getComponent();
-        if (thisTextField.getText().length() > 3 && thisTextField.getText().contains(" ")) {
-            thisTextField.setForeground(Color.BLACK);
-        } else {
-            thisTextField.setForeground(Color.RED);
-        }     
-    }//GEN-LAST:event_DriverNameTextFieldKeyTyped
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JLabel DateLabel;
+    protected javax.swing.JPanel DocumentPropsPanel;
     protected javax.swing.JLabel DriverNameLabel;
-    protected javax.swing.JTextField DriverNameTextField;
     protected javax.swing.JComboBox FormationComboBox;
     protected javax.swing.JLabel FormationLabel;
     protected javax.swing.JComboBox MillitaryUnitComboBox;
     protected javax.swing.JLabel MillitaryUnitLabel;
     protected javax.swing.JLabel MovementDateLabel;
-    protected javax.swing.JLabel MovementDateLabel1;
     protected de.linogistix.common.gui.component.controls.LOSDateFormattedTextField MovementDateTextField;
-    protected de.linogistix.common.gui.component.controls.LOSDateFormattedTextField MovementDateTextField1;
     protected javax.swing.JLabel MovementLoadLabel;
     protected javax.swing.JTextField MovementLoadTextField;
+    private javax.swing.JPanel MovementPanel;
     protected javax.swing.JLabel MovementPurposeLabel;
     protected javax.swing.JTextField MovementPurposeTextField;
     protected javax.swing.JLabel MovementRouteLabel;
     protected javax.swing.JTextField MovementRouteTextField;
     protected javax.swing.JFormattedTextField OrderNoFormattedTextField;
-    protected javax.swing.JFormattedTextField OrderNoFormattedTextField1;
     protected javax.swing.JLabel OrderNoLabel;
-    protected javax.swing.JLabel OrderNoLabel1;
     protected javax.swing.JComboBox OrganizationComboBox;
     protected javax.swing.JLabel OrganizationLabel;
     protected javax.swing.JLabel Passenger1Label;
@@ -718,35 +526,18 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
     protected javax.swing.JTextField Passenger3TextField;
     protected javax.swing.JLabel Passenger4Label;
     protected javax.swing.JTextField Passenger4TextField;
+    protected javax.swing.JPanel PersonsPanel;
     protected javax.swing.JLabel SequenceNoLabel;
-    protected javax.swing.JFormattedTextField VehiclePlateNoFormattedTextField;
-    protected javax.swing.JFormattedTextField VehiclePlateNoFormattedTextField1;
+    protected javax.swing.JPanel VehiclePanel;
     protected javax.swing.JLabel VehiclePlateNoLabel;
-    protected javax.swing.JLabel VehiclePlateNoLabel1;
-    protected javax.swing.JComboBox VehicleTypeComboBox;
-    protected javax.swing.JComboBox VehicleTypeComboBox1;
     protected javax.swing.JLabel VehicleTypeLabel;
-    protected javax.swing.JLabel VehicleTypeLabel1;
     protected de.linogistix.common.gui.component.controls.LOSDateFormattedTextField currentDateTextField;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JSplitPane jSplitPane3;
     protected javax.swing.JTextField sequenceNumberTextField;
+    protected javax.swing.JTextField vehicleTypeTextField;
     // End of variables declaration//GEN-END:variables
 
-    protected LOSDateFormattedTextField getVurrentDateTextField() {
+    protected LOSDateFormattedTextField getCurrentDateTextField() {
         return (LOSDateFormattedTextField) currentDateTextField;
     }
 
@@ -773,4 +564,6 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
     protected JLabel getVehiclePlateNoLabel() {
         return VehiclePlateNoLabel;
     }
+
+ 
 }

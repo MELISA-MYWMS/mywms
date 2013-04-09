@@ -11,8 +11,10 @@ import java.util.Date;
 import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
+import org.mywms.model.Zone;
 import org.mywms.service.BasicServiceBean;
 
+import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.MovementOrderLog;
 
 @Stateless
@@ -23,11 +25,11 @@ public class MovementOrderLogServiceBean extends BasicServiceBean<MovementOrderL
 
 	
 	public MovementOrderLog create(String organization,
-			String formation, String militaryUnit, long sequenceNumber,Date currDate
+			String formation, Zone militaryUnit, long sequenceNumber,Date currDate
 			, String plateNo,
 			String vehicleType, Date movementDate, String orderNo,
 			String movementPurpose, String movementRoute, String movementLoad,
-			String driverName, String passenger1Name, String passenger2Name,
+			LOSOrderReceipients driver, String passenger1Name, String passenger2Name,
 			String passenger3Name, String passenger4Name) {
 		
 		MovementOrderLog myNewMovementOrder;
@@ -36,7 +38,7 @@ public class MovementOrderLogServiceBean extends BasicServiceBean<MovementOrderL
 		if (organization == null || formation == null || militaryUnit == null
 				|| plateNo == null || movementDate == null
 				|| orderNo == null || movementRoute == null
-				|| movementPurpose == null || driverName == null) {
+				|| movementPurpose == null || driver == null) {
 			throw new NullPointerException(
 					"Creating new movement order failed due to missing parameter(s)");
 		} else {
@@ -55,7 +57,7 @@ public class MovementOrderLogServiceBean extends BasicServiceBean<MovementOrderL
 			myNewMovementOrder.setMovementRoute(movementRoute);
 			if (movementLoad != null)
 				myNewMovementOrder.setMovementLoad(movementLoad);
-			myNewMovementOrder.setDriverName(driverName);
+			myNewMovementOrder.setDriver(driver);
 			myNewMovementOrder.setPassenger1Name(passenger1Name);
 			myNewMovementOrder.setPassenger2Name(passenger2Name);
 			myNewMovementOrder.setPassenger3Name(passenger3Name);
