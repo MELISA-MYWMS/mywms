@@ -26,6 +26,7 @@ import de.linogistix.los.inventory.exception.InventoryException;
 import de.linogistix.los.inventory.exception.InventoryExceptionKey;
 import de.linogistix.los.inventory.model.LOSAdvice;
 import de.linogistix.los.inventory.model.LOSAdviceState;
+import de.linogistix.los.inventory.model.LOSFormationType;
 import de.linogistix.los.inventory.model.LOSGoodsReceipt;
 import de.linogistix.los.inventory.model.LOSGoodsReceiptState;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
@@ -50,16 +51,16 @@ public class MovementOrderFacadeBean extends BasicFacadeBean implements
 	protected EntityManager manager;
 
 
-	public boolean createMovementOrder(String organization, String formation,
-			Zone militaryUnit,Long sequenceNumber,Date currDate, String plateNo, String vehicleType,
+	public MovementOrderLog createMovementOrder(String organization, LOSFormationType formation,
+			Zone militaryUnit,Date currDate, String plateNo, String vehicleType,
 			Date movementDate,
 			String orderNo, String movementPurpose,
 			String movementRoute, String movementLoad, LOSOrderReceipients driver,
 			String passenger1Name, String passenger2Name,
 			String passenger3Name, String passenger4Name) throws FacadeException {
-		movementOrderService.create(organization, formation, militaryUnit, sequenceNumber, currDate, plateNo, vehicleType, movementDate, orderNo, movementPurpose, movementRoute, movementLoad, driver, passenger1Name, passenger2Name, passenger3Name, passenger4Name);
+			return movementOrderService.create(organization, formation, militaryUnit, currDate, plateNo, vehicleType, movementDate, orderNo, movementPurpose, movementRoute, movementLoad, driver, passenger1Name, passenger2Name, passenger3Name, passenger4Name);
 			
-		return true;
+		 
 	}
 
 }

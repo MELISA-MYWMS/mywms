@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Deltio kinhsews" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.7715610000000048"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="Organization" class="java.lang.String"/>
+	<field name="Formation" class="java.lang.String"/>
+	<field name="MilitaryUnit" class="java.lang.String"/>
+	<field name="DriverName" class="java.lang.String"/>
+	<field name="PlateNo" class="java.lang.String"/>
+	<field name="vehicleType" class="java.lang.String"/>
+	<field name="movementDate" class="java.util.Date"/>
+	<field name="orderNo" class="java.lang.String"/>
+	<field name="movementPurpose" class="java.lang.String"/>
+	<field name="movementRoute" class="java.lang.String"/>
+	<field name="movementLoad" class="java.lang.String"/>
+	<field name="passenger1Name" class="java.lang.String"/>
+	<field name="passenger2Name" class="java.lang.String"/>
+	<field name="passenger3Name" class="java.lang.String"/>
+	<field name="passenger4Name" class="java.lang.String"/>
+	<field name="currDate" class="java.util.Date"/>
+	<field name="IDImage" class="java.io.InputStream"/>
+	<field name="VehicleID" class="java.io.InputStream"/>
+	<field name="DriverID" class="java.io.InputStream"/>
+	<field name="transactionId" class="java.lang.String"/>
+	<detail>
+		<band height="802">
+			<textField isBlankWhenNull="true">
+				<reportElement x="87" y="37" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MilitaryUnit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="63" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Ημερομηνία]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="87" y="50" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{transactionId}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="87" y="10" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Organization}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="23" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Σχηματισμός]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="87" y="23" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Formation}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="87" y="63" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{currDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="10" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[ΓΕΝ. ΕΠΙΤΕΛΕΙΟ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="50" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Αύξ. Αριθμ.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="37" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Μονάδα]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="128" y="83" width="313" height="35"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial Unicode MS" size="20" isBold="true" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[ΔΙΑΤΑΓΗ - ΔΕΛΤΙΟ ΚΙΝΗΣΕΩΣ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="163" y="190" width="100" height="12"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DriverName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="166" y="127" width="109" height="13"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PlateNo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="69" y="140" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{movementDate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="227" y="140" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{orderNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="28" y="165" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[3. Δρομολόγιο:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="106" y="153" width="191" height="12"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{movementPurpose}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="69" y="177" width="445" height="13"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{movementLoad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="297" y="127" width="44" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[όχημα]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="122" y="202" width="153" height="12"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{passenger1Name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="28" y="127" width="190" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[1. Εγκρίνεται όπως το υπ' αριθμ. ΕΣ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="140" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[κινηθεί τη]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="163" y="140" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[σύμφωνα με την]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="190" width="174" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[5. Επιβαίνοντα πρόσωπα: Οδηγός:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="153" width="115" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[2. Σκοπός κινήσεως:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="86" y="165" width="422" height="12"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{movementRoute}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="28" y="177" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[4. Φορτίο:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="506" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Διαρροές γενικά:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="315" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Προθέρμανση]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="194" y="374" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" isUnderline="false" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="439" y="449" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="486" y="282" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="486" y="292" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="75" y="412" width="119" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[(2) Κατά τις Στάσεις:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="399" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Συμπλέκτης:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="433" y="507" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="194" y="326" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="269" y="292" width="130" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Εργαλεία - Εξαρτήματα:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="405" y="386" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="75" y="360" width="119" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[(1) Κατά τη διαδρομή:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="496" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Φρένα:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="439" y="471" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="405" y="374" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="433" y="495" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="100" y="449" width="320" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Υπερθέμανση Ταμπούρων, Κιβωτίων ταχυτήτων, Διαφορικού:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="194" y="292" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="439" y="427" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="51" y="292" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Διαρροές γενικά]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="486" y="315" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="269" y="303" width="120" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Εγχειρίδια - Έντυπα:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="326" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Όργανα]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="439" y="460" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="269" y="315" width="203" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Σύστημα Δνσεως - Ελαστικά Επίσωτρα.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="427" width="320" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Έλεγχος ανωμαλιών που παρατηρήθηκαν κατά την Διαδρομή]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="194" y="282" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="100" y="386" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Φρένα:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="497" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Συσφίξεις:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="262" width="154" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" isBold="true" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[α. Πριν από την Αποστολή:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="282" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Παραμορφώσεις-ελλείψεις]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="303" width="118" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Καύσιμα-Λάδια-Νερό]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="520" width="189" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[(4) Παρατηρήσεις: από τα πιο πάνω ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="264" y="520" width="228" height="36"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="194" y="386" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="275" y="400" width="120" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Ασυνήθιστοι θόρυβοι:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="374" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Σύστημα Δνσεως:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="194" y="303" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="100" y="438" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Διαρροές:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="460" width="130" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Αναρτήρες, Μπάρες:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="69" y="540" width="470" height="29"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[(5) Σύμβολα: Για κάθε εργασία η οποία εκτελείται τοποθετείται το σημείο "" αν όλα έχουν καλά ή το σημείο "" αν βρέθηκαν ελλατώματα]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="194" y="507" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="305" y="505" width="115" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Καύσιμα, Λάδι, Νερό:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="439" y="437" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="269" y="282" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Πυροσβεστήρες]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="387" width="120" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Λειτουργία Κινητήρος:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="471" width="130" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Επίσωτρα-Ερπύστριες:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="194" y="399" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="405" y="399" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="486" y="303" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="194" y="315" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="75" y="484" width="125" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[(3) Κατά την Αποστολή:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="375" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Όργανα:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="194" y="496" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="346" width="154" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" isBold="true" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[β. Κατά την Αποστολή:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="245" width="276" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" isBold="true" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[6. ΥΠΟΧΡΕΩΣΕΙΣ ΟΔΗΓΟΥ ΓΙΑ ΘΕΜΑΤΑ ΣΥΝΤΗΡΗΣΗΣ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="112" y="560" width="39" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Όχημα]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="433" y="560" width="53" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Οδηγός]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="30" y="577" width="201" height="46"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+				<imageExpression class="java.io.InputStream"><![CDATA[$F{VehicleID}]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame">
+				<reportElement x="349" y="577" width="201" height="46"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[$F{DriverID}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="205" y="649" width="144" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" isBold="true" isUnderline="true" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[ΕΛΑΒΕ ΧΩΡΑ ΕΠΙΘΕΩΡΗΣΗ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="668" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[ΟΔΗΓΟΥ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="387" y="668" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[ΟΧΗΜΑΤΟΣ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="241" y="680" width="100" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="363" y="680" width="100" height="42"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="43" y="732" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[ΔΚΤΗΣ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="732" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[ΔΙΜΟΙΡΙΤΗΣ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="732" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[ΤΕΧΝΙΚΟΣ Ο.Σ.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="792" width="100" height="1"/>
+			</line>
+			<line>
+				<reportElement x="212" y="793" width="100" height="1"/>
+			</line>
+			<line>
+				<reportElement x="421" y="791" width="100" height="1"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="324" y="202" width="184" height="12"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{passenger3Name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="122" y="218" width="152" height="12"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{passenger2Name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="327" y="127" width="81" height="13"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vehicleType}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement stretchType="RelativeToTallestObject" x="430" y="1" width="146" height="146"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[$F{IDImage}]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="324" y="218" width="184" height="12"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{passenger4Name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="408" y="623" width="100" height="12"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DriverName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="75" y="623" width="109" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Unicode MS" size="8" pdfEncoding="Cp1253"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PlateNo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

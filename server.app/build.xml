@@ -138,6 +138,8 @@
 		</copy>
 		<!-- Ensure appserver.properties are always modified -->
 		<touch file="${project.war.dir}/META-INF/appserver.properties" />
+		
+		
 		<!-- deploy -->
 <delete includeemptydirs="true" failonerror="false">
 			<fileset dir="${project.ear.dir}/los-mobile.war" />

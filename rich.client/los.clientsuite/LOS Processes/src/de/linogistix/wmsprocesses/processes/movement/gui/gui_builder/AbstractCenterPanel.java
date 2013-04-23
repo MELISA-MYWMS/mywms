@@ -183,6 +183,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         DocumentPropsPanel.add(SequenceNoLabel, gridBagConstraints);
 
         sequenceNumberTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.sequenceNumberTextField.text")); // NOI18N
+        sequenceNumberTextField.setEnabled(false);
         sequenceNumberTextField.setMaximumSize(new java.awt.Dimension(180, 27));
         sequenceNumberTextField.setMinimumSize(new java.awt.Dimension(180, 27));
         sequenceNumberTextField.setPreferredSize(new java.awt.Dimension(180, 27));

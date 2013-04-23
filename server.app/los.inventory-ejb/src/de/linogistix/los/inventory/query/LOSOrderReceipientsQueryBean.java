@@ -37,6 +37,7 @@ public class LOSOrderReceipientsQueryBean extends BusinessObjectQueryBean<LOSOrd
 	"lastName",
 	"rankAbbr",
 	"rank",
+	"type",
 	"organizationUnit",
 	"phone",
 	"vpnPhone",

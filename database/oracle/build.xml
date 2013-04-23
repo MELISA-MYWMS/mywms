@@ -72,6 +72,7 @@
 
 			<classpath refid="toolslib" />
 			<transaction src="./initdata-oracle.sql" />
+			<transaction src="./data.sql" />
 
 		</sql>
 	</target>

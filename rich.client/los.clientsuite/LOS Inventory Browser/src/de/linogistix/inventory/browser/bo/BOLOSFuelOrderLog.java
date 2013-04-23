@@ -97,5 +97,4 @@ public class BOLOSFuelOrderLog extends BO {
     protected Class<? extends Node> initBoMasterNodeType() {
         return BOLOSFuelOrderLogMasterNode.class;
     }
-
 }

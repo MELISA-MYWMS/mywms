@@ -10,6 +10,9 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -17,6 +20,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -37,9 +41,9 @@ public class MovementOrderLog extends BasicEntity {
 	private String transactionId;
 
 	private String organization;
-	private String formation;
+	private LOSFormationType formation;
 	private Zone militaryUnit;
-	private long sequenceNumber;
+	//private long sequenceNumber;
 	private Date currDate;
 	private String plateNo;
 	private String vehicleType;
@@ -101,16 +105,18 @@ public class MovementOrderLog extends BasicEntity {
 		this.organization = organization;
 	}
 
-	 @Column(nullable = false)
-	public String getFormation() {
+	
+	@Column(nullable = false)
+	public LOSFormationType getFormation() {
 		return this.formation;
 	}
 
-	public void setFormation(String formation) {
+	public void setFormation(LOSFormationType formation) {
 		this.formation = formation;
 	}
 
-	@Column(nullable = false)
+	@ManyToOne(optional=false)
+	@JoinColumn(name="name")
 	public Zone getMilitaryUnit() {
 		return this.militaryUnit;
 	}
@@ -118,15 +124,17 @@ public class MovementOrderLog extends BasicEntity {
 	public void setMilitaryUnit(Zone militaryUnit) {
 		this.militaryUnit = militaryUnit;
 	}
-
-	@Column(nullable = false, unique = true)
+	
+	/*@Id
+    @SequenceGenerator(name = "Mov_Seq", sequenceName = "Mov_Seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Mov_Seq")
 	public Long getSequenceNumber() {
 		return this.sequenceNumber;
 	}
 
-	public void setSequenceNumber(Long sequenceNumber) {
+	protected void setSequenceNumber(Long sequenceNumber) {
 		this.sequenceNumber = sequenceNumber;
-	}
+	}*/
 	
 	@Column(nullable = false)
 	public Date getCurrDate() {

@@ -39,7 +39,7 @@ public class MovementOrderLogQueryBean extends
 				"organization",
 				"formation", 
 				"militaryUnit",
-				"sequenceNumber",
+				//"sequenceNumber",
 				"currDate",
 				"plateNo",  
 				"vehicleType",

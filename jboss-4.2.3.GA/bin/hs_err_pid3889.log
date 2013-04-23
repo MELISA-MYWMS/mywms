@@ -1,0 +1,796 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007f6c9468dc00, pid=3889, tid=140104237242112
+#
+# JRE version: 6.0_38-b05
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (20.13-b02 mixed mode linux-amd64 compressed oops)
+# Problematic frame:
+# j  javax.management.JMRuntimeException.<init>()V+1
+#
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f6c64597000):  JavaThread "ScannerThread" daemon [_thread_in_Java, id=3906, stack(0x00007f6c8f3ad000,0x00007f6c8f4ae000)]
+
+siginfo:si_signo=SIGSEGV: si_errno=0, si_code=1 (SEGV_MAPERR), si_addr=0x000000010004e8f0
+
+Registers:
+RAX=0x00000000dae00000, RBX=0x00000000000000b7, RCX=0x00000000ffffd0c8, RDX=0x000000000000a300
+RSP=0x00007f6c8f4a9738, RBP=0x00007f6c8f4a9780, RSI=0x00007f6c987873b0, RDI=0x00007f6c6458a978
+R8 =0x0000000000000ffc, R9 =0x00007f6c987873b8, R10=0x00007f6c988cdf80, R11=0x00007f6c987727d0
+R12=0x0000000000000000, R13=0x00000000fb2a7911, R14=0x00007f6c8f4a9790, R15=0x00007f6c64597000
+RIP=0x00007f6c9468dc00, EFLAGS=0x0000000000010206, CSGSFS=0x0000000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007f6c8f4a9738)
+0x00007f6c8f4a9738:   00000000dae00000 00007f6c8f4a9740
+0x00007f6c8f4a9748:   00000000fb2a7911 00007f6c8f4a9790
+0x00007f6c8f4a9758:   00000000ffffd0c8 0000000000000000
+0x00007f6c8f4a9768:   00000000fb2a7920 0000000000000000
+0x00007f6c8f4a9778:   00007f6c8f4a9790 00007f6c8f4a97d8
+0x00007f6c8f4a9788:   00007f6c94677a82 00000000dae00000
+0x00007f6c8f4a9798:   00007f6c8f4a9798 00000000fb2a84d1
+0x00007f6c8f4a97a8:   00007f6c8f4a97f0 00000000ffffd170
+0x00007f6c8f4a97b8:   0000000000000000 00000000fb2a84e0
+0x00007f6c8f4a97c8:   00007f6c8f4a9790 00007f6c8f4a97e8
+0x00007f6c8f4a97d8:   00007f6c8f4a9840 00007f6c94677a82
+0x00007f6c8f4a97e8:   00000000faea78b0 00000000dae00000
+0x00007f6c8f4a97f8:   00000000dae00000 00007f6c8f4a9800
+0x00007f6c8f4a9808:   00000000fb30060a 00007f6c8f4a9858
+0x00007f6c8f4a9818:   00000000fb305548 0000000000000000
+0x00007f6c8f4a9828:   00000000fb300648 00007f6c8f4a97e8
+0x00007f6c8f4a9838:   00007f6c8f4a9850 00007f6c8f4a98a0
+0x00007f6c8f4a9848:   00007f6c94677a82 00000000faea78b0
+0x00007f6c8f4a9858:   00000000e883a798 00007f6c8f4a9860
+0x00007f6c8f4a9868:   00000000fb2fc7f8 00007f6c8f4a9938
+0x00007f6c8f4a9878:   00000000fb305548 00000000fe799678
+0x00007f6c8f4a9888:   00000000fb2fca50 00007f6c8f4a9850
+0x00007f6c8f4a9898:   00007f6c8f4a9920 00007f6c8f4a9980
+0x00007f6c8f4a98a8:   00007f6c94677e03 0000000000000000
+0x00007f6c8f4a98b8:   0000000000000000 0000000000000000
+0x00007f6c8f4a98c8:   0000000000000000 0000000000000000
+0x00007f6c8f4a98d8:   0000000000000000 00000000faea78b0
+0x00007f6c8f4a98e8:   0000000000000000 00000000e883a620
+0x00007f6c8f4a98f8:   0000000000000000 00000000e883a6e8
+0x00007f6c8f4a9908:   00000000e883a818 00000000e883a800
+0x00007f6c8f4a9918:   00000000fb5a9e18 00000000e59c3fe8
+0x00007f6c8f4a9928:   00000000e883a568 00000000fb5a9e18 
+
+Instructions: (pc=0x00007f6c9468dc00)
+0x00007f6c9468dbe0:   00 00 48 83 ec 10 48 89 04 24 e9 01 00 00 00 50
+0x00007f6c9468dbf0:   4c 89 6d c8 41 0f b7 55 01 48 8b 4d d8 c1 e2 02
+0x00007f6c9468dc00:   8b 5c d1 28 c1 eb 10 81 e3 ff 00 00 00 81 fb b7
+0x00007f6c9468dc10:   00 00 00 0f 84 99 00 00 00 bb b7 00 00 00 e8 05 
+
+Register to memory mapping:
+
+RAX=0x00000000dae00000 is an oop
+javax.management.RuntimeErrorException 
+ - klass: 'javax/management/RuntimeErrorException'
+RBX=0x00000000000000b7 is an unknown value
+RCX=0x00000000ffffd0c8 is an oop
+{constant pool cache} 
+ - klass: {other class}
+RDX=0x000000000000a300 is an unknown value
+RSP=0x00007f6c8f4a9738 is pointing into the stack for thread: 0x00007f6c64597000
+RBP=0x00007f6c8f4a9780 is pointing into the stack for thread: 0x00007f6c64597000
+RSI=0x00007f6c987873b0: <offset 0xa9e3b0> in /usr/java/jdk1.6.0_38/jre/lib/amd64/server/libjvm.so at 0x00007f6c97ce9000
+RDI=0x00007f6c6458a978 is an unknown value
+R8 =0x0000000000000ffc is an unknown value
+R9 =0x00007f6c987873b8: <offset 0xa9e3b8> in /usr/java/jdk1.6.0_38/jre/lib/amd64/server/libjvm.so at 0x00007f6c97ce9000
+R10=0x00007f6c988cdf80: <offset 0xbe4f80> in /usr/java/jdk1.6.0_38/jre/lib/amd64/server/libjvm.so at 0x00007f6c97ce9000
+R11=0x00007f6c987727d0: <offset 0xa897d0> in /usr/java/jdk1.6.0_38/jre/lib/amd64/server/libjvm.so at 0x00007f6c97ce9000
+R12=0x0000000000000000 is an unknown value
+R13=0x00000000fb2a7911 is an oop
+{constMethod} 
+ - klass: {other class}
+ - method:       0x00000000fb2a7920 {method} '<init>' '()V' in 'javax/management/JMRuntimeException'
+ - exceptions:   0x00000000fae01e98
+bci_from(0xfb2a7911) = 1; print_codes():
+R14=0x00007f6c8f4a9790 is pointing into the stack for thread: 0x00007f6c64597000
+R15=0x00007f6c64597000 is a thread
+
+
+Stack: [0x00007f6c8f3ad000,0x00007f6c8f4ae000],  sp=0x00007f6c8f4a9738,  free space=1009k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+j  javax.management.JMRuntimeException.<init>()V+1
+j  javax.management.RuntimeErrorException.<init>(Ljava/lang/Error;)V+1
+j  org.jboss.mx.server.AbstractMBeanInvoker.rethrowAsMBeanException(Ljava/lang/Throwable;)V+34
+j  org.jboss.mx.server.AbstractMBeanInvoker.invoke(Ljava/lang/String;[Ljava/lang/Object;[Ljava/lang/String;)Ljava/lang/Object;+464
+j  org.jboss.mx.server.MBeanServerImpl.invoke(Ljavax/management/ObjectName;Ljava/lang/String;[Ljava/lang/Object;[Ljava/lang/String;)Ljava/lang/Object;+38
+j  org.jboss.system.ServiceController$ServiceProxy.invoke(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object;+38
+j  $Proxy0.start()V+9
+j  org.jboss.system.ServiceController.start(Ljavax/management/ObjectName;)V+295
+j  sun.reflect.GeneratedMethodAccessor9.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+40
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f6c70f6f000 JavaThread "WorkerThread#0[127.0.0.1:33171]" [_thread_blocked, id=4378, stack(0x00007f6c75f6d000,0x00007f6c7606e000)]
+  0x00007f6c60022000 JavaThread "RMI Scheduler(0)" daemon [_thread_blocked, id=4376, stack(0x00007f6c8c09e000,0x00007f6c8c19f000)]
+  0x00007f6c64e8b000 JavaThread "ajp-127.0.0.1-8009-Acceptor-0" daemon [_thread_in_native, id=4271, stack(0x00007f6c8c3a1000,0x00007f6c8c4a2000)]
+  0x00007f6c651bc800 JavaThread "http-127.0.0.1-8443-Acceptor-0" daemon [_thread_in_native, id=4270, stack(0x00007f6c8cc79000,0x00007f6c8cd7a000)]
+  0x00007f6c5c006000 JavaThread "http-127.0.0.1-8080-1" daemon [_thread_blocked, id=4269, stack(0x00007f6c8c817000,0x00007f6c8c918000)]
+  0x00007f6c6505c800 JavaThread "http-127.0.0.1-8080-Acceptor-0" daemon [_thread_in_native, id=4268, stack(0x00007f6c8c918000,0x00007f6c8ca19000)]
+  0x00007f6c64960800 JavaThread "Thread-5" [_thread_blocked, id=4267, stack(0x00007f6c8ca19000,0x00007f6c8cb1a000)]
+  0x00007f6c6505f800 JavaThread "JBossLifeThread" [_thread_blocked, id=4266, stack(0x00007f6c8cb1a000,0x00007f6c8cc1b000)]
+  0x00007f6c64ceb000 JavaThread "UILServerILService Accept Thread" [_thread_in_native, id=3947, stack(0x00007f6c8cfdc000,0x00007f6c8d0dd000)]
+  0x00007f6c64d29800 JavaThread "TimeoutFactory-0" daemon [_thread_blocked, id=3944, stack(0x00007f6c8d0dd000,0x00007f6c8d1de000)]
+  0x00007f6c64d4a000 JavaThread "IdleRemover" daemon [_thread_blocked, id=3940, stack(0x00007f6c8d1de000,0x00007f6c8d2df000)]
+  0x00007f6c64d2a800 JavaThread "Timer-1" daemon [_thread_blocked, id=3939, stack(0x00007f6c8d2df000,0x00007f6c8d3e0000)]
+  0x00007f6c64d2c000 JavaThread "DefaultQuartzScheduler_QuartzSchedulerThread" [_thread_blocked, id=3938, stack(0x00007f6c8d3e0000,0x00007f6c8d4e1000)]
+  0x00007f6c64d1c800 JavaThread "DefaultQuartzScheduler_Worker-9" [_thread_blocked, id=3937, stack(0x00007f6c8d4e1000,0x00007f6c8d5e2000)]
+  0x00007f6c64d1a800 JavaThread "DefaultQuartzScheduler_Worker-8" [_thread_blocked, id=3936, stack(0x00007f6c8d5e2000,0x00007f6c8d6e3000)]
+  0x00007f6c64d18800 JavaThread "DefaultQuartzScheduler_Worker-7" [_thread_blocked, id=3935, stack(0x00007f6c8d6e3000,0x00007f6c8d7e4000)]
+  0x00007f6c64d16800 JavaThread "DefaultQuartzScheduler_Worker-6" [_thread_blocked, id=3934, stack(0x00007f6c8d7e4000,0x00007f6c8d8e5000)]
+  0x00007f6c64d14800 JavaThread "DefaultQuartzScheduler_Worker-5" [_thread_blocked, id=3933, stack(0x00007f6c8d8e5000,0x00007f6c8d9e6000)]
+  0x00007f6c64cf8000 JavaThread "DefaultQuartzScheduler_Worker-4" [_thread_blocked, id=3932, stack(0x00007f6c8d9e6000,0x00007f6c8dae7000)]
+  0x00007f6c64ced800 JavaThread "DefaultQuartzScheduler_Worker-3" [_thread_blocked, id=3931, stack(0x00007f6c8dae7000,0x00007f6c8dbe8000)]
+  0x00007f6c64c05000 JavaThread "DefaultQuartzScheduler_Worker-2" [_thread_blocked, id=3930, stack(0x00007f6c8dbe8000,0x00007f6c8dce9000)]
+  0x00007f6c64c04000 JavaThread "DefaultQuartzScheduler_Worker-1" [_thread_blocked, id=3929, stack(0x00007f6c8dce9000,0x00007f6c8ddea000)]
+  0x00007f6c64ceb800 JavaThread "DefaultQuartzScheduler_Worker-0" [_thread_blocked, id=3928, stack(0x00007f6c8ddea000,0x00007f6c8deeb000)]
+  0x00007f6c649d2000 JavaThread "WorkManager(2)-1" daemon [_thread_blocked, id=3927, stack(0x00007f6c8df9a000,0x00007f6c8e09b000)]
+  0x00007f6c64944800 JavaThread "JBossMQ Cache Reference Softner" daemon [_thread_blocked, id=3926, stack(0x00007f6c8e0a7000,0x00007f6c8e1a8000)]
+  0x00007f6c647da000 JavaThread "ContainerBackgroundProcessor[StandardEngine[jboss.web]]" daemon [_thread_blocked, id=3925, stack(0x00007f6c8e1a8000,0x00007f6c8e2a9000)]
+  0x00007f6c64855000 JavaThread "SubscriptionWatchDog" [_thread_blocked, id=3924, stack(0x00007f6c8e2c3000,0x00007f6c8e3c4000)]
+  0x00007f6c70ceb000 JavaThread "ServerSocketRefresh" daemon [_thread_blocked, id=3923, stack(0x00007f6c8e46c000,0x00007f6c8e56d000)]
+  0x00007f6c64695800 JavaThread "AcceptorThread#0:3873" [_thread_in_native, id=3922, stack(0x00007f6c8e56d000,0x00007f6c8e66e000)]
+  0x00007f6c6c002000 JavaThread "ServerSocketRefresh" daemon [_thread_blocked, id=3920, stack(0x00007f6c8e69d000,0x00007f6c8e79e000)]
+  0x00007f6c64639000 JavaThread "AcceptorThread#0:4446" [_thread_in_native, id=3919, stack(0x00007f6c8e79e000,0x00007f6c8e89f000)]
+  0x00007f6c64635800 JavaThread "PooledInvokerAcceptor#0-4445" [_thread_in_native, id=3918, stack(0x00007f6c8e89f000,0x00007f6c8e9a0000)]
+  0x00007f6c64635000 JavaThread "RMI TCP Accept-4444" daemon [_thread_in_native, id=3917, stack(0x00007f6c8e9a0000,0x00007f6c8eaa1000)]
+  0x00007f6c64627800 JavaThread "Listener:45215" daemon [_thread_in_native, id=3916, stack(0x00007f6c8eaa1000,0x00007f6c8eba2000)]
+  0x00007f6c645e7800 JavaThread "Thread-4" daemon [_thread_blocked, id=3914, stack(0x00007f6c8eba2000,0x00007f6c8eca3000)]
+  0x00007f6c6460b800 JavaThread "Thread-3" daemon [_thread_blocked, id=3913, stack(0x00007f6c8eca3000,0x00007f6c8eda4000)]
+  0x00007f6c645df000 JavaThread "Listener:34270" daemon [_thread_in_native, id=3912, stack(0x00007f6c8eda4000,0x00007f6c8eea5000)]
+  0x00007f6c645a9800 JavaThread "JBoss System Threads(1)-2" daemon [_thread_in_native, id=3911, stack(0x00007f6c8eea8000,0x00007f6c8efa9000)]
+  0x00007f6c64586000 JavaThread "GC Daemon" daemon [_thread_blocked, id=3910, stack(0x00007f6c8efa9000,0x00007f6c8f0aa000)]
+  0x00007f6c645bf800 JavaThread "RMI Reaper" [_thread_blocked, id=3909, stack(0x00007f6c8f0aa000,0x00007f6c8f1ab000)]
+  0x00007f6c6458e800 JavaThread "RMI TCP Accept-1098" daemon [_thread_in_native, id=3908, stack(0x00007f6c8f1ab000,0x00007f6c8f2ac000)]
+  0x00007f6c645d0000 JavaThread "JBoss System Threads(1)-1" daemon [_thread_in_native, id=3907, stack(0x00007f6c8f2ac000,0x00007f6c8f3ad000)]
+=>0x00007f6c64597000 JavaThread "ScannerThread" daemon [_thread_in_Java, id=3906, stack(0x00007f6c8f3ad000,0x00007f6c8f4ae000)]
+  0x00007f6c6457d800 JavaThread "Timer-0" daemon [_thread_blocked, id=3905, stack(0x00007f6c8f4b5000,0x00007f6c8f5b6000)]
+  0x00007f6c90007000 JavaThread "DestroyJavaVM" [_thread_blocked, id=3891, stack(0x00007f6c97be8000,0x00007f6c97ce9000)]
+  0x00007f6c90092000 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=3902, stack(0x00007f6c8fafb000,0x00007f6c8fbfc000)]
+  0x00007f6c9008f800 JavaThread "C2 CompilerThread1" daemon [_thread_in_native, id=3901, stack(0x00007f6c7606e000,0x00007f6c7616f000)]
+  0x00007f6c9008d000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=3900, stack(0x00007f6c8fbfc000,0x00007f6c8fcfd000)]
+  0x00007f6c9008b000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=3899, stack(0x00007f6c8fcfd000,0x00007f6c8fdfe000)]
+  0x00007f6c9006e800 JavaThread "Finalizer" daemon [_thread_blocked, id=3898, stack(0x00007f6c8fdfe000,0x00007f6c8feff000)]
+  0x00007f6c9006c800 JavaThread "Reference Handler" daemon [_thread_blocked, id=3897, stack(0x00007f6c8feff000,0x00007f6c90000000)]
+
+Other Threads:
+  0x00007f6c90066000 VMThread [stack: 0x00007f6c940a4000,0x00007f6c941a5000] [id=3896]
+  0x00007f6c9009d000 WatcherThread [stack: 0x00007f6c8f9fa000,0x00007f6c8fafb000] [id=3903]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ def new generation   total 55296K, used 913K [0x00000000dae00000, 0x00000000de9f0000, 0x00000000e58a0000)
+  eden space 49216K,   1% used [0x00000000dae00000, 0x00000000daee4780, 0x00000000dde10000)
+  from space 6080K,   0% used [0x00000000de400000, 0x00000000de400000, 0x00000000de9f0000)
+  to   space 6080K,   0% used [0x00000000dde10000, 0x00000000dde10000, 0x00000000de400000)
+ tenured generation   total 122420K, used 52689K [0x00000000e58a0000, 0x00000000ed02d000, 0x00000000fae00000)
+   the space 122420K,  43% used [0x00000000e58a0000, 0x00000000e8c14738, 0x00000000e8c14800, 0x00000000ed02d000)
+ compacting perm gen  total 83968K, used 83956K [0x00000000fae00000, 0x0000000100000000, 0x0000000100000000)
+   the space 83968K,  99% used [0x00000000fae00000, 0x00000000ffffd1f8, 0x00000000ffffd200, 0x0000000100000000)
+No shared spaces configured.
+
+Code Cache  [0x00007f6c94672000, 0x00007f6c94c52000, 0x00007f6c97672000)
+ total_blobs=1792 nmethods=1340 adapters=405 free_code_cache=44379520 largest_free_block=34880
+
+Dynamic libraries:
+40000000-40009000 r-xp 00000000 fd:00 396914                             /usr/java/jdk1.6.0_38/jre/bin/java
+40108000-4010a000 rwxp 00008000 fd:00 396914                             /usr/java/jdk1.6.0_38/jre/bin/java
+41863000-41884000 rwxp 00000000 00:00 0                                  [heap]
+dae00000-de9f0000 rwxp 00000000 00:00 0 
+de9f0000-e58a0000 rwxp 00000000 00:00 0 
+e58a0000-ed02d000 rwxp 00000000 00:00 0 
+ed02d000-fae00000 rwxp 00000000 00:00 0 
+fae00000-100000000 rwxp 00000000 00:00 0 
+3ab4200000-3ab4220000 r-xp 00000000 fd:00 1947                           /lib64/ld-2.12.so
+3ab441f000-3ab4420000 r-xp 0001f000 fd:00 1947                           /lib64/ld-2.12.so
+3ab4420000-3ab4421000 rwxp 00020000 fd:00 1947                           /lib64/ld-2.12.so
+3ab4421000-3ab4422000 rwxp 00000000 00:00 0 
+3ab4600000-3ab4789000 r-xp 00000000 fd:00 2310                           /lib64/libc-2.12.so
+3ab4789000-3ab4989000 ---p 00189000 fd:00 2310                           /lib64/libc-2.12.so
+3ab4989000-3ab498d000 r-xp 00189000 fd:00 2310                           /lib64/libc-2.12.so
+3ab498d000-3ab498e000 rwxp 0018d000 fd:00 2310                           /lib64/libc-2.12.so
+3ab498e000-3ab4993000 rwxp 00000000 00:00 0 
+3ab4a00000-3ab4a02000 r-xp 00000000 fd:00 11859                          /lib64/libdl-2.12.so
+3ab4a02000-3ab4c02000 ---p 00002000 fd:00 11859                          /lib64/libdl-2.12.so
+3ab4c02000-3ab4c03000 r-xp 00002000 fd:00 11859                          /lib64/libdl-2.12.so
+3ab4c03000-3ab4c04000 rwxp 00003000 fd:00 11859                          /lib64/libdl-2.12.so
+3ab4e00000-3ab4e17000 r-xp 00000000 fd:00 9686                           /lib64/libpthread-2.12.so
+3ab4e17000-3ab5017000 ---p 00017000 fd:00 9686                           /lib64/libpthread-2.12.so
+3ab5017000-3ab5018000 r-xp 00017000 fd:00 9686                           /lib64/libpthread-2.12.so
+3ab5018000-3ab5019000 rwxp 00018000 fd:00 9686                           /lib64/libpthread-2.12.so
+3ab5019000-3ab501d000 rwxp 00000000 00:00 0 
+3ab5200000-3ab5283000 r-xp 00000000 fd:00 4147                           /lib64/libm-2.12.so
+3ab5283000-3ab5482000 ---p 00083000 fd:00 4147                           /lib64/libm-2.12.so
+3ab5482000-3ab5483000 r-xp 00082000 fd:00 4147                           /lib64/libm-2.12.so
+3ab5483000-3ab5484000 rwxp 00083000 fd:00 4147                           /lib64/libm-2.12.so
+3ab5600000-3ab5607000 r-xp 00000000 fd:00 29892                          /lib64/librt-2.12.so
+3ab5607000-3ab5806000 ---p 00007000 fd:00 29892                          /lib64/librt-2.12.so
+3ab5806000-3ab5807000 r-xp 00006000 fd:00 29892                          /lib64/librt-2.12.so
+3ab5807000-3ab5808000 rwxp 00007000 fd:00 29892                          /lib64/librt-2.12.so
+3ab6e00000-3ab6f39000 r-xp 00000000 fd:00 12009                          /usr/lib64/libX11.so.6.3.0
+3ab6f39000-3ab7139000 ---p 00139000 fd:00 12009                          /usr/lib64/libX11.so.6.3.0
+3ab7139000-3ab713f000 rwxp 00139000 fd:00 12009                          /usr/lib64/libX11.so.6.3.0
+3ab7200000-3ab721b000 r-xp 00000000 fd:00 11238                          /usr/lib64/libxcb.so.1.1.0
+3ab721b000-3ab741a000 ---p 0001b000 fd:00 11238                          /usr/lib64/libxcb.so.1.1.0
+3ab741a000-3ab741b000 rwxp 0001a000 fd:00 11238                          /usr/lib64/libxcb.so.1.1.0
+3ab7600000-3ab7602000 r-xp 00000000 fd:00 5645                           /usr/lib64/libXau.so.6.0.0
+3ab7602000-3ab7802000 ---p 00002000 fd:00 5645                           /usr/lib64/libXau.so.6.0.0
+3ab7802000-3ab7803000 rwxp 00002000 fd:00 5645                           /usr/lib64/libXau.so.6.0.0
+3ab7e00000-3ab7e11000 r-xp 00000000 fd:00 12054                          /usr/lib64/libXext.so.6.4.0
+3ab7e11000-3ab8011000 ---p 00011000 fd:00 12054                          /usr/lib64/libXext.so.6.4.0
+3ab8011000-3ab8012000 rwxp 00011000 fd:00 12054                          /usr/lib64/libXext.so.6.4.0
+3ab9a00000-3ab9a0f000 r-xp 00000000 fd:00 29879                          /usr/lib64/libXi.so.6.1.0
+3ab9a0f000-3ab9c0e000 ---p 0000f000 fd:00 29879                          /usr/lib64/libXi.so.6.1.0
+3ab9c0e000-3ab9c0f000 rwxp 0000e000 fd:00 29879                          /usr/lib64/libXi.so.6.1.0
+3ac2e00000-3ac2e05000 r-xp 00000000 fd:00 43656                          /usr/lib64/libXtst.so.6.1.0
+3ac2e05000-3ac3005000 ---p 00005000 fd:00 43656                          /usr/lib64/libXtst.so.6.1.0
+3ac3005000-3ac3006000 rwxp 00005000 fd:00 43656                          /usr/lib64/libXtst.so.6.1.0
+3ac4e00000-3ac4e16000 r-xp 00000000 fd:00 14884                          /lib64/libnsl-2.12.so
+3ac4e16000-3ac5015000 ---p 00016000 fd:00 14884                          /lib64/libnsl-2.12.so
+3ac5015000-3ac5016000 r-xp 00015000 fd:00 14884                          /lib64/libnsl-2.12.so
+3ac5016000-3ac5017000 rwxp 00016000 fd:00 14884                          /lib64/libnsl-2.12.so
+3ac5017000-3ac5019000 rwxp 00000000 00:00 0 
+7f6c48000000-7f6c48025000 rwxp 00000000 00:00 0 
+7f6c48025000-7f6c4c000000 ---p 00000000 00:00 0 
+7f6c50000000-7f6c50021000 rwxp 00000000 00:00 0 
+7f6c50021000-7f6c54000000 ---p 00000000 00:00 0 
+7f6c54000000-7f6c54021000 rwxp 00000000 00:00 0 
+7f6c54021000-7f6c58000000 ---p 00000000 00:00 0 
+7f6c58000000-7f6c5803c000 rwxp 00000000 00:00 0 
+7f6c5803c000-7f6c5c000000 ---p 00000000 00:00 0 
+7f6c5c000000-7f6c5c360000 rwxp 00000000 00:00 0 
+7f6c5c360000-7f6c60000000 ---p 00000000 00:00 0 
+7f6c60000000-7f6c60045000 rwxp 00000000 00:00 0 
+7f6c60045000-7f6c64000000 ---p 00000000 00:00 0 
+7f6c64000000-7f6c6544d000 rwxp 00000000 00:00 0 
+7f6c6544d000-7f6c68000000 ---p 00000000 00:00 0 
+7f6c68000000-7f6c69f50000 rwxp 00000000 00:00 0 
+7f6c69f50000-7f6c6c000000 ---p 00000000 00:00 0 
+7f6c6c000000-7f6c6c021000 rwxp 00000000 00:00 0 
+7f6c6c021000-7f6c70000000 ---p 00000000 00:00 0 
+7f6c70000000-7f6c7262b000 rwxp 00000000 00:00 0 
+7f6c7262b000-7f6c74000000 ---p 00000000 00:00 0 
+7f6c75d69000-7f6c75d6b000 r-xs 0000c000 fd:02 1439396                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/commons-logging.jar
+7f6c75d6b000-7f6c75d6e000 ---p 00000000 00:00 0 
+7f6c75d6e000-7f6c75e6c000 rwxp 00000000 00:00 0 
+7f6c75e6c000-7f6c75e6f000 ---p 00000000 00:00 0 
+7f6c75e6f000-7f6c75f6d000 rwxp 00000000 00:00 0 
+7f6c75f6d000-7f6c75f70000 ---p 00000000 00:00 0 
+7f6c75f70000-7f6c7606e000 rwxp 00000000 00:00 0 
+7f6c7606e000-7f6c76071000 ---p 00000000 00:00 0 
+7f6c76071000-7f6c7616f000 rwxp 00000000 00:00 0 
+7f6c7616f000-7f6c7c000000 r-xp 00000000 fd:00 6240                       /usr/lib/locale/locale-archive
+7f6c7c000000-7f6c7c021000 rwxp 00000000 00:00 0 
+7f6c7c021000-7f6c80000000 ---p 00000000 00:00 0 
+7f6c80000000-7f6c80021000 rwxp 00000000 00:00 0 
+7f6c80021000-7f6c84000000 ---p 00000000 00:00 0 
+7f6c84000000-7f6c84030000 rwxp 00000000 00:00 0 
+7f6c84030000-7f6c88000000 ---p 00000000 00:00 0 
+7f6c88000000-7f6c8872c000 rwxp 00000000 00:00 0 
+7f6c8872c000-7f6c8c000000 ---p 00000000 00:00 0 
+7f6c8c001000-7f6c8c005000 r-xs 00020000 fd:02 1439395                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/commons-digester-1.8.jar
+7f6c8c005000-7f6c8c007000 r-xs 0025c000 fd:02 1439403                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/jasperreports-fonts-3.6.1.jar
+7f6c8c007000-7f6c8c00c000 r-xs 0002a000 fd:02 1439393                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/commons-beanutils.jar
+7f6c8c00c000-7f6c8c00e000 r-xs 00007000 fd:02 1442310                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/javase.jar
+7f6c8c00e000-7f6c8c010000 r-xs 00013000 fd:02 1439390                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/barbecue-1.1.jar
+7f6c8c010000-7f6c8c014000 r-xs 00026000 fd:02 1439392                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/commons-beanutils-core.jar
+7f6c8c014000-7f6c8c047000 r-xs 0029f000 fd:02 1439401                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/jasperreports-3.0.0.jar
+7f6c8c047000-7f6c8c092000 r-xs 00670000 fd:02 1439399                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/iReport.jar
+7f6c8c092000-7f6c8c09e000 r-xs 00108000 fd:02 1439400                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/itext-1.02b.jar
+7f6c8c09e000-7f6c8c0a1000 ---p 00000000 00:00 0 
+7f6c8c0a1000-7f6c8c19f000 rwxp 00000000 00:00 0 
+7f6c8c19f000-7f6c8c1a0000 r-xp 00000000 fd:00 396970                     /usr/java/jdk1.6.0_38/jre/lib/amd64/librmi.so
+7f6c8c1a0000-7f6c8c29f000 ---p 00001000 fd:00 396970                     /usr/java/jdk1.6.0_38/jre/lib/amd64/librmi.so
+7f6c8c29f000-7f6c8c2a0000 rwxp 00000000 fd:00 396970                     /usr/java/jdk1.6.0_38/jre/lib/amd64/librmi.so
+7f6c8c2a0000-7f6c8c2a3000 ---p 00000000 00:00 0 
+7f6c8c2a3000-7f6c8c3a1000 rwxp 00000000 00:00 0 
+7f6c8c3a1000-7f6c8c3a4000 ---p 00000000 00:00 0 
+7f6c8c3a4000-7f6c8c4a2000 rwxp 00000000 00:00 0 
+7f6c8c4a2000-7f6c8c4be000 r-xs 0020e000 fd:02 786870                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp1730512520969666253los-mobile-exp.war/WEB-INF/lib/richfaces-ui-3.2.0.GA.jar (deleted)
+7f6c8c4be000-7f6c8c4d7000 r-xs 0019e000 fd:02 786869                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp1730512520969666253los-mobile-exp.war/WEB-INF/lib/richfaces-ui-3.1.4.GA.jar (deleted)
+7f6c8c4d7000-7f6c8c4e9000 r-xs 00145000 fd:02 786868                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp1730512520969666253los-mobile-exp.war/WEB-INF/lib/richfaces-impl-3.2.0.GA.jar (deleted)
+7f6c8c4e9000-7f6c8c52b000 r-xp 00000000 fd:00 396985                     /usr/java/jdk1.6.0_38/jre/lib/amd64/xawt/libmawt.so
+7f6c8c52b000-7f6c8c62a000 ---p 00042000 fd:00 396985                     /usr/java/jdk1.6.0_38/jre/lib/amd64/xawt/libmawt.so
+7f6c8c62a000-7f6c8c636000 rwxp 00041000 fd:00 396985                     /usr/java/jdk1.6.0_38/jre/lib/amd64/xawt/libmawt.so
+7f6c8c636000-7f6c8c637000 rwxp 00000000 00:00 0 
+7f6c8c637000-7f6c8c6c9000 r-xp 00000000 fd:00 396940                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libawt.so
+7f6c8c6c9000-7f6c8c7c8000 ---p 00092000 fd:00 396940                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libawt.so
+7f6c8c7c8000-7f6c8c7e2000 rwxp 00091000 fd:00 396940                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libawt.so
+7f6c8c7e2000-7f6c8c806000 rwxp 00000000 00:00 0 
+7f6c8c806000-7f6c8c817000 r-xs 0012e000 fd:02 786867                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp1730512520969666253los-mobile-exp.war/WEB-INF/lib/richfaces-impl-3.1.4.GA.jar (deleted)
+7f6c8c817000-7f6c8c81a000 ---p 00000000 00:00 0 
+7f6c8c81a000-7f6c8c918000 rwxp 00000000 00:00 0 
+7f6c8c918000-7f6c8c91b000 ---p 00000000 00:00 0 
+7f6c8c91b000-7f6c8ca19000 rwxp 00000000 00:00 0 
+7f6c8ca19000-7f6c8ca1c000 ---p 00000000 00:00 0 
+7f6c8ca1c000-7f6c8cb1a000 rwxp 00000000 00:00 0 
+7f6c8cb1a000-7f6c8cb1d000 ---p 00000000 00:00 0 
+7f6c8cb1d000-7f6c8cc1b000 rwxp 00000000 00:00 0 
+7f6c8cc1c000-7f6c8cc1e000 r-xs 00005000 fd:02 1439391                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/commons-beanutils-bean-collections.jar
+7f6c8cc1e000-7f6c8cc25000 r-xs 00067000 fd:02 1442309                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/core.jar
+7f6c8cc25000-7f6c8cc32000 r-xs 0007f000 fd:02 1439394                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/commons-collections-3.2.jar
+7f6c8cc32000-7f6c8cc34000 r-xs 00013000 fd:02 1439397                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/commons-validator-1.1.4.jar
+7f6c8cc34000-7f6c8cc35000 r-xs 00eb8000 fd:02 1439398                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/fonts.jar
+7f6c8cc35000-7f6c8cc50000 r-xs 00158000 fd:02 1439405                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/poi-2.5.1-final-20040804.jar
+7f6c8cc50000-7f6c8cc53000 r-xs 00029000 fd:02 1439404                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/jsch-0.1.39.jar
+7f6c8cc5c000-7f6c8cc5d000 r-xs 00004000 fd:02 660176                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp3528494315252336915los.mobile-comp.jar
+7f6c8cc5d000-7f6c8cc5f000 r-xs 0000c000 fd:02 660166                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp8555023762499009069los.stocktaking-comp.jar
+7f6c8cc5f000-7f6c8cc6e000 r-xs 000a4000 fd:02 660148                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp492055074723770818los.inventory-comp.jar
+7f6c8cc6e000-7f6c8cc73000 r-xs 00024000 fd:02 660142                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp7467159795910576253los.location-comp.jar
+7f6c8cc73000-7f6c8cc79000 r-xs 00025000 fd:02 660141                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp4488299503201663854los.common-comp.jar
+7f6c8cc79000-7f6c8cc7c000 ---p 00000000 00:00 0 
+7f6c8cc7c000-7f6c8cd7a000 rwxp 00000000 00:00 0 
+7f6c8cd7a000-7f6c8cd7d000 ---p 00000000 00:00 0 
+7f6c8cd7d000-7f6c8ce7b000 rwxp 00000000 00:00 0 
+7f6c8ce7b000-7f6c8ce7d000 r-xs 0000c000 fd:02 1439396                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/commons-logging.jar
+7f6c8ce7d000-7f6c8ce81000 r-xs 00020000 fd:02 1439395                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/commons-digester-1.8.jar
+7f6c8ce81000-7f6c8ce83000 r-xs 0025c000 fd:02 1439403                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/jasperreports-fonts-3.6.1.jar
+7f6c8ce83000-7f6c8ce88000 r-xs 0002a000 fd:02 1439393                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/commons-beanutils.jar
+7f6c8ce88000-7f6c8ce8a000 r-xs 00007000 fd:02 1442310                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/javase.jar
+7f6c8ce8a000-7f6c8ce8c000 r-xs 00013000 fd:02 1439390                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/barbecue-1.1.jar
+7f6c8ce8c000-7f6c8ce90000 r-xs 00026000 fd:02 1439392                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/commons-beanutils-core.jar
+7f6c8ce90000-7f6c8cedb000 r-xs 00670000 fd:02 1439399                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/iReport.jar
+7f6c8cedb000-7f6c8cede000 ---p 00000000 00:00 0 
+7f6c8cede000-7f6c8cfdc000 rwxp 00000000 00:00 0 
+7f6c8cfdc000-7f6c8cfdf000 ---p 00000000 00:00 0 
+7f6c8cfdf000-7f6c8d0dd000 rwxp 00000000 00:00 0 
+7f6c8d0dd000-7f6c8d0e0000 ---p 00000000 00:00 0 
+7f6c8d0e0000-7f6c8d1de000 rwxp 00000000 00:00 0 
+7f6c8d1de000-7f6c8d1e1000 ---p 00000000 00:00 0 
+7f6c8d1e1000-7f6c8d2df000 rwxp 00000000 00:00 0 
+7f6c8d2df000-7f6c8d2e2000 ---p 00000000 00:00 0 
+7f6c8d2e2000-7f6c8d3e0000 rwxp 00000000 00:00 0 
+7f6c8d3e0000-7f6c8d3e3000 ---p 00000000 00:00 0 
+7f6c8d3e3000-7f6c8d4e1000 rwxp 00000000 00:00 0 
+7f6c8d4e1000-7f6c8d4e4000 ---p 00000000 00:00 0 
+7f6c8d4e4000-7f6c8d5e2000 rwxp 00000000 00:00 0 
+7f6c8d5e2000-7f6c8d5e5000 ---p 00000000 00:00 0 
+7f6c8d5e5000-7f6c8d6e3000 rwxp 00000000 00:00 0 
+7f6c8d6e3000-7f6c8d6e6000 ---p 00000000 00:00 0 
+7f6c8d6e6000-7f6c8d7e4000 rwxp 00000000 00:00 0 
+7f6c8d7e4000-7f6c8d7e7000 ---p 00000000 00:00 0 
+7f6c8d7e7000-7f6c8d8e5000 rwxp 00000000 00:00 0 
+7f6c8d8e5000-7f6c8d8e8000 ---p 00000000 00:00 0 
+7f6c8d8e8000-7f6c8d9e6000 rwxp 00000000 00:00 0 
+7f6c8d9e6000-7f6c8d9e9000 ---p 00000000 00:00 0 
+7f6c8d9e9000-7f6c8dae7000 rwxp 00000000 00:00 0 
+7f6c8dae7000-7f6c8daea000 ---p 00000000 00:00 0 
+7f6c8daea000-7f6c8dbe8000 rwxp 00000000 00:00 0 
+7f6c8dbe8000-7f6c8dbeb000 ---p 00000000 00:00 0 
+7f6c8dbeb000-7f6c8dce9000 rwxp 00000000 00:00 0 
+7f6c8dce9000-7f6c8dcec000 ---p 00000000 00:00 0 
+7f6c8dcec000-7f6c8ddea000 rwxp 00000000 00:00 0 
+7f6c8ddea000-7f6c8dded000 ---p 00000000 00:00 0 
+7f6c8dded000-7f6c8deeb000 rwxp 00000000 00:00 0 
+7f6c8deeb000-7f6c8deec000 r-xs 00002000 fd:02 654454                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp5736171959263937481jboss-ha-xa-jdbc.rar
+7f6c8deed000-7f6c8df20000 r-xs 0029f000 fd:02 1439401                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/jasperreports-3.0.0.jar
+7f6c8df20000-7f6c8df22000 r-xs 00005000 fd:02 1439391                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/commons-beanutils-bean-collections.jar
+7f6c8df22000-7f6c8df29000 r-xs 00067000 fd:02 1442309                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/core.jar
+7f6c8df29000-7f6c8df2a000 r-xs 00008000 fd:02 1439402                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/jasperreports-extensions-3.5.3.jar
+7f6c8df2a000-7f6c8df36000 r-xs 00108000 fd:02 1439400                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/itext-1.02b.jar
+7f6c8df36000-7f6c8df43000 r-xs 0007f000 fd:02 1439394                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/commons-collections-3.2.jar
+7f6c8df43000-7f6c8df45000 r-xs 00013000 fd:02 1439397                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/commons-validator-1.1.4.jar
+7f6c8df45000-7f6c8df46000 r-xs 00eb8000 fd:02 1439398                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/fonts.jar
+7f6c8df46000-7f6c8df61000 r-xs 00158000 fd:02 1439405                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/poi-2.5.1-final-20040804.jar
+7f6c8df61000-7f6c8df64000 r-xs 00029000 fd:02 1439404                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/jsch-0.1.39.jar
+7f6c8df64000-7f6c8df65000 r-xs 00008000 fd:02 1439402                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/los.reference.ear/lib/jasperreports-extensions-3.5.3.jar
+7f6c8df65000-7f6c8df69000 r-xs 00029000 fd:02 660137                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp2074654926240271667myWMS-comp.jar
+7f6c8df69000-7f6c8df6b000 r-xs 00009000 fd:02 660135                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp7368182402705144447project-ejb3.jar
+7f6c8df6b000-7f6c8df6c000 r-xs 00000000 fd:02 660134                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp5390936408649217457project-par.jar
+7f6c8df6c000-7f6c8df6d000 r-xs 00004000 fd:02 654492                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp8366672163754674179los.mobile-comp.jar (deleted)
+7f6c8df6d000-7f6c8df6f000 r-xs 0000c000 fd:02 654471                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp3283745799183305277los.stocktaking-comp.jar (deleted)
+7f6c8df6f000-7f6c8df7e000 r-xs 000a4000 fd:02 654468                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp6966067820889356922los.inventory-comp.jar (deleted)
+7f6c8df7e000-7f6c8df83000 r-xs 00024000 fd:02 654467                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp3303309876864023635los.location-comp.jar (deleted)
+7f6c8df83000-7f6c8df89000 r-xs 00025000 fd:02 654466                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp4208416009741854930los.common-comp.jar (deleted)
+7f6c8df89000-7f6c8df8d000 r-xs 00029000 fd:02 654465                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp2593559433935027520myWMS-comp.jar (deleted)
+7f6c8df8d000-7f6c8df8f000 r-xs 00009000 fd:02 654464                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp7974488265166055941project-ejb3.jar (deleted)
+7f6c8df8f000-7f6c8df90000 r-xs 00000000 fd:02 654463                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp7492490986522965243project-par.jar (deleted)
+7f6c8df90000-7f6c8df98000 r-xs 00115000 fd:00 397222                     /usr/java/jdk1.6.0_38/jre/lib/resources.jar
+7f6c8df98000-7f6c8df99000 r-xs 00001000 fd:02 786303                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp7426327054339732993quartz-ra.rar-contents/quartz-ra.jar
+7f6c8df99000-7f6c8df9a000 r-xs 00001000 fd:02 654460                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp7426327054339732993quartz-ra.rar
+7f6c8df9a000-7f6c8df9d000 ---p 00000000 00:00 0 
+7f6c8df9d000-7f6c8e09b000 rwxp 00000000 00:00 0 
+7f6c8e09b000-7f6c8e09c000 r-xs 00002000 fd:02 786301                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp6620129694808120468mail-ra.rar-contents/mail-ra.jar
+7f6c8e09c000-7f6c8e09d000 r-xs 00002000 fd:02 654459                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp6620129694808120468mail-ra.rar
+7f6c8e09d000-7f6c8e09f000 r-xs 00013000 fd:02 786299                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp217708547523110365jms-ra.rar-contents/jms-ra.jar
+7f6c8e09f000-7f6c8e0a0000 r-xs 00013000 fd:02 654458                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp217708547523110365jms-ra.rar
+7f6c8e0a0000-7f6c8e0a1000 r-xs 00003000 fd:02 786297                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp3017197475095734213jboss-xa-jdbc.rar-contents/jboss-xa-jdbc.jar
+7f6c8e0a1000-7f6c8e0a2000 r-xs 00003000 fd:02 654457                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp3017197475095734213jboss-xa-jdbc.rar
+7f6c8e0a2000-7f6c8e0a3000 r-xs 00002000 fd:02 786295                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp1504267304429111174jboss-local-jdbc.rar-contents/jboss-local-jdbc.jar
+7f6c8e0a3000-7f6c8e0a4000 r-xs 00002000 fd:02 654456                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp1504267304429111174jboss-local-jdbc.rar
+7f6c8e0a4000-7f6c8e0a5000 r-xs 00001000 fd:02 786173                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp5736171959263937481jboss-ha-xa-jdbc.rar-contents/jboss-ha-xa-jdbc.jar
+7f6c8e0a5000-7f6c8e0a6000 r-xs 00001000 fd:02 786171                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp322799217438215265jboss-ha-local-jdbc.rar-contents/jboss-ha-local-jdbc.jar
+7f6c8e0a6000-7f6c8e0a7000 r-xs 00001000 fd:02 654453                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp322799217438215265jboss-ha-local-jdbc.rar
+7f6c8e0a7000-7f6c8e0aa000 ---p 00000000 00:00 0 
+7f6c8e0aa000-7f6c8e1a8000 rwxp 00000000 00:00 0 
+7f6c8e1a8000-7f6c8e1ab000 ---p 00000000 00:00 0 
+7f6c8e1ab000-7f6c8e2a9000 rwxp 00000000 00:00 0 
+7f6c8e2a9000-7f6c8e2ac000 r-xs 00027000 fd:00 397106                     /usr/java/jdk1.6.0_38/jre/lib/ext/sunjce_provider.jar
+7f6c8e2ac000-7f6c8e2b9000 r-xs 00101000 fd:02 654431                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp3523359002138124294jfreechart.jar
+7f6c8e2b9000-7f6c8e2bf000 r-xs 00047000 fd:02 654430                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp1326128405978438499jcommon.jar
+7f6c8e2bf000-7f6c8e2c3000 r-xs 00020000 fd:02 654429                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp1606113586084828138console-mgr-classes.jar
+7f6c8e2c3000-7f6c8e2c6000 ---p 00000000 00:00 0 
+7f6c8e2c6000-7f6c8e3c4000 rwxp 00000000 00:00 0 
+7f6c8e3c4000-7f6c8e3cb000 r-xs 00040000 fd:02 654428                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp6830799855050611554xmlsec.jar
+7f6c8e3cb000-7f6c8e3d1000 r-xs 00071000 fd:02 654427                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp951645104294003624wstx.jar
+7f6c8e3d1000-7f6c8e3d5000 r-xs 0002b000 fd:02 654426                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp3817311677692895315wsdl4j.jar
+7f6c8e3d5000-7f6c8e3d7000 r-xs 00005000 fd:02 654425                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp5554016089767254466stax-api.jar
+7f6c8e3d7000-7f6c8e3d8000 r-xs 00009000 fd:02 654424                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp4316741091915099439policy.jar
+7f6c8e3d8000-7f6c8e3da000 r-xs 0000c000 fd:02 654423                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp16024957811307402jettison.jar
+7f6c8e3da000-7f6c8e3de000 r-xs 0002b000 fd:02 1437260                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/jbossws.sar/wsdl4j.jar
+7f6c8e3de000-7f6c8e3e0000 r-xs 00005000 fd:02 1437259                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/jbossws.sar/stax-api.jar
+7f6c8e3e0000-7f6c8e3e1000 r-xs 00009000 fd:02 1437258                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/deploy/jbossws.sar/policy.jar
+7f6c8e3e1000-7f6c8e3fa000 r-xs 00179000 fd:02 654419                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp4244311285074885873jbossws-core.jar
+7f6c8e3fa000-7f6c8e3fc000 r-xs 00005000 fd:02 654418                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp7217766037544182227jboss-jaxb-intros.jar
+7f6c8e3fc000-7f6c8e40e000 r-xs 000c1000 fd:02 654417                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp646247314741815236jaxb-impl.jar
+7f6c8e40e000-7f6c8e411000 r-xs 00011000 fd:02 654416                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp4703638101209314938jaxb-api.jar
+7f6c8e411000-7f6c8e416000 r-xs 00043000 fd:02 654415                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp1022146024059921903FastInfoset.jar
+7f6c8e416000-7f6c8e41f000 r-xs 0005e000 fd:02 654410                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp7363119716488470813jstl.jar
+7f6c8e41f000-7f6c8e429000 r-xs 000c2000 fd:02 654409                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp7074368320597198248jsf-impl.jar
+7f6c8e429000-7f6c8e42f000 r-xs 0004f000 fd:02 654408                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp262622821020404700jsf-api.jar
+7f6c8e42f000-7f6c8e431000 r-xs 00001000 fd:02 654407                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp8067548216100134599jboss-faces.jar
+7f6c8e431000-7f6c8e451000 r-xs 0023a000 fd:02 654406                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp8539346580131897659jbossweb.jar
+7f6c8e451000-7f6c8e455000 r-xs 00036000 fd:02 654405                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp3907495366608018697jbossweb-service.jar
+7f6c8e455000-7f6c8e457000 r-xs 0000a000 fd:02 654404                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp5140418924412985188jbossweb-extras.jar
+7f6c8e457000-7f6c8e463000 r-xs 00146000 fd:02 654403                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp3829310907937682376jasper-jdt.jar
+7f6c8e463000-7f6c8e46a000 r-xs 0002f000 fd:02 654402                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp2631336522760968635jboss-microcontainer.jar
+7f6c8e46a000-7f6c8e46c000 r-xs 0000d000 fd:02 654400                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp4433363554714169248jboss-container.jar
+7f6c8e46c000-7f6c8e46f000 ---p 00000000 00:00 0 
+7f6c8e46f000-7f6c8e56d000 rwxp 00000000 00:00 0 
+7f6c8e56d000-7f6c8e570000 ---p 00000000 00:00 0 
+7f6c8e570000-7f6c8e66e000 rwxp 00000000 00:00 0 
+7f6c8e66e000-7f6c8e677000 r-xs 00056000 fd:02 654397                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp1476792885276496063trove.jar
+7f6c8e677000-7f6c8e678000 r-xs 00001000 fd:02 654396                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp2267080173579580100pluggable-instrumentor.jar
+7f6c8e678000-7f6c8e679000 r-xs 00001000 fd:02 654395                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp4597359125672619589jrockit-pluggable-instrumentor.jar
+7f6c8e679000-7f6c8e681000 r-xs 00044000 fd:02 654394                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp7492825544739456263jboss-aspect-library-jdk50.jar
+7f6c8e681000-7f6c8e68e000 r-xs 000d6000 fd:02 654393                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp1470735692094710257jboss-aop-jdk50.jar
+7f6c8e68e000-7f6c8e69a000 r-xs 000b9000 fd:02 654392                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp8940399882600024179jboss-ejb3.jar
+7f6c8e69a000-7f6c8e69d000 r-xs 00008000 fd:02 654391                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp8850243553964243494jboss-annotations-ejb3.jar
+7f6c8e69d000-7f6c8e6a0000 ---p 00000000 00:00 0 
+7f6c8e6a0000-7f6c8e79e000 rwxp 00000000 00:00 0 
+7f6c8e79e000-7f6c8e7a1000 ---p 00000000 00:00 0 
+7f6c8e7a1000-7f6c8e89f000 rwxp 00000000 00:00 0 
+7f6c8e89f000-7f6c8e8a2000 ---p 00000000 00:00 0 
+7f6c8e8a2000-7f6c8e9a0000 rwxp 00000000 00:00 0 
+7f6c8e9a0000-7f6c8e9a3000 ---p 00000000 00:00 0 
+7f6c8e9a3000-7f6c8eaa1000 rwxp 00000000 00:00 0 
+7f6c8eaa1000-7f6c8eaa4000 ---p 00000000 00:00 0 
+7f6c8eaa4000-7f6c8eba2000 rwxp 00000000 00:00 0 
+7f6c8eba2000-7f6c8eba5000 ---p 00000000 00:00 0 
+7f6c8eba5000-7f6c8eca3000 rwxp 00000000 00:00 0 
+7f6c8eca3000-7f6c8eca6000 ---p 00000000 00:00 0 
+7f6c8eca6000-7f6c8eda4000 rwxp 00000000 00:00 0 
+7f6c8eda4000-7f6c8eda7000 ---p 00000000 00:00 0 
+7f6c8eda7000-7f6c8eea5000 rwxp 00000000 00:00 0 
+7f6c8eea5000-7f6c8eea8000 r-xs 00036000 fd:00 397107                     /usr/java/jdk1.6.0_38/jre/lib/ext/sunpkcs11.jar
+7f6c8eea8000-7f6c8eeab000 ---p 00000000 00:00 0 
+7f6c8eeab000-7f6c8efa9000 rwxp 00000000 00:00 0 
+7f6c8efa9000-7f6c8efac000 ---p 00000000 00:00 0 
+7f6c8efac000-7f6c8f0aa000 rwxp 00000000 00:00 0 
+7f6c8f0aa000-7f6c8f0ad000 ---p 00000000 00:00 0 
+7f6c8f0ad000-7f6c8f1ab000 rwxp 00000000 00:00 0 
+7f6c8f1ab000-7f6c8f1ae000 ---p 00000000 00:00 0 
+7f6c8f1ae000-7f6c8f2ac000 rwxp 00000000 00:00 0 
+7f6c8f2ac000-7f6c8f2af000 ---p 00000000 00:00 0 
+7f6c8f2af000-7f6c8f3ad000 rwxp 00000000 00:00 0 
+7f6c8f3ad000-7f6c8f3b0000 ---p 00000000 00:00 0 
+7f6c8f3b0000-7f6c8f4ae000 rwxp 00000000 00:00 0 
+7f6c8f4ae000-7f6c8f4b5000 r-xs 00095000 fd:00 397223                     /usr/java/jdk1.6.0_38/jre/lib/jsse.jar
+7f6c8f4b5000-7f6c8f4b8000 ---p 00000000 00:00 0 
+7f6c8f4b8000-7f6c8f5b6000 rwxp 00000000 00:00 0 
+7f6c8f5b6000-7f6c8f5bd000 r-xs 0004d000 fd:02 1437325                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-iiop.jar
+7f6c8f5bd000-7f6c8f5be000 r-xs 00003000 fd:02 1437356                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/log4j-snmp-appender.jar
+7f6c8f5be000-7f6c8f5bf000 r-xs 00004000 fd:02 1437323                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-ejb3x.jar
+7f6c8f5bf000-7f6c8f5c8000 r-xs 00075000 fd:02 1437302                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/bcel.jar
+7f6c8f5c8000-7f6c8f5d3000 r-xs 0007b000 fd:02 1437344                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jbossjta.jar
+7f6c8f5d3000-7f6c8f5d4000 r-xs 00006000 fd:02 1437343                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jbossjta-integration.jar
+7f6c8f5d4000-7f6c8f5d6000 r-xs 0000c000 fd:02 1437340                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-transaction.jar
+7f6c8f5d6000-7f6c8f5d9000 r-xs 00019000 fd:02 1437316                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/hibernate-entitymanager.jar
+7f6c8f5d9000-7f6c8f5e9000 r-xs 00170000 fd:02 1437360                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/ojdbc14.jar
+7f6c8f5e9000-7f6c8f5ee000 r-xs 00030000 fd:02 1437310                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/commons-httpclient.jar
+7f6c8f5ee000-7f6c8f5fa000 r-xs 0005c000 fd:02 1437326                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-j2ee.jar
+7f6c8f5fa000-7f6c8f5fc000 r-xs 0000d000 fd:02 1437299                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/activation.jar
+7f6c8f5fc000-7f6c8f5fd000 r-xs 00004000 fd:02 654401                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp624412759368135941jboss-dependency.jar
+7f6c8f5fd000-7f6c8f5fe000 r-xs 00001000 fd:02 654398                     /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/tmp/deploy/tmp8785138667714455430jboss-bean-deployer.jar
+7f6c8f5fe000-7f6c8f61c000 r-xs 001ea000 fd:02 1437342                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss.jar
+7f6c8f61c000-7f6c8f61e000 r-xs 00007000 fd:02 1437352                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jmx-adaptor-plugin.jar
+7f6c8f61e000-7f6c8f620000 r-xs 00000000 fd:02 1437301                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/autonumber-plugin.jar
+7f6c8f620000-7f6c8f623000 r-xs 00012000 fd:02 1437354                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/joesnmp.jar
+7f6c8f623000-7f6c8f644000 r-xs 0020b000 fd:02 1437317                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/hibernate3.jar
+7f6c8f644000-7f6c8f645000 r-xs 00000000 fd:02 1437367                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/xmlentitymgr.jar
+7f6c8f645000-7f6c8f649000 r-xs 0001a000 fd:02 1437341                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-vfs.jar
+7f6c8f649000-7f6c8f64a000 r-xs 00000000 fd:02 1437364                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/scheduler-plugin-example.jar
+7f6c8f64a000-7f6c8f64c000 r-xs 00001000 fd:02 1437335                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-remoting-int.jar
+7f6c8f64c000-7f6c8f653000 r-xs 00050000 fd:02 1437357                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/log4j.jar
+7f6c8f653000-7f6c8f654000 r-xs 00001000 fd:02 1437358                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/mail-plugin.jar
+7f6c8f654000-7f6c8f655000 r-xs 00003000 fd:02 1437324                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-hibernate.jar
+7f6c8f655000-7f6c8f666000 r-xs 000cd000 fd:02 1437336                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-remoting.jar
+7f6c8f666000-7f6c8f66c000 r-xs 00059000 fd:02 1437359                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/mail.jar
+7f6c8f66c000-7f6c8f66e000 r-xs 0000c000 fd:02 1437311                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/commons-logging.jar
+7f6c8f66e000-7f6c8f671000 r-xs 00014000 fd:02 1437349                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jbossws-framework.jar
+7f6c8f671000-7f6c8f674000 r-xs 00013000 fd:00 397160                     /usr/java/jdk1.6.0_38/jre/lib/jce.jar
+7f6c8f674000-7f6c8f675000 r-xs 0000b000 fd:02 1437353                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jnpserver.jar
+7f6c8f675000-7f6c8f677000 r-xs 00005000 fd:02 1437337                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-saaj.jar
+7f6c8f677000-7f6c8f679000 r-xs 00007000 fd:02 1437329                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-jaxws.jar
+7f6c8f679000-7f6c8f67c000 r-xs 00005000 fd:02 1437327                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-jaxrpc.jar
+7f6c8f67c000-7f6c8f680000 r-xs 00016000 fd:02 1437351                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jbossws-spi.jar
+7f6c8f680000-7f6c8f683000 r-xs 00006000 fd:02 1437328                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-jaxws-ext.jar
+7f6c8f683000-7f6c8f685000 r-xs 0000e000 fd:02 1437332                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-jsr88.jar
+7f6c8f685000-7f6c8f687000 r-xs 00001000 fd:02 1437318                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/hsqldb-plugin.jar
+7f6c8f687000-7f6c8f694000 r-xs 0007c000 fd:02 1437309                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/commons-collections.jar
+7f6c8f694000-7f6c8f69d000 r-xs 00064000 fd:02 1437315                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/hibernate-annotations.jar
+7f6c8f69d000-7f6c8f69f000 r-xs 00018000 fd:02 1437322                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-common-jdbc-wrapper.jar
+7f6c8f69f000-7f6c8f6a5000 r-xs 00047000 fd:02 1437346                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jbosssx.jar
+7f6c8f6a5000-7f6c8f6a6000 r-xs 00006000 fd:02 1437314                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/el-api.jar
+7f6c8f6a6000-7f6c8f6ad000 r-xs 0004a000 fd:02 1437307                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/cglib.jar
+7f6c8f6ad000-7f6c8f6b2000 r-xs 00030000 fd:02 1437330                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-jca.jar
+7f6c8f6b2000-7f6c8f6b6000 r-xs 00022000 fd:02 1437333                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-management.jar
+7f6c8f6b6000-7f6c8f6b8000 r-xs 0000a000 fd:02 1437308                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/commons-codec.jar
+7f6c8f6b8000-7f6c8f6ba000 r-xs 00004000 fd:02 1437303                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/bindingservice-plugin.jar
+7f6c8f6ba000-7f6c8f6bf000 r-xs 00035000 fd:02 1437306                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/bsh.jar
+7f6c8f6bf000-7f6c8f6c1000 r-xs 00001000 fd:02 1437362                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/properties-plugin.jar
+7f6c8f6c1000-7f6c8f6c7000 r-xs 00077000 fd:02 1437361                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/postgresql-9.1-901.jdbc3.jar
+7f6c8f6c7000-7f6c8f6ca000 r-xs 00012000 fd:02 1437355                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jsp-api.jar
+7f6c8f6ca000-7f6c8f6d3000 r-xs 000a4000 fd:02 1437319                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/hsqldb.jar
+7f6c8f6d3000-7f6c8f6d8000 r-xs 0005b000 fd:02 1437363                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/quartz.jar
+7f6c8f6d8000-7f6c8f6db000 r-xs 00011000 fd:02 1437350                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jbossws-jboss42.jar
+7f6c8f6db000-7f6c8f6e1000 r-xp 00000000 fd:00 396962                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libmanagement.so
+7f6c8f6e1000-7f6c8f7e0000 ---p 00006000 fd:00 396962                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libmanagement.so
+7f6c8f7e0000-7f6c8f7e2000 rwxp 00005000 fd:00 396962                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libmanagement.so
+7f6c8f7e2000-7f6c8f7f5000 r-xp 00000000 fd:00 396966                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libnet.so
+7f6c8f7f5000-7f6c8f8f6000 ---p 00013000 fd:00 396966                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libnet.so
+7f6c8f8f6000-7f6c8f8f9000 rwxp 00014000 fd:00 396966                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libnet.so
+7f6c8f8f9000-7f6c8f8fc000 ---p 00000000 00:00 0 
+7f6c8f8fc000-7f6c8f9fa000 rwxp 00000000 00:00 0 
+7f6c8f9fa000-7f6c8f9fb000 ---p 00000000 00:00 0 
+7f6c8f9fb000-7f6c8fafb000 rwxp 00000000 00:00 0 
+7f6c8fafb000-7f6c8fafe000 ---p 00000000 00:00 0 
+7f6c8fafe000-7f6c8fbfc000 rwxp 00000000 00:00 0 
+7f6c8fbfc000-7f6c8fbff000 ---p 00000000 00:00 0 
+7f6c8fbff000-7f6c8fcfd000 rwxp 00000000 00:00 0 
+7f6c8fcfd000-7f6c8fd00000 ---p 00000000 00:00 0 
+7f6c8fd00000-7f6c8fdfe000 rwxp 00000000 00:00 0 
+7f6c8fdfe000-7f6c8fe01000 ---p 00000000 00:00 0 
+7f6c8fe01000-7f6c8feff000 rwxp 00000000 00:00 0 
+7f6c8feff000-7f6c8ff02000 ---p 00000000 00:00 0 
+7f6c8ff02000-7f6c90000000 rwxp 00000000 00:00 0 
+7f6c90000000-7f6c900ef000 rwxp 00000000 00:00 0 
+7f6c900ef000-7f6c94000000 ---p 00000000 00:00 0 
+7f6c94000000-7f6c94002000 r-xs 0000a000 fd:02 1437339                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-srp.jar
+7f6c94002000-7f6c94007000 r-xs 00052000 fd:02 1437300                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/antlr.jar
+7f6c94007000-7f6c9400a000 r-xs 0001c000 fd:02 1437338                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-serialization.jar
+7f6c9400a000-7f6c9400c000 r-xs 0000c000 fd:02 1437334                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-monitoring.jar
+7f6c9400c000-7f6c9400e000 r-xs 00002000 fd:02 1437331                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jboss-jsr77.jar
+7f6c9400e000-7f6c94016000 r-xs 0007c000 fd:02 1437345                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jbossmq.jar
+7f6c94016000-7f6c9401a000 r-xs 00025000 fd:02 1437304                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/bsf.jar
+7f6c9401a000-7f6c9401c000 r-xs 0000a000 fd:02 1437365                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/scheduler-plugin.jar
+7f6c9401c000-7f6c9401e000 r-xs 00014000 fd:02 1437366                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/servlet-api.jar
+7f6c9401e000-7f6c94024000 r-xs 00032000 fd:02 1437321                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jaxen.jar
+7f6c94024000-7f6c94029000 r-xs 00048000 fd:02 1437312                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/dom4j.jar
+7f6c94029000-7f6c9402c000 r-xs 0000a000 fd:02 1437313                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/ejb3-persistence.jar
+7f6c9402c000-7f6c94034000 r-xs 0008b000 fd:02 1437320                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/javassist.jar
+7f6c94034000-7f6c9403f000 r-xs 0009c000 fd:02 1438910                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jaybird-full-2.1.6.jar
+7f6c9403f000-7f6c94041000 r-xs 0000e000 fd:02 1437347                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jbossts-common.jar
+7f6c94041000-7f6c94043000 r-xs 0000e000 fd:02 1437348                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/jbossws-common.jar
+7f6c94043000-7f6c94044000 r-xs 00002000 fd:02 1437305                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/server/default/lib/bsh-deployer.jar
+7f6c94044000-7f6c94075000 rwxp 00000000 00:00 0 
+7f6c94075000-7f6c9407c000 r-xs 00055000 fd:02 1436907                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/lib/jboss-xml-binding.jar
+7f6c9407c000-7f6c94081000 r-xs 0003d000 fd:02 1436906                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/lib/jboss-system.jar
+7f6c94081000-7f6c9408b000 r-xs 0005a000 fd:02 1436904                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/lib/jboss-common.jar
+7f6c9408b000-7f6c9408f000 r-xs 0001c000 fd:02 1436908                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/lib/log4j-boot.jar
+7f6c9408f000-7f6c94096000 r-xs 00038000 fd:02 1436891                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/lib/concurrent.jar
+7f6c94096000-7f6c940a3000 r-xs 000ca000 fd:02 1436905                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/lib/jboss-jmx.jar
+7f6c940a3000-7f6c940a4000 r-xs 00003000 fd:02 1436618                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/client/getopt.jar
+7f6c940a4000-7f6c940a5000 ---p 00000000 00:00 0 
+7f6c940a5000-7f6c941d9000 rwxp 00000000 00:00 0 
+7f6c941d9000-7f6c94371000 r-xs 03083000 fd:00 398297                     /usr/java/jdk1.6.0_38/jre/lib/rt.jar
+7f6c94371000-7f6c94373000 r-xs 00007000 fd:02 1436896                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/lib/endorsed/jboss-jaxws.jar
+7f6c94373000-7f6c94386000 r-xs 00190000 fd:02 1436899                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/lib/endorsed/xalan.jar
+7f6c94386000-7f6c94388000 r-xs 00005000 fd:02 1436897                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/lib/endorsed/jboss-saaj.jar
+7f6c94388000-7f6c9438b000 r-xs 00005000 fd:02 1436894                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/lib/endorsed/jboss-jaxrpc.jar
+7f6c9438b000-7f6c943dd000 rwxp 00000000 00:00 0 
+7f6c943dd000-7f6c94419000 rwxp 00000000 00:00 0 
+7f6c94419000-7f6c94488000 rwxp 00000000 00:00 0 
+7f6c94488000-7f6c944a6000 rwxp 00000000 00:00 0 
+7f6c944a6000-7f6c944dd000 rwxp 00000000 00:00 0 
+7f6c944dd000-7f6c9451a000 rwxp 00000000 00:00 0 
+7f6c9451a000-7f6c94588000 rwxp 00000000 00:00 0 
+7f6c94588000-7f6c945b1000 rwxp 00000000 00:00 0 
+7f6c945b1000-7f6c945ca000 rwxp 00000000 00:00 0 
+7f6c945ca000-7f6c94672000 rwxp 00000000 00:00 0 
+7f6c94672000-7f6c94c52000 rwxp 00000000 00:00 0 
+7f6c94c52000-7f6c97672000 rwxp 00000000 00:00 0 
+7f6c97672000-7f6c97680000 r-xp 00000000 fd:00 396975                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libzip.so
+7f6c97680000-7f6c97782000 ---p 0000e000 fd:00 396975                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libzip.so
+7f6c97782000-7f6c97785000 rwxp 00010000 fd:00 396975                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libzip.so
+7f6c97785000-7f6c97786000 rwxp 00000000 00:00 0 
+7f6c97786000-7f6c97792000 r-xp 00000000 fd:00 4771                       /lib64/libnss_files-2.12.so
+7f6c97792000-7f6c97992000 ---p 0000c000 fd:00 4771                       /lib64/libnss_files-2.12.so
+7f6c97992000-7f6c97993000 r-xp 0000c000 fd:00 4771                       /lib64/libnss_files-2.12.so
+7f6c97993000-7f6c97994000 rwxp 0000d000 fd:00 4771                       /lib64/libnss_files-2.12.so
+7f6c97994000-7f6c979aa000 r-xs 0010f000 fd:02 1436900                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/lib/endorsed/xercesImpl.jar
+7f6c979aa000-7f6c979d3000 r-xp 00000000 fd:00 396953                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libjava.so
+7f6c979d3000-7f6c97ad2000 ---p 00029000 fd:00 396953                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libjava.so
+7f6c97ad2000-7f6c97ad9000 rwxp 00028000 fd:00 396953                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libjava.so
+7f6c97ad9000-7f6c97ae6000 r-xp 00000000 fd:00 396974                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libverify.so
+7f6c97ae6000-7f6c97be5000 ---p 0000d000 fd:00 396974                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libverify.so
+7f6c97be5000-7f6c97be8000 rwxp 0000c000 fd:00 396974                     /usr/java/jdk1.6.0_38/jre/lib/amd64/libverify.so
+7f6c97be8000-7f6c97beb000 ---p 00000000 00:00 0 
+7f6c97beb000-7f6c97ce9000 rwxp 00000000 00:00 0 
+7f6c97ce9000-7f6c98607000 r-xp 00000000 fd:00 396983                     /usr/java/jdk1.6.0_38/jre/lib/amd64/server/libjvm.so
+7f6c98607000-7f6c98709000 ---p 0091e000 fd:00 396983                     /usr/java/jdk1.6.0_38/jre/lib/amd64/server/libjvm.so
+7f6c98709000-7f6c988bf000 rwxp 00920000 fd:00 396983                     /usr/java/jdk1.6.0_38/jre/lib/amd64/server/libjvm.so
+7f6c988bf000-7f6c988fc000 rwxp 00000000 00:00 0 
+7f6c988fc000-7f6c98903000 r-xp 00000000 fd:00 396936                     /usr/java/jdk1.6.0_38/jre/lib/amd64/jli/libjli.so
+7f6c98903000-7f6c98a04000 ---p 00007000 fd:00 396936                     /usr/java/jdk1.6.0_38/jre/lib/amd64/jli/libjli.so
+7f6c98a04000-7f6c98a06000 rwxp 00008000 fd:00 396936                     /usr/java/jdk1.6.0_38/jre/lib/amd64/jli/libjli.so
+7f6c98a06000-7f6c98a07000 rwxp 00000000 00:00 0 
+7f6c98a07000-7f6c98a09000 r-xs 00009000 fd:02 1436591                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/bin/run.jar
+7f6c98a09000-7f6c98a0c000 r-xs 00011000 fd:02 1436893                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/lib/endorsed/jaxb-api.jar
+7f6c98a0c000-7f6c98a10000 r-xs 0002b000 fd:02 1436898                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/lib/endorsed/serializer.jar
+7f6c98a10000-7f6c98a13000 r-xs 00006000 fd:02 1436895                    /home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/lib/endorsed/jboss-jaxws-ext.jar
+7f6c98a13000-7f6c98a1b000 rwxs 00000000 fd:00 655473                     /tmp/hsperfdata_Parhs/3889
+7f6c98a1b000-7f6c98a1c000 rwxp 00000000 00:00 0 
+7f6c98a1c000-7f6c98a1d000 r-xp 00000000 00:00 0 
+7f6c98a1d000-7f6c98a1e000 rwxp 00000000 00:00 0 
+7fff31ee1000-7fff31ef6000 rwxp 00000000 00:00 0                          [stack]
+7fff31fff000-7fff32000000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+jvm_args: -Dprogram.name=run.bat -Djava.endorsed.dirs=/home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA/bin/../lib/endorsed -Xms128m -Xmx512m -Dfile.encoding=UTF-8 
+java_command: org.jboss.Main -c default
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/usr/java/jdk1.6.0_38
+PATH=/u01/app/oracle/product/11.2.0/xe/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/java/jdk1.6.0_38/bin:/usr/java/jdk1.6.0_38/bin:/usr/java/jdk1.6.0_38:/usr/java/jdk1.6.0_38/bin:/usr/ant/apache-ant-1.6.0/bin:/home/Parhs/Documents/Programming/Java/mywms/jboss-4.2.3.GA//bin:/home/Parhs/bin
+USERNAME=Parhs
+LD_LIBRARY_PATH=/usr/java/jdk1.6.0_38/jre/lib/amd64/server:/usr/java/jdk1.6.0_38/jre/lib/amd64:/usr/java/jdk1.6.0_38/jre/../lib/amd64
+SHELL=/bin/bash
+DISPLAY=:0.0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0x8629a0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGBUS: [libjvm.so+0x8629a0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGFPE: [libjvm.so+0x710660], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGPIPE: [libjvm.so+0x710660], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGXFSZ: [libjvm.so+0x710660], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGILL: [libjvm.so+0x710660], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGUSR1: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGUSR2: [libjvm.so+0x713490], sa_mask[0]=0x00000004, sa_flags=0x10000004
+SIGHUP: [libjvm.so+0x713090], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGINT: [libjvm.so+0x713090], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGTERM: [libjvm.so+0x713090], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGQUIT: [libjvm.so+0x713090], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+
+
+---------------  S Y S T E M  ---------------
+
+OS:CentOS release 6.3 (Final)
+
+uname:Linux 2.6.32-279.19.1.el6.x86_64 #1 SMP Wed Dec 19 07:05:20 UTC 2012 x86_64
+libc:glibc 2.12 NPTL 2.12 
+rlimit: STACK 10240k, CORE 0k, NPROC 1024, NOFILE 4096, AS infinity
+load average:2.40 0.81 0.42
+
+/proc/meminfo:
+MemTotal:        1826780 kB
+MemFree:          206180 kB
+Buffers:            7500 kB
+Cached:           229416 kB
+SwapCached:        24396 kB
+Active:          1042012 kB
+Inactive:         435068 kB
+Active(anon):     971368 kB
+Inactive(anon):   360692 kB
+Active(file):      70644 kB
+Inactive(file):    74376 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:       3932152 kB
+SwapFree:        3649980 kB
+Dirty:              1232 kB
+Writeback:             0 kB
+AnonPages:       1224212 kB
+Mapped:            26500 kB
+Shmem:             91784 kB
+Slab:              65040 kB
+SReclaimable:      24684 kB
+SUnreclaim:        40356 kB
+KernelStack:        3448 kB
+PageTables:        32704 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     4845540 kB
+Committed_AS:    3236652 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:      553340 kB
+VmallocChunk:   34359166732 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:    731136 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:        8192 kB
+DirectMap2M:     1998848 kB
+
+
+CPU:total 2 (2 cores per cpu, 1 threads per core) family 6 model 42 stepping 7, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 42
+model name	: Intel(R) Celeron(R) CPU G530 @ 2.40GHz
+stepping	: 7
+cpu MHz		: 2400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 2
+core id		: 0
+cpu cores	: 2
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm sse4_1 sse4_2 popcnt xsave lahf_lm arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 4789.10
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 42
+model name	: Intel(R) Celeron(R) CPU G530 @ 2.40GHz
+stepping	: 7
+cpu MHz		: 2400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 2
+core id		: 1
+cpu cores	: 2
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm sse4_1 sse4_2 popcnt xsave lahf_lm arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 4789.10
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 1826780k(206180k free), swap 3932152k(3649980k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (20.13-b02) for linux-amd64 JRE (1.6.0_38-b05), built on Nov 14 2012 02:12:33 by "java_re" with gcc 3.2.2 (SuSE Linux)
+
+time: Mon Apr 15 07:47:30 2013
+elapsed time: 1782 seconds
+

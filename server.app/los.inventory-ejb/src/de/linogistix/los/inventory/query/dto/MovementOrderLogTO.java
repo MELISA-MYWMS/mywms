@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 
+import de.linogistix.los.inventory.model.LOSFormationType;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.MovementOrderLog;
 import de.linogistix.los.query.BODTO;
@@ -18,9 +19,9 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 	private static final Logger log = Logger.getLogger(MovementOrderLogTO.class);
 
 	private String organization;
-	private String formation;
+	private LOSFormationType formation;
 	private Zone militaryUnit;
-	private long sequenceNumber;
+	//private long sequenceNumber;
 	private Date currDate;
 	private String plateNo;
 	private String vehicleType;
@@ -40,7 +41,7 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		this.organization = idat.getOrganization();
 		this.formation = idat.getFormation();
 		this.militaryUnit = idat.getMilitaryUnit();
-		this.sequenceNumber = idat.getSequenceNumber();
+		//this.sequenceNumber = idat.getSequenceNumber();
 		this.currDate = idat.getCreated();
 		this.plateNo = idat.getPlateNo();
 		this.vehicleType = idat.getVehicleType();
@@ -60,8 +61,8 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		super(id, version, transactionId);
 	}
 
-	public MovementOrderLogTO(Long id, int version, String transactionId, String organization, String formation,
-			Zone militaryUnit,Long sequenceNumber,Date currDate, String plateNo, String vehicleType,
+	public MovementOrderLogTO(Long id, int version, String transactionId, String organization, LOSFormationType formation,
+			Zone militaryUnit,Date currDate, String plateNo, String vehicleType,
 			Date movementDate,
 			String orderNo, String movementPurpose,
 			String movementRoute, String movementLoad, LOSOrderReceipients driver,
@@ -71,7 +72,7 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		this.organization = organization;
 		this.formation = formation;
 		this.militaryUnit = militaryUnit;
-		this.sequenceNumber = sequenceNumber;
+		//this.sequenceNumber = sequenceNumber;
 		this.currDate = currDate;
 		this.plateNo = plateNo;
 		this.vehicleType = vehicleType;
@@ -96,11 +97,11 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		this.organization = organization;
 	}
 
-	public String getFormation() {
+	public LOSFormationType getFormation() {
 		return this.formation;
 	}
 
-	public void setFormation(String formation) {
+	public void setFormation(LOSFormationType formation) {
 		this.formation = formation;
 	}
 
@@ -112,14 +113,14 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		this.militaryUnit = militaryUnit;
 	}
 
-	public Long getSequenceNumber() {
+	/*public Long getSequenceNumber() {
 		return this.sequenceNumber;
 	}
 
 	public void setSequenceNumber(Long sequenceNumber) {
 		this.sequenceNumber = sequenceNumber;
 	}
-
+*/
 	public Date getCurrDate() {
 		return this.currDate;
 	}

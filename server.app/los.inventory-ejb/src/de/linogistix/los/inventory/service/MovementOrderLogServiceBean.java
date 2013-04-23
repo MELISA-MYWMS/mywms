@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.mywms.model.Zone;
 import org.mywms.service.BasicServiceBean;
 
+import de.linogistix.los.inventory.model.LOSFormationType;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.MovementOrderLog;
 
@@ -25,7 +26,7 @@ public class MovementOrderLogServiceBean extends BasicServiceBean<MovementOrderL
 
 	
 	public MovementOrderLog create(String organization,
-			String formation, Zone militaryUnit, long sequenceNumber,Date currDate
+			LOSFormationType formation, Zone militaryUnit, Date currDate
 			, String plateNo,
 			String vehicleType, Date movementDate, String orderNo,
 			String movementPurpose, String movementRoute, String movementLoad,

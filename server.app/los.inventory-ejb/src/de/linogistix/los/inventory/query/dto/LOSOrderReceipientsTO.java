@@ -3,6 +3,7 @@ package de.linogistix.los.inventory.query.dto;
 import java.math.BigDecimal;
 
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
+import de.linogistix.los.inventory.model.LOSOrderReceipientsType;
 import de.linogistix.los.query.BODTO;
 
 public class LOSOrderReceipientsTO extends BODTO<LOSOrderReceipients> {
@@ -14,6 +15,7 @@ public class LOSOrderReceipientsTO extends BODTO<LOSOrderReceipients> {
 	private String lastName;
 	private String rankAbbr;
 	private String rank;
+	private LOSOrderReceipientsType type;
 	private String organizationUnit;
 	private BigDecimal phone;
 	private BigDecimal vpnPhone;
@@ -25,7 +27,8 @@ public class LOSOrderReceipientsTO extends BODTO<LOSOrderReceipients> {
 		this.firstName		 = rec.getFirstName();       
 		this.lastName		 = rec.getLastName();        
 		this.rankAbbr		 = rec.getRankAbbr();        
-		this.rank		 = rec.getRank();            
+		this.rank		 = rec.getRank();     
+		this.type 	=rec.getType();
 		this.organizationUnit	 = rec.getOrganizationUnit();
 		this.phone		 = rec.getPhone();           
 		this.vpnPhone		 = rec.getVpnPhone();        
@@ -37,7 +40,7 @@ public class LOSOrderReceipientsTO extends BODTO<LOSOrderReceipients> {
 	}
 	
 	public LOSOrderReceipientsTO(Long id, int version, String name,
-		String personnelId, String firstName, String lastName, String rankAbbr, String rank, String organizationUnit,
+		String personnelId, String firstName, String lastName, String rankAbbr, String rank,LOSOrderReceipientsType type, String organizationUnit,
 		BigDecimal phone, BigDecimal vpnPhone, String tokenId) {
 		super(id, version, name);
 		this.personnelId	= personnelId;
@@ -45,6 +48,7 @@ public class LOSOrderReceipientsTO extends BODTO<LOSOrderReceipients> {
 		this.lastName		= lastName;
 		this.rankAbbr		= rankAbbr;
 		this.rank		= rank;
+		this.type		= type;
 		this.organizationUnit	= organizationUnit;
 		this.phone		= phone;
 		this.vpnPhone		= vpnPhone;
@@ -229,5 +233,13 @@ public class LOSOrderReceipientsTO extends BODTO<LOSOrderReceipients> {
 	public void setTokenId(String tokenId)
 	{
 	    this.tokenId = tokenId;
+	}
+
+	public LOSOrderReceipientsType getType() {
+		return type;
+	}
+
+	public void setType(LOSOrderReceipientsType type) {
+		this.type = type;
 	}
 }

@@ -9,6 +9,7 @@ import de.linogistix.los.query.BODTO;
 import java.beans.IntrospectionException;
 import org.openide.nodes.Node.PropertySet;
 import org.openide.nodes.Sheet;
+import org.openide.util.NbBundle;
 
 public class BOLOSOrderReceipientsMasterNode extends BOMasterNode {
 
@@ -31,6 +32,8 @@ public class BOLOSOrderReceipientsMasterNode extends BOMasterNode {
             BOMasterNodeProperty<String> lastName= new BOMasterNodeProperty<String>("lastName", String.class, to.getLastName(), CommonBundleResolver.class);
             sheet.put(lastName);
             BOMasterNodeProperty<String> tokenId= new BOMasterNodeProperty<String>("tokenId", String.class, to.getTokenId(), CommonBundleResolver.class);
+            sheet.put(tokenId);
+            BOMasterNodeProperty<String> type= new BOMasterNodeProperty<String>("type", String.class,  NbBundle.getMessage(CommonBundleResolver.class,to.getType().toString()) , CommonBundleResolver.class);
             sheet.put(tokenId);
         }
         return new PropertySet[] {sheet};

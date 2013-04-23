@@ -9,48 +9,25 @@ package de.linogistix.wmsprocesses.processes.movement.gui.component;
 
 import de.linogistix.common.gui.component.controls.BOAutoFilteringComboBox;
 import de.linogistix.common.gui.listener.TopComponentListener;
-import de.linogistix.common.gui.component.controls.LOSDateFormattedTextField;
 import de.linogistix.wmsprocesses.processes.movement.gui.gui_builder.AbstractCenterPanel;
 import de.linogistix.common.services.J2EEServiceLocator;
 import de.linogistix.common.services.J2EEServiceLocatorException;
 import de.linogistix.common.userlogin.LoginService;
-import de.linogistix.common.util.BusinessExceptionResolver;
-import de.linogistix.common.util.CursorControl;
 import de.linogistix.common.util.ExceptionAnnotator;
-import de.linogistix.inventory.gui.component.controls.ClientItemDataLotFilteringComponent;
-import de.linogistix.los.inventory.exception.InventoryException;
-import de.linogistix.los.inventory.exception.InventoryExceptionKey;
 import de.linogistix.los.inventory.facade.MovementOrderFacade;
+import de.linogistix.los.inventory.model.LOSFormationType;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
-import de.linogistix.los.inventory.model.OrderType;
-
-import de.linogistix.los.query.BODTO;
-import de.linogistix.los.query.ClientQueryRemote;
-import de.linogistix.wmsprocesses.lot.gui.component.LotOptionPanel;
+import de.linogistix.los.inventory.model.MovementOrderLog;
 import de.linogistix.wmsprocesses.res.WMSProcessesBundleResolver;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.event.ItemListener;
-import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.text.DateFormatter;
 import org.mywms.facade.ZoneFacade;
-import org.mywms.facade.VehicleDataFacade;
 import org.mywms.facade.FacadeException;
-import org.mywms.model.Client;
-import org.mywms.model.ItemData;
-import org.mywms.model.Lot;
 import org.mywms.model.Zone;
 import org.mywms.model.VehicleData;
 import org.openide.util.Exceptions;
@@ -84,15 +61,15 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
     }
 
     public void process(boolean processAutomaticly) {
-        String formation = FormationComboBox.getSelectedItem().toString();
         String organization = OrganizationComboBox.getSelectedItem().toString();
-        Zone militaryUnit = (Zone) MillitaryUnitComboBox.getSelectedItem();
+        LOSFormationType formation = ((LOSFormationType) FormationComboBox.getSelectedItem());
+        Zone militaryUnit = ((Zone) MillitaryUnitComboBox.getSelectedItem());
         Date currDate = currentDateTextField.getDate();
         String vehicleType = vehicleDataComboBox.getSelectedAsEntity().getModelName();
         String plateNo = vehicleDataComboBox.getSelectedAsEntity().getPlateNumber();
         Date movementDate = MovementDateTextField.getDate();
         String orderNo = OrderNoFormattedTextField.getText();
-        Long sequenceNumber = Long.parseLong(sequenceNumberTextField.getText());
+        // Long sequenceNumber = Long.parseLong(sequenceNumberTextField.getText());
         String movementPurpose = MovementPurposeTextField.getText();
         String movementLoad = MovementLoadTextField.getText();
         String movementRoute = MovementRouteTextField.getText();
@@ -102,13 +79,6 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         String passenger3Name = Passenger3TextField.getText();
         String passenger4Name = Passenger4TextField.getText();
 
-
-        Logger.getLogger(CenterPanel.class.getName()).info("---*--- Formation Text: " + formation);
-        Logger.getLogger(CenterPanel.class.getName()).info("---*--- Organization Text: " + organization);
-        Logger.getLogger(CenterPanel.class.getName()).info("---*--- Pass 3: " + passenger3Name);
-        Logger.getLogger(CenterPanel.class.getName()).info("---*--- Date Text: " + currDate);
-        Logger.getLogger(CenterPanel.class.getName()).info("---*--- VehicleTypeComboBox Text: " + vehicleType);
-        Logger.getLogger(CenterPanel.class.getName()).info("---*--- Pass 2: " + passenger2Name);
         MovementOrderFacade mi;
         try {
             mi = (MovementOrderFacade) loc.getStateless(MovementOrderFacade.class);
@@ -117,10 +87,15 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
             return;
         }
         try {
-            Logger.getLogger(CenterPanel.class.getName()).info("---*--- Movement created: " + mi.createMovementOrder(organization, formation, militaryUnit, sequenceNumber, currDate, plateNo, vehicleType, movementDate, orderNo, movementPurpose, movementRoute, movementLoad, driver, passenger1Name, passenger2Name, passenger3Name, passenger4Name));
+            MovementOrderLog MovementOrder = mi.createMovementOrder(organization, formation, militaryUnit, currDate, plateNo, vehicleType, movementDate, orderNo, movementPurpose, movementRoute, movementLoad, driver, passenger1Name, passenger2Name, passenger3Name, passenger4Name);
+            Logger.getLogger(CenterPanel.class.getName()).info("---*--- Movement created");
+            PdfReport MyReport = new PdfReport(MovementOrder);
+            MyReport.start();
+
         } catch (FacadeException ex) {
             Exceptions.printStackTrace(ex);
         }
+
     }
 
     private void initDefaults() {
@@ -131,7 +106,7 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         FormationLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.FormationLabel") + ":");
         MillitaryUnitLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MillitaryUnitLabel") + ":");
         DateLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.DateLabel") + ":");
-        SequenceNoLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.SequenceNumberLabel") + ":");
+        //SequenceNoLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.SequenceNumberLabel") + ":");
         VehicleTypeLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.VehicleTypeLabel") + ":");
         VehiclePlateNoLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.VehiclePlateNoLabel") + ":");
         MovementDateLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementDateLabel") + ":");
@@ -151,18 +126,20 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         OrganizationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.HNComboItem"));
 
         FormationComboBox.removeAllItems();
-        FormationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.ATAComboItem"));
-        FormationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.GEAComboItem"));
-        FormationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.DAEComboItem"));
-        FormationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.DAYComboItem"));
-        FormationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.DAKComboItem"));
+
+        FormationComboBox.addItem(LOSFormationType.ATA);
+        FormationComboBox.addItem(LOSFormationType.DAE);
+        FormationComboBox.addItem(LOSFormationType.DAK);
+        FormationComboBox.addItem(LOSFormationType.DAY);
+        FormationComboBox.addItem(LOSFormationType.GEA);
 
         MillitaryUnitComboBox.removeAllItems();
         List<Zone> MillitaryUnits = this.getMillitaryUnits();
         for (int i = 0; i < MillitaryUnits.size(); i++) {
-            MillitaryUnitComboBox.addItem(MillitaryUnits.get(i).getName());
+            MillitaryUnitComboBox.addItem(MillitaryUnits.get(i));
         }
         initAutofiltering();
+        // PdfReport pdf = new PdfReport();
     }
 
     private void initAutofiltering() {
@@ -242,18 +219,17 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         return zones;
     }
 
-  /*  private List<VehicleData> getVehicles() {
-        VehicleDataFacade VehicleF = null;
-        List<VehicleData> vehicles = null;
-        try {
-            VehicleF = (VehicleDataFacade) loc.getStateless(VehicleDataFacade.class);
-        } catch (J2EEServiceLocatorException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        vehicles = VehicleF.getAllVehicles();
-        return vehicles;
+    /*  private List<VehicleData> getVehicles() {
+    VehicleDataFacade VehicleF = null;
+    List<VehicleData> vehicles = null;
+    try {
+    VehicleF = (VehicleDataFacade) loc.getStateless(VehicleDataFacade.class);
+    } catch (J2EEServiceLocatorException ex) {
+    Exceptions.printStackTrace(ex);
+    }
+    vehicles = VehicleF.getAllVehicles();
+    return vehicles;
     }*/
-
     public void componentClosed() {
     }
 
