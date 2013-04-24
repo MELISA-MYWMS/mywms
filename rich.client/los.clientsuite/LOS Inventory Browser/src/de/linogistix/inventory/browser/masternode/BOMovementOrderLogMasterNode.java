@@ -41,11 +41,9 @@ public class BOMovementOrderLogMasterNode extends BOMasterNode {
 		sheet.put(formation);
                 BOMasterNodeProperty<String>militaryUnit= new BOMasterNodeProperty<String>("militaryUnit", String.class, to.getMilitaryUnit().getName(), InventoryBundleResolver.class);
 		sheet.put(militaryUnit);
-                /*BOMasterNodeProperty<Long>sequenceNumber= new BOMasterNodeProperty<Long>("sequenceNumber", Long.class, to.getSequenceNumber(), InventoryBundleResolver.class);
-		sheet.put(sequenceNumber);*/
-                BOMasterNodeProperty<String> plateNumber= new BOMasterNodeProperty<String>("plateNo", String.class, to.getPlateNo(), InventoryBundleResolver.class);
+                BOMasterNodeProperty<String> plateNumber= new BOMasterNodeProperty<String>("plateNo", String.class, to.getVehicle().getPlateNumber(), InventoryBundleResolver.class);
 		sheet.put(plateNumber);
-                BOMasterNodeProperty<String> vehicleType= new BOMasterNodeProperty<String>("vehicleType", String.class, to.getVehicleType(), InventoryBundleResolver.class);
+                BOMasterNodeProperty<String> vehicleType= new BOMasterNodeProperty<String>("vehicleType", String.class, to.getVehicle().getModelName(), InventoryBundleResolver.class);
 		sheet.put(vehicleType);
                 BOMasterNodeProperty<Date> movementDate= new BOMasterNodeProperty<Date>("movementDate", Date.class, to.getMovementDate(), InventoryBundleResolver.class);
 		sheet.put(movementDate);

@@ -1,30 +1,27 @@
 package de.linogistix.los.inventory.query.dto;
 
-import java.math.BigDecimal;
 import java.util.Date;
-
-import javax.persistence.Column;
 
 import de.linogistix.los.inventory.model.LOSFormationType;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.MovementOrderLog;
 import de.linogistix.los.query.BODTO;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
+import org.mywms.model.VehicleData;
 import org.mywms.model.Zone;
 
 public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(MovementOrderLogTO.class);
+	// private static final Logger log =
+	// Logger.getLogger(MovementOrderLogTO.class);
 
 	private String organization;
 	private LOSFormationType formation;
 	private Zone militaryUnit;
-	//private long sequenceNumber;
 	private Date currDate;
-	private String plateNo;
-	private String vehicleType;
+	private VehicleData vehicle;
 	private Date movementDate;
 	private String orderNo;
 	private String movementPurpose;
@@ -41,10 +38,8 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		this.organization = idat.getOrganization();
 		this.formation = idat.getFormation();
 		this.militaryUnit = idat.getMilitaryUnit();
-		//this.sequenceNumber = idat.getSequenceNumber();
 		this.currDate = idat.getCreated();
-		this.plateNo = idat.getPlateNo();
-		this.vehicleType = idat.getVehicleType();
+		this.vehicle = idat.getVehicle();
 		this.movementDate = idat.getMovementDate();
 		this.orderNo = idat.getOrderNo();
 		this.movementPurpose = idat.getMovementPurpose();
@@ -61,21 +56,19 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		super(id, version, transactionId);
 	}
 
-	public MovementOrderLogTO(Long id, int version, String transactionId, String organization, LOSFormationType formation,
-			Zone militaryUnit,Date currDate, String plateNo, String vehicleType,
-			Date movementDate,
-			String orderNo, String movementPurpose,
-			String movementRoute, String movementLoad, LOSOrderReceipients driver,
+	public MovementOrderLogTO(Long id, int version, String transactionId,
+			String organization, LOSFormationType formation, Zone militaryUnit,
+			Date currDate, VehicleData vehicle, Date movementDate,
+			String orderNo, String movementPurpose, String movementRoute,
+			String movementLoad, LOSOrderReceipients driver,
 			String passenger1Name, String passenger2Name,
 			String passenger3Name, String passenger4Name) {
 		super(id, version, transactionId);
 		this.organization = organization;
 		this.formation = formation;
+		this.vehicle = vehicle;
 		this.militaryUnit = militaryUnit;
-		//this.sequenceNumber = sequenceNumber;
 		this.currDate = currDate;
-		this.plateNo = plateNo;
-		this.vehicleType = vehicleType;
 		this.movementDate = movementDate;
 		this.orderNo = orderNo;
 		this.movementPurpose = movementPurpose;
@@ -87,7 +80,6 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		this.passenger3Name = passenger3Name;
 		this.passenger4Name = passenger4Name;
 	}
-
 
 	public String getOrganization() {
 		return this.organization;
@@ -113,36 +105,12 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		this.militaryUnit = militaryUnit;
 	}
 
-	/*public Long getSequenceNumber() {
-		return this.sequenceNumber;
-	}
-
-	public void setSequenceNumber(Long sequenceNumber) {
-		this.sequenceNumber = sequenceNumber;
-	}
-*/
 	public Date getCurrDate() {
 		return this.currDate;
 	}
 
 	public void setCurrDate(Date currDate) {
 		this.currDate = currDate;
-	}
-
-	public String getPlateNo() {
-		return this.plateNo;
-	}
-
-	public void setPlateNo(String plateNo) {
-		this.plateNo = plateNo;
-	}
-
-	public String getVehicleType() {
-		return this.vehicleType;
-	}
-
-	public void setVehicleType(String vehicleType) {
-		this.vehicleType = vehicleType;
 	}
 
 	public String getOrderNo() {
@@ -190,7 +158,7 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 	}
 
 	public void setDriver(LOSOrderReceipients driver) {
-		this.driver= driver;
+		this.driver = driver;
 	}
 
 	public String getPassenger1Name() {
@@ -223,6 +191,14 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 
 	public void setPassenger4Name(String passenger4Name) {
 		this.passenger4Name = passenger4Name;
+	}
+
+	public VehicleData getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(VehicleData vehicle) {
+		this.vehicle = vehicle;
 	}
 
 }

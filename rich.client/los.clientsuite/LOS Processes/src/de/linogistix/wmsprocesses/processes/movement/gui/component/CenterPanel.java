@@ -65,8 +65,8 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         LOSFormationType formation = ((LOSFormationType) FormationComboBox.getSelectedItem());
         Zone militaryUnit = ((Zone) MillitaryUnitComboBox.getSelectedItem());
         Date currDate = currentDateTextField.getDate();
-        String vehicleType = vehicleDataComboBox.getSelectedAsEntity().getModelName();
-        String plateNo = vehicleDataComboBox.getSelectedAsEntity().getPlateNumber();
+        VehicleData vehicle = vehicleDataComboBox.getSelectedAsEntity();
+        //String plateNo = vehicleDataComboBox.getSelectedAsEntity().getPlateNumber();
         Date movementDate = MovementDateTextField.getDate();
         String orderNo = OrderNoFormattedTextField.getText();
         // Long sequenceNumber = Long.parseLong(sequenceNumberTextField.getText());
@@ -87,7 +87,7 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
             return;
         }
         try {
-            MovementOrderLog MovementOrder = mi.createMovementOrder(organization, formation, militaryUnit, currDate, plateNo, vehicleType, movementDate, orderNo, movementPurpose, movementRoute, movementLoad, driver, passenger1Name, passenger2Name, passenger3Name, passenger4Name);
+            MovementOrderLog MovementOrder = mi.createMovementOrder(organization, formation, militaryUnit, currDate, vehicle, movementDate, orderNo, movementPurpose, movementRoute, movementLoad, driver, passenger1Name, passenger2Name, passenger3Name, passenger4Name);
             Logger.getLogger(CenterPanel.class.getName()).info("---*--- Movement created");
             PdfReport MyReport = new PdfReport(MovementOrder);
             MyReport.start();
@@ -174,6 +174,7 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
                 LOSOrderReceipients selDriver = getDriverComboBox().getSelectedAsEntity();
 
                 if (selDriver != null) {
+                    
                 } else {
 //                    getAmountTextField().setEnabled(false);
                 }

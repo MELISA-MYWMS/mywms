@@ -10,31 +10,20 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
 import org.mywms.model.BasicEntity;
 import org.mywms.model.BusinessException;
+import org.mywms.model.VehicleData;
 import org.mywms.model.Zone;
 import org.mywms.service.ConstraintViolatedException;
 
 @Entity
-@Table(name = "los_movement_order_log", uniqueConstraints = {
-	    @UniqueConstraint(columnNames = {
-	        "transactionid"
-	    })
-	})
+@Table(name = "los_movement_order_log", uniqueConstraints = { @UniqueConstraint(columnNames = { "transactionid" }) })
 public class MovementOrderLog extends BasicEntity {
 	private static final long serialVersionUID = 1L;
 
@@ -43,10 +32,8 @@ public class MovementOrderLog extends BasicEntity {
 	private String organization;
 	private LOSFormationType formation;
 	private Zone militaryUnit;
-	//private long sequenceNumber;
 	private Date currDate;
-	private String plateNo;
-	private String vehicleType;
+	private VehicleData vehicle;
 	private Date movementDate;
 	private String orderNo;
 	private String movementPurpose;
@@ -58,44 +45,43 @@ public class MovementOrderLog extends BasicEntity {
 	private String passenger3Name;
 	private String passenger4Name;
 
-	
-	
 	@Column(nullable = false)
-    public String getTransactionId() {
-        return this.transactionId;
-    }
+	public String getTransactionId() {
+		return this.transactionId;
+	}
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-    
-    //TransactionID not unique?
-    @Override
-    public String toUniqueString() {
-        if (getTransactionId() != null) {
-            return getTransactionId();
-        } else {
-            return getId().toString();
-        }
-    }
-    
-    @PreUpdate
-    @PrePersist
-    public void sanityCheck() throws BusinessException, ConstraintViolatedException {
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
+	}
 
-        if (getId() != null) {
-            if (( getTransactionId() == null || getTransactionId().length() == 0 )) {
-                setTransactionId(getId().toString());
-            } else {
-                //ok
-            }
-        } else {
-            throw new RuntimeException("Id cannot be retrieved yet - hence TransactionId cannot be set");
-        }
+	// TransactionID not unique?
+	@Override
+	public String toUniqueString() {
+		if (getTransactionId() != null) {
+			return getTransactionId();
+		} else {
+			return getId().toString();
+		}
+	}
 
-    }
-    
-	
+	@PreUpdate
+	@PrePersist
+	public void sanityCheck() throws BusinessException,
+			ConstraintViolatedException {
+
+		if (getId() != null) {
+			if ((getTransactionId() == null || getTransactionId().length() == 0)) {
+				setTransactionId(getId().toString());
+			} else {
+				// ok
+			}
+		} else {
+			throw new RuntimeException(
+					"Id cannot be retrieved yet - hence TransactionId cannot be set");
+		}
+
+	}
+
 	@Column(nullable = false)
 	public String getOrganization() {
 		return this.organization;
@@ -105,7 +91,6 @@ public class MovementOrderLog extends BasicEntity {
 		this.organization = organization;
 	}
 
-	
 	@Column(nullable = false)
 	public LOSFormationType getFormation() {
 		return this.formation;
@@ -115,8 +100,8 @@ public class MovementOrderLog extends BasicEntity {
 		this.formation = formation;
 	}
 
-	@ManyToOne(optional=false)
-	@JoinColumn(name="name")
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "name")
 	public Zone getMilitaryUnit() {
 		return this.militaryUnit;
 	}
@@ -124,18 +109,7 @@ public class MovementOrderLog extends BasicEntity {
 	public void setMilitaryUnit(Zone militaryUnit) {
 		this.militaryUnit = militaryUnit;
 	}
-	
-	/*@Id
-    @SequenceGenerator(name = "Mov_Seq", sequenceName = "Mov_Seq", allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Mov_Seq")
-	public Long getSequenceNumber() {
-		return this.sequenceNumber;
-	}
 
-	protected void setSequenceNumber(Long sequenceNumber) {
-		this.sequenceNumber = sequenceNumber;
-	}*/
-	
 	@Column(nullable = false)
 	public Date getCurrDate() {
 		return this.currDate;
@@ -144,24 +118,7 @@ public class MovementOrderLog extends BasicEntity {
 	public void setCurrDate(Date currDate) {
 		this.currDate = currDate;
 	}
-	
-	@Column(nullable = false)
-	public String getPlateNo() {
-		return this.plateNo;
-	}
 
-	public void setPlateNo(String plateNo) {
-		this.plateNo = plateNo;
-	}
-
-	public String getVehicleType() {
-		return this.vehicleType;
-	}
-
-	public void setVehicleType(String vehicleType) {
-		this.vehicleType = vehicleType;
-	}
-	
 	@Column(nullable = false)
 	public String getOrderNo() {
 		return this.orderNo;
@@ -170,7 +127,7 @@ public class MovementOrderLog extends BasicEntity {
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
 	}
-	
+
 	@Column(nullable = false)
 	public Date getMovementDate() {
 		return this.movementDate;
@@ -188,7 +145,7 @@ public class MovementOrderLog extends BasicEntity {
 	public void setMovementPurpose(String movementPurpose) {
 		this.movementPurpose = movementPurpose;
 	}
-	
+
 	@Column(nullable = false)
 	public String getMovementRoute() {
 		return this.movementRoute;
@@ -197,7 +154,7 @@ public class MovementOrderLog extends BasicEntity {
 	public void setMovementRoute(String movementRoute) {
 		this.movementRoute = movementRoute;
 	}
-	
+
 	public String getMovementLoad() {
 		return this.movementLoad;
 	}
@@ -205,10 +162,10 @@ public class MovementOrderLog extends BasicEntity {
 	public void setMovementLoad(String movementLoad) {
 		this.movementLoad = movementLoad;
 	}
-	
-	//@Column(nullable = false)
-	@ManyToOne(optional=false)
-	@JoinColumn(name="identityCard")
+
+	// @Column(nullable = false)
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "identityCard")
 	public LOSOrderReceipients getDriver() {
 		return this.driver;
 	}
@@ -216,7 +173,7 @@ public class MovementOrderLog extends BasicEntity {
 	public void setDriver(LOSOrderReceipients driver) {
 		this.driver = driver;
 	}
-	
+
 	public String getPassenger1Name() {
 		return this.passenger1Name;
 	}
@@ -224,7 +181,7 @@ public class MovementOrderLog extends BasicEntity {
 	public void setPassenger1Name(String passenger1Name) {
 		this.passenger1Name = passenger1Name;
 	}
-	
+
 	public String getPassenger2Name() {
 		return this.passenger2Name;
 	}
@@ -232,7 +189,7 @@ public class MovementOrderLog extends BasicEntity {
 	public void setPassenger2Name(String passenger2Name) {
 		this.passenger2Name = passenger2Name;
 	}
-	
+
 	public String getPassenger3Name() {
 		return this.passenger3Name;
 	}
@@ -240,12 +197,21 @@ public class MovementOrderLog extends BasicEntity {
 	public void setPassenger3Name(String passenger3Name) {
 		this.passenger3Name = passenger3Name;
 	}
-	
+
 	public String getPassenger4Name() {
 		return this.passenger4Name;
 	}
 
 	public void setPassenger4Name(String passenger4Name) {
 		this.passenger4Name = passenger4Name;
+	}
+
+	@ManyToOne(optional = false)
+	public VehicleData getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(VehicleData vehicle) {
+		this.vehicle = vehicle;
 	}
 }

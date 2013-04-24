@@ -35,7 +35,7 @@ import java.util.Date;
 
 /**
  *
- * @author Parhs
+ * @author Parhs Rozakhs
  */
 public class PdfReport extends Thread {
 
@@ -47,6 +47,7 @@ public class PdfReport extends Thread {
     protected Date currDate;
     protected String plateNo;
     protected String vehicleType;
+    protected String vehicleID;
     protected Date movementDate;
     protected String orderNo;
     protected String movementPurpose;
@@ -65,8 +66,9 @@ public class PdfReport extends Thread {
         formation = myOrder.getFormation().name();
         militaryUnit = myOrder.getMilitaryUnit().getName();
         currDate = myOrder.getCurrDate();
-        plateNo = myOrder.getPlateNo();
-        vehicleType = myOrder.getVehicleType();
+        plateNo = myOrder.getVehicle().getPlateNumber();
+        vehicleType = myOrder.getVehicle().getModelName();
+        vehicleID = myOrder.getVehicle().getId().toString();
         movementDate = myOrder.getMovementDate();
         orderNo = myOrder.getOrderNo();
         movementPurpose = myOrder.getMovementPurpose();
@@ -118,9 +120,9 @@ public class PdfReport extends Thread {
             map.put("movementPurpose", movementPurpose);
             map.put("movementLoad", movementLoad);
             map.put("movementRoute", movementRoute);
-            ByteArrayInputStream QRStream = new ByteArrayInputStream(Str2QR(transactionId + plateNo + driverID));
+            ByteArrayInputStream QRStream = new ByteArrayInputStream(Str2QR(transactionId + vehicleID + driverID));
             map.put("IDImage", QRStream);
-            ByteArrayInputStream BrcdStream = new ByteArrayInputStream(Str2Brcd(plateNo));
+            ByteArrayInputStream BrcdStream = new ByteArrayInputStream(Str2Brcd(vehicleID));
             map.put("VehicleID", BrcdStream);
             ByteArrayInputStream BrcdStream2 = new ByteArrayInputStream(Str2Brcd(driverID));
             map.put("DriverID", BrcdStream2);

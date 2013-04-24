@@ -8,8 +8,6 @@
 package de.linogistix.los.inventory.facade;
 
 import java.util.Date;
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,21 +16,13 @@ import javax.persistence.PersistenceContext;
 import org.apache.log4j.Logger;
 import org.mywms.facade.BasicFacadeBean;
 import org.mywms.facade.FacadeException;
+import org.mywms.model.VehicleData;
 import org.mywms.model.Zone;
 
 import de.linogistix.los.inventory.service.MovementOrderLogService;
-import de.linogistix.los.inventory.businessservice.LOSGoodsReceiptComponent;
-import de.linogistix.los.inventory.exception.InventoryException;
-import de.linogistix.los.inventory.exception.InventoryExceptionKey;
-import de.linogistix.los.inventory.model.LOSAdvice;
-import de.linogistix.los.inventory.model.LOSAdviceState;
 import de.linogistix.los.inventory.model.LOSFormationType;
-import de.linogistix.los.inventory.model.LOSGoodsReceipt;
-import de.linogistix.los.inventory.model.LOSGoodsReceiptState;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.MovementOrderLog;
-import de.linogistix.los.inventory.service.LOSGoodsReceiptService;
-import de.linogistix.los.query.BODTO;
 
 @Stateless
 public class MovementOrderFacadeBean extends BasicFacadeBean implements
@@ -50,17 +40,19 @@ public class MovementOrderFacadeBean extends BasicFacadeBean implements
 	@PersistenceContext(unitName = "myWMS")
 	protected EntityManager manager;
 
+	@Override
+	public MovementOrderLog createMovementOrder(String organization,
+			LOSFormationType formation, Zone militaryUnit, Date currDate,
+			VehicleData vehicle, Date movementDate, String orderNo,
+			String movementPurpose, String movementRoute, String movementLoad,
+			LOSOrderReceipients driver, String passenger1Name,
+			String passenger2Name, String passenger3Name, String passenger4Name)
+			throws FacadeException {
+		return movementOrderService.create(organization, formation,
+				militaryUnit, currDate, vehicle, movementDate, orderNo,
+				movementPurpose, movementRoute, movementLoad, driver,
+				passenger1Name, passenger2Name, passenger3Name, passenger4Name);
 
-	public MovementOrderLog createMovementOrder(String organization, LOSFormationType formation,
-			Zone militaryUnit,Date currDate, String plateNo, String vehicleType,
-			Date movementDate,
-			String orderNo, String movementPurpose,
-			String movementRoute, String movementLoad, LOSOrderReceipients driver,
-			String passenger1Name, String passenger2Name,
-			String passenger3Name, String passenger4Name) throws FacadeException {
-			return movementOrderService.create(organization, formation, militaryUnit, currDate, plateNo, vehicleType, movementDate, orderNo, movementPurpose, movementRoute, movementLoad, driver, passenger1Name, passenger2Name, passenger3Name, passenger4Name);
-			
-		 
 	}
 
 }

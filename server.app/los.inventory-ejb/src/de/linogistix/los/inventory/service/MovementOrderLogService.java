@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.ejb.Remote;
 
-import org.mywms.model.ItemData;
+import org.mywms.model.VehicleData;
 import org.mywms.model.Zone;
 
 import de.linogistix.los.inventory.model.LOSFormationType;
@@ -21,9 +21,9 @@ import org.mywms.service.BasicService;
 public interface MovementOrderLogService extends BasicService<MovementOrderLog> {
 
 	public MovementOrderLog create(String organization,
-			LOSFormationType formation, Zone militaryUnit, Date currDate, String plateNo,
-			String vehicleType, Date movementDate, String orderNo,
+			LOSFormationType formation, Zone militaryUnit, Date currDate,
+			VehicleData vehicle, Date movementDate, String orderNo,
 			String movementPurpose, String movementRoute, String movementLoad,
-			LOSOrderReceipients driver, String passenger1Name, String passenger2Name,
-			String passenger3Name, String passenger4Name);
+			LOSOrderReceipients driver, String passenger1Name,
+			String passenger2Name, String passenger3Name, String passenger4Name);
 }

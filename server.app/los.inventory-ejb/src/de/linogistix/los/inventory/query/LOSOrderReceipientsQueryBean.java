@@ -5,25 +5,18 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
 
 import de.linogistix.los.inventory.query.dto.LOSOrderReceipientsTO;
-import de.linogistix.los.query.LOSResultList;
-import de.linogistix.los.query.BODTO;
 import de.linogistix.los.query.BusinessObjectQueryBean;
-import de.linogistix.los.query.QueryDetail;
-import de.linogistix.los.query.TemplateQuery;
 import de.linogistix.los.query.TemplateQueryWhereToken;
-import de.linogistix.los.query.exception.BusinessObjectNotFoundException;
-import de.linogistix.los.query.exception.BusinessObjectQueryException;
 
 @Stateless
 public class LOSOrderReceipientsQueryBean extends BusinessObjectQueryBean<LOSOrderReceipients>
     implements LOSOrderReceipientsQueryRemote{
 
-    private static final Logger log = Logger
-                                      .getLogger(LOSOrderReceipientsQueryBean.class);
+    //private static final Logger log = Logger.getLogger(LOSOrderReceipientsQueryBean.class);
 
     @Override
     public String getUniqueNameProp() {

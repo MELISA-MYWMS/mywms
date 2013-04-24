@@ -10,15 +10,16 @@ import de.linogistix.los.inventory.model.MovementOrderLog;
 import de.linogistix.los.inventory.service.MovementOrderLogService;
 
 @Stateless
-public class MovementOrderLogCRUDBean extends BusinessObjectCRUDBean<MovementOrderLog> implements MovementOrderLogCRUDRemote {
+public class MovementOrderLogCRUDBean extends
+		BusinessObjectCRUDBean<MovementOrderLog> implements
+		MovementOrderLogCRUDRemote {
 
-	@EJB 
+	@EJB
 	MovementOrderLogService service;
 
-    @Override
-    protected BasicService<MovementOrderLog> getBasicService() {
-        return service;
-    }
-	
-	
+	@Override
+	protected BasicService<MovementOrderLog> getBasicService() {
+		return service;
+	}
+
 }
