@@ -368,6 +368,10 @@ public class BOAutoFilteringComboBox<T extends BasicEntity> extends AbstractBOAu
         return queryMethod;
     }
 
+    public void setText(String text){
+        getAutoFilteringComboBox().setText(text);
+    }
+
      /**
      * Just useful in conjunction with Mode.INVOKE_QUERYMETHOD.
      * 

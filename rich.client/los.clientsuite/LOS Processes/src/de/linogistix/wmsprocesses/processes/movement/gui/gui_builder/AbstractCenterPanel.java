@@ -47,8 +47,6 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         MillitaryUnitComboBox = new javax.swing.JComboBox();
         DateLabel = new javax.swing.JLabel();
         currentDateTextField = new de.linogistix.common.gui.component.controls.LOSDateFormattedTextField();
-        SequenceNoLabel = new javax.swing.JLabel();
-        sequenceNumberTextField = new javax.swing.JTextField();
         MovementPanel = new javax.swing.JPanel();
         MovementPurposeLabel = new javax.swing.JLabel();
         MovementPurposeTextField = new javax.swing.JTextField();
@@ -58,8 +56,6 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         MovementRouteTextField = new javax.swing.JTextField();
         VehiclePanel = new javax.swing.JPanel();
         VehiclePlateNoLabel = new javax.swing.JLabel();
-        VehicleTypeLabel = new javax.swing.JLabel();
-        vehicleTypeTextField = new javax.swing.JTextField();
         MovementDateLabel = new javax.swing.JLabel();
         MovementDateTextField = new de.linogistix.common.gui.component.controls.LOSDateFormattedTextField();
         OrderNoLabel = new javax.swing.JLabel();
@@ -173,30 +169,10 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
         DocumentPropsPanel.add(currentDateTextField, gridBagConstraints);
 
-        SequenceNoLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        SequenceNoLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.SequenceNoLabel.text_1")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
-        DocumentPropsPanel.add(SequenceNoLabel, gridBagConstraints);
-
-        sequenceNumberTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.sequenceNumberTextField.text")); // NOI18N
-        sequenceNumberTextField.setEnabled(false);
-        sequenceNumberTextField.setMaximumSize(new java.awt.Dimension(180, 27));
-        sequenceNumberTextField.setMinimumSize(new java.awt.Dimension(180, 27));
-        sequenceNumberTextField.setPreferredSize(new java.awt.Dimension(180, 27));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
-        DocumentPropsPanel.add(sequenceNumberTextField, gridBagConstraints);
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(DocumentPropsPanel, gridBagConstraints);
 
@@ -277,31 +253,11 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 4);
         VehiclePanel.add(VehiclePlateNoLabel, gridBagConstraints);
 
-        VehicleTypeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        VehicleTypeLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.VehicleTypeLabel.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
-        VehiclePanel.add(VehicleTypeLabel, gridBagConstraints);
-
-        vehicleTypeTextField.setEditable(false);
-        vehicleTypeTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.vehicleTypeTextField.text")); // NOI18N
-        vehicleTypeTextField.setMinimumSize(new java.awt.Dimension(99, 27));
-        vehicleTypeTextField.setPreferredSize(new java.awt.Dimension(180, 27));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
-        VehiclePanel.add(vehicleTypeTextField, gridBagConstraints);
-
         MovementDateLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         MovementDateLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementDateLabel.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
         VehiclePanel.add(MovementDateLabel, gridBagConstraints);
@@ -311,7 +267,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         MovementDateTextField.setPreferredSize(new java.awt.Dimension(180, 27));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
         VehiclePanel.add(MovementDateTextField, gridBagConstraints);
@@ -320,7 +276,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         OrderNoLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.OrderNoLabel.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
         VehiclePanel.add(OrderNoLabel, gridBagConstraints);
@@ -336,7 +292,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         OrderNoFormattedTextField.setMinimumSize(new java.awt.Dimension(100, 27));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 0);
         VehiclePanel.add(OrderNoFormattedTextField, gridBagConstraints);
@@ -528,14 +484,10 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
     protected javax.swing.JLabel Passenger4Label;
     protected javax.swing.JTextField Passenger4TextField;
     protected javax.swing.JPanel PersonsPanel;
-    protected javax.swing.JLabel SequenceNoLabel;
     protected javax.swing.JPanel VehiclePanel;
     protected javax.swing.JLabel VehiclePlateNoLabel;
-    protected javax.swing.JLabel VehicleTypeLabel;
     protected de.linogistix.common.gui.component.controls.LOSDateFormattedTextField currentDateTextField;
     private javax.swing.JPanel jPanel1;
-    protected javax.swing.JTextField sequenceNumberTextField;
-    protected javax.swing.JTextField vehicleTypeTextField;
     // End of variables declaration//GEN-END:variables
 
     protected LOSDateFormattedTextField getCurrentDateTextField() {

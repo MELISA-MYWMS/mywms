@@ -18,6 +18,7 @@ import de.linogistix.los.inventory.facade.MovementOrderFacade;
 import de.linogistix.los.inventory.model.LOSFormationType;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.MovementOrderLog;
+import de.linogistix.los.query.BODTO;
 import de.linogistix.wmsprocesses.res.WMSProcessesBundleResolver;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -66,10 +67,8 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         Zone militaryUnit = ((Zone) MillitaryUnitComboBox.getSelectedItem());
         Date currDate = currentDateTextField.getDate();
         VehicleData vehicle = vehicleDataComboBox.getSelectedAsEntity();
-        //String plateNo = vehicleDataComboBox.getSelectedAsEntity().getPlateNumber();
         Date movementDate = MovementDateTextField.getDate();
         String orderNo = OrderNoFormattedTextField.getText();
-        // Long sequenceNumber = Long.parseLong(sequenceNumberTextField.getText());
         String movementPurpose = MovementPurposeTextField.getText();
         String movementLoad = MovementLoadTextField.getText();
         String movementRoute = MovementRouteTextField.getText();
@@ -106,8 +105,6 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         FormationLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.FormationLabel") + ":");
         MillitaryUnitLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MillitaryUnitLabel") + ":");
         DateLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.DateLabel") + ":");
-        //SequenceNoLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.SequenceNumberLabel") + ":");
-        VehicleTypeLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.VehicleTypeLabel") + ":");
         VehiclePlateNoLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.VehiclePlateNoLabel") + ":");
         MovementDateLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementDateLabel") + ":");
         OrderNoLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.OrderNoLabel") + ":");
@@ -146,9 +143,6 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         getVehicleDataComboBox().setEnabled(true);
         getVehicleDataComboBox().setMandatory(true);
         getVehicleDataComboBox().setAlignmentX(CENTER_ALIGNMENT);
-        //getVehicleDataComboBox().setEditorLabelTitle("Vehicle Data");
-
-
         getVehicleDataComboBox().addItemChangeListener(new PropertyChangeListener() {
 
             public void propertyChange(PropertyChangeEvent evt) {
@@ -156,10 +150,8 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
                 VehicleData selVehicleData = getVehicleDataComboBox().getSelectedAsEntity();
 
                 if (selVehicleData != null) {
-                    vehicleTypeTextField.setText(selVehicleData.getModelName());
-
-                } else {
-//                    getAmountTextField().setEnabled(false);
+                    getVehicleDataComboBox().setEditorLabelTitle(selVehicleData.getModelName());
+                    getVehicleDataComboBox().setSelectedItem((BODTO<VehicleData>) evt.getNewValue());
                 }
             }
         });
@@ -174,9 +166,7 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
                 LOSOrderReceipients selDriver = getDriverComboBox().getSelectedAsEntity();
 
                 if (selDriver != null) {
-                    
-                } else {
-//                    getAmountTextField().setEnabled(false);
+                    getDriverComboBox().setEditorLabelTitle(selDriver.getFirstName() + " " + selDriver.getLastName());
                 }
             }
         });

@@ -62,35 +62,33 @@ public class VehicleDataQueryBean extends BusinessObjectQueryBean<VehicleData>
         return VehicleDataTO.class;
     }
 
-    @Override
-    protected List<TemplateQueryWhereToken> getAutoCompletionTokens(String value) {
-        List<TemplateQueryWhereToken> ret = new ArrayList<TemplateQueryWhereToken>();
+	@Override
+	protected List<TemplateQueryWhereToken> getAutoCompletionTokens(String value) {
+		List<TemplateQueryWhereToken> ret = new ArrayList<TemplateQueryWhereToken>();
 
-//TemplateQueryWhereToken idt = new TemplateQueryWhereToken(
-        //TemplateQueryWhereToken.OPERATOR_LIKE, "labelId",
-        //getUniqueNameProp(),
-        //value);
-//idt.setLogicalOperator(TemplateQueryWhereToken.OPERATOR_OR);
+		TemplateQueryWhereToken idt = new TemplateQueryWhereToken(
+				TemplateQueryWhereToken.OPERATOR_LIKE, "labelId", value);
+		idt.setLogicalOperator(TemplateQueryWhereToken.OPERATOR_OR);
 
-//TemplateQueryWhereToken plateNumber = new TemplateQueryWhereToken(
-//TemplateQueryWhereToken.OPERATOR_LIKE, "plateNumber", value);
-//plateNumber.setLogicalOperator(TemplateQueryWhereToken.OPERATOR_OR);
+		TemplateQueryWhereToken plateNumber = new TemplateQueryWhereToken(
+				TemplateQueryWhereToken.OPERATOR_LIKE, "plateNumber", value);
+		plateNumber.setLogicalOperator(TemplateQueryWhereToken.OPERATOR_OR);
 
-        TemplateQueryWhereToken chassisNumber = new TemplateQueryWhereToken(
-            TemplateQueryWhereToken.OPERATOR_LIKE, "chassisNumber", value);
-        chassisNumber.setLogicalOperator(TemplateQueryWhereToken.OPERATOR_OR);
+		TemplateQueryWhereToken chassisNumber = new TemplateQueryWhereToken(
+				TemplateQueryWhereToken.OPERATOR_LIKE, "chassisNumber", value);
+		chassisNumber.setLogicalOperator(TemplateQueryWhereToken.OPERATOR_OR);
 
-        TemplateQueryWhereToken engineNumber = new TemplateQueryWhereToken(
-            TemplateQueryWhereToken.OPERATOR_LIKE, "engineNumber", value);
-        engineNumber.setLogicalOperator(TemplateQueryWhereToken.OPERATOR_OR);
+		TemplateQueryWhereToken engineNumber = new TemplateQueryWhereToken(
+				TemplateQueryWhereToken.OPERATOR_LIKE, "engineNumber", value);
+		engineNumber.setLogicalOperator(TemplateQueryWhereToken.OPERATOR_OR);
 
-//ret.add(idt);
-//ret.add(plateNumber);
-        ret.add(chassisNumber);
-        ret.add(engineNumber);
+		ret.add(idt);
+		ret.add(plateNumber);
+		ret.add(chassisNumber);
+		ret.add(engineNumber);
 
-        return ret;
-    }
+		return ret;
+	}
 
     public LOSResultList<VehicleData> queryByPlateNumber( QueryDetail detail, String vdId)
     throws BusinessObjectNotFoundException, BusinessObjectQueryException {
