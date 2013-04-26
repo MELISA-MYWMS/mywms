@@ -7,22 +7,22 @@
  */
 package de.linogistix.wmsprocesses.processes.movement.gui.gui_builder;
 
-import de.linogistix.common.gui.component.controls.BOAutoFilteringComboBox;
 import de.linogistix.common.gui.component.controls.LOSDateFormattedTextField;
 import java.awt.Color;
-import java.text.ParseException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import org.mywms.model.VehicleData;
-import org.openide.util.Exceptions;
 
 /**
  *
  * @author  artur
  */
 public class AbstractCenterPanel extends javax.swing.JPanel {
-
+    private final static Logger log = Logger.getLogger(AbstractCenterPanel.class.getName());
     /** Creates new form AbstractCenterPanel */
     public AbstractCenterPanel() {
         initComponents();
@@ -288,8 +288,9 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         }
         OrderNoFormattedTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         OrderNoFormattedTextField.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.OrderNoFormattedTextField.text")); // NOI18N
-        OrderNoFormattedTextField.setMaximumSize(new java.awt.Dimension(120, 27));
-        OrderNoFormattedTextField.setMinimumSize(new java.awt.Dimension(100, 27));
+        OrderNoFormattedTextField.setMaximumSize(new java.awt.Dimension(140, 27));
+        OrderNoFormattedTextField.setMinimumSize(new java.awt.Dimension(120, 27));
+        OrderNoFormattedTextField.setPreferredSize(new java.awt.Dimension(120, 27));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -428,7 +429,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Passenger3TextKeyFieldTyped
 
     private void Passenger1TextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Passenger1TextFieldKeyTyped
-       JTextField thisTextField = (JTextField) evt.getComponent();
+        JTextField thisTextField = (JTextField) evt.getComponent();
         if (thisTextField.getText().length() > 3 && thisTextField.getText().contains(" ")) {
             thisTextField.setForeground(Color.BLACK);
         } else {
@@ -453,6 +454,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
             thisTextField.setForeground(Color.RED);
         }
     }//GEN-LAST:event_Passenger4TextFieldKeyTyped
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JLabel DateLabel;
@@ -517,6 +519,4 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
     protected JLabel getVehiclePlateNoLabel() {
         return VehiclePlateNoLabel;
     }
-
- 
 }

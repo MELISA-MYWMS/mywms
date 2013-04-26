@@ -10,6 +10,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
@@ -28,8 +30,10 @@ public class MovementOrderLog extends BasicEntity {
 	private static final long serialVersionUID = 1L;
 
 	private String transactionId;
-
+	
 	private String organization;
+	
+	@Enumerated(EnumType.STRING)
 	private LOSFormationType formation;
 	private Zone militaryUnit;
 	private Date currDate;

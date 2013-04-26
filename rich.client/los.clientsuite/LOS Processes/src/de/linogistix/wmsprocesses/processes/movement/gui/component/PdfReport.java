@@ -80,7 +80,6 @@ public class PdfReport extends Thread {
         passenger2Name = myOrder.getPassenger2Name();
         passenger3Name = myOrder.getPassenger3Name();
         passenger4Name = myOrder.getPassenger4Name();
-        //createMovementOrderReport();
     }
 
     @Override
@@ -133,8 +132,6 @@ public class PdfReport extends Thread {
             // compile report
             JasperReport jasperReport =
                     JasperCompileManager.compileReport("reports/MovementOrder.jrxml");
-            //JasperCompileManager.compileReport("LOSFuelOrderLogReport.jrxml");
-
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap<String, Object>(), dataSource);
             // view report to UI
             //JasperViewer.viewReport(jasperPrint, false);
@@ -172,7 +169,6 @@ public class PdfReport extends Thread {
         try {
             matrix = writer.encode(Text, BarcodeFormat.CODE_128, 512, 200);
         } catch (WriterException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         if (matrix != null) {

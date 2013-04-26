@@ -50,6 +50,7 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
 
     public CenterPanel(TopComponentPanel topComponentPanel) {
         this.topComponentPanel = topComponentPanel;
+        setLabels();
         initDefaults();
 
     }
@@ -86,8 +87,12 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
             return;
         }
         try {
-            MovementOrderLog MovementOrder = mi.createMovementOrder(organization, formation, militaryUnit, currDate, vehicle, movementDate, orderNo, movementPurpose, movementRoute, movementLoad, driver, passenger1Name, passenger2Name, passenger3Name, passenger4Name);
-            Logger.getLogger(CenterPanel.class.getName()).info("---*--- Movement created");
+            MovementOrderLog MovementOrder = mi.createMovementOrder(
+                    organization, formation,
+                    militaryUnit, currDate, vehicle, movementDate, orderNo, movementPurpose,
+                    movementRoute, movementLoad, driver, passenger1Name, passenger2Name,
+                    passenger3Name, passenger4Name);
+
             PdfReport MyReport = new PdfReport(MovementOrder);
             MyReport.start();
 
@@ -99,50 +104,51 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
 
     private void initDefaults() {
         LoginService login = Lookup.getDefault().lookup(LoginService.class);
-        currentDateTextField.setDate(new Date());
-        MovementDateTextField.setDate(new Date());
-        OrganizationLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.OrganizationLabel") + ":");
-        FormationLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.FormationLabel") + ":");
-        MillitaryUnitLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MillitaryUnitLabel") + ":");
-        DateLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.DateLabel") + ":");
-        VehiclePlateNoLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.VehiclePlateNoLabel") + ":");
-        MovementDateLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementDateLabel") + ":");
-        OrderNoLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.OrderNoLabel") + ":");
-        MovementPurposeLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementPurposeLabel") + ":");
-        MovementLoadLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementLoadLabel") + ":");
-        MovementRouteLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementRouteLabel") + ":");
-        DriverNameLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.DriverNameLabel") + ":");
-        Passenger1Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
-        Passenger2Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
-        Passenger3Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
-        Passenger4Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
-
         OrganizationComboBox.removeAllItems();
         OrganizationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.HAFComboItem"));
         OrganizationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.HAComboItem"));
         OrganizationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.HNComboItem"));
+        OrganizationComboBox.setSelectedIndex(0);
 
         FormationComboBox.removeAllItems();
-
-        FormationComboBox.addItem(LOSFormationType.ATA);
-        FormationComboBox.addItem(LOSFormationType.DAE);
-        FormationComboBox.addItem(LOSFormationType.DAK);
-        FormationComboBox.addItem(LOSFormationType.DAY);
-        FormationComboBox.addItem(LOSFormationType.GEA);
+        FormationComboBox.addItem(LOSFormationType.ΑΤΑ);
+        FormationComboBox.addItem(LOSFormationType.ΓΕΑ);
+        FormationComboBox.addItem(LOSFormationType.ΔΑΕ);
+        FormationComboBox.addItem(LOSFormationType.ΔΑΚ);
+        FormationComboBox.addItem(LOSFormationType.ΔΑΚ);
+        FormationComboBox.setSelectedIndex(0);
 
         MillitaryUnitComboBox.removeAllItems();
         List<Zone> MillitaryUnits = this.getMillitaryUnits();
         for (int i = 0; i < MillitaryUnits.size(); i++) {
             MillitaryUnitComboBox.addItem(MillitaryUnits.get(i));
         }
+        MillitaryUnitComboBox.setSelectedIndex(0);
+
+        currentDateTextField.setDate(new Date());
+        MovementDateTextField.setDate(new Date());
+        OrderNoFormattedTextField.setText("");
+        Passenger1TextField.setText("");
+        Passenger2TextField.setText("");
+        Passenger3TextField.setText("");
+        Passenger4TextField.setText("");
+        MovementRouteTextField.setText("");
+        MovementPurposeTextField.setText("");
+        MovementLoadTextField.setText("");
         initAutofiltering();
-        // PdfReport pdf = new PdfReport();
     }
 
     private void initAutofiltering() {
+        initVehicleDataComboBox();
+        initDriverComboBox();
+    }
+
+    private void initVehicleDataComboBox() {
         getVehicleDataComboBox().setEnabled(true);
         getVehicleDataComboBox().setMandatory(true);
         getVehicleDataComboBox().setAlignmentX(CENTER_ALIGNMENT);
+        getVehicleDataComboBox().setEditorLabelTitle("");
+        getVehicleDataComboBox().clear();
         getVehicleDataComboBox().addItemChangeListener(new PropertyChangeListener() {
 
             public void propertyChange(PropertyChangeEvent evt) {
@@ -155,10 +161,14 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
                 }
             }
         });
+    }
 
+    private void initDriverComboBox() {
         getDriverComboBox().setEnabled(true);
         getDriverComboBox().setMandatory(true);
         getDriverComboBox().setAlignmentX(CENTER_ALIGNMENT);
+        getDriverComboBox().setEditorLabelTitle("");
+        getDriverComboBox().clear();
         getDriverComboBox().addItemChangeListener(new PropertyChangeListener() {
 
             public void propertyChange(PropertyChangeEvent evt) {
@@ -210,17 +220,26 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         return zones;
     }
 
-    /*  private List<VehicleData> getVehicles() {
-    VehicleDataFacade VehicleF = null;
-    List<VehicleData> vehicles = null;
-    try {
-    VehicleF = (VehicleDataFacade) loc.getStateless(VehicleDataFacade.class);
-    } catch (J2EEServiceLocatorException ex) {
-    Exceptions.printStackTrace(ex);
+    private void setLabels() {
+        currentDateTextField.setDate(new Date());
+        MovementDateTextField.setDate(new Date());
+        OrganizationLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.OrganizationLabel") + ":");
+        FormationLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.FormationLabel") + ":");
+        MillitaryUnitLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MillitaryUnitLabel") + ":");
+        DateLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.DateLabel") + ":");
+        VehiclePlateNoLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.VehiclePlateNoLabel") + ":");
+        MovementDateLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementDateLabel") + ":");
+        OrderNoLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.OrderNoLabel") + ":");
+        MovementPurposeLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementPurposeLabel") + ":");
+        MovementLoadLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementLoadLabel") + ":");
+        MovementRouteLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementRouteLabel") + ":");
+        DriverNameLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.DriverNameLabel") + ":");
+        Passenger1Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
+        Passenger2Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
+        Passenger3Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
+        Passenger4Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
     }
-    vehicles = VehicleF.getAllVehicles();
-    return vehicles;
-    }*/
+
     public void componentClosed() {
     }
 

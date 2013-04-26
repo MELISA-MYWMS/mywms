@@ -27,6 +27,7 @@ public class BundleResolve {
     ret = keyIfUnresolved ?  key : "";
     
     for (Class c : bundleResolvers) {
+
       try{
         ret = NbBundle.getMessage(c, key, params);
         if (ret != null) {

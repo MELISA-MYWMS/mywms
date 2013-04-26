@@ -8,9 +8,9 @@
 package de.linogistix.los.inventory.model;
 
 public enum LOSFormationType {
-	ATA,
-	DAY,
-	DAE,
-	DAK,
-	GEA
+	ΑΤΑ,
+	ΔΑΥ,
+	ΔΑΕ,
+	ΔΑΚ,
+	ΓΕΑ
 }
