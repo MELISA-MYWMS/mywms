@@ -22,7 +22,7 @@ import de.linogistix.los.inventory.model.LOSOrderReceipients;
 @Remote
 public interface MovementOrderFacade {
 	public MovementOrderLog createMovementOrder(String organization,
-			LOSFormationType formation, Zone militaryUnit, Date currDate,
+			String formation, Zone militaryUnit, Date currDate,
 			VehicleData vehicle, Date movementDate, String orderNo,
 			String movementPurpose, String movementRoute, String movementLoad,
 			LOSOrderReceipients driver, String passenger1Name,

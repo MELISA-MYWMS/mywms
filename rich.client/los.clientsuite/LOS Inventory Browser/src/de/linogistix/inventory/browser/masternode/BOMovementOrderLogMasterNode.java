@@ -37,7 +37,7 @@ public class BOMovementOrderLogMasterNode extends BOMasterNode {
 
                 BOMasterNodeProperty<String> organization= new BOMasterNodeProperty<String>("organization", String.class, to.getOrganization(), InventoryBundleResolver.class);
                 sheet.put(organization);
-                BOMasterNodeProperty<String>formation= new BOMasterNodeProperty<String>("formation", String.class, to.getFormation().name(), InventoryBundleResolver.class);
+                BOMasterNodeProperty<String>formation= new BOMasterNodeProperty<String>("formation", String.class, to.getFormation().toString(), InventoryBundleResolver.class);
 		sheet.put(formation);
                 BOMasterNodeProperty<String>militaryUnit= new BOMasterNodeProperty<String>("militaryUnit", String.class, to.getMilitaryUnit().getName(), InventoryBundleResolver.class);
 		sheet.put(militaryUnit);

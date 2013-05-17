@@ -34,7 +34,7 @@ public class MovementOrderLog extends BasicEntity {
 	private String organization;
 	
 	@Enumerated(EnumType.STRING)
-	private LOSFormationType formation;
+	private String formation;
 	private Zone militaryUnit;
 	private Date currDate;
 	private VehicleData vehicle;
@@ -96,11 +96,11 @@ public class MovementOrderLog extends BasicEntity {
 	}
 
 	@Column(nullable = false)
-	public LOSFormationType getFormation() {
+	public String getFormation() {
 		return this.formation;
 	}
 
-	public void setFormation(LOSFormationType formation) {
+	public void setFormation(String formation) {
 		this.formation = formation;
 	}
 

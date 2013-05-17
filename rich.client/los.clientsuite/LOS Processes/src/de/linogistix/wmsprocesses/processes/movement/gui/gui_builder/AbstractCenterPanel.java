@@ -118,7 +118,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 4);
         DocumentPropsPanel.add(FormationLabel, gridBagConstraints);
 
-        FormationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        FormationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ΑΤΑ", "ΓΕΑ", "ΔΑΕ", "ΔΑΥ", "ΔΑΚ" }));
         FormationComboBox.setMaximumSize(new java.awt.Dimension(180, 27));
         FormationComboBox.setMinimumSize(new java.awt.Dimension(180, 27));
         FormationComboBox.setPreferredSize(new java.awt.Dimension(180, 27));

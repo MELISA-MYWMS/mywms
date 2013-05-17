@@ -8,6 +8,7 @@
 package de.linogistix.wmsprocesses.processes.movement.gui.component;
 
 import de.linogistix.common.gui.component.controls.BOAutoFilteringComboBox;
+import de.linogistix.common.gui.component.controls.LOSComboBox;
 import de.linogistix.common.gui.listener.TopComponentListener;
 import de.linogistix.wmsprocesses.processes.movement.gui.gui_builder.AbstractCenterPanel;
 import de.linogistix.common.services.J2EEServiceLocator;
@@ -15,11 +16,12 @@ import de.linogistix.common.services.J2EEServiceLocatorException;
 import de.linogistix.common.userlogin.LoginService;
 import de.linogistix.common.util.ExceptionAnnotator;
 import de.linogistix.los.inventory.facade.MovementOrderFacade;
-import de.linogistix.los.inventory.model.LOSFormationType;
+//import de.linogistix.los.inventory.model.LOSFormationType;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.MovementOrderLog;
 import de.linogistix.los.query.BODTO;
 import de.linogistix.wmsprocesses.res.WMSProcessesBundleResolver;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.beans.PropertyChangeEvent;
@@ -27,6 +29,8 @@ import java.beans.PropertyChangeListener;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
 import org.mywms.facade.ZoneFacade;
 import org.mywms.facade.FacadeException;
 import org.mywms.model.Zone;
@@ -47,12 +51,12 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
     TopComponentPanel topComponentPanel;
     private BOAutoFilteringComboBox<VehicleData> vehicleDataComboBox = null;
     private BOAutoFilteringComboBox<LOSOrderReceipients> driverComboBox = null;
+    private LOSComboBox formationComboBox = null;
 
     public CenterPanel(TopComponentPanel topComponentPanel) {
         this.topComponentPanel = topComponentPanel;
         setLabels();
         initDefaults();
-
     }
 
     void clear() {
@@ -64,7 +68,7 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
 
     public void process(boolean processAutomaticly) {
         String organization = OrganizationComboBox.getSelectedItem().toString();
-        LOSFormationType formation = ((LOSFormationType) FormationComboBox.getSelectedItem());
+        String formation =  FormationComboBox.getSelectedItem().toString();
         Zone militaryUnit = ((Zone) MillitaryUnitComboBox.getSelectedItem());
         Date currDate = currentDateTextField.getDate();
         VehicleData vehicle = vehicleDataComboBox.getSelectedAsEntity();
@@ -99,7 +103,6 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         } catch (FacadeException ex) {
             Exceptions.printStackTrace(ex);
         }
-
     }
 
     private void initDefaults() {
@@ -110,12 +113,10 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         OrganizationComboBox.addItem(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.HNComboItem"));
         OrganizationComboBox.setSelectedIndex(0);
 
-        FormationComboBox.removeAllItems();
-        FormationComboBox.addItem(LOSFormationType.ΑΤΑ);
-        FormationComboBox.addItem(LOSFormationType.ΓΕΑ);
-        FormationComboBox.addItem(LOSFormationType.ΔΑΕ);
-        FormationComboBox.addItem(LOSFormationType.ΔΑΚ);
-        FormationComboBox.addItem(LOSFormationType.ΔΑΚ);
+      /*   FormationComboBox.removeAllItems();
+       for( LOSFormationType formationType : LOSFormationType.values()){
+            FormationComboBox.addItem( formationType);
+        }*/
         FormationComboBox.setSelectedIndex(0);
 
         MillitaryUnitComboBox.removeAllItems();
@@ -182,6 +183,7 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         });
     }
 
+
     private BOAutoFilteringComboBox<VehicleData> getVehicleDataComboBox() {
         if (vehicleDataComboBox == null) {
             vehicleDataComboBox = new BOAutoFilteringComboBox<VehicleData>(VehicleData.class);
@@ -207,6 +209,7 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         }
         return driverComboBox;
     }
+
 
     private List<Zone> getMillitaryUnits() {
         ZoneFacade ZoneF = null;

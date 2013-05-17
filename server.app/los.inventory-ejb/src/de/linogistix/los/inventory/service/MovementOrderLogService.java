@@ -21,7 +21,7 @@ import org.mywms.service.BasicService;
 public interface MovementOrderLogService extends BasicService<MovementOrderLog> {
 
 	public MovementOrderLog create(String organization,
-			LOSFormationType formation, Zone militaryUnit, Date currDate,
+			String formation, Zone militaryUnit, Date currDate,
 			VehicleData vehicle, Date movementDate, String orderNo,
 			String movementPurpose, String movementRoute, String movementLoad,
 			LOSOrderReceipients driver, String passenger1Name,

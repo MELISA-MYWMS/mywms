@@ -18,7 +18,7 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 	// Logger.getLogger(MovementOrderLogTO.class);
 
 	private String organization;
-	private LOSFormationType formation;
+	private String formation;
 	private Zone militaryUnit;
 	private Date currDate;
 	private VehicleData vehicle;
@@ -57,7 +57,7 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 	}
 
 	public MovementOrderLogTO(Long id, int version, String transactionId,
-			String organization, LOSFormationType formation, Zone militaryUnit,
+			String organization, String formation, Zone militaryUnit,
 			Date currDate, VehicleData vehicle, Date movementDate,
 			String orderNo, String movementPurpose, String movementRoute,
 			String movementLoad, LOSOrderReceipients driver,
@@ -89,11 +89,11 @@ public class MovementOrderLogTO extends BODTO<MovementOrderLog> {
 		this.organization = organization;
 	}
 
-	public LOSFormationType getFormation() {
+	public String getFormation() {
 		return this.formation;
 	}
 
-	public void setFormation(LOSFormationType formation) {
+	public void setFormation(String formation) {
 		this.formation = formation;
 	}
 

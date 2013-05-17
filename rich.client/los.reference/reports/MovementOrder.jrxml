@@ -582,7 +582,7 @@
 				<text><![CDATA[β. Κατά την Αποστολή:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="28" y="245" width="276" height="20"/>
+				<reportElement x="28" y="245" width="350" height="20"/>
 				<textElement>
 					<font fontName="Arial Unicode MS" isBold="true" pdfEncoding="Cp1253"/>
 				</textElement>
