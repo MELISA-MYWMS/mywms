@@ -12,6 +12,8 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.oned.Code128Writer;
 import com.google.zxing.qrcode.QRCodeWriter;
+import de.linogistix.common.gui.component.windows.ProgressDialog;
+import de.linogistix.wmsprocesses.res.WMSProcessesBundleResolver;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -34,9 +36,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.Date;
 import java.security.MessageDigest;
+import java.util.Arrays;
 import org.netbeans.api.progress.ProgressHandle;
 import org.netbeans.api.progress.ProgressHandleFactory;
 import org.openide.util.Exceptions;
+import org.openide.util.NbBundle;
 
 /**
  *
@@ -65,6 +69,9 @@ public class PdfReport extends Thread {
     protected String passenger2Name;
     protected String passenger3Name;
     protected String passenger4Name;
+    private ProgressDialog progDialog;
+    private List<String> pdMessages;
+    final ProgressHandle progrHandle = ProgressHandleFactory.createHandle("");
 
     public PdfReport(MovementOrderLog myOrder) {
         transactionId = myOrder.getTransactionId();
@@ -86,20 +93,28 @@ public class PdfReport extends Thread {
         passenger2Name = myOrder.getPassenger2Name();
         passenger3Name = myOrder.getPassenger3Name();
         passenger4Name = myOrder.getPassenger4Name();
+        pdMessages = Arrays.asList(
+                NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.creatingMessage"),
+                NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.exportingMessage"),
+                NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.openingMessage"));
+        progDialog = ProgressDialog.getInstance();
     }
-    final ProgressHandle progr = ProgressHandleFactory.createHandle("");
+    
+
     @Override
     public void run() {
-        progr.start(100);
-        createMovementOrderReport();
+        progrHandle.start(100);
+        progDialog.DialogShow();
+        createMovementOrderReport();        
     }
 
     public void createMovementOrderReport() {
         try {
             // load report location
             // fill report
-            progr.progress(10);
-            progr.setDisplayName("Creating Movement Order Document");
+            progrHandle.progress(10);
+            progrHandle.setDisplayName(pdMessages.get(0));
+            progDialog.setProgress(10, pdMessages.get(0));
             List<Map<String, ?>> maps = new ArrayList<Map<String, ?>>();
 
             Map<String, Object> map = new HashMap<String, Object>();
@@ -128,7 +143,7 @@ public class PdfReport extends Thread {
             map.put("movementPurpose", movementPurpose);
             map.put("movementLoad", movementLoad);
             map.put("movementRoute", movementRoute);
-            
+
             ByteArrayInputStream QRStream = new ByteArrayInputStream(Str2QR(hash(transactionId + vehicleID + driverID)));
             map.put("IDImage", QRStream);
             ByteArrayInputStream BrcdStream = new ByteArrayInputStream(Str2Brcd(vehicleID));
@@ -136,30 +151,35 @@ public class PdfReport extends Thread {
             ByteArrayInputStream BrcdStream2 = new ByteArrayInputStream(Str2Brcd(driverID));
             map.put("DriverID", BrcdStream2);
             maps.add(map);
-            progr.progress(20);
-            
+            progrHandle.progress(20);
+            progDialog.setProgress(20);
             JRMapCollectionDataSource dataSource = new JRMapCollectionDataSource(maps);
-            progr.progress(30);
+            progrHandle.progress(30);
+            progDialog.setProgress(30);
             // compile report
             JasperReport jasperReport =
                     JasperCompileManager.compileReport("reports/MovementOrder.jrxml");
-            progr.progress(50);
-            progr.setDisplayName("Exporting to PDF");
+            progrHandle.progress(50);
+            progrHandle.setDisplayName(pdMessages.get(1));
+            progDialog.setProgress(50, pdMessages.get(1));
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap<String, Object>(), dataSource);
-            
+
             // view report to UI
             //JasperViewer.viewReport(jasperPrint, false);
-            progr.progress(80);
-            progr.setDisplayName("Opening PDF");
+            progrHandle.progress(80);
+            progrHandle.setDisplayName(pdMessages.get(2));
+            progDialog.setProgress(80, pdMessages.get(2));
             JasperExportManager.exportReportToPdfFile(jasperPrint, "reports/report.pdf");
         } catch (JRException ex) {
-            progr.suspend("PDF Creation error");
+            progrHandle.suspend("PDF Creation error");
             Logger.getLogger(PdfReport.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        progr.progress(90);
+        progrHandle.progress(90);
+        progDialog.setProgress(90);
         OpenPdfReportFile();
-        progr.finish();
+        progDialog.setProgress(100);
+        progrHandle.finish();
     }
 
     private byte[] Str2QR(String Text) {

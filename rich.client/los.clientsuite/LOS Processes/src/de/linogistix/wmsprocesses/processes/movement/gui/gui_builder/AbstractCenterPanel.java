@@ -8,14 +8,18 @@
 package de.linogistix.wmsprocesses.processes.movement.gui.gui_builder;
 
 import de.linogistix.common.gui.component.controls.LOSDateFormattedTextField;
+import de.linogistix.common.gui.component.windows.ProgressDialog;
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.util.Date;
-import java.util.logging.Level;
+import java.awt.Frame;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+import org.openide.windows.WindowManager;
 
 /**
  *
@@ -84,6 +88,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(153, 388));
+        setName("panel"); // NOI18N
         setLayout(new java.awt.GridBagLayout());
 
         DocumentPropsPanel.setMinimumSize(new java.awt.Dimension(300, 175));

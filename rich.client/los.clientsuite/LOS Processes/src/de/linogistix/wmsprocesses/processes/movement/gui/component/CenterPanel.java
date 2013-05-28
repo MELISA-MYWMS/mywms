@@ -31,10 +31,12 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import org.mywms.facade.ZoneFacade;
 import org.mywms.facade.FacadeException;
 import org.mywms.model.Zone;
 import org.mywms.model.VehicleData;
+import org.openide.DialogDescriptor;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
@@ -61,6 +63,7 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
 
     void clear() {
         initDefaults();
+        
     }
 
     private void clearPositionDetail() {
