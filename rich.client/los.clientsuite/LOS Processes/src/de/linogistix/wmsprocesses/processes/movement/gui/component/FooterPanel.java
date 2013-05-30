@@ -10,6 +10,9 @@ package de.linogistix.wmsprocesses.processes.movement.gui.component;
 import de.linogistix.common.gui.gui_builder.AbstractFooterPanel;
 import de.linogistix.wmsprocesses.res.WMSProcessesBundleResolver;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.JButton;
 import org.netbeans.api.javahelp.Help;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
@@ -25,8 +28,8 @@ public class FooterPanel extends AbstractFooterPanel {
         this.topComponentPanel = topComponentPanel;
         postInit();
     }
-
-  /*  @Override
+/*
+    @Override
     public List<JButton> getButtonList() {
         List<JButton> buttonList = super.getButtonList();
         
@@ -39,17 +42,17 @@ public class FooterPanel extends AbstractFooterPanel {
             }
         });
         
-        createMovementButton.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class,"Create Movement Order"));
+        createMovementButton.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class,"CTL_MovementAction"));
         createMovementButton.setMnemonic(NbBundle.getMessage(WMSProcessesBundleResolver.class, "CreateMovement.mnemonic").charAt(0));
         
         buttonList.add(0, createMovementButton);
         
         return buttonList;
         
-    }*/
-    
+    }
+    */
     private void postInit() {
-        super.okButton.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class,"Create order and start"));
+        super.okButton.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class,"CTL_OrderAction"));
         super.okButton.setMnemonic(NbBundle.getMessage(WMSProcessesBundleResolver.class, "CreateOrderAndStart.mnemonic").charAt(0));
         super.clearButton.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class,"Clear"));
         super.clearButton.setMnemonic(NbBundle.getMessage(WMSProcessesBundleResolver.class, "Clear.mnemonic").charAt(0));

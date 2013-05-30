@@ -25,7 +25,7 @@ public class HeaderPanel extends AbstractHeaderPanel {
     
     
     private void postInit() {
-        super.headerLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class,"CTL_MovementAction"));
+        super.headerLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class,"CTL_CreateMovementAction"));
     }
 
 }

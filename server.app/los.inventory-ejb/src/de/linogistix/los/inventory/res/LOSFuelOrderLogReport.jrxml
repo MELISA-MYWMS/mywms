@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FuelOrderLog" printOrder="Horizontal" pageWidth="595" pageHeight="842" columnWidth="567" leftMargin="14" rightMargin="14" topMargin="61" bottomMargin="61">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StorageLocationLabels" printOrder="Horizontal" pageWidth="595" pageHeight="842" columnWidth="567" leftMargin="14" rightMargin="14" topMargin="61" bottomMargin="61">
 	<property name="ireport.scriptlethandling" value="0"/>
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.0"/>
@@ -17,52 +17,6 @@
 	<field name="tankRemaining" class="java.math.BigDecimal"/>
 	<field name="receipientName" class="java.lang.String"/>
 	<field name="rcptPosQuantity" class="java.math.BigDecimal"/>
-	<field name="transactionDate" class="java.util.Date"/>
-	<group name="FuelType">
-		<groupExpression><![CDATA[$F{rcptArticleRef}]]></groupExpression>
-		<groupHeader>
-			<band height="28">
-				<textField>
-					<reportElement x="82" y="8" width="216" height="20"/>
-					<textElement>
-						<font fontName="Arial Unicode MS" size="12" isBold="true" pdfEncoding="Cp1253"/>
-					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{rcptArticleDescr}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement x="0" y="8" width="82" height="20"/>
-					<textElement>
-						<font fontName="Arial Unicode MS" isItalic="true" pdfEncoding="Cp1253"/>
-					</textElement>
-					<text><![CDATA[Τύπος Καυσίμου]]></text>
-				</staticText>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="TransactionDate">
-		<groupExpression><![CDATA[$F{transactionDate}]]></groupExpression>
-		<groupHeader>
-			<band height="20">
-				<staticText>
-					<reportElement x="17" y="0" width="65" height="20"/>
-					<textElement>
-						<font fontName="Arial Unicode MS" isItalic="false" isUnderline="true" pdfEncoding="Cp1253"/>
-					</textElement>
-					<text><![CDATA[Απογραφή:]]></text>
-				</staticText>
-				<textField isBlankWhenNull="true">
-					<reportElement x="82" y="0" width="160" height="20"/>
-					<textElement>
-						<font fontName="Arial Unicode MS" isBold="false" isUnderline="true" pdfEncoding="Cp1253"/>
-					</textElement>
-					<textFieldExpression class="java.util.Date"><![CDATA[$F{transactionDate}]]></textFieldExpression>
-				</textField>
-			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="21"/>
-		</groupFooter>
-	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -85,6 +39,13 @@
 				</textElement>
 				<text><![CDATA[Από:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="435" y="34" width="125" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial Unicode MS" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{PAGE_NUMBER} + " / " + $V{PAGE_COUNT}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="138" y="0" width="311" height="34"/>
 				<textElement textAlignment="Center">
@@ -114,6 +75,13 @@
 				<text><![CDATA[Υπόλοιπο Δεξαμενής σε λίτρα]]></text>
 			</staticText>
 			<staticText>
+				<reportElement x="460" y="54" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" isItalic="true" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Υπογραφή]]></text>
+			</staticText>
+			<staticText>
 				<reportElement x="100" y="54" width="160" height="40"/>
 				<textElement>
 					<font fontName="Arial Unicode MS" isItalic="true" pdfEncoding="Cp1253"/>
@@ -123,6 +91,13 @@
 			<line>
 				<reportElement x="0" y="94" width="560" height="1"/>
 			</line>
+			<staticText>
+				<reportElement x="378" y="34" width="42" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial Unicode MS" size="12" pdfEncoding="Cp1253"/>
+				</textElement>
+				<text><![CDATA[Σελίδα]]></text>
+			</staticText>
 			<textField isBlankWhenNull="true">
 				<reportElement x="180" y="34" width="91" height="20"/>
 				<textElement textAlignment="Right">
@@ -136,13 +111,6 @@
 					<font fontName="Arial Unicode MS" pdfEncoding="Cp1253"/>
 				</textElement>
 				<text><![CDATA[Έως:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="460" y="54" width="100" height="20"/>
-				<textElement>
-					<font fontName="Arial Unicode MS" isItalic="true" pdfEncoding="Cp1253"/>
-				</textElement>
-				<text><![CDATA[Υπογραφή]]></text>
 			</staticText>
 		</band>
 	</pageHeader>

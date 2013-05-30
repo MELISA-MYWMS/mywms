@@ -6,6 +6,7 @@
     <folder name="Actions">
         <folder name="Window">
             <file name="de-linogistix-wmsprocesses-processes-create_avis-CreateAvisAction.instance"/>
+            <file name="de-linogistix-wmsprocesses-processes-fuel-CreateFuelAction.instance"/>
             <file name="de-linogistix-wmsprocesses-processes-goodsreceipt-GoodsReceiptAction.instance"/>
             <file name="de-linogistix-wmsprocesses-processes-movement-CreateMovementAction.instance"/>
             <file name="de-linogistix-wmsprocesses-stockunittransfer-StockUnitTransferAction.instance"/>
@@ -54,8 +55,12 @@
          <!--   <file name="Sep-499[javax-swing-JSeparator].instance">
                 <attr name="position" intvalue="499"/>
             </file> -->
-             <file name="CreateMovementAction.shadow">
+            <file name="CreateFuelAction.shadow">
                 <attr name="position" intvalue="500"/>
+                <attr name="originalFile" stringvalue="Actions/Window/de-linogistix-wmsprocesses-processes-fuel-CreateFuelAction.instance"/>
+            </file>
+             <file name="CreateMovementAction.shadow">
+                <attr name="position" intvalue="600"/>
                 <attr name="originalFile" stringvalue="Actions/Window/de-linogistix-wmsprocesses-processes-movement-CreateMovementAction.instance"/>
             </file> 
         </folder>
