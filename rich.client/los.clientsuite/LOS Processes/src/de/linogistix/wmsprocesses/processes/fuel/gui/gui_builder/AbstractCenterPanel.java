@@ -7,13 +7,17 @@
  */
 package de.linogistix.wmsprocesses.processes.fuel.gui.gui_builder;
 
+import de.linogistix.wmsprocesses.res.WMSProcessesBundleResolver;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Logger;
+import org.openide.util.NbBundle;
 
 
 
 /**
  *
- * @author  artur
+ * @author  Parhs Rozakhs
  */
 public class AbstractCenterPanel extends javax.swing.JPanel {
     private final static Logger log = Logger.getLogger(AbstractCenterPanel.class.getName());
@@ -32,6 +36,14 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        fromSelectDate = new de.linogistix.common.gui.component.controls.LOSDateFormattedTextField();
+        jLabel3 = new javax.swing.JLabel();
+        toSelectDate = new de.linogistix.common.gui.component.controls.LOSDateFormattedTextField();
+        monthButton = new javax.swing.JButton();
+        yearButton = new javax.swing.JButton();
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -48,11 +60,106 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(153, 388));
         setName("panel"); // NOI18N
         setLayout(new java.awt.GridBagLayout());
+
+        jPanel2.setMinimumSize(new java.awt.Dimension(600, 150));
+        jPanel2.setPreferredSize(new java.awt.Dimension(600, 150));
+        jPanel2.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "FuelAbstractCenterPanel.jLabel1.text"));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 15, 0);
+        jPanel2.add(jLabel1, gridBagConstraints);
+
+        jLabel2.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "FuelAbstractCenterPanel.jLabel3.text"));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 9);
+        jPanel2.add(jLabel2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel2.add(fromSelectDate, gridBagConstraints);
+
+        jLabel3.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "FuelAbstractCenterPanel.jLabel2.text"));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 9);
+        jPanel2.add(jLabel3, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel2.add(toSelectDate, gridBagConstraints);
+
+        monthButton.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "FuelAbstractCenterPanel.monthButton.text"));
+        monthButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monthButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        jPanel2.add(monthButton, gridBagConstraints);
+
+        yearButton.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "FuelAbstractCenterPanel.yearButton.text"));
+        yearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yearButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        jPanel2.add(yearButton, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        add(jPanel2, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void yearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearButtonActionPerformed
+        Calendar calendar =Calendar.getInstance();
+        Date now = calendar.getTime();
+        calendar.set(Calendar.DAY_OF_YEAR, 1);
+        Date currentYearStart = calendar.getTime();
+        toSelectDate.setDate(now);
+        fromSelectDate.setDate(currentYearStart);
+    }//GEN-LAST:event_yearButtonActionPerformed
+
+    private void monthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthButtonActionPerformed
+        Calendar calendar =Calendar.getInstance();
+        Date now = calendar.getTime();
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        Date currentYearStart = calendar.getTime();
+        toSelectDate.setDate(now);
+        fromSelectDate.setDate(currentYearStart);
+    }//GEN-LAST:event_monthButtonActionPerformed
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected de.linogistix.common.gui.component.controls.LOSDateFormattedTextField fromSelectDate;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton monthButton;
+    protected de.linogistix.common.gui.component.controls.LOSDateFormattedTextField toSelectDate;
+    private javax.swing.JButton yearButton;
     // End of variables declaration//GEN-END:variables
 
 }

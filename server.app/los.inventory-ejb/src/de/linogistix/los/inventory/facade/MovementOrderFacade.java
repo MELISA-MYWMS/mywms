@@ -15,9 +15,8 @@ import org.mywms.facade.FacadeException;
 import org.mywms.model.VehicleData;
 import org.mywms.model.Zone;
 
-import de.linogistix.los.inventory.model.MovementOrderLog;
-import de.linogistix.los.inventory.model.LOSFormationType;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
+import de.linogistix.los.inventory.model.MovementOrderLog;
 
 @Remote
 public interface MovementOrderFacade {

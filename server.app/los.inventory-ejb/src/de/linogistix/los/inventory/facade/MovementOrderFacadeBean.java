@@ -8,6 +8,7 @@
 package de.linogistix.los.inventory.facade;
 
 import java.util.Date;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,10 +20,9 @@ import org.mywms.facade.FacadeException;
 import org.mywms.model.VehicleData;
 import org.mywms.model.Zone;
 
-import de.linogistix.los.inventory.service.MovementOrderLogService;
-import de.linogistix.los.inventory.model.LOSFormationType;
 import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.MovementOrderLog;
+import de.linogistix.los.inventory.service.MovementOrderLogService;
 
 @Stateless
 public class MovementOrderFacadeBean extends BasicFacadeBean implements

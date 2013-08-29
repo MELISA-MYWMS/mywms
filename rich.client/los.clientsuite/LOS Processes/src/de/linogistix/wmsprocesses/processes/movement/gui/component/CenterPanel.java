@@ -21,7 +21,6 @@ import de.linogistix.los.inventory.model.LOSOrderReceipients;
 import de.linogistix.los.inventory.model.MovementOrderLog;
 import de.linogistix.los.query.BODTO;
 import de.linogistix.wmsprocesses.res.WMSProcessesBundleResolver;
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.beans.PropertyChangeEvent;
@@ -29,14 +28,10 @@ import java.beans.PropertyChangeListener;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JList;
-import javax.swing.JPanel;
 import org.mywms.facade.ZoneFacade;
 import org.mywms.facade.FacadeException;
 import org.mywms.model.Zone;
 import org.mywms.model.VehicleData;
-import org.openide.DialogDescriptor;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
@@ -57,7 +52,6 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
 
     public CenterPanel(TopComponentPanel topComponentPanel) {
         this.topComponentPanel = topComponentPanel;
-        setLabels();
         initDefaults();
     }
 
@@ -224,26 +218,6 @@ public class CenterPanel extends AbstractCenterPanel implements TopComponentList
         }
         zones = ZoneF.getAllZones();
         return zones;
-    }
-
-    private void setLabels() {
-        currentDateTextField.setDate(new Date());
-        MovementDateTextField.setDate(new Date());
-        OrganizationLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.OrganizationLabel") + ":");
-        FormationLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.FormationLabel") + ":");
-        MillitaryUnitLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MillitaryUnitLabel") + ":");
-        DateLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.DateLabel") + ":");
-        VehiclePlateNoLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.VehiclePlateNoLabel") + ":");
-        MovementDateLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementDateLabel") + ":");
-        OrderNoLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.OrderNoLabel") + ":");
-        MovementPurposeLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementPurposeLabel") + ":");
-        MovementLoadLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementLoadLabel") + ":");
-        MovementRouteLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementRouteLabel") + ":");
-        DriverNameLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.DriverNameLabel") + ":");
-        Passenger1Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
-        Passenger2Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
-        Passenger3Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
-        Passenger4Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
     }
 
     public void componentClosed() {

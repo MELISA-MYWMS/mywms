@@ -52,8 +52,8 @@ public class FooterPanel extends AbstractFooterPanel {
     }
     */
     private void postInit() {
-        super.okButton.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class,"CTL_OrderAction"));
-        super.okButton.setMnemonic(NbBundle.getMessage(WMSProcessesBundleResolver.class, "CreateOrderAndStart.mnemonic").charAt(0));
+        super.okButton.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class,"Create order"));
+        super.okButton.setMnemonic(NbBundle.getMessage(WMSProcessesBundleResolver.class, "CreateOrder.mnemonic").charAt(0));
         super.clearButton.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class,"Clear"));
         super.clearButton.setMnemonic(NbBundle.getMessage(WMSProcessesBundleResolver.class, "Clear.mnemonic").charAt(0));
     }

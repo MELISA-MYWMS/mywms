@@ -28,8 +28,6 @@ import de.linogistix.los.inventory.model.OrderType;
 import de.linogistix.los.inventory.pick.model.LOSPickRequest;
 import de.linogistix.los.inventory.query.dto.LOSOrderStockUnitTO;
 import de.linogistix.los.location.exception.LOSLocationException;
-import de.linogistix.los.location.model.LOSArea;
-import de.linogistix.los.location.model.LOSAreaType;
 import de.linogistix.los.location.model.LOSStorageLocation;
 import de.linogistix.los.query.BODTO;
 import de.linogistix.los.query.LOSResultList;

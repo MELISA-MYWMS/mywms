@@ -8,18 +8,14 @@
 package de.linogistix.wmsprocesses.processes.movement.gui.gui_builder;
 
 import de.linogistix.common.gui.component.controls.LOSDateFormattedTextField;
-import de.linogistix.common.gui.component.windows.ProgressDialog;
-import java.awt.BorderLayout;
+import de.linogistix.wmsprocesses.res.WMSProcessesBundleResolver;
 import java.awt.Color;
-import java.awt.Frame;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
 
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
-import org.openide.windows.WindowManager;
+import org.openide.util.NbBundle;
 
 /**
  *
@@ -95,7 +91,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         DocumentPropsPanel.setLayout(new java.awt.GridBagLayout());
 
         OrganizationLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        OrganizationLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.OrganizationLabel.text_1")); // NOI18N
+        OrganizationLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.OrganizationLabel") + ":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -106,6 +102,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
 
         OrganizationComboBox.setMaximumSize(new java.awt.Dimension(180, 27));
         OrganizationComboBox.setMinimumSize(new java.awt.Dimension(180, 27));
+        OrganizationComboBox.setNextFocusableComponent(FormationComboBox);
         OrganizationComboBox.setPreferredSize(new java.awt.Dimension(180, 27));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -115,7 +112,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         DocumentPropsPanel.add(OrganizationComboBox, gridBagConstraints);
 
         FormationLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        FormationLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.FormationLabel.text")); // NOI18N
+        FormationLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.FormationLabel") + ":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -126,6 +123,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         FormationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ΑΤΑ", "ΓΕΑ", "ΔΑΕ", "ΔΑΥ", "ΔΑΚ" }));
         FormationComboBox.setMaximumSize(new java.awt.Dimension(180, 27));
         FormationComboBox.setMinimumSize(new java.awt.Dimension(180, 27));
+        FormationComboBox.setNextFocusableComponent(MillitaryUnitComboBox);
         FormationComboBox.setPreferredSize(new java.awt.Dimension(180, 27));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -135,7 +133,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         DocumentPropsPanel.add(FormationComboBox, gridBagConstraints);
 
         MillitaryUnitLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        MillitaryUnitLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MillitaryUnitLabel.text")); // NOI18N
+        MillitaryUnitLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MillitaryUnitLabel") + ":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -155,7 +153,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         DocumentPropsPanel.add(MillitaryUnitComboBox, gridBagConstraints);
 
         DateLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        DateLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.DateLabel.text")); // NOI18N
+        DateLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.DateLabel") + ":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -184,7 +182,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         MovementPanel.setLayout(new java.awt.GridBagLayout());
 
         MovementPurposeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        MovementPurposeLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementPurposeLabel.text")); // NOI18N
+        MovementPurposeLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementPurposeLabel") + ":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -203,7 +201,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         MovementPanel.add(MovementPurposeTextField, gridBagConstraints);
 
         MovementLoadLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        MovementLoadLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementLoadLabel.text")); // NOI18N
+        MovementLoadLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementLoadLabel") + ":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -222,7 +220,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         MovementPanel.add(MovementLoadTextField, gridBagConstraints);
 
         MovementRouteLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        MovementRouteLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementRouteLabel.text")); // NOI18N
+        MovementRouteLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementRouteLabel") + ":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 4, 10, 4);
@@ -248,7 +246,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         VehiclePanel.setLayout(new java.awt.GridBagLayout());
 
         VehiclePlateNoLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        VehiclePlateNoLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.VehiclePlateNoLabel.text")); // NOI18N
+        VehiclePlateNoLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.VehiclePlateNoLabel") + ":");
         VehiclePlateNoLabel.setAlignmentX(0.5F);
         VehiclePlateNoLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -259,7 +257,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         VehiclePanel.add(VehiclePlateNoLabel, gridBagConstraints);
 
         MovementDateLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        MovementDateLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.MovementDateLabel.text")); // NOI18N
+        MovementDateLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.MovementDateLabel") + ":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -278,7 +276,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         VehiclePanel.add(MovementDateTextField, gridBagConstraints);
 
         OrderNoLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        OrderNoLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.OrderNoLabel.text")); // NOI18N
+        OrderNoLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.OrderNoLabel") + ":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -313,7 +311,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         PersonsPanel.setLayout(new java.awt.GridBagLayout());
 
         DriverNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        DriverNameLabel.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.DriverNameLabel.text")); // NOI18N
+        DriverNameLabel.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.DriverNameLabel") + ":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -322,7 +320,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         PersonsPanel.add(DriverNameLabel, gridBagConstraints);
 
         Passenger1Label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Passenger1Label.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger1Label.text")); // NOI18N
+        Passenger1Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -347,7 +345,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         PersonsPanel.add(Passenger1TextField, gridBagConstraints);
 
         Passenger2Label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Passenger2Label.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger2Label.text")); // NOI18N
+        Passenger2Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -370,7 +368,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         PersonsPanel.add(Passenger2TextField, gridBagConstraints);
 
         Passenger3Label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Passenger3Label.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger3Label.text")); // NOI18N
+        Passenger3Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -393,7 +391,7 @@ public class AbstractCenterPanel extends javax.swing.JPanel {
         PersonsPanel.add(Passenger3TextField, gridBagConstraints);
 
         Passenger4Label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Passenger4Label.setText(org.openide.util.NbBundle.getMessage(AbstractCenterPanel.class, "AbstractCenterPanel.Passenger4Label.text")); // NOI18N
+        Passenger4Label.setText(NbBundle.getMessage(WMSProcessesBundleResolver.class, "MovementOrderCenterPanel.PassNameLabel") + ":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
